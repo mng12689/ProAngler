@@ -1,0 +1,16 @@
+//
+//  Venue.m
+//  ProAngler
+//
+//  Created by Michael Ng on 6/20/12.
+//  Copyright (c) 2012 Amherst College. All rights reserved.
+//
+
+#import "Venue.h"
+
+
+@implementation Venue
+
+@dynamic name;
+
+@end

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1487" systemVersion="11E2617" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Bait" representedClassName="Bait" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="newCatch" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NewCatch" inverseName="bait" inverseEntity="NewCatch" syncable="YES"/>
+    </entity>
+    <entity name="NewCatch" representedClassName="NewCatch">
+        <attribute name="baitDepth" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="depth" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="length" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="spawning" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="waterColor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="waterLevel" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="waterTemp" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="weightLB" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="weightOZ" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="bait" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Bait" inverseName="newCatch" inverseEntity="Bait" syncable="YES"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photos" inverseName="newCatch" inverseEntity="Photos" syncable="YES"/>
+        <relationship name="species" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Species" inverseName="newCatch" inverseEntity="Species" syncable="YES"/>
+        <relationship name="structure" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Structure" inverseName="newCatch" inverseEntity="Structure" syncable="YES"/>
+        <relationship name="venue" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Venue" inverseName="newCatch" inverseEntity="Venue" syncable="YES"/>
+        <userInfo/>
+    </entity>
+    <entity name="Photos" syncable="YES">
+        <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="newCatch" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="NewCatch" inverseName="photos" inverseEntity="NewCatch" syncable="YES"/>
+    </entity>
+    <entity name="Species" representedClassName="Species" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="newCatch" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NewCatch" inverseName="species" inverseEntity="NewCatch" syncable="YES"/>
+    </entity>
+    <entity name="Structure" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="newCatch" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NewCatch" inverseName="structure" inverseEntity="NewCatch" syncable="YES"/>
+    </entity>
+    <entity name="Venue" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="newCatch" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NewCatch" inverseName="venue" inverseEntity="NewCatch" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Bait" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="NewCatch" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Species" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Structure" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Venue" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Photos" positionX="0" positionY="0" width="0" height="0"/>
+    </elements>
+</model>
