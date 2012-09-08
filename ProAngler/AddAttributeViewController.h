@@ -16,13 +16,7 @@
 
 @interface AddAttributeViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UITextField *textField;
-
 @property (nonatomic, weak) id <AddAttributeViewControllerDelegate> delegate;
-@property (nonatomic, strong) NSManagedObjectContext* context;
 @property (nonatomic, strong) NSString* attributeType;
-
-- (IBAction)saveAttribute:(id)sender;
-- (IBAction)cancelModal:(id)sender;
 
 @end

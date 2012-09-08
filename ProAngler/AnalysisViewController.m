@@ -8,19 +8,28 @@
 
 #import "AnalysisViewController.h"
 #import "FilterViewController.h"
-#import "NewCatch.h"
+#import "Catch.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ProAnglerDataStore.h"
+#import <MapKit/MapKit.h>
+#import "Species.h"
+#import "ProAnglerDataStore.h"
+#import "AlbumDetailViewController.m"
+#import "CatchPointAnnotation.h"
 
 @interface AnalysisViewController () <FilterViewControllerDelegate, MKMapViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (weak, nonatomic) IBOutlet UIView *page1;
+@property (strong, nonatomic) IBOutlet MKMapView *mapView;
+@property (nonatomic,strong) NSArray* catchesToBeDisplayed;
+@property (weak, nonatomic) IBOutlet UILabel *venueLabel;
+@property (weak, nonatomic) IBOutlet UITextView *additionalFiltersTextView;
 
 @end
 
 @implementation AnalysisViewController
-
-@synthesize context;
-@synthesize mapView;
-@synthesize catchesToBeDisplayed;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,14 +45,18 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"graph_paper.png"]];
+    self.mapView.delegate = self;
+    self.navigationController.navigationBarHidden = YES;
   
     NSArray *venueList = [ProAnglerDataStore fetchEntity:@"Venue" sortBy:@"name" withPredicate:nil];
     NSPredicate *predicate;
     if(venueList && [venueList count]!=0){
-        predicate = [NSPredicate predicateWithFormat:@"(venue == %@)", [[venueList objectAtIndex:0]name]];
-        catchesToBeDisplayed = [ProAnglerDataStore fetchEntity:@"NewCatch" sortBy:@"venue" withPredicate:predicate];
+        predicate = [NSPredicate predicateWithFormat:@"venue.name like %@", [[venueList objectAtIndex:0]name]];
+        self.catchesToBeDisplayed = [ProAnglerDataStore fetchEntity:@"Catch" sortBy:@"venue" withPredicate:predicate];
+        self.venueLabel.text = [[venueList objectAtIndex:0] name];
     }
     
+    self.scrollView.contentSize = CGSizeMake(self.page1.frame.size.width, self.page1.frame.size.height);
     self.mapView.mapType = MKMapTypeHybrid;
     self.mapView.showsUserLocation = YES;
     self.mapView.zoomEnabled = YES;
@@ -58,9 +71,12 @@
 
 - (void)viewDidUnload
 {
-    [self setMapView:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
+    [self setMapView:nil];
+    [self setVenueLabel:nil];
+    [self setAdditionalFiltersTextView:nil];
+    [self setScrollView:nil];
+    [self setPage1:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -77,54 +93,59 @@
     }
 }
 
-- (void) filterSaved:(NSArray*)filteredCatches
+-(void)filterForVenue:(NSString *)venue withPredicate:(NSPredicate *)predicate andAdditionalFilters:(NSArray *)filters
 {
-    self.catchesToBeDisplayed = filteredCatches;
+    self.catchesToBeDisplayed = [ProAnglerDataStore fetchEntity:@"Catch" sortBy:@"venue" withPredicate:predicate];
     [self annotateMap];
+    
+    self.venueLabel.text = venue;
+    if ([filters count] == 0) 
+        self.additionalFiltersTextView.text = @"None";
+    else
+        self.additionalFiltersTextView.text = [filters componentsJoinedByString:@"\n"];
 }
 
 - (void)annotateMap
 {
-    if(mapView.annotations != nil){
-        [mapView removeAnnotations:mapView.annotations];
-    }
+    if(self.mapView.annotations != nil)
+        [self.mapView removeAnnotations:self.mapView.annotations];
     
     CLLocationDegrees minLng;
     CLLocationDegrees maxLng;
     CLLocationDegrees minLat;
     CLLocationDegrees maxLat;
     
-    for(int catch = 0; catch < catchesToBeDisplayed.count; catch++){
-        NewCatch *newCatch = [catchesToBeDisplayed objectAtIndex:catch];
+    for(Catch *catch in self.catchesToBeDisplayed){
     
-        MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
+        CatchPointAnnotation *annotation = [CatchPointAnnotation new];
     
-        CLLocation *location = newCatch.location;
+        CLLocation *location = catch.location;
         annotation.coordinate = location.coordinate;
-        annotation.title = newCatch.species;
-        annotation.subtitle = [newCatch dateToString];
+        annotation.title = catch.species.name;
+        annotation.subtitle = [catch dateToString];
+        annotation.catch = catch;
     
-        [mapView addAnnotation:annotation];
+        [self.mapView addAnnotation:annotation];
         
-        if(catch == 0){
+        if([catch isEqual:[self.catchesToBeDisplayed objectAtIndex:0]]){
             minLat = location.coordinate.latitude;
             maxLat = location.coordinate.latitude;
             minLng = location.coordinate.longitude;
             maxLng = location.coordinate.longitude;
         }
         else{
-            if (location.coordinate.latitude < minLat) {
+            if (location.coordinate.latitude < minLat) 
                 minLat = location.coordinate.latitude;
-            }
-            if (location.coordinate.latitude > maxLat) {
+            
+            if (location.coordinate.latitude > maxLat) 
                 maxLat = location.coordinate.latitude;
-            }
-            if (location.coordinate.longitude < minLng) {
+            
+            if (location.coordinate.longitude < minLng) 
                 minLng = location.coordinate.longitude;
-            }
-            if (location.coordinate.longitude > maxLng) {
+            
+            if (location.coordinate.longitude > maxLng) 
                 maxLng = location.coordinate.longitude;
-            }
+            
             NSLog(@"location: %f %f",location.coordinate.latitude,location.coordinate.longitude);
         }
     }
@@ -133,18 +154,18 @@
 
 - (void)zoomMapWithMinLng:(CLLocationDegrees)minLng maxLng:(CLLocationDegrees)maxLng minLat:(CLLocationDegrees)minLat maxLat:(CLLocationDegrees)maxLat
 {
-    if (!catchesToBeDisplayed || [catchesToBeDisplayed count] == 0){
+    if (!self.catchesToBeDisplayed || [self.catchesToBeDisplayed count] == 0){
         return;
     }
     
-    CLLocationCoordinate2D center = CLLocationCoordinate2DMake((minLat+maxLat)/2, (minLng+maxLng)/2);
+    CLLocationCoordinate2D center = CLLocationCoordinate2DMake((minLat+maxLat)/2.0, (minLng+maxLng)/2.0);
     MKCoordinateSpan span;
     
-    if ([catchesToBeDisplayed count] == 1){
-        span = MKCoordinateSpanMake(.03, .03);
+    if ([self.catchesToBeDisplayed count] == 1){
+        span = MKCoordinateSpanMake(.01, .01);
     }
     else{
-        span = MKCoordinateSpanMake(maxLat-minLat, maxLng-minLng);
+        span = MKCoordinateSpanMake(maxLat-minLat + .005, maxLng-minLng + .005);
     }
     
     MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
@@ -155,14 +176,21 @@
 -(MKAnnotationView*)mapView:(MKMapView*)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
     //if ([annotation isMemberOfClass:[Annotation class]]) {
-        MKAnnotationView *annotationView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:nil];
-        annotationView.canShowCallout = YES;
-        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        return annotationView;
+    MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:nil];
+    annotationView.canShowCallout = YES;
+    annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    annotationView.animatesDrop = YES;
+    return annotationView;
    /* }
     else{
         return nil;
     }*/
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    CatchPointAnnotation *annotationView = (CatchPointAnnotation*)view;
+    [self presentModalViewController:[[AlbumDetailViewController alloc]initWithNewCatch:annotationView.catch atIndex:0] animated:YES];
 }
 
 @end

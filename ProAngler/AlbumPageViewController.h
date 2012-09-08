@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AlbumPageViewController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource>
+@interface AlbumPageViewController : UIPageViewController
 
 @property (nonatomic,strong) NSArray *fetchedObjects;
-@property NSInteger currentPage;
+@property int currentPage;
 
 @end

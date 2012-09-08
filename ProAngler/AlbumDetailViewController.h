@@ -8,41 +8,46 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import "NewCatch.h"
+@class Catch;
 
-@interface AlbumDetailViewController : UIViewController 
+@interface AlbumDetailViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UILabel *speciesLabel;
-@property (strong, nonatomic) IBOutlet UILabel *weightLabel;
-@property (strong, nonatomic) IBOutlet UILabel *lengthLabel;
-@property (strong, nonatomic) IBOutlet UILabel *venueLabel;
-@property (strong, nonatomic) IBOutlet UILabel *baitLabel;
-@property (strong, nonatomic) IBOutlet UILabel *structureLabel;
-@property (strong, nonatomic) IBOutlet UILabel *depthLabel;
-@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
-@property (strong, nonatomic) IBOutlet UILabel *spawningLabel;
+@property int currentPage;
+@property (strong) Catch *catch;
 
-@property (strong, nonatomic) IBOutlet UILabel *tempLabel;
-@property (strong, nonatomic) IBOutlet UILabel *windLabel;
-@property (strong, nonatomic) IBOutlet UILabel *humidityLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *speciesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *weightLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lengthLabel;
+@property (weak, nonatomic) IBOutlet UILabel *venueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *baitLabel;
+@property (weak, nonatomic) IBOutlet UILabel *structureLabel;
+@property (weak, nonatomic) IBOutlet UILabel *depthLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *spawningLabel;
 
-@property (strong, nonatomic) IBOutlet UILabel *waterColorLabel;
-@property (strong, nonatomic) IBOutlet UILabel *waterTempLabel;
-@property (strong, nonatomic) IBOutlet UILabel *waterLevelLabel;
+@property (weak, nonatomic) IBOutlet UILabel *weatherDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tempLabel;
+@property (weak, nonatomic) IBOutlet UILabel *windLabel;
+@property (weak, nonatomic) IBOutlet UILabel *humidityLabel;
+@property (weak, nonatomic) IBOutlet UILabel *visibilityLabel;
 
-@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *waterColorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *waterTempLabel;
+@property (weak, nonatomic) IBOutlet UILabel *waterLevelLabel;
 
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-@property (strong, nonatomic) IBOutlet UIImageView *mainImageView;
-@property (strong, nonatomic) IBOutlet UIView *photoDisplayView;
-@property (strong, nonatomic) IBOutlet UIScrollView *photoDisplayScrollView;
+@property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
+@property (weak, nonatomic) IBOutlet UIScrollView *mediaScrollView;
 
-@property (strong, nonatomic) IBOutlet UIView *catchInfoView;
-@property (strong, nonatomic) IBOutlet UIView *weatherConditionsView;
-@property (strong, nonatomic) IBOutlet UIView *waterConditionsView;
+@property (weak, nonatomic) IBOutlet UIView *catchInfoView;
+@property (weak, nonatomic) IBOutlet UIView *weatherConditionsView;
+@property (weak, nonatomic) IBOutlet UIView *waterConditionsView;
 
+@property (weak, nonatomic) IBOutlet UIButton *addToWallOfFameButton;
+- (IBAction)addToWallOfFame:(id)sender;
 
-+ (AlbumDetailViewController*) initWithNewCatch:(NewCatch*)newCatch atIndex:(NSInteger)index;
+- (AlbumDetailViewController*) initWithNewCatch:(Catch*)newCatch atIndex:(int)index;
 
 @end

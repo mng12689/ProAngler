@@ -7,9 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "NewCatchViewController.h"
+/*#import "NewCatchViewController.h"
 #import "AlbumViewController.h"
-#import "AnalysisViewController.h"
+#import "AnalysisViewController.h"*/
 
 @implementation AppDelegate
 

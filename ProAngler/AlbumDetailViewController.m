@@ -7,36 +7,19 @@
 //
 
 #import "AlbumDetailViewController.h"
+#import "Catch.h"
+#import "Venue.h"
+#import "Species.h"
+#import "Bait.h"
+#import "Structure.h"
+#import "Photo.h"
+#import "ProAnglerDataStore.h"
 
 @interface AlbumDetailViewController ()
 
 @end
 
 @implementation AlbumDetailViewController
-@synthesize speciesLabel;
-@synthesize weightLabel;
-@synthesize lengthLabel;
-@synthesize venueLabel;
-@synthesize baitLabel;
-@synthesize structureLabel;
-@synthesize depthLabel;
-@synthesize timeLabel;
-@synthesize spawningLabel;
-@synthesize tempLabel;
-@synthesize windLabel;
-@synthesize humidityLabel;
-@synthesize waterColorLabel;
-@synthesize waterTempLabel;
-@synthesize waterLevelLabel;
-@synthesize dateLabel;
-@synthesize scrollView;
-@synthesize photoDisplayView;
-@synthesize photoDisplayScrollView;
-@synthesize mainImageView;
-@synthesize catchInfoView;
-@synthesize weatherConditionsView;
-@synthesize waterConditionsView;
-UIStoryboard *storyboard = nil;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -51,45 +34,42 @@ UIStoryboard *storyboard = nil;
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wood_texture.png"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"page_texture.png"]];
 
-    scrollView.contentSize = CGSizeMake(320, 1500);
+    self.scrollView.contentSize = CGSizeMake(320, 1500);
+    self.mediaScrollView.layer.cornerRadius = 5;
+    self.mediaScrollView.alpha = .3;
     
-    //catchInfoView.backgroundColor = [UIColor colorWithRed:172 green:209 blue:233 alpha:.5];
-    catchInfoView.layer.borderColor = [UIColor greenColor].CGColor; 
-    catchInfoView.layer.borderWidth = 2.0f;
-    catchInfoView.layer.cornerRadius = 10;
-    catchInfoView.layer.masksToBounds = YES;
+    self.catchInfoView.layer.borderColor = [UIColor greenColor].CGColor;
+    self.catchInfoView.layer.borderWidth = 2.0f;
+    self.catchInfoView.layer.cornerRadius = 10;
+    self.catchInfoView.layer.masksToBounds = YES;
     
-    weatherConditionsView.layer.borderColor = [UIColor greenColor].CGColor; 
-    weatherConditionsView.layer.borderWidth = 3.0f;
-    weatherConditionsView.layer.cornerRadius = 10;
-    weatherConditionsView.layer.masksToBounds = YES;
+    self.weatherConditionsView.layer.borderColor = [UIColor greenColor].CGColor;
+    self.weatherConditionsView.layer.borderWidth = 3.0f;
+    self.weatherConditionsView.layer.cornerRadius = 10;
+    self.weatherConditionsView.layer.masksToBounds = YES;
     
-    waterConditionsView.layer.borderColor = [UIColor greenColor].CGColor; 
-    waterConditionsView.layer.borderWidth = 3.0f;
-    waterConditionsView.layer.cornerRadius = 10;
-    waterConditionsView.layer.masksToBounds = YES;
+    self.waterConditionsView.layer.borderColor = [UIColor greenColor].CGColor;
+    self.waterConditionsView.layer.borderWidth = 3.0f;
+    self.waterConditionsView.layer.cornerRadius = 10;
+    self.waterConditionsView.layer.masksToBounds = YES;
     
-    mainImageView.layer.cornerRadius = 6;
-    mainImageView.layer.masksToBounds = YES;
-    
-    photoDisplayView.layer.cornerRadius = 6;
-    photoDisplayView.layer.masksToBounds = YES;
-
+    self.mainImageView.layer.cornerRadius = 6;
+    self.mainImageView.layer.masksToBounds = YES;
 }
 
 - (void)viewDidUnload
 {
+    [super viewDidUnload];
     [self setSpeciesLabel:nil];
     [self setWeightLabel:nil];
     [self setLengthLabel:nil];
     [self setVenueLabel:nil];
     [self setBaitLabel:nil];
     [self setDateLabel:nil];
-    [self setPhotoDisplayView:nil];
     [self setMainImageView:nil];
-    [self setPhotoDisplayScrollView:nil];
+    [self setMediaScrollView:nil];
     [self setScrollView:nil];
     [self setWeatherConditionsView:nil];
     [self setWeatherConditionsView:nil];
@@ -104,8 +84,10 @@ UIStoryboard *storyboard = nil;
     [self setWaterColorLabel:nil];
     [self setWaterTempLabel:nil];
     [self setWaterLevelLabel:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
+    [self setDateLabel:nil];
+    [self setWeatherDescriptionLabel:nil];
+    [self setVisibilityLabel:nil];
+    [self setAddToWallOfFameButton:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -113,28 +95,56 @@ UIStoryboard *storyboard = nil;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-+ (AlbumDetailViewController*) initWithNewCatch:(NewCatch*)newCatch atIndex:(NSInteger)index
+- (AlbumDetailViewController*) initWithNewCatch:(Catch*)catch atIndex:(int)index
 {
-    NSLog(@"init");
-    storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    AlbumDetailViewController *albumDetailViewController = [storyboard instantiateViewControllerWithIdentifier: @"albumDetailViewController"];
-    albumDetailViewController.view.backgroundColor = [UIColor clearColor];  
-    albumDetailViewController.view.tag = index;
-    
-    NSLog(@"set index");
-    //albumDetailViewController.dateLabel.text = [newCatch dateToString];
-    albumDetailViewController.speciesLabel.text = newCatch.species;
-    albumDetailViewController.weightLabel.text = [newCatch weightToString];
-    albumDetailViewController.lengthLabel.text = [newCatch lengthToString];
-    albumDetailViewController.venueLabel.text = newCatch.venue;
-    albumDetailViewController.baitLabel.text = newCatch.bait;
-    albumDetailViewController.structureLabel.text = newCatch.structure;
-    albumDetailViewController.depthLabel.text = [newCatch depthToString];
-    albumDetailViewController.timeLabel.text = [newCatch timeToString];
-    albumDetailViewController.spawningLabel.text = newCatch.spawning;
-    
-    
-    return albumDetailViewController;
+    self = [super init];
+    if (self) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+        self = [storyboard instantiateViewControllerWithIdentifier: @"albumDetailViewController"];
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"page_texture.png"]];
+        
+        self.currentPage = index;
+        self.catch = catch;
+
+        self.dateLabel.text = [catch dateToString];
+        self.speciesLabel.text = catch.species.name;
+        self.weightLabel.text = [catch weightToString];
+        self.lengthLabel.text = [catch lengthToString];
+        self.venueLabel.text = catch.venue.name;
+        self.baitLabel.text = catch.bait.name;
+        self.structureLabel.text = catch.structure.name;
+        self.depthLabel.text = [catch depthToString];
+        self.timeLabel.text = [catch timeToString];
+        self.spawningLabel.text = catch.spawning;
+        
+        self.weatherDescriptionLabel.text = catch.weatherDesc;
+        self.tempLabel.text = [catch tempFToString];
+        self.windLabel.text = [catch windToString];
+        self.humidityLabel.text = [catch humidityToString];
+        self.visibilityLabel.text = [catch visibilityToString];
+        
+        self.waterColorLabel.text = catch.waterColor;
+        self.waterTempLabel.text = [catch waterTempFToString];
+        self.waterLevelLabel.text = catch.waterLevel;
+        
+        NSArray *photos = [catch.photos allObjects];
+        if ([photos count] > 0) {
+            self.mainImageView.image = [UIImage imageWithData:[[photos objectAtIndex:0] photo]];
+            for (int i = 1; i < [photos count]; i++) {
+                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0 + 70*([self.mediaScrollView.subviews count]-1), 0, 70, 70)];
+                self.mediaScrollView.contentSize = CGSizeMake(70+self.mediaScrollView.contentSize.width,70);
+                [self.mediaScrollView addSubview:imageView];
+            }
+        }
+    }
+
+    return self;
+}
+
+- (IBAction)addToWallOfFame:(id)sender
+{
+    self.catch.trophyFish = [NSNumber numberWithBool:YES];
+    [ProAnglerDataStore saveContext];
 }
 
 @end

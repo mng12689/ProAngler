@@ -7,7 +7,7 @@
 //
 
 #import "ProAnglerDataStore.h"
-#import "NewCatch.h"
+#import "Catch.h"
 
 NSManagedObjectContext *_context;
 NSManagedObjectModel *_model;
@@ -47,9 +47,9 @@ NSPersistentStoreCoordinator *_psc;
     return [NSEntityDescription insertNewObjectForEntityForName:attributeType inManagedObjectContext:[ProAnglerDataStore context]];
 }
 
-+ (NewCatch*) createNewCatch
++ (id) createEntity:(NSString*)entity
 {
-    return [NSEntityDescription insertNewObjectForEntityForName:@"NewCatch"inManagedObjectContext:[ProAnglerDataStore context]];
+    return [NSEntityDescription insertNewObjectForEntityForName:entity inManagedObjectContext:[ProAnglerDataStore context]];
 }
 
 + (void)saveContext

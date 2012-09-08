@@ -9,9 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface WallOfFameViewController : UIViewController
-{
-}
 
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) IBOutlet UINavigationBar* navBar;
 @end

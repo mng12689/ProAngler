@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class NewCatch;
+@class Catch;
 
 @interface ProAnglerDataStore : NSObject
 
@@ -19,7 +19,7 @@
 + (NSURL*)applicationDocumentsDirectory;
 
 + (NSArray*) fetchEntity:(NSString*)entity sortBy:(NSString*)sortBy withPredicate:(NSPredicate*)predicate;
-+ (NewCatch*) createNewCatch;
++ (id) createEntity:(NSString*)entity;
 + (id) createNewAttribute:(NSString*)attributeType;
 
 @end

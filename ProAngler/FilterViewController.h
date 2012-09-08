@@ -12,14 +12,11 @@
 @class FilterViewController;
 
 @protocol FilterViewControllerDelegate <NSObject>
-- (void)filterSaved:(NSArray*)filteredCatches;
+- (void)filterForVenue:(NSString*)venue withPredicate:(NSPredicate*)predicate andAdditionalFilters:(NSArray*)filters;
 @end
 
 @interface FilterViewController : SelectAttributesViewController
 
 @property (nonatomic, weak) id <FilterViewControllerDelegate> delegate;
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-
-- (IBAction)cancelModal:(id)sender;
 
 @end

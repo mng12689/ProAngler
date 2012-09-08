@@ -7,15 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MapKit/MapKit.h>
-#import "FilterViewController.h"
+@class MKMapView;
 
 @interface AnalysisViewController : UIViewController 
-
-@property (nonatomic,strong) NSManagedObjectContext* context;
-
-@property (strong, nonatomic) IBOutlet MKMapView *mapView;
-
-@property (nonatomic,strong) NSArray* catchesToBeDisplayed;
 
 @end

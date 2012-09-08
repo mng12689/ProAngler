@@ -7,12 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AlbumSettingsViewController.h"
 
-@interface AlbumViewController : UITableViewController <AlbumSettingsViewControllerDelegate>
-
-@property (nonatomic,strong) NSManagedObjectContext* context;
-@property (nonatomic,strong) NSArray* fetchedObjects;
-@property (nonatomic,strong) NSString* sortBy;
+@interface AlbumViewController : UITableViewController
 
 @end

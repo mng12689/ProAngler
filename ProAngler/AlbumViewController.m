@@ -7,21 +7,24 @@
 //
 
 #import "AlbumViewController.h"
-#import "NewCatch.h"
+#import "Catch.h"
 #import "AlbumPageViewController.h"
 #import "AlbumDetailViewController.h"
 #import "ProAnglerDataStore.h"
+#import "AlbumSettingsViewController.h"
+#import "Venue.h"
+#import "Photo.h"
 
-@interface AlbumViewController ()
+@interface AlbumViewController () <AlbumSettingsViewControllerDelegate>
+
+@property (strong) NSArray* fetchedObjects;
+@property (strong) NSString* sortBy;
+@property (strong) NSArray *sorters;
+@property (strong) AlbumPageViewController *albumPageViewController;
 
 @end
 
 @implementation AlbumViewController
-
-@synthesize context;
-@synthesize fetchedObjects;
-@synthesize sortBy;
-NSArray *sorters = nil;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -36,9 +39,14 @@ NSArray *sorters = nil;
 {
     [super viewDidLoad];
     
-    sorters = [NSArray arrayWithObjects:@"date", @"weight", @"venue", @"species", nil];
-    sortBy = [sorters objectAtIndex:0];
-    fetchedObjects = [ProAnglerDataStore fetchEntity:@"NewCatch" sortBy:sortBy withPredicate:nil];
+    self.albumPageViewController = [[AlbumPageViewController alloc]
+                                    initWithTransitionStyle: UIPageViewControllerTransitionStylePageCurl
+                                    navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                    options: nil];
+    
+    self.sorters = [NSArray arrayWithObjects:@"date", @"weight", @"venue.name", @"species.name", nil];
+    self.sortBy = [self.sorters objectAtIndex:0];
+    self.fetchedObjects = [ProAnglerDataStore fetchEntity:@"Catch" sortBy:self.sortBy withPredicate:nil];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"page_texture.png"]];
     //fetchedResultsController.delegate = self;
@@ -64,37 +72,24 @@ NSArray *sorters = nil;
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return [fetchedObjects count];
+    return [self.fetchedObjects count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CatchCell"];
-	NewCatch *catch = [fetchedObjects objectAtIndex:indexPath.row];
-    
-	UILabel *speciesLabel = (UILabel *)[cell viewWithTag:101];
-	speciesLabel.text = catch.species;
-	
-    UILabel *measurementsLabel = (UILabel *)[cell viewWithTag:102];
-	measurementsLabel.text = [catch weightToString];
+	Catch *catch = [self.fetchedObjects objectAtIndex:indexPath.row];
     
     UILabel *venueLabel = (UILabel *)[cell viewWithTag:103];
-	venueLabel.text = catch.venue;
+	venueLabel.text = catch.venue.name ;
     
     UILabel *dateLabel = (UILabel *)[cell viewWithTag:104];
 	dateLabel.text = [catch dateToString];
 	
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:105];
-    imageView.image = [UIImage imageNamed: @"green.jpg"];
+    imageView.image = [UIImage imageWithData:[((Photo*)[catch.photos anyObject]) photo]];
     
     return cell;    
 }
@@ -142,24 +137,18 @@ NSArray *sorters = nil;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AlbumPageViewController *albumPageViewController = [[AlbumPageViewController alloc] 
-                                initWithTransitionStyle: UIPageViewControllerTransitionStylePageCurl
-                                navigationOrientation: UIPageViewControllerNavigationOrientationHorizontal
-                                options: nil];
-    albumPageViewController.fetchedObjects = fetchedObjects;
-    albumPageViewController.currentPage = indexPath.row;
-    NSLog(@"currentPage: %d",albumPageViewController.currentPage);
-    NewCatch *newCatch = [fetchedObjects objectAtIndex:indexPath.row];
+    self.albumPageViewController.fetchedObjects = self.fetchedObjects;
+    self.albumPageViewController.currentPage = indexPath.row;
     
-    AlbumDetailViewController *albumDetailViewController = [AlbumDetailViewController initWithNewCatch:newCatch atIndex:indexPath.row];
+    Catch *catch = [self.fetchedObjects objectAtIndex:indexPath.row];
+    AlbumDetailViewController *albumDetailViewController = [[AlbumDetailViewController alloc ]initWithNewCatch:catch atIndex:indexPath.row];
     NSArray *viewControllers = [NSArray arrayWithObject:albumDetailViewController];
-    NSLog(@"init view controllers array");
-    [albumPageViewController setViewControllers:viewControllers 
+    [self.albumPageViewController setViewControllers:viewControllers
                             direction:UIPageViewControllerNavigationDirectionForward
-                            animated:NO 
+                            animated:YES
                             completion:nil];
     
-     [self.navigationController pushViewController:albumPageViewController animated:YES];
+     [self.navigationController pushViewController:self.albumPageViewController animated:YES];
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
@@ -185,12 +174,11 @@ NSArray *sorters = nil;
 #pragma mark - AlbumSettingsViewControllerDelegate
 - (void)albumSettingsViewControllerIsDone:(AlbumSettingsViewController *)controller sortBy:(NSUInteger)index
 {
-    if(![self.sortBy isEqualToString:[sorters objectAtIndex:index]]){
-        self.sortBy = [sorters objectAtIndex:index];
-        fetchedObjects = [ProAnglerDataStore fetchEntity:@"NewCatch" sortBy:[sorters objectAtIndex:index] withPredicate:nil];
+    if(![self.sortBy isEqualToString:[self.sorters objectAtIndex:index]]){
+        self.sortBy = [self.sorters objectAtIndex:index];
+        self.fetchedObjects = [ProAnglerDataStore fetchEntity:@"Catch" sortBy:[self.sorters objectAtIndex:index] withPredicate:nil];
         [self.tableView reloadData];
     }
-    NSLog(@"sortBy = %@", sortBy);
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -201,10 +189,8 @@ NSArray *sorters = nil;
 		AlbumSettingsViewController *albumSettingsViewController = 
         segue.destinationViewController;
         albumSettingsViewController.delegate = self;
-        albumSettingsViewController.index = [sorters indexOfObject:sortBy];
-        NSLog(@"sortBy: %@",sortBy);
-        NSLog(@"index: %u", albumSettingsViewController.index);
-	} 
+        albumSettingsViewController.index = [self.sorters indexOfObject:self.sortBy];
+    } 
 }   
 
 @end

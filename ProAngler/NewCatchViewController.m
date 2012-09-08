@@ -11,32 +11,31 @@
 #import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>
 #import "AddAttributeViewController.h"
-#import "NewCatch.h"
-#import "DetailView.h"
+#import "Catch.h"
+#import "ProAnglerDataStore.h"
+#import "Venue.h"
+#import "Photo.h"
+#import "RestKit.h"
 
-@interface NewCatchViewController () < CLLocationManagerDelegate, AddAttributeViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface NewCatchViewController () < CLLocationManagerDelegate, AddAttributeViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RKRequestDelegate>
 
-@property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) CLLocation *currentLocation;
-@property (strong, nonatomic) NSTimer *locationTimer;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIScrollView *mediaScrollView;
-@property (weak, nonatomic) IBOutlet DetailView *detailView;
+@property (strong) CLLocationManager *locationManager;
+@property (strong) CLLocation *currentLocation;
+//@property (strong, nonatomic) NSTimer *locationTimer;
+@property (weak) IBOutlet UIScrollView *scrollView;
+@property (weak) IBOutlet UIScrollView *mediaScrollView;
+@property (weak, nonatomic) IBOutlet UIView *detailView;
+@property (strong) NSMutableArray *photos;
+@property (strong) Catch *currentCatch;
 
 - (IBAction)addAttribute:(UIButton*)sender;
 - (IBAction)saveNewCatch:(id)sender;
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)toggleHiddenView:(id)sender;
 
-
 @end
 
 @implementation NewCatchViewController
-@synthesize detailView;
-@synthesize scrollView;
-@synthesize mediaScrollView;
-@synthesize locationManager,currentLocation,locationTimer;
-
 
 - (void)viewDidLoad
 {
@@ -46,10 +45,13 @@
     
     self.scrollView.contentSize = CGSizeMake(320, 450);
     self.mediaScrollView.layer.cornerRadius = 5;
+    self.mediaScrollView.alpha = .3;
     
-    locationManager = [[CLLocationManager alloc]init];
-    locationManager.delegate = self;
-    [locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+    self.locationManager = [[CLLocationManager alloc]init];
+    self.locationManager.delegate = self;
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+    
+    [RKClient clientWithBaseURL:[NSURL URLWithString:@"http://free.worldweatheronline.com"]];
 }
 
 - (void)viewDidUnload
@@ -57,17 +59,18 @@
     [self setMediaScrollView:nil];
     [self setScrollView:nil];
     [self setDetailView:nil];
+    [self setDetailView:nil];
     [super viewDidUnload];
 }
 
  - (void) viewWillAppear:(BOOL)animated
 {
-    [locationManager startUpdatingLocation];
+    [self.locationManager startUpdatingLocation];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-    [locationManager stopUpdatingLocation];
+    [self.locationManager stopUpdatingLocation];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -123,53 +126,90 @@
 
 - (IBAction)saveNewCatch:(id)sender 
 {
-    NewCatch *newCatch = [ProAnglerDataStore createNewCatch];
+    Catch *catch = [ProAnglerDataStore createEntity:@"Catch"];
     
-    newCatch.date = [NSDate date];
-    newCatch.location = self.currentLocation;
-    newCatch.media = self.media
+    catch.date = [NSDate date];
+    catch.location = self.currentLocation;
+    [self requestWeatherConditions:catch.location];
+
+    for (Photo *photo in self.photos) {
+        photo.catch = catch;
+    }
+    catch.photos = [NSSet setWithArray:self.photos];
     
     if([super.sizePickerView selectedRowInComponent:0]!=0){
-        newCatch.weightLB = [NSNumber numberWithInt:[super.sizePickerView selectedRowInComponent:0]-1];
+        catch.weightLB = [NSNumber numberWithInt:[super.sizePickerView selectedRowInComponent:0]-1];
+    }
+    else{
+        catch.weightLB = [NSNumber numberWithInt:-1];
     }
     if([super.sizePickerView selectedRowInComponent:1]!=0){
-        newCatch.weightOZ = [NSNumber numberWithInt:[super.sizePickerView selectedRowInComponent:1]-1];
+        catch.weightOZ = [NSNumber numberWithInt:[super.sizePickerView selectedRowInComponent:1]-1];
+    }
+    else{
+        catch.weightOZ = [NSNumber numberWithInt:-1];
     }
     if([super.sizePickerView selectedRowInComponent:2]!=0){
-        newCatch.length = [NSNumber numberWithInt:[super.sizePickerView selectedRowInComponent:2]-1];
+        catch.length = [NSNumber numberWithInt:[super.sizePickerView selectedRowInComponent:2]-1];
     }
-    /*if([super.venuePickerView selectedRowInComponent:0]!=0){
-        newCatch.venue = [[super.venueList objectAtIndex:[super.venuePickerView selectedRowInComponent:0]-1]name];
-    }*/
+    else{
+        catch.length = [NSNumber numberWithInt:-1];
+    }
+    if([super.venuePickerView selectedRowInComponent:0]!=0)
+    {
+        NSString *venueString = [[super.venueList objectAtIndex:[super.venuePickerView selectedRowInComponent:0]-1]name];
+        NSArray *venues = [ProAnglerDataStore fetchEntity:@"Venue" sortBy:@"name" withPredicate:[NSPredicate predicateWithFormat:@"name like %@",venueString]];
+        
+        if ([venues count] == 0) {
+            Venue *venue = [ProAnglerDataStore createEntity:@"Venue"];
+            venue.name = venueString;
+            catch.venue = venue;
+        }
+        else{
+            catch.venue = [venues objectAtIndex:0];
+        }
+    }
     if([super.speciesPickerView selectedRowInComponent:0]!=0){
-        newCatch.species = [[super.speciesList objectAtIndex:[super.speciesPickerView selectedRowInComponent:0]-1]name];
+        NSString *species = [[super.speciesList objectAtIndex:[super.speciesPickerView selectedRowInComponent:0]-1]name];
+        catch.species = [[ProAnglerDataStore fetchEntity:@"Species" sortBy:@"name" withPredicate:[NSPredicate predicateWithFormat:@"name like %@",species]] objectAtIndex:0];
     }
     if([super.baitPickerView selectedRowInComponent:0]!=0){
-        newCatch.bait = [[super.baitList objectAtIndex:[super.baitPickerView selectedRowInComponent:0]-1]name];
+        NSString *bait = [[super.baitList objectAtIndex:[super.baitPickerView selectedRowInComponent:0]-1]name];
+        catch.bait = [[ProAnglerDataStore fetchEntity:@"Bait" sortBy:@"name" withPredicate:[NSPredicate predicateWithFormat:@"name like %@",bait]] objectAtIndex:0];
     }
     if([super.structurePickerView selectedRowInComponent:0]!=0){
-        newCatch.structure = [[super.structureList objectAtIndex:[super.structurePickerView selectedRowInComponent:0]-1]name];
+        NSString *structure = [[super.structureList objectAtIndex:[super.structurePickerView selectedRowInComponent:0]-1]name];
+        catch.structure = [[ProAnglerDataStore fetchEntity:@"Structure" sortBy:@"name" withPredicate:[NSPredicate predicateWithFormat:@"name like %@",structure]] objectAtIndex:0];
     }
     if([super.depthPickerView selectedRowInComponent:0]!=0){
-        newCatch.depth = [NSNumber numberWithInt:[super.depthPickerView selectedRowInComponent:0]-1];
+        catch.depth = [NSNumber numberWithInt:[super.depthPickerView selectedRowInComponent:0]-1];
+    }
+    else{
+        catch.depth = [NSNumber numberWithInt:-1];
     }
     if([super.waterTempPickerView selectedRowInComponent:0]!=0){
-        newCatch.waterTemp = [NSNumber numberWithInt:[super.waterTempPickerView selectedRowInComponent:0]+31];
+        catch.waterTempF = [NSNumber numberWithInt:[super.waterTempPickerView selectedRowInComponent:0]+31];
      }
+    else{
+        catch.waterTempF = [NSNumber numberWithInt:-1];
+    }
     if([super.waterColorPickerView selectedRowInComponent:0]!=0){
-        newCatch.waterColor = [super.waterColorList objectAtIndex:[super.waterColorPickerView selectedRowInComponent:0]-1];
+        catch.waterColor = [super.waterColorList objectAtIndex:[super.waterColorPickerView selectedRowInComponent:0]-1];
     }
     if([super.waterLevelPickerView selectedRowInComponent:0]!=0){
-        newCatch.waterLevel = [super.waterLevelList objectAtIndex: [super.waterLevelPickerView selectedRowInComponent:0]-1];
+        catch.waterLevel = [super.waterLevelList objectAtIndex: [super.waterLevelPickerView selectedRowInComponent:0]-1];
     }
     if([super.spawningPickerView selectedRowInComponent:0]!=0){
-    newCatch.spawning = [super.spawningList objectAtIndex:[super.spawningPickerView selectedRowInComponent:0]-1];
+    catch.spawning = [super.spawningList objectAtIndex:[super.spawningPickerView selectedRowInComponent:0]-1];
     }
     if([super.baitDepthPickerView selectedRowInComponent:0]!=0){
-        newCatch.baitDepth = [super.baitDepthList objectAtIndex:[super.baitDepthPickerView selectedRowInComponent:0]-1];
+        catch.baitDepth = [super.baitDepthList objectAtIndex:[super.baitDepthPickerView selectedRowInComponent:0]-1];
     }
     
+    self.currentCatch = catch;
+    
     [ProAnglerDataStore saveContext];
+    [self resetView];
     
     /*NSError *error;
     if(![ProAnglerDataStore saveContext:&error])
@@ -185,9 +225,34 @@
     //reset picker views and pictures
 }
 
+- (void)resetView
+{
+    self.photos = nil;
+    for (int i = 1; i < [self.mediaScrollView.subviews count]; i++) {
+        [[self.mediaScrollView.subviews objectAtIndex:i] removeFromSuperview];
+    }
+    if (!self.detailView.hidden) {
+        [self toggleHiddenView:nil];
+    }
+    
+    [super.sizePickerView selectRow:0 inComponent:0 animated:YES];
+    [super.sizePickerView selectRow:0 inComponent:1 animated:YES];
+    [super.sizePickerView selectRow:0 inComponent:2 animated:YES];
+    [super.venuePickerView selectRow:0 inComponent:0 animated:NO];
+    [super.speciesPickerView selectRow:0 inComponent:0 animated:NO];
+    [super.baitPickerView selectRow:0 inComponent:0 animated:NO];
+    [super.structurePickerView selectRow:0 inComponent:0 animated:NO];
+    [super.depthPickerView selectRow:0 inComponent:0 animated:NO];
+    [super.waterTempPickerView selectRow:0 inComponent:0 animated:NO];
+    [super.waterColorPickerView selectRow:0 inComponent:0 animated:NO];
+    [super.waterLevelPickerView selectRow:0 inComponent:0 animated:NO];
+    [super.spawningPickerView selectRow:0 inComponent:0 animated:NO];
+    [super.baitDepthPickerView selectRow:0 inComponent:0 animated:NO];
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    if (newLocation.horizontalAccuracy > currentLocation.horizontalAccuracy) {
+    if (newLocation.horizontalAccuracy > self.currentLocation.horizontalAccuracy) {
         self.currentLocation = newLocation;
     }
 }
@@ -195,7 +260,7 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     if(error.code == kCLErrorDenied) {
-        [locationManager stopUpdatingLocation];
+        [self.locationManager stopUpdatingLocation];
     } 
     else if(error.code == kCLErrorLocationUnknown) {
         // retry
@@ -222,12 +287,19 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0 + 70*([self.mediaScrollView.subviews count]-1), 0, 70, 70)];
-    //imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     //if (CFStringCompare((__bridge CFStringRef) [info objectForKey:UIImagePickerControllerMediaType], kUTTypeImage, 0) == kCFCompareEqualTo){
-        
-    imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    if (!self.photos) {
+        self.photos = [NSMutableArray new];
+    }
+    UIImage *newImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    Photo *image = [ProAnglerDataStore createEntity:@"Photo"];
+    image.photo = UIImageJPEGRepresentation(newImage, 1);
+    [self.photos addObject:image];
+    
+    imageView.image = newImage;
     imageView.opaque = YES;
+    
     self.mediaScrollView.contentSize = CGSizeMake(70+self.mediaScrollView.contentSize.width,70);
     [self.mediaScrollView addSubview:imageView];
     //}
@@ -244,6 +316,45 @@
         self.detailView.hidden = YES;
         self.scrollView.contentSize = CGSizeMake(320, 450);
     }
+}
+
+-(void)requestWeatherConditions:(CLLocation*)location
+{
+   
+    RKClient *client = [RKClient sharedClient];
+    NSDictionary *params = [NSDictionary dictionaryWithKeysAndObjects:
+                            @"q", [NSString stringWithFormat:@"%f,%f",location.coordinate.latitude,location.coordinate.longitude],
+                            @"format", @"json",
+                            @"num_of_days", @"2",
+                            @"key", @"66a46b14b5045801120509",
+                            nil];
+    
+    [client get:@"/feed/weather.ashx" queryParameters:params delegate:self];
+}
+
+-(void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response
+{
+    NSError *error = nil;
+    NSDictionary *weatherResponse = [response parsedBody:&error];
+    NSLog(@"%@",[weatherResponse description]);
+    if(error){
+        self.currentCatch.humidity = [NSNumber numberWithInt:-1];
+        self.currentCatch.tempF = [NSNumber numberWithInt:-1];
+        self.currentCatch.visibility = [NSNumber numberWithInt:-1];
+        self.currentCatch.windSpeedMPH = [NSNumber numberWithInt:-1];
+    }
+    else{
+        NSDictionary *currentConditions = [[[weatherResponse objectForKey:@"data"] objectForKey:@"current_condition"] objectAtIndex:0];
+        self.currentCatch.humidity = [NSNumber numberWithInt:[[currentConditions objectForKey:@"humidity"]intValue]];
+        self.currentCatch.tempF = [NSNumber numberWithInt:[[currentConditions objectForKey:@"temp_F"]intValue]];
+        self.currentCatch.visibility = [NSNumber numberWithInt:[[currentConditions objectForKey:@"visibility"]intValue]];
+        self.currentCatch.weatherDesc = [[[currentConditions objectForKey:@"weatherDesc"] objectAtIndex:0] objectForKey:@"value"];
+        self.currentCatch.windSpeedMPH = [NSNumber numberWithInt:[[currentConditions objectForKey:@"windspeedMiles"]intValue]];
+        self.currentCatch.windDir = [currentConditions objectForKey:@"winddir16Point"];
+        
+        [ProAnglerDataStore saveContext];
+    }
+
 }
 
 @end

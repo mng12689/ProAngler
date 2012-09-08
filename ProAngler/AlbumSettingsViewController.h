@@ -11,14 +11,12 @@
 @class AlbumSettingsViewController;
 
 @protocol AlbumSettingsViewControllerDelegate <NSObject>
-    - (void)albumSettingsViewControllerIsDone:(AlbumSettingsViewController *)controller sortBy:(NSUInteger)index;
+- (void)albumSettingsViewControllerIsDone:(AlbumSettingsViewController *)controller sortBy:(NSUInteger)index;
 @end
 
 @interface AlbumSettingsViewController : UIViewController
-    @property (nonatomic, weak) id <AlbumSettingsViewControllerDelegate> delegate;
-    @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
-    @property NSUInteger index;
 
-    - (IBAction)segmentedControlIndexChanged:(id)sender;
-    - (IBAction)done:(id)sender;
+@property (nonatomic, weak) id <AlbumSettingsViewControllerDelegate> delegate;
+@property NSUInteger index;
+
 @end

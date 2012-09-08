@@ -8,16 +8,13 @@
 
 #import "AlbumPageViewController.h"
 #import "AlbumDetailViewController.h"
-#import "NewCatch.h"
+#import "Catch.h"
 
-@interface AlbumPageViewController ()
+@interface AlbumPageViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIGestureRecognizerDelegate>
 
 @end
 
 @implementation AlbumPageViewController
-
-@synthesize fetchedObjects;
-@synthesize currentPage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,13 +30,20 @@
     [super viewDidLoad];
     
     self.delegate = self;
-    self.dataSource = self;        
+    self.dataSource = self;
+    for (UIGestureRecognizer *gR in self.view.gestureRecognizers) {
+        gR.delegate = self;
+    }
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"current_page: %d",self.currentPage);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -49,45 +53,58 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    NSInteger index;
-    if(currentPage == 0){
-        index = [fetchedObjects count]-1;
+    int index;
+    if(self.currentPage == 0){
+        index = [self.fetchedObjects count]-1;
     }
     else{
-        index = currentPage - 1;
+        index = self.currentPage - 1;
     }
-    NewCatch *newCatch = [fetchedObjects objectAtIndex:index];
-    viewController = [AlbumDetailViewController initWithNewCatch:newCatch atIndex:index];
-    //set variables
-    return viewController;
+    NSLog(@"Will display previous page: %d",index);
+    self.currentPage = index;
+    Catch *catch = [self.fetchedObjects objectAtIndex:index];
+    return [[AlbumDetailViewController alloc ]initWithNewCatch:catch atIndex:index];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    NSInteger index;
-    if(currentPage == [fetchedObjects count]-1){
+    int index;
+    if(self.currentPage == [self.fetchedObjects count]-1){
         index = 0;
     }
     else{
-        index = currentPage + 1;
+        index = self.currentPage + 1;
     }
-
-    NewCatch *newCatch = [fetchedObjects objectAtIndex:index];
-    viewController = [AlbumDetailViewController initWithNewCatch:newCatch atIndex:index];;
-    //set variables
-    return viewController;
+    NSLog(@"Will display next page: %d",index);
+    self.currentPage = index;
+    Catch *catch = [self.fetchedObjects objectAtIndex:index];
+    return [[AlbumDetailViewController alloc] initWithNewCatch:catch atIndex:index];
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
-    UIViewController *previousViewController = [previousViewControllers objectAtIndex:0];
-    if((previousViewController.view.tag < currentPage) && completed){
-        currentPage++;
+    AlbumDetailViewController *previousViewController = [previousViewControllers objectAtIndex:0];
+    if (!completed) {
+        [self setViewControllers:previousViewControllers direction:UIPageViewControllerNavigationOrientationHorizontal animated:YES completion:nil];
+        if(previousViewController.currentPage < self.currentPage){
+            NSLog(@"Current page -1");
+            self.currentPage--;
+        }
+        else if(previousViewController.currentPage > self.currentPage){
+            NSLog(@"Current page +1");
+            self.currentPage++;
+        }
     }
-    else if((previousViewController.view.tag > currentPage) && completed){
-        currentPage--;
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
+        CGPoint touchPoint = [touch locationInView:self.view];
+        if (CGRectContainsPoint([[[self.viewControllers objectAtIndex:0] addToWallOfFameButton]frame],touchPoint))
+            return NO;
     }
-    NSLog(@"currentPage: %d",currentPage);
+    return YES;
 }
 
 @end

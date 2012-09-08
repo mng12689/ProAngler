@@ -10,13 +10,14 @@
 
 @interface AlbumSettingsViewController ()
 
+@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+
+- (IBAction)segmentedControlIndexChanged:(id)sender;
+- (IBAction)done:(id)sender;
+
 @end
 
 @implementation AlbumSettingsViewController
-
-@synthesize delegate;
-@synthesize segmentedControl;
-@synthesize index;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,20 +28,13 @@
     return self;
 }
 
-/*- (void)loadView
-{
-    // If you create your views manually, you MUST override this method and use it to create your views.
-    // If you use Interface Builder to create your views, then you must NOT override this method.
-}*/
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor clearColor];
     
-    self.segmentedControl.selectedSegmentIndex = index;
+    self.segmentedControl.selectedSegmentIndex = self.index;
 }
 
 - (void)viewDidUnload
@@ -59,16 +53,16 @@
 {
     switch (self.segmentedControl.selectedSegmentIndex) {
         case 0:
-            index = 0;
+            self.index = 0;
             break;
         case 1:
-            index = 1;
+            self.index = 1;
             break;
         case 2:
-            index = 2;
+            self.index = 2;
             break;
         case 3:
-            index = 3;
+            self.index = 3;
             break;
         default:
             break;
@@ -78,7 +72,7 @@
 
 - (IBAction)done:(id)sender
 {
-	[self.delegate albumSettingsViewControllerIsDone:self sortBy:index];
+	[self.delegate albumSettingsViewControllerIsDone:self sortBy:self.index];
 }
 
 @end
