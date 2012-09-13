@@ -1,20 +1,21 @@
 //
-//  AlbumPageViewController.m
+//  FullSizeImagePageViewController.m
 //  ProAngler
 //
-//  Created by Michael Ng on 6/27/12.
-//  Copyright (c) Michael Ng. All rights reserved.
+//  Created by Michael Ng on 9/12/12.
+//  Copyright (c) Michael NG. All rights reserved.
 //
 
-#import "AlbumPageViewController.h"
-#import "AlbumDetailViewController.h"
+#import "FullSizeImagePageViewController.h"
 #import "Catch.h"
+#import "FullSizeImageViewController.h"
+#import "Photo.h"
 
-@interface AlbumPageViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIGestureRecognizerDelegate>
+@interface FullSizeImagePageViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIGestureRecognizerDelegate>
 
 @end
 
-@implementation AlbumPageViewController
+@implementation FullSizeImagePageViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,6 +39,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    // Release any retained subviews of the main view.
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -54,7 +56,7 @@
 {
     int index;
     if(self.currentPage == 0){
-        index = [self.catches count]-1;
+        index = [self.photosForPages count]-1;
     }
     else{
         index = self.currentPage - 1;
@@ -62,14 +64,14 @@
     NSLog(@"Will display previous page: %d",index);
     self.currentPage = index;
     
-    Catch *catch = [self.catches objectAtIndex:index];
-    return [[AlbumDetailViewController alloc ]initWithNewCatch:catch atIndex:index];
+    //Catch *catch = [[self.photosForPages objectAtIndex:index] catch];
+    return [[FullSizeImageViewController alloc]initWithPhoto:[self.photosForPages objectAtIndex:self.currentPage]];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
     int index;
-    if(self.currentPage == [self.catches count]-1){
+    if(self.currentPage == [self.photosForPages count]-1){
         index = 0;
     }
     else{
@@ -77,13 +79,14 @@
     }
     NSLog(@"Will display next page: %d",index);
     self.currentPage = index;
-    Catch *catch = [self.catches objectAtIndex:index];
-    return [[AlbumDetailViewController alloc] initWithNewCatch:catch atIndex:index];
+    
+    //Catch *catch = [[self.photosForPages objectAtIndex:index] catch];
+    return [[FullSizeImageViewController alloc]initWithPhoto:[self.photosForPages objectAtIndex:self.currentPage]];
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
-    AlbumDetailViewController *previousViewController = [previousViewControllers objectAtIndex:0];
+    FullSizeImageViewController *previousViewController = [previousViewControllers objectAtIndex:0];
     if (!completed) {
         [self setViewControllers:previousViewControllers direction:UIPageViewControllerNavigationOrientationHorizontal animated:YES completion:nil];
         if(previousViewController.currentPage < self.currentPage){
@@ -99,17 +102,9 @@
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
-        CGPoint touchPoint = [touch locationInView:self.view];
-        if (CGRectContainsPoint([[[self.viewControllers objectAtIndex:0] addToWallOfFameButton]frame],touchPoint))
-            return NO;
-        else if (CGRectContainsPoint([[[self.viewControllers objectAtIndex:0] emailButton]frame],touchPoint))
-            return NO;
-        else if (CGRectContainsPoint([[[self.viewControllers objectAtIndex:0] twitterButton]frame],touchPoint))
-            return NO;
-        else if (CGRectContainsPoint([[[self.viewControllers objectAtIndex:0] mainImageView]frame],touchPoint))
-            return NO;
-    }
+    if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]])
+        return NO;
+    
     return YES;
 }
 

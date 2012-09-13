@@ -2,15 +2,21 @@
 //  Species.m
 //  ProAngler
 //
-//  Created by Michael Ng on 6/20/12.
-//  Copyright (c) Michael Ng. All rights reserved.
+//  Created by Michael Ng on 9/9/12.
+//  Copyright (c) 2012 Amherst College. All rights reserved.
 //
 
 #import "Species.h"
+#import "Catch.h"
+#import "Venue.h"
 
 
 @implementation Species
 
 @dynamic name;
+@dynamic totalCatches;
+@dynamic catches;
+@dynamic venues;
+@dynamic largestCatch;
 
 @end

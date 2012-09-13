@@ -56,7 +56,7 @@
     NSLog(@"Will display previous page: %d",index);
     self.currentPage = index;
 
-    UIImage *photo = [UIImage imageWithData:[[[[self.trophyFish objectAtIndex:index] photos] anyObject] photo]];
+    UIImage *photo = [UIImage imageWithData:[[[[self.trophyFish objectAtIndex:index] photos] anyObject] fullSizeImage]];
     return [[FullSizeViewController alloc]initWithImage:photo];
 }
 
@@ -71,7 +71,7 @@
     }
     NSLog(@"Will display next page: %d",index);
     self.currentPage = index;
-    UIImage *photo = [UIImage imageWithData:[[[[self.trophyFish objectAtIndex:index] photos] anyObject] photo]];
+    UIImage *photo = [UIImage imageWithData:[[[[self.trophyFish objectAtIndex:index] photos] anyObject] fullSizeImage]];
     return [[FullSizeViewController alloc]initWithImage:photo];
 }
 

@@ -15,7 +15,7 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *model;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-+ (void)saveContext;
++ (void)saveContext:(NSError**)error;
 + (NSURL*)applicationDocumentsDirectory;
 
 + (NSArray*) fetchEntity:(NSString*)entity sortBy:(NSString*)sortBy withPredicate:(NSPredicate*)predicate;

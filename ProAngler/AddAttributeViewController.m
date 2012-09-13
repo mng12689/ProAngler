@@ -59,7 +59,7 @@
     else{
         NSManagedObject *newAttribute = [ProAnglerDataStore createNewAttribute:self.attributeType];;
         [newAttribute setValue:self.textField.text forKey:@"name"];
-        [ProAnglerDataStore saveContext];
+        [ProAnglerDataStore saveContext:nil];
         /*NSError *error;
         if (![context save:&error]) {
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);

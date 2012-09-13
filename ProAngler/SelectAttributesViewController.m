@@ -110,11 +110,17 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
     if(pickerView.tag == 101)
         return 3;
+    
+    else if (pickerView.tag == 118)
+        return 4;
+    
     else if (pickerView.tag >= 115)
         return 2;
+    
     else 
         return 1;
 }
@@ -123,6 +129,7 @@
        
 {
     if(pickerView.tag == 101)
+        
         if(component == 0)
             return 1002;
         
@@ -166,6 +173,13 @@
     else if (pickerView.tag == 115)
         return 132;
     
+    else if (pickerView.tag == 118)
+        
+        if (component == 0 || component == 2)
+            return 1002;
+        else
+            return 17;
+        
     else if (pickerView.tag == 119)
         return 122;
 
@@ -176,7 +190,7 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component 
 {
     if(row == 0)
-        return @"-----";
+        return @"";
     
     else if(pickerView.tag == 101 || pickerView.tag == 118 || pickerView.tag == 119)
         return [[NSNumber numberWithInt:row-1] stringValue];

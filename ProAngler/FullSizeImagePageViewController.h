@@ -1,5 +1,5 @@
 //
-//  FullSizeImageViewController.h
+//  FullSizeImagePageViewController.h
 //  ProAngler
 //
 //  Created by Michael Ng on 9/12/12.
@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@class Catch;
-@class Photo;
 
-@interface FullSizeImageViewController : UIViewController
+@interface FullSizeImagePageViewController : UIPageViewController
 
+@property (nonatomic,strong) NSArray *photosForPages;
 @property int currentPage;
--(id)initWithPhoto:(Photo*)photo;
 
 @end

@@ -10,17 +10,19 @@
 #import "ProAnglerDataStore.h"
 #import "Catch.h"
 #import "Photo.h"
-#import "FullSizePageViewController.h"
-#import "FullSizeViewController.h"
-#import "FrameView.h"
+#import "PictureView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "FullSizeImageViewController.h"
+#import "FullSizeImagePageViewController.h"
+#import "PictureView.h"
 
 @interface WallOfFameViewController ()
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UINavigationBar* navBar;
-@property (strong) FullSizePageViewController *fullSizePageViewController;
 @property (strong) NSArray *trophyFish;
+@property (strong) NSMutableArray *frameViewControllers;
+@property (strong) FullSizeImagePageViewController *pageViewController;
+-(void)populateWall;
 
 @end
 
@@ -39,65 +41,19 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wood_wall_texture.jpg"]];
-
-    UIImage *image = [UIImage imageNamed:@"wood_beam.png"];
-    [self.navBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    self.scrollView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wood_wall_texture.jpg"]];
     
-    self.trophyFish = [ProAnglerDataStore fetchEntity:@"Catch" sortBy:@"date" withPredicate:[NSPredicate predicateWithFormat:@"trophyFish == YES"]];
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"AddToWOF" object:nil queue:nil usingBlock:^(NSNotification *note){
+        [self populateWall];
+    }];
     
-    self.fullSizePageViewController = [FullSizePageViewController new];
+    self.pageViewController = [[FullSizeImagePageViewController alloc]
+                                    initWithTransitionStyle: UIPageViewControllerTransitionStylePageCurl
+                                    navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                    options: nil];
     
-    BOOL toggle = YES;
-    /*for (Catch *catch in self.trophyFish)
-    {
-        toggle = !toggle;
-        
-        UIView *containerView = [[UIView alloc]initWithFrame:CGRectMake(20 + 150*toggle, 20, 130, 130)];
-        containerView.contentMode = UIViewContentModeScaleAspectFit;
-        containerView.layer.masksToBounds = YES;
-        
-        FrameView *frameView = [[FrameView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
-        frameView.contentMode = UIViewContentModeScaleAspectFit;
-        frameView.layer.masksToBounds = YES;
-        
-        frameView.imageView.image = [UIImage imageWithData:[[catch.photos anyObject] photo]];
-        
-        [containerView addSubview:frameView];
-        [self.view addSubview:containerView];
-    }*/
-    for (Catch *catch in self.trophyFish)
-    {
-        toggle = !toggle;
-        
-        UIView *containerView = [[UIView alloc]initWithFrame:CGRectMake(20 + 150*toggle, 20, 130, 130)];
-        containerView.backgroundColor = [UIColor clearColor];
-        containerView.contentMode = UIViewContentModeCenter;
-        containerView.layer.masksToBounds = YES;
-        [self.view addSubview:containerView];
-        
-        UIImageView *imageView = [[UIImageView alloc]initWithFrame:containerView.frame];
-        imageView.backgroundColor = [UIColor redColor];
-        imageView.image = [UIImage imageWithData:[[catch.photos anyObject] photo]];
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
-        imageView.layer.masksToBounds = YES;
-        
-        [containerView addSubview:imageView];
-        
-        /*UIView *frameView = [[UIView alloc]initWithFrame:CGRectMake(imageView.frame.origin.x - 10, imageView.frame.origin.y - 10, imageView.frame.size.width +20, imageView.frame.size.height + 20)];
-        frameView.backgroundColor = [UIColor redColor];
-        [containerView addSubview:frameView];*/
-                
-        /*FrameView *frameView = [[FrameView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
-        frameView.contentMode = UIViewContentModeScaleAspectFit;
-        frameView.layer.masksToBounds = YES;
-        
-        frameView.imageView.image = [UIImage imageWithData:[[catch.photos anyObject] photo]];
-        
-        [containerView addSubview:frameView];
-        [self.view addSubview:containerView];*/
-    }
-
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+    [self populateWall];
 }
 
 - (void)viewDidUnload
@@ -107,25 +63,55 @@
     // Release any retained subviews of the main view.
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBar.alpha = 0.0;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(void)fullSizeImage:(Catch*)catch
+-(void)populateWall
 {
-    self.fullSizePageViewController.trophyFish = self.trophyFish;
-    self.fullSizePageViewController.currentPage = [self.trophyFish indexOfObject:catch];
+    self.trophyFish = [ProAnglerDataStore fetchEntity:@"Catch" sortBy:@"date" withPredicate:[NSPredicate predicateWithFormat:@"trophyFish == YES"]];
     
-    UIImage *photo = [UIImage imageWithData:[[[[self.trophyFish objectAtIndex:self.fullSizePageViewController.currentPage] photos] anyObject] photo]];
-    FullSizeViewController *fullSizeViewController = [[FullSizeViewController alloc]initWithImage:photo];
-    NSArray *viewControllers = [NSArray arrayWithObject:fullSizeViewController];
-    [self.fullSizePageViewController setViewControllers:viewControllers
-                                           direction:UIPageViewControllerNavigationDirectionForward
-                                           animated:YES
-                                           completion:nil];
+    BOOL toggle = YES;
+    int index = 0;
+    int row = 0;
+    for (Catch *catch in self.trophyFish)
+    {
+        toggle = !toggle;
     
-    [self.navigationController pushViewController:self.fullSizePageViewController animated:YES];
+        PictureView *pictureView = [[PictureView alloc] initWithFrame:CGRectMake(20 + 150*toggle, 20 + 150*row, 130, 130) photo:[catch.photos anyObject] delegate:self];
+        
+        [self.scrollView addSubview:pictureView];
+        
+        if (index != 0 || index%2) 
+            row++;
+        index++;
+    }
+}
+
+-(void)showFullSizeImage:(UITapGestureRecognizer*)tapGesture
+{
+    UIImageView *imageView = (UIImageView*)tapGesture.view;
+    FullSizeImageViewController *fullSizeImageViewController = [[FullSizeImageViewController alloc]initWithPhoto:[(PictureView*)imageView.superview photo]];
+    self.pageViewController.currentPage = [self.trophyFish indexOfObject:[[(PictureView*)imageView.superview photo]catch]];
+    
+    NSMutableArray *photos = [NSMutableArray new];
+    for (Catch *catch in self.trophyFish) 
+        [photos addObject:[catch.photos anyObject]];
+    
+    self.pageViewController.photosForPages = photos;
+    
+    [self.pageViewController setViewControllers:@[fullSizeImageViewController]
+                                direction:UIPageViewControllerNavigationDirectionForward
+                                animated:YES
+                                completion:nil];
+    
+    [self.navigationController pushViewController:self.pageViewController animated:YES];
 }
 
 @end

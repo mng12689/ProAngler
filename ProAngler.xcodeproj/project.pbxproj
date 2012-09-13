@@ -25,31 +25,43 @@
 		276B6F28159954C800F84728 /* wood_wall_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 276B6F27159954C800F84728 /* wood_wall_texture.jpg */; };
 		276B6F2A159954CD00F84728 /* wood_wall_texture@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 276B6F29159954CD00F84728 /* wood_wall_texture@2x.jpg */; };
 		276B6F2D1599559000F84728 /* WallOfFameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 276B6F2C1599558D00F84728 /* WallOfFameViewController.m */; };
-		276B6F38159AD99A00F84728 /* trout_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 276B6F37159AD99900F84728 /* trout_texture.png */; };
 		276B6F3E159BA70200F84728 /* AlbumPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 276B6F3D159BA70100F84728 /* AlbumPageViewController.m */; };
 		276B6F41159C28B600F84728 /* AlbumDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 276B6F40159C28B500F84728 /* AlbumDetailViewController.m */; };
-		279C5204159E970600FAF2E9 /* rainbow_trout.png in Resources */ = {isa = PBXBuildFile; fileRef = 279C5203159E970600FAF2E9 /* rainbow_trout.png */; };
 		279C520715A007CE00FAF2E9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 279C520615A007CE00FAF2E9 /* QuartzCore.framework */; };
 		279C520915A1106E00FAF2E9 /* wood_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 279C520815A1106E00FAF2E9 /* wood_texture.png */; };
 		279C520F15A2CEF700FAF2E9 /* AddAttributeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279C520E15A2CEF700FAF2E9 /* AddAttributeViewController.m */; };
 		279E6A661539368000D72111 /* AlbumSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279E6A651539368000D72111 /* AlbumSettingsViewController.m */; };
-		4C0C21D715F983F3004324F8 /* FullSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0C21D615F983F3004324F8 /* FullSizeViewController.m */; };
-		4C0C21DB15F984B4004324F8 /* FullSizePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0C21DA15F984B4004324F8 /* FullSizePageViewController.m */; };
-		4C0C21F015FADEE3004324F8 /* FrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0C21EF15FADEE3004324F8 /* FrameView.m */; };
+		4C11AEBC15FBD6840088D55F /* AnalysisPagedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C11AEBB15FBD6840088D55F /* AnalysisPagedViewController.m */; };
+		4C11AEC515FC062B0088D55F /* PageTwoStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C11AEC315FC062B0088D55F /* PageTwoStatsViewController.m */; };
+		4C11AEC615FC062B0088D55F /* PageTwoStatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AEC415FC062B0088D55F /* PageTwoStatsViewController.xib */; };
+		4C11AED615FD54940088D55F /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C11AED515FD54940088D55F /* Venue.m */; };
+		4C11AEDC15FD6B2D0088D55F /* PageOneMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C11AEDA15FD6B2D0088D55F /* PageOneMapViewController.m */; };
+		4C11AEDD15FD6B2D0088D55F /* PageOneMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AEDB15FD6B2D0088D55F /* PageOneMapViewController.xib */; };
+		4C11AEE315FDA14A0088D55F /* Species.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C11AEE215FDA14A0088D55F /* Species.m */; };
+		4C11AEE515FDCBAA0088D55F /* NureenHouseStock_0016.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AEE415FDCBAA0088D55F /* NureenHouseStock_0016.JPG */; };
+		4C11AEE715FDCBB60088D55F /* NureenHouseStock_0017.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AEE615FDCBB60088D55F /* NureenHouseStock_0017.JPG */; };
+		4C11AEE915FE9E8D0088D55F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C11AEE815FE9E8D0088D55F /* MessageUI.framework */; };
+		4C11AEEB15FE9ED80088D55F /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C11AEEA15FE9ED80088D55F /* Twitter.framework */; };
+		4C11AEEE15FEC53E0088D55F /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C11AEED15FEC53E0088D55F /* Photo.m */; };
+		4C11AEFD160003130088D55F /* PictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C11AEFC160003130088D55F /* PictureView.m */; };
+		4C11AF091600483A0088D55F /* light_wood@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AF081600483A0088D55F /* light_wood@2x.jpg */; };
+		4C11AF0D16004B0E0088D55F /* dark_wood@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AF0C16004B0E0088D55F /* dark_wood@2x.jpg */; };
+		4C11AF0F1600726D0088D55F /* twitter-bird-white-on-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AF0E1600726C0088D55F /* twitter-bird-white-on-blue.png */; };
+		4C11AF1116007A4F0088D55F /* light_wood_tab_bar@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AF1016007A4F0088D55F /* light_wood_tab_bar@2x.jpg */; };
+		4C11AF131600FFA30088D55F /* wood_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AF121600FFA20088D55F /* wood_texture.jpg */; };
+		4C11AF15160102D60088D55F /* light_wood_nav_bar@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AF14160102D50088D55F /* light_wood_nav_bar@2x.jpg */; };
+		4C11AF1816014E080088D55F /* FullSizeImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C11AF1716014E080088D55F /* FullSizeImageViewController.m */; };
 		4C47C64315F5B7A50061621E /* Catch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C47C64215F5B7A50061621E /* Catch.m */; };
 		4C47C64615F5B9D00061621E /* Bait.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C47C64515F5B9D00061621E /* Bait.m */; };
-		4C47C64915F5B9D90061621E /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C47C64815F5B9D90061621E /* Photo.m */; };
-		4C47C64C15F5B9E10061621E /* Species.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C47C64B15F5B9E10061621E /* Species.m */; };
 		4C47C64F15F5B9E70061621E /* Structure.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C47C64E15F5B9E70061621E /* Structure.m */; };
-		4C47C65215F5B9ED0061621E /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C47C65115F5B9ED0061621E /* Venue.m */; };
 		4C6602F615FB36CA007F81E1 /* CatchPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6602F515FB36CA007F81E1 /* CatchPointAnnotation.m */; };
-		4C69949215B2756F00289161 /* AnalysisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C69949115B2756F00289161 /* AnalysisViewController.m */; };
 		4C69949815B353D400289161 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C69949715B353D400289161 /* MapKit.framework */; };
 		4CA2727715F4082700EFD55F /* ProAnglerDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA2727615F4082700EFD55F /* ProAnglerDataStore.m */; };
 		4CA939BF15D30248008F1A13 /* nav_bar_water_droplets@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA939BE15D30248008F1A13 /* nav_bar_water_droplets@2x.png */; };
 		4CA939C615D392AD008F1A13 /* page_texture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA939C515D392AD008F1A13 /* page_texture@2x.png */; };
 		4CA939C815D39C21008F1A13 /* graph_paper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA939C715D39C21008F1A13 /* graph_paper@2x.png */; };
 		4CA939CA15D39FF6008F1A13 /* wood_beam@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA939C915D39FF6008F1A13 /* wood_beam@2x.png */; };
+		4CF342E1160166D0009D22B6 /* FullSizeImagePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF342E0160166D0009D22B6 /* FullSizeImagePageViewController.m */; };
 		7F5225B40DB64F3F9D31B0F4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 972A7ACA77B54C0F9E03D218 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -81,40 +93,52 @@
 		276B6F29159954CD00F84728 /* wood_wall_texture@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "wood_wall_texture@2x.jpg"; sourceTree = "<group>"; };
 		276B6F2B1599558D00F84728 /* WallOfFameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WallOfFameViewController.h; sourceTree = "<group>"; };
 		276B6F2C1599558D00F84728 /* WallOfFameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WallOfFameViewController.m; sourceTree = "<group>"; };
-		276B6F37159AD99900F84728 /* trout_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trout_texture.png; sourceTree = "<group>"; };
 		276B6F3C159BA70100F84728 /* AlbumPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumPageViewController.h; sourceTree = "<group>"; };
 		276B6F3D159BA70100F84728 /* AlbumPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumPageViewController.m; sourceTree = "<group>"; };
 		276B6F3F159C28B500F84728 /* AlbumDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumDetailViewController.h; sourceTree = "<group>"; };
 		276B6F40159C28B500F84728 /* AlbumDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumDetailViewController.m; sourceTree = "<group>"; };
-		279C5203159E970600FAF2E9 /* rainbow_trout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rainbow_trout.png; sourceTree = "<group>"; };
 		279C520615A007CE00FAF2E9 /* QuartzCore.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		279C520815A1106E00FAF2E9 /* wood_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wood_texture.png; sourceTree = "<group>"; };
 		279C520D15A2CEF600FAF2E9 /* AddAttributeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAttributeViewController.h; sourceTree = "<group>"; };
 		279C520E15A2CEF700FAF2E9 /* AddAttributeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAttributeViewController.m; sourceTree = "<group>"; };
 		279E6A641539368000D72111 /* AlbumSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumSettingsViewController.h; sourceTree = "<group>"; };
 		279E6A651539368000D72111 /* AlbumSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumSettingsViewController.m; sourceTree = "<group>"; };
-		4C0C21D515F983F3004324F8 /* FullSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullSizeViewController.h; sourceTree = "<group>"; };
-		4C0C21D615F983F3004324F8 /* FullSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullSizeViewController.m; sourceTree = "<group>"; };
-		4C0C21D915F984B4004324F8 /* FullSizePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullSizePageViewController.h; sourceTree = "<group>"; };
-		4C0C21DA15F984B4004324F8 /* FullSizePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullSizePageViewController.m; sourceTree = "<group>"; };
-		4C0C21EE15FADEE3004324F8 /* FrameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameView.h; sourceTree = "<group>"; };
-		4C0C21EF15FADEE3004324F8 /* FrameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameView.m; sourceTree = "<group>"; };
+		4C11AEBA15FBD6840088D55F /* AnalysisPagedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalysisPagedViewController.h; sourceTree = "<group>"; };
+		4C11AEBB15FBD6840088D55F /* AnalysisPagedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalysisPagedViewController.m; sourceTree = "<group>"; };
+		4C11AEC215FC062B0088D55F /* PageTwoStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageTwoStatsViewController.h; sourceTree = "<group>"; };
+		4C11AEC315FC062B0088D55F /* PageTwoStatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageTwoStatsViewController.m; sourceTree = "<group>"; };
+		4C11AEC415FC062B0088D55F /* PageTwoStatsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageTwoStatsViewController.xib; sourceTree = "<group>"; };
+		4C11AED415FD54940088D55F /* Venue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Venue.h; sourceTree = "<group>"; };
+		4C11AED515FD54940088D55F /* Venue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Venue.m; sourceTree = "<group>"; };
+		4C11AED915FD6B2D0088D55F /* PageOneMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageOneMapViewController.h; sourceTree = "<group>"; };
+		4C11AEDA15FD6B2D0088D55F /* PageOneMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageOneMapViewController.m; sourceTree = "<group>"; };
+		4C11AEDB15FD6B2D0088D55F /* PageOneMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageOneMapViewController.xib; sourceTree = "<group>"; };
+		4C11AEE115FDA14A0088D55F /* Species.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Species.h; sourceTree = "<group>"; };
+		4C11AEE215FDA14A0088D55F /* Species.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Species.m; sourceTree = "<group>"; };
+		4C11AEE415FDCBAA0088D55F /* NureenHouseStock_0016.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = NureenHouseStock_0016.JPG; sourceTree = "<group>"; };
+		4C11AEE615FDCBB60088D55F /* NureenHouseStock_0017.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = NureenHouseStock_0017.JPG; sourceTree = "<group>"; };
+		4C11AEE815FE9E8D0088D55F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		4C11AEEA15FE9ED80088D55F /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		4C11AEEC15FEC53E0088D55F /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		4C11AEED15FEC53E0088D55F /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		4C11AEFB160003130088D55F /* PictureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureView.h; sourceTree = "<group>"; };
+		4C11AEFC160003130088D55F /* PictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureView.m; sourceTree = "<group>"; };
+		4C11AF081600483A0088D55F /* light_wood@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "light_wood@2x.jpg"; sourceTree = "<group>"; };
+		4C11AF0C16004B0E0088D55F /* dark_wood@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "dark_wood@2x.jpg"; sourceTree = "<group>"; };
+		4C11AF0E1600726C0088D55F /* twitter-bird-white-on-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-bird-white-on-blue.png"; sourceTree = "<group>"; };
+		4C11AF1016007A4F0088D55F /* light_wood_tab_bar@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "light_wood_tab_bar@2x.jpg"; sourceTree = "<group>"; };
+		4C11AF121600FFA20088D55F /* wood_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wood_texture.jpg; sourceTree = "<group>"; };
+		4C11AF14160102D50088D55F /* light_wood_nav_bar@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "light_wood_nav_bar@2x.jpg"; sourceTree = "<group>"; };
+		4C11AF1616014E070088D55F /* FullSizeImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullSizeImageViewController.h; sourceTree = "<group>"; };
+		4C11AF1716014E080088D55F /* FullSizeImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullSizeImageViewController.m; sourceTree = "<group>"; };
 		4C47C64115F5B7A50061621E /* Catch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Catch.h; path = ../Catch.h; sourceTree = "<group>"; };
 		4C47C64215F5B7A50061621E /* Catch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Catch.m; path = ../Catch.m; sourceTree = "<group>"; };
 		4C47C64415F5B9D00061621E /* Bait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bait.h; sourceTree = "<group>"; };
 		4C47C64515F5B9D00061621E /* Bait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bait.m; sourceTree = "<group>"; };
-		4C47C64715F5B9D80061621E /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = ../Photo.h; sourceTree = "<group>"; };
-		4C47C64815F5B9D90061621E /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = ../Photo.m; sourceTree = "<group>"; };
-		4C47C64A15F5B9E10061621E /* Species.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Species.h; path = ../Species.h; sourceTree = "<group>"; };
-		4C47C64B15F5B9E10061621E /* Species.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Species.m; path = ../Species.m; sourceTree = "<group>"; };
 		4C47C64D15F5B9E70061621E /* Structure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Structure.h; path = ../Structure.h; sourceTree = "<group>"; };
 		4C47C64E15F5B9E70061621E /* Structure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Structure.m; path = ../Structure.m; sourceTree = "<group>"; };
-		4C47C65015F5B9ED0061621E /* Venue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Venue.h; path = ../Venue.h; sourceTree = "<group>"; };
-		4C47C65115F5B9ED0061621E /* Venue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Venue.m; path = ../Venue.m; sourceTree = "<group>"; };
 		4C6602F415FB36C9007F81E1 /* CatchPointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatchPointAnnotation.h; sourceTree = "<group>"; };
 		4C6602F515FB36CA007F81E1 /* CatchPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatchPointAnnotation.m; sourceTree = "<group>"; };
-		4C69949015B2756F00289161 /* AnalysisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalysisViewController.h; sourceTree = "<group>"; };
-		4C69949115B2756F00289161 /* AnalysisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalysisViewController.m; sourceTree = "<group>"; };
 		4C69949715B353D400289161 /* MapKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4CA2727515F4082700EFD55F /* ProAnglerDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProAnglerDataStore.h; sourceTree = "<group>"; };
 		4CA2727615F4082700EFD55F /* ProAnglerDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProAnglerDataStore.m; sourceTree = "<group>"; };
@@ -122,6 +146,8 @@
 		4CA939C515D392AD008F1A13 /* page_texture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "page_texture@2x.png"; sourceTree = "<group>"; };
 		4CA939C715D39C21008F1A13 /* graph_paper@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "graph_paper@2x.png"; sourceTree = "<group>"; };
 		4CA939C915D39FF6008F1A13 /* wood_beam@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wood_beam@2x.png"; sourceTree = "<group>"; };
+		4CF342DF160166D0009D22B6 /* FullSizeImagePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullSizeImagePageViewController.h; sourceTree = "<group>"; };
+		4CF342E0160166D0009D22B6 /* FullSizeImagePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullSizeImagePageViewController.m; sourceTree = "<group>"; };
 		735EA41A7C8F4CC0B729A5A4 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		972A7ACA77B54C0F9E03D218 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -131,6 +157,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C11AEEB15FE9ED80088D55F /* Twitter.framework in Frameworks */,
+				4C11AEE915FE9E8D0088D55F /* MessageUI.framework in Frameworks */,
 				4C69949815B353D400289161 /* MapKit.framework in Frameworks */,
 				279C520715A007CE00FAF2E9 /* QuartzCore.framework in Frameworks */,
 				276B6F1A15928CDD00F84728 /* CoreLocation.framework in Frameworks */,
@@ -166,6 +194,8 @@
 		273D0BDB152FB419009D054A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4C11AEEA15FE9ED80088D55F /* Twitter.framework */,
+				4C11AEE815FE9E8D0088D55F /* MessageUI.framework */,
 				4C69949715B353D400289161 /* MapKit.framework */,
 				279C520615A007CE00FAF2E9 /* QuartzCore.framework */,
 				276B6F1915928CDC00F84728 /* CoreLocation.framework */,
@@ -184,6 +214,7 @@
 				273D0BED152FB419009D054A /* AppDelegate.h */,
 				273D0BEE152FB419009D054A /* AppDelegate.m */,
 				273D0BF0152FB419009D054A /* MainStoryboard.storyboard */,
+				4CF342E6160177F7009D22B6 /* Full Size Image Stuff */,
 				4C286A8515E1EEA30079B47F /* New Catch */,
 				4C286A8915E1EF350079B47F /* Album */,
 				4C286A8C15E1EF9E0079B47F /* Wall Of Fame */,
@@ -219,12 +250,18 @@
 		4C286A8815E1EEF50079B47F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4C11AF1016007A4F0088D55F /* light_wood_tab_bar@2x.jpg */,
+				4C11AF081600483A0088D55F /* light_wood@2x.jpg */,
+				4C11AEE615FDCBB60088D55F /* NureenHouseStock_0017.JPG */,
+				4C11AEE415FDCBAA0088D55F /* NureenHouseStock_0016.JPG */,
 				279C520815A1106E00FAF2E9 /* wood_texture.png */,
-				276B6F37159AD99900F84728 /* trout_texture.png */,
-				279C5203159E970600FAF2E9 /* rainbow_trout.png */,
+				4C11AF14160102D50088D55F /* light_wood_nav_bar@2x.jpg */,
+				4C11AF0C16004B0E0088D55F /* dark_wood@2x.jpg */,
 				4CA939C915D39FF6008F1A13 /* wood_beam@2x.png */,
+				4C11AF121600FFA20088D55F /* wood_texture.jpg */,
 				4CA939C515D392AD008F1A13 /* page_texture@2x.png */,
 				4CA939C715D39C21008F1A13 /* graph_paper@2x.png */,
+				4C11AF0E1600726C0088D55F /* twitter-bird-white-on-blue.png */,
 				4CA939BE15D30248008F1A13 /* nav_bar_water_droplets@2x.png */,
 				276B6F27159954C800F84728 /* wood_wall_texture.jpg */,
 				276B6F29159954CD00F84728 /* wood_wall_texture@2x.jpg */,
@@ -240,10 +277,10 @@
 				273D0C391530D6BC009D054A /* AlbumViewController.m */,
 				276B6F3C159BA70100F84728 /* AlbumPageViewController.h */,
 				276B6F3D159BA70100F84728 /* AlbumPageViewController.m */,
-				276B6F3F159C28B500F84728 /* AlbumDetailViewController.h */,
-				276B6F40159C28B500F84728 /* AlbumDetailViewController.m */,
 				279E6A641539368000D72111 /* AlbumSettingsViewController.h */,
 				279E6A651539368000D72111 /* AlbumSettingsViewController.m */,
+				276B6F3F159C28B500F84728 /* AlbumDetailViewController.h */,
+				276B6F40159C28B500F84728 /* AlbumDetailViewController.m */,
 			);
 			name = Album;
 			sourceTree = "<group>";
@@ -265,18 +302,18 @@
 				273D0BF3152FB419009D054A /* ProAngler.xcdatamodeld */,
 				4CA2727515F4082700EFD55F /* ProAnglerDataStore.h */,
 				4CA2727615F4082700EFD55F /* ProAnglerDataStore.m */,
+				4C11AED415FD54940088D55F /* Venue.h */,
+				4C11AED515FD54940088D55F /* Venue.m */,
+				4C11AEE115FDA14A0088D55F /* Species.h */,
+				4C11AEE215FDA14A0088D55F /* Species.m */,
 				4C47C64415F5B9D00061621E /* Bait.h */,
 				4C47C64515F5B9D00061621E /* Bait.m */,
-				4C47C65015F5B9ED0061621E /* Venue.h */,
-				4C47C65115F5B9ED0061621E /* Venue.m */,
 				4C47C64D15F5B9E70061621E /* Structure.h */,
 				4C47C64E15F5B9E70061621E /* Structure.m */,
-				4C47C64A15F5B9E10061621E /* Species.h */,
-				4C47C64B15F5B9E10061621E /* Species.m */,
-				4C47C64715F5B9D80061621E /* Photo.h */,
-				4C47C64815F5B9D90061621E /* Photo.m */,
 				4C47C64115F5B7A50061621E /* Catch.h */,
 				4C47C64215F5B7A50061621E /* Catch.m */,
+				4C11AEEC15FEC53E0088D55F /* Photo.h */,
+				4C11AEED15FEC53E0088D55F /* Photo.m */,
 			);
 			name = "Data Models";
 			sourceTree = "<group>";
@@ -286,12 +323,8 @@
 			children = (
 				276B6F2B1599558D00F84728 /* WallOfFameViewController.h */,
 				276B6F2C1599558D00F84728 /* WallOfFameViewController.m */,
-				4C0C21D915F984B4004324F8 /* FullSizePageViewController.h */,
-				4C0C21DA15F984B4004324F8 /* FullSizePageViewController.m */,
-				4C0C21D515F983F3004324F8 /* FullSizeViewController.h */,
-				4C0C21D615F983F3004324F8 /* FullSizeViewController.m */,
-				4C0C21EE15FADEE3004324F8 /* FrameView.h */,
-				4C0C21EF15FADEE3004324F8 /* FrameView.m */,
+				4C11AEFB160003130088D55F /* PictureView.h */,
+				4C11AEFC160003130088D55F /* PictureView.m */,
 			);
 			name = "Wall Of Fame";
 			sourceTree = "<group>";
@@ -299,14 +332,31 @@
 		4C286A8D15E1F03F0079B47F /* Analysis */ = {
 			isa = PBXGroup;
 			children = (
-				4C69949015B2756F00289161 /* AnalysisViewController.h */,
-				4C69949115B2756F00289161 /* AnalysisViewController.m */,
+				4C11AEBA15FBD6840088D55F /* AnalysisPagedViewController.h */,
+				4C11AEBB15FBD6840088D55F /* AnalysisPagedViewController.m */,
+				4C11AED915FD6B2D0088D55F /* PageOneMapViewController.h */,
+				4C11AEDA15FD6B2D0088D55F /* PageOneMapViewController.m */,
+				4C11AEDB15FD6B2D0088D55F /* PageOneMapViewController.xib */,
+				4C11AEC215FC062B0088D55F /* PageTwoStatsViewController.h */,
+				4C11AEC315FC062B0088D55F /* PageTwoStatsViewController.m */,
+				4C11AEC415FC062B0088D55F /* PageTwoStatsViewController.xib */,
 				272AE2BA15AA60DB00F7A4DB /* FilterViewController.h */,
 				272AE2BB15AA60DB00F7A4DB /* FilterViewController.m */,
 				4C6602F415FB36C9007F81E1 /* CatchPointAnnotation.h */,
 				4C6602F515FB36CA007F81E1 /* CatchPointAnnotation.m */,
 			);
 			name = Analysis;
+			sourceTree = "<group>";
+		};
+		4CF342E6160177F7009D22B6 /* Full Size Image Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				4CF342DF160166D0009D22B6 /* FullSizeImagePageViewController.h */,
+				4CF342E0160166D0009D22B6 /* FullSizeImagePageViewController.m */,
+				4C11AF1616014E070088D55F /* FullSizeImageViewController.h */,
+				4C11AF1716014E080088D55F /* FullSizeImageViewController.m */,
+			);
+			name = "Full Size Image Stuff";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,13 +416,21 @@
 				276B6F141592770200F84728 /* green.jpg in Resources */,
 				276B6F28159954C800F84728 /* wood_wall_texture.jpg in Resources */,
 				276B6F2A159954CD00F84728 /* wood_wall_texture@2x.jpg in Resources */,
-				276B6F38159AD99A00F84728 /* trout_texture.png in Resources */,
-				279C5204159E970600FAF2E9 /* rainbow_trout.png in Resources */,
 				279C520915A1106E00FAF2E9 /* wood_texture.png in Resources */,
 				4CA939BF15D30248008F1A13 /* nav_bar_water_droplets@2x.png in Resources */,
 				4CA939C615D392AD008F1A13 /* page_texture@2x.png in Resources */,
 				4CA939C815D39C21008F1A13 /* graph_paper@2x.png in Resources */,
 				4CA939CA15D39FF6008F1A13 /* wood_beam@2x.png in Resources */,
+				4C11AEC615FC062B0088D55F /* PageTwoStatsViewController.xib in Resources */,
+				4C11AEDD15FD6B2D0088D55F /* PageOneMapViewController.xib in Resources */,
+				4C11AEE515FDCBAA0088D55F /* NureenHouseStock_0016.JPG in Resources */,
+				4C11AEE715FDCBB60088D55F /* NureenHouseStock_0017.JPG in Resources */,
+				4C11AF091600483A0088D55F /* light_wood@2x.jpg in Resources */,
+				4C11AF0D16004B0E0088D55F /* dark_wood@2x.jpg in Resources */,
+				4C11AF0F1600726D0088D55F /* twitter-bird-white-on-blue.png in Resources */,
+				4C11AF1116007A4F0088D55F /* light_wood_tab_bar@2x.jpg in Resources */,
+				4C11AF131600FFA30088D55F /* wood_texture.jpg in Resources */,
+				4C11AF15160102D60088D55F /* light_wood_nav_bar@2x.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,18 +470,20 @@
 				279C520F15A2CEF700FAF2E9 /* AddAttributeViewController.m in Sources */,
 				272AE2BC15AA60DB00F7A4DB /* FilterViewController.m in Sources */,
 				272AE2C015AA687500F7A4DB /* SelectAttributesViewController.m in Sources */,
-				4C69949215B2756F00289161 /* AnalysisViewController.m in Sources */,
 				4CA2727715F4082700EFD55F /* ProAnglerDataStore.m in Sources */,
 				4C47C64315F5B7A50061621E /* Catch.m in Sources */,
 				4C47C64615F5B9D00061621E /* Bait.m in Sources */,
-				4C47C64915F5B9D90061621E /* Photo.m in Sources */,
-				4C47C64C15F5B9E10061621E /* Species.m in Sources */,
 				4C47C64F15F5B9E70061621E /* Structure.m in Sources */,
-				4C47C65215F5B9ED0061621E /* Venue.m in Sources */,
-				4C0C21D715F983F3004324F8 /* FullSizeViewController.m in Sources */,
-				4C0C21DB15F984B4004324F8 /* FullSizePageViewController.m in Sources */,
-				4C0C21F015FADEE3004324F8 /* FrameView.m in Sources */,
 				4C6602F615FB36CA007F81E1 /* CatchPointAnnotation.m in Sources */,
+				4C11AEBC15FBD6840088D55F /* AnalysisPagedViewController.m in Sources */,
+				4C11AEC515FC062B0088D55F /* PageTwoStatsViewController.m in Sources */,
+				4C11AED615FD54940088D55F /* Venue.m in Sources */,
+				4C11AEDC15FD6B2D0088D55F /* PageOneMapViewController.m in Sources */,
+				4C11AEE315FDA14A0088D55F /* Species.m in Sources */,
+				4C11AEEE15FEC53E0088D55F /* Photo.m in Sources */,
+				4C11AEFD160003130088D55F /* PictureView.m in Sources */,
+				4C11AF1816014E080088D55F /* FullSizeImageViewController.m in Sources */,
+				4CF342E1160166D0009D22B6 /* FullSizeImagePageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

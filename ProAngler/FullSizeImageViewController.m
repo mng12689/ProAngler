@@ -2,23 +2,31 @@
 //  FullSizeImageViewController.m
 //  ProAngler
 //
-//  Created by Michael Ng on 9/6/12.
+//  Created by Michael Ng on 9/12/12.
 //  Copyright (c) 2012 Amherst College. All rights reserved.
 //
 
 #import "FullSizeImageViewController.h"
+#import "AlbumDetailViewController.h"
+#import "Catch.h"
+#import "Photo.h"
 
-@interface FullSizeImageViewController ()
+@interface FullSizeImageViewController () <UINavigationBarDelegate>
+
+@property (strong) Photo *photo;
+@property (strong) NSTimer *timer;
 
 @end
 
 @implementation FullSizeImageViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithPhoto:(Photo *)photo
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    self = [super init];
+    if (self)
+    {
+        self.photo = photo;
+        self.hidesBottomBarWhenPushed = YES;
     }
     return self;
 }
@@ -26,18 +34,50 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Stats" style:UIBarButtonItemStyleBordered target:self action:@selector(showFullStats)];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
+}
+
+-(void)loadView
+{
+    self.view = [[UIImageView alloc]initWithImage:[UIImage imageWithData:self.photo.screenSizeImage]];
+    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(animateNavBar)]];
+    self.view.userInteractionEnabled = YES;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+-(void)animation
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:.5];
+    [self.navigationController.navigationBar setAlpha:0.0];
+    [UIView commitAnimations];
+         
+    [self.timer invalidate];
+}
+         
+-(void)animateNavBar
+{
+    [self.navigationController.navigationBar setAlpha:1.0];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(animation) userInfo:nil repeats:NO];
+}
+
+-(void)navigationBar:(UINavigationBar *)navigationBar didPopItem:(UINavigationItem *)item
+{
+    self.navigationController.navigationBar.alpha = 1.0;
+}
+
+/*-(void)showFullStats
+{
+    self presentModalViewController:[[AlbumDetailViewController alloc]initWithNewCatch:<#(Catch *)#> atIndex:<#(int)#> animated:<#(BOOL)#>
+}*/
 
 @end

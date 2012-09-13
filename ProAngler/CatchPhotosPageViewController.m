@@ -1,18 +1,18 @@
 //
-//  FrameViewController.m
+//  CatchPhotosPageViewController.m
 //  ProAngler
 //
-//  Created by Michael Ng on 9/11/12.
+//  Created by Michael Ng on 9/12/12.
 //  Copyright (c) 2012 Amherst College. All rights reserved.
 //
 
-#import "FrameViewController.h"
+#import "CatchPhotosPageViewController.h"
 
-@interface FrameViewController ()
+@interface CatchPhotosPageViewController ()
 
 @end
 
-@implementation FrameViewController
+@implementation CatchPhotosPageViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,14 +26,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+	// Do any additional setup after loading the view.
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

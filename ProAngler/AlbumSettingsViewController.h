@@ -3,7 +3,7 @@
 //  ProAngler
 //
 //  Created by Michael Ng on 4/14/12.
-//  Copyright (c) 2012 Amherst College. All rights reserved.
+//  Copyright (c) Michael Ng. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,12 +11,11 @@
 @class AlbumSettingsViewController;
 
 @protocol AlbumSettingsViewControllerDelegate <NSObject>
-- (void)albumSettingsViewControllerIsDone:(AlbumSettingsViewController *)controller sortBy:(NSUInteger)index;
+- (void)settingsChanged;
 @end
 
 @interface AlbumSettingsViewController : UIViewController
 
 @property (nonatomic, weak) id <AlbumSettingsViewControllerDelegate> delegate;
-@property NSUInteger index;
 
 @end

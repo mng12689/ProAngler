@@ -2,12 +2,11 @@
 //  FrameView.m
 //  ProAngler
 //
-//  Created by Michael Ng on 9/7/12.
+//  Created by Michael Ng on 9/11/12.
 //  Copyright (c) 2012 Amherst College. All rights reserved.
 //
 
 #import "FrameView.h"
-#import <QuartzCore/QuartzCore.h>
 
 @implementation FrameView
 
@@ -15,11 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor brownColor];
-        self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, self.frame.size.width - 20, self.frame.size.height - 20)];
-        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        self.imageView.layer.masksToBounds = YES;
-        [self addSubview:self.imageView];
+        // Initialization code
     }
     return self;
 }

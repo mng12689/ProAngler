@@ -26,7 +26,11 @@ NSPersistentStoreCoordinator *_psc;
     NSFetchRequest *fetchRequest = [NSFetchRequest new];
     fetchRequest.entity = [[ProAnglerDataStore model].entitiesByName objectForKey:entity];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:sortBy ascending:YES selector:nil];
+    BOOL ascending = YES;
+    if ([sortBy isEqualToString:@"date"] || [sortBy isEqualToString:@"weight"]) 
+        ascending = NO;
+   
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:sortBy ascending:ascending selector:nil];
     NSArray *descriptors = [NSArray arrayWithObject:sortDescriptor];
     fetchRequest.sortDescriptors = descriptors;
     
@@ -52,15 +56,14 @@ NSPersistentStoreCoordinator *_psc;
     return [NSEntityDescription insertNewObjectForEntityForName:entity inManagedObjectContext:[ProAnglerDataStore context]];
 }
 
-+ (void)saveContext
++ (void)saveContext:(NSError**)error
 {
-    NSError *error = nil;
     NSManagedObjectContext *context = [self context];
     if (context != nil) {
-        if ([context hasChanges] && ![context save:&error]) {
+        if ([context hasChanges] && ![context save:error]) {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            //NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
     }

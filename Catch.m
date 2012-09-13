@@ -25,7 +25,6 @@
 @dynamic waterColor;
 @dynamic waterLevel;
 @dynamic waterTempF;
-@dynamic weightLB;
 @dynamic weightOZ;
 @dynamic bait;
 @dynamic photos;
@@ -51,12 +50,13 @@
 {
     NSString *weightString = @"";
     
-    if (([self.weightLB intValue] != -1) && ([self.weightOZ intValue] != -1)) {
-        NSString* pounds = @"lb";
-        if([self.weightLB intValue] != 1){
-            pounds = [pounds stringByAppendingString:@"s"];
-        }
-        weightString = [NSString stringWithFormat:@"%d %@ %d oz",[self.weightLB intValue], pounds, [self.weightOZ intValue]];
+    if ([self.weightOZ intValue] != -1) {
+        NSString* pounds;
+        if ([self.weightOZ intValue] == 16)
+            pounds = @"lb";
+        else if ([self.weightOZ intValue] > 16)
+            pounds = @"lbs";
+        weightString = [NSString stringWithFormat:@"%d %@ %d oz",[self.weightOZ intValue]/16, pounds, [self.weightOZ intValue]%16];
     }
     return weightString;
 }

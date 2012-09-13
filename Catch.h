@@ -22,7 +22,6 @@
 @property (nonatomic, retain) NSString * waterColor;
 @property (nonatomic, retain) NSString * waterLevel;
 @property (nonatomic, retain) NSNumber * waterTempF;
-@property (nonatomic, retain) NSNumber * weightLB;
 @property (nonatomic, retain) NSNumber * weightOZ;
 @property (nonatomic, retain) Bait *bait;
 @property (nonatomic, retain) NSSet *photos;

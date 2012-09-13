@@ -3,14 +3,14 @@
 //  ProAngler
 //
 //  Created by Michael Ng on 6/27/12.
-//  Copyright (c) 2012 Amherst College. All rights reserved.
+//  Copyright (c) Michael Ng. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 @interface AlbumPageViewController : UIPageViewController
 
-@property (nonatomic,strong) NSArray *fetchedObjects;
+@property (nonatomic,strong) NSArray *catches;
 @property int currentPage;
 
 @end

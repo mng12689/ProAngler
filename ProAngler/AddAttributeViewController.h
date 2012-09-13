@@ -11,7 +11,7 @@
 @class AddAttributeViewController;
 
 @protocol AddAttributeViewControllerDelegate <NSObject>
-- (void)attributeSaved:(AddAttributeViewController*) addAttributeViewController;
+- (void)attributeSaved:(NSString*)attributeType;
 @end
 
 @interface AddAttributeViewController : UIViewController

@@ -3,13 +3,10 @@
 //  ProAngler
 //
 //  Created by Michael Ng on 4/6/12.
-//  Copyright (c) 2012 Amherst College. All rights reserved.
+//  Copyright (c) Michael Ng. All rights reserved.
 //
 
 #import "AppDelegate.h"
-/*#import "NewCatchViewController.h"
-#import "AlbumViewController.h"
-#import "AnalysisViewController.h"*/
 
 @implementation AppDelegate
 
@@ -17,25 +14,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    /*UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    NSDictionary *defaults = [NSDictionary dictionaryWithObject:@"date" forKey:@"ProAnglerAlbumSortTypePrefKey"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
-    /*NewCatchViewController *newCatchViewController = [[tabBarController viewControllers] objectAtIndex:0];
-    newCatchViewController.context = self.managedObjectContext;
+    //[[UITabBar appearance] setTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"light_wood_tab_bar.jpg"]]];
+    //[[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"light_wood_tab_bar.jpg"]];
+    //[[UINavigationBar appearance]setTitleView:[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dark_wood.jpg"]]];
     
-    AnalysisViewController *analysisViewController = [[tabBarController viewControllers] objectAtIndex:3];
-    analysisViewController.context = self.managedObjectContext;
-
-    AddVenueViewController *addVenueViewController = [[newCatchViewController childViewControllers] objectAtIndex:0];
-    addVenueViewController.context = self.managedObjectContext;
-    AddSpeciesViewController *addSpeciesViewController = [[newCatchViewController childViewControllers] objectAtIndex:1];
-    addSpeciesViewController.context = self.managedObjectContext;
-    AddBaitViewController *addBaitViewController = [[newCatchViewController childViewControllers] objectAtIndex:2];
-    addBaitViewController.context = self.managedObjectContext;
-    
-    UINavigationController *navigationController = [[tabBarController viewControllers] objectAtIndex:1];
-    AlbumViewController *albumViewController = [[navigationController viewControllers] objectAtIndex:0];
-    albumViewController.context = self.managedObjectContext;*/
-
     return YES;
 }
 							
