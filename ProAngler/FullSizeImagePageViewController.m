@@ -3,13 +3,14 @@
 //  ProAngler
 //
 //  Created by Michael Ng on 9/12/12.
-//  Copyright (c) Michael NG. All rights reserved.
+//  Copyright (c) Michael Ng. All rights reserved.
 //
 
 #import "FullSizeImagePageViewController.h"
 #import "Catch.h"
 #import "FullSizeImageViewController.h"
 #import "Photo.h"
+#import "AlbumDetailViewController.h"
 
 @interface FullSizeImagePageViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIGestureRecognizerDelegate>
 
@@ -34,6 +35,9 @@
     self.dataSource = self;
     for (UIGestureRecognizer *gR in self.view.gestureRecognizers)
         gR.delegate = self;
+    
+    if (self.showFullStatsOption)
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Full Stats" style:UIBarButtonItemStyleBordered target:self action:@selector(showFullStats)];
 }
 
 - (void)viewDidUnload
@@ -64,7 +68,6 @@
     NSLog(@"Will display previous page: %d",index);
     self.currentPage = index;
     
-    //Catch *catch = [[self.photosForPages objectAtIndex:index] catch];
     return [[FullSizeImageViewController alloc]initWithPhoto:[self.photosForPages objectAtIndex:self.currentPage]];
 }
 
@@ -80,7 +83,6 @@
     NSLog(@"Will display next page: %d",index);
     self.currentPage = index;
     
-    //Catch *catch = [[self.photosForPages objectAtIndex:index] catch];
     return [[FullSizeImageViewController alloc]initWithPhoto:[self.photosForPages objectAtIndex:self.currentPage]];
 }
 
@@ -106,6 +108,13 @@
         return NO;
     
     return YES;
+}
+
+-(void)showFullStats
+{
+    AlbumDetailViewController *albumDetailForCatch = [[AlbumDetailViewController alloc]initWithNewCatch:[[self.photosForPages objectAtIndex:self.currentPage] catch] atIndex:0];
+    albumDetailForCatch.modalTransitionStyle = UIViewAnimationOptionTransitionFlipFromRight;
+    [self presentModalViewController:albumDetailForCatch animated:YES];
 }
 
 @end

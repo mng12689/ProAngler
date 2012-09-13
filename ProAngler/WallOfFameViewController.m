@@ -98,6 +98,7 @@
 {
     UIImageView *imageView = (UIImageView*)tapGesture.view;
     FullSizeImageViewController *fullSizeImageViewController = [[FullSizeImageViewController alloc]initWithPhoto:[(PictureView*)imageView.superview photo]];
+    
     self.pageViewController.currentPage = [self.trophyFish indexOfObject:[[(PictureView*)imageView.superview photo]catch]];
     
     NSMutableArray *photos = [NSMutableArray new];
@@ -105,6 +106,7 @@
         [photos addObject:[catch.photos anyObject]];
     
     self.pageViewController.photosForPages = photos;
+    self.pageViewController.showFullStatsOption = YES;
     
     [self.pageViewController setViewControllers:@[fullSizeImageViewController]
                                 direction:UIPageViewControllerNavigationDirectionForward

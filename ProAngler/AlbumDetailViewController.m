@@ -39,6 +39,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *baitLabel;
 @property (weak, nonatomic) IBOutlet UILabel *structureLabel;
 @property (weak, nonatomic) IBOutlet UILabel *depthLabel;
+@property (weak, nonatomic) IBOutlet UILabel *baitDepthLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *spawningLabel;
 
@@ -54,6 +55,7 @@
 
 @property (strong) FullSizeImagePageViewController *pageViewController;
 @property (strong) NSMutableArray *photos;
+@property (strong) Photo *currentlySelectedPhoto;
 
 - (IBAction)addToWallOfFame:(id)sender;
 - (IBAction)composeEmail:(id)sender;
@@ -62,6 +64,7 @@
 @end
 
 @implementation AlbumDetailViewController
+@synthesize baitDepthLabel = _baitDepthLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -75,9 +78,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"page_texture.png"]];
-    
+        
     [[NSNotificationCenter defaultCenter] postNotificationName:@"AddToWOF" object:self];
 
     self.pageViewController = [[FullSizeImagePageViewController alloc]
@@ -91,12 +92,15 @@
     self.emailButton.layer.masksToBounds = YES;
     
     UIView *mainView = [self.scrollView.subviews objectAtIndex:0];
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.origin.y + mainView.frame.size.height);
+    self.scrollView.contentSize = CGSizeMake(mainView.frame.size.width, mainView.frame.size.height);
+        
     self.mediaScrollView.layer.cornerRadius = 5;
     self.mediaScrollView.backgroundColor = [UIColor colorWithHue:0 saturation:0 brightness:100 alpha:.2];
+    self.mediaScrollView.contentSize = CGSizeMake(self.mediaScrollView.frame.size.width, self.mediaScrollView.frame.size.height);
+    [self.mediaScrollView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moveThumbnailToMainView:)]];
     
     self.catchInfoView.layer.borderColor = [UIColor greenColor].CGColor;
-    self.catchInfoView.layer.borderWidth = 2.0f;
+    self.catchInfoView.layer.borderWidth = 3.0f;
     self.catchInfoView.layer.cornerRadius = 10;
     self.catchInfoView.layer.masksToBounds = YES;
     
@@ -120,6 +124,7 @@
 {
     [self setEmailButton:nil];
     [self setTwitterButton:nil];
+    [self setBaitDepthLabel:nil];
     [super viewDidUnload];
     [self setSpeciesLabel:nil];
     [self setWeightLabel:nil];
@@ -178,6 +183,7 @@
         self.baitLabel.text = catch.bait.name;
         self.structureLabel.text = catch.structure.name;
         self.depthLabel.text = [catch depthToString];
+        self.baitDepthLabel.text = catch.baitDepth;
         self.timeLabel.text = [catch timeToString];
         self.spawningLabel.text = catch.spawning;
         
@@ -191,15 +197,33 @@
         self.waterTempLabel.text = [catch waterTempFToString];
         self.waterLevelLabel.text = catch.waterLevel;
         
-        self.photos = [catch.photos allObjects];
-        if ([self.photos count] > 0) {
+        self.photos = [NSMutableArray arrayWithArray:[catch.photos allObjects]];
+        if ([self.photos count] > 0)
+        {
             self.mainImageView.image = [UIImage imageWithData:[[self.photos objectAtIndex:0] fullSizeImage]];
-            for (int i = 1; i < [self.photos count]; i++) {
-                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0 + 70*([self.mediaScrollView.subviews count]-1), 0, 70, 70)];
-                self.mediaScrollView.contentSize = CGSizeMake(70+self.mediaScrollView.contentSize.width,70);
+            self.currentlySelectedPhoto = [self.photos objectAtIndex:0];
+            
+            int column = 0;
+            BOOL toggle = YES;
+            for (int i = 0; i < [self.photos count]; i++)
+            {
+                toggle = !toggle;
+                
+                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 56*column, 4 + 56*toggle, 52, 52)];
+                imageView.layer.cornerRadius = 5;
+                imageView.layer.masksToBounds = YES;
+                imageView.image = [UIImage imageWithData:[[self.photos objectAtIndex:i] thumbnail]];
+                
+                if (i != 0 && i % 5 == 0)
+                    self.mediaScrollView.contentSize = CGSizeMake(58+self.mediaScrollView.contentSize.width,self.mediaScrollView.contentSize.height);
+                if (i % 2)
+                    column++;
+                
                 [self.mediaScrollView addSubview:imageView];
             }
         }
+        if ([self.photos count] == 0)
+            self.addToWallOfFameButton.userInteractionEnabled = NO;
     }
 
     return self;
@@ -268,17 +292,32 @@
 {
     if (self.mainImageView.image)
     {
-        FullSizeImageViewController *fullSizeImageViewController = [[FullSizeImageViewController alloc]initWithPhoto:[self.photos objectAtIndex:0]];
+        FullSizeImageViewController *fullSizeImageViewController = [[FullSizeImageViewController alloc]initWithPhoto:self.currentlySelectedPhoto];
         self.navigationController.navigationBar.alpha = 0.0;
         
         self.pageViewController.currentPage = 0;
         self.pageViewController.photosForPages = [self.catch.photos allObjects];
+        self.pageViewController.showFullStatsOption = NO;
         [self.pageViewController setViewControllers:@[fullSizeImageViewController]
                                         direction:UIPageViewControllerNavigationDirectionForward
                                         animated:YES
                                         completion:nil];
         
-        [self.navigationController pushViewController:fullSizeImageViewController animated:YES];
+        [self.navigationController pushViewController:self.pageViewController animated:YES];
+    }
+}
+
+-(void)moveThumbnailToMainView:(UITapGestureRecognizer*)tapGesure
+{
+    for (int i = 0; i < [self.mediaScrollView.subviews count]; i++)
+    {
+        UIImageView *imageView = [self.mediaScrollView.subviews objectAtIndex:i];
+        if (CGRectContainsPoint(imageView.frame, [tapGesure locationInView:self.mediaScrollView])){
+            //imageView.highlighted = YES;
+            self.currentlySelectedPhoto = [self.photos objectAtIndex:i];
+            self.mainImageView.image = [UIImage imageWithData:[self.currentlySelectedPhoto screenSizeImage]];
+            break;
+        }
     }
 }
 

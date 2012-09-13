@@ -46,11 +46,9 @@
     [self.scrollView addSubview:pageOne.view];
     [self.pagesViewControllers addObject:pageOne];
     
-    //PageTwoStatsViewController *pageTwo = [PageTwoStatsViewController new];
-    //[self.scrollView addSubview:pageTwo.view];
-    //[self.pagesViewControllers addObject:pageTwo];
-    
-    //self.navigationController.navigationBarHidden = YES;
+    PageTwoStatsViewController *pageTwo = [PageTwoStatsViewController new];
+    [self.scrollView addSubview:pageTwo.view];
+    [self.pagesViewControllers addObject:pageTwo];    
 }
 
 - (void)viewDidUnload

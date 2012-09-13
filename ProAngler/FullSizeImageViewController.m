@@ -3,7 +3,7 @@
 //  ProAngler
 //
 //  Created by Michael Ng on 9/12/12.
-//  Copyright (c) 2012 Amherst College. All rights reserved.
+//  Copyright (c) Michael Ng. All rights reserved.
 //
 
 #import "FullSizeImageViewController.h"
@@ -34,7 +34,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Stats" style:UIBarButtonItemStyleBordered target:self action:@selector(showFullStats)];
+    //if (true)
+       // self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Full Stats" style:UIBarButtonItemStyleBordered target:self action:@selector(showFullStats)];
 }
 
 - (void)viewDidUnload
@@ -77,7 +78,7 @@
 
 /*-(void)showFullStats
 {
-    self presentModalViewController:[[AlbumDetailViewController alloc]initWithNewCatch:<#(Catch *)#> atIndex:<#(int)#> animated:<#(BOOL)#>
+    [self presentModalViewController:[[AlbumDetailViewController alloc]initWithNewCatch:self.photo.catch atIndex:0] animated:YES];
 }*/
 
 @end

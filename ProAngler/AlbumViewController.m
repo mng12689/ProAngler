@@ -15,6 +15,7 @@
 #import "Venue.h"
 #import "Photo.h"
 #import "Species.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface AlbumViewController () <AlbumSettingsViewControllerDelegate>
 
@@ -76,11 +77,15 @@
     UILabel *dateLabel = (UILabel *)[cell viewWithTag:104];
 	dateLabel.text = [catch dateToString];
 	
+    UIImageView *imageView = (UIImageView *)[cell viewWithTag:105];
     if ([catch.photos count] != 0) {
-        UIImageView *imageView = (UIImageView *)[cell viewWithTag:105];
         NSData *thumbnail = [[[catch.photos allObjects] objectAtIndex:0] thumbnail];
         imageView.image = [UIImage imageWithData:thumbnail];
+        imageView.layer.cornerRadius = 2;
+        imageView.layer.masksToBounds = YES;
     }
+    else
+        imageView = nil;
     
     return cell;    
 }
