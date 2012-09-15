@@ -35,7 +35,7 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark_wood.jpg"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark_wood_no_gradient.jpg"]];
     
     int pageCount = 5;
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * pageCount, 480);

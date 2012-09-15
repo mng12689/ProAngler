@@ -27,7 +27,7 @@ NSPersistentStoreCoordinator *_psc;
     fetchRequest.entity = [[ProAnglerDataStore model].entitiesByName objectForKey:entity];
     
     BOOL ascending = YES;
-    if ([sortBy isEqualToString:@"date"] || [sortBy isEqualToString:@"weight"]) 
+    if ([sortBy isEqualToString:@"date"] || [sortBy isEqualToString:@"weightOZ"]) 
         ascending = NO;
    
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:sortBy ascending:ascending selector:nil];

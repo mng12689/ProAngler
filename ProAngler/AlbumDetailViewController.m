@@ -24,7 +24,6 @@
 
 @property (strong) Catch *catch;
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIScrollView *mediaScrollView;
 
 @property (weak, nonatomic) IBOutlet UIView *catchInfoView;
@@ -53,7 +52,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *waterTempLabel;
 @property (weak, nonatomic) IBOutlet UILabel *waterLevelLabel;
 
-@property (strong) FullSizeImagePageViewController *pageViewController;
 @property (strong) NSMutableArray *photos;
 @property (strong) Photo *currentlySelectedPhoto;
 
@@ -79,13 +77,6 @@
 {
     [super viewDidLoad];
         
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"AddToWOF" object:self];
-
-    self.pageViewController = [[FullSizeImagePageViewController alloc]
-                               initWithTransitionStyle: UIPageViewControllerTransitionStylePageCurl
-                               navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
-                               options: nil];
-    
     self.twitterButton.layer.cornerRadius = 8;
     self.twitterButton.layer.masksToBounds = YES;
     self.emailButton.layer.cornerRadius = 8;
@@ -232,6 +223,8 @@
 - (IBAction)addToWallOfFame:(id)sender
 {
     self.catch.trophyFish = [NSNumber numberWithBool:YES];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"AddToWOF" object:self];
     [ProAnglerDataStore saveContext:nil];
 }
 
@@ -295,15 +288,19 @@
         FullSizeImageViewController *fullSizeImageViewController = [[FullSizeImageViewController alloc]initWithPhoto:self.currentlySelectedPhoto];
         self.navigationController.navigationBar.alpha = 0.0;
         
-        self.pageViewController.currentPage = 0;
-        self.pageViewController.photosForPages = [self.catch.photos allObjects];
-        self.pageViewController.showFullStatsOption = NO;
-        [self.pageViewController setViewControllers:@[fullSizeImageViewController]
+        FullSizeImagePageViewController *pageViewController = [[FullSizeImagePageViewController alloc]
+                                   initWithTransitionStyle: UIPageViewControllerTransitionStylePageCurl
+                                   navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                   options: nil];
+        pageViewController.currentPage = 0;
+        pageViewController.photosForPages = [self.catch.photos allObjects];
+        pageViewController.showFullStatsOption = NO;
+        [pageViewController setViewControllers:@[fullSizeImageViewController]
                                         direction:UIPageViewControllerNavigationDirectionForward
                                         animated:YES
                                         completion:nil];
         
-        [self.navigationController pushViewController:self.pageViewController animated:YES];
+        [self.navigationController pushViewController:pageViewController animated:YES];
     }
 }
 

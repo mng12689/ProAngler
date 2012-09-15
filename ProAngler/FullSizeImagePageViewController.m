@@ -22,7 +22,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -38,6 +37,8 @@
     
     if (self.showFullStatsOption)
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Full Stats" style:UIBarButtonItemStyleBordered target:self action:@selector(showFullStats)];
+    
+    self.hidesBottomBarWhenPushed = YES;
 }
 
 - (void)viewDidUnload
@@ -46,7 +47,7 @@
     // Release any retained subviews of the main view.
 }
 
--(void)viewDidAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
     NSLog(@"current_page: %d",self.currentPage);
 }
@@ -113,8 +114,22 @@
 -(void)showFullStats
 {
     AlbumDetailViewController *albumDetailForCatch = [[AlbumDetailViewController alloc]initWithNewCatch:[[self.photosForPages objectAtIndex:self.currentPage] catch] atIndex:0];
-    albumDetailForCatch.modalTransitionStyle = UIViewAnimationOptionTransitionFlipFromRight;
+    albumDetailForCatch.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    
+    UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0,0,320,44)];
+    UINavigationItem *navItem = [UINavigationItem new];
+    navItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(done)];
+    navBar.items = @[navItem];
+    
+    albumDetailForCatch.scrollView.frame = CGRectMake(albumDetailForCatch.scrollView.frame.origin.x, albumDetailForCatch.scrollView.frame.origin.y + navBar.frame.size.height, albumDetailForCatch.scrollView.frame.size.width, albumDetailForCatch.view.frame.size.height - navBar.frame.size.height);
+    [albumDetailForCatch.view addSubview:navBar];
+    
     [self presentModalViewController:albumDetailForCatch animated:YES];
+}
+
+-(void)done
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

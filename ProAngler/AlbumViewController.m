@@ -16,11 +16,11 @@
 #import "Photo.h"
 #import "Species.h"
 #import <QuartzCore/QuartzCore.h>
+#import "CatchCell.h"
 
 @interface AlbumViewController () <AlbumSettingsViewControllerDelegate>
 
 @property (strong) NSArray* catches;
-@property (strong) AlbumPageViewController *albumPageViewController;
 -(void)loadData;
 
 @end
@@ -37,11 +37,6 @@
         [self loadData];
         [self.tableView reloadData];
     }];
-    
-    self.albumPageViewController = [[AlbumPageViewController alloc]
-                                    initWithTransitionStyle: UIPageViewControllerTransitionStylePageCurl
-                                    navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
-                                    options: nil];
     
     [self loadData];
 }
@@ -65,27 +60,26 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CatchCell"];
+    CatchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CatchCell"];
+    
+    if (!cell)
+        cell = [[CatchCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CatchCell"];
+    
 	Catch *catch = [self.catches objectAtIndex:indexPath.row];
-    
-    UILabel *speciesLabel = (UILabel *)[cell viewWithTag:101];
-	speciesLabel.text = catch.species.name ;
-    
-    UILabel *venueLabel = (UILabel *)[cell viewWithTag:103];
-	venueLabel.text = catch.venue.name ;
-    
-    UILabel *dateLabel = (UILabel *)[cell viewWithTag:104];
-	dateLabel.text = [catch dateToString];
-	
-    UIImageView *imageView = (UIImageView *)[cell viewWithTag:105];
-    if ([catch.photos count] != 0) {
-        NSData *thumbnail = [[[catch.photos allObjects] objectAtIndex:0] thumbnail];
-        imageView.image = [UIImage imageWithData:thumbnail];
-        imageView.layer.cornerRadius = 2;
-        imageView.layer.masksToBounds = YES;
+    if (cell.currentCatch == catch)
+        return cell;
+    cell.currentCatch = catch;
+ 
+	cell.venueLabel.text = catch.venue.name ;
+	cell.dateLabel.text = [catch dateToString];
+	cell.timeLabel.text = [catch timeToString];
+    cell.customImageView.image = nil;
+
+    if ([catch.photos count] != 0)
+    {
+        UIImage *thumbnail = [UIImage imageWithData:[[[catch.photos allObjects] objectAtIndex:0] thumbnail]];
+        cell.customImageView.image = thumbnail;
     }
-    else
-        imageView = nil;
     
     return cell;    
 }
@@ -94,17 +88,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.albumPageViewController.catches = self.catches;
-    self.albumPageViewController.currentPage = indexPath.row;
+    AlbumPageViewController *albumPageViewController = [[AlbumPageViewController alloc]
+                                    initWithTransitionStyle: UIPageViewControllerTransitionStylePageCurl
+                                    navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                    options: nil];
+    albumPageViewController.catches = self.catches;
+    albumPageViewController.currentPage = indexPath.row;
     
     Catch *catch = [self.catches objectAtIndex:indexPath.row];
     AlbumDetailViewController *albumDetailViewController = [[AlbumDetailViewController alloc]initWithNewCatch:catch atIndex:indexPath.row];
-    [self.albumPageViewController setViewControllers:@[albumDetailViewController]
+    [albumPageViewController setViewControllers:@[albumDetailViewController]
                             direction:UIPageViewControllerNavigationDirectionForward
                             animated:YES
                             completion:nil];
     
-     [self.navigationController pushViewController:self.albumPageViewController animated:YES];
+     [self.navigationController pushViewController:albumPageViewController animated:YES];
 }
 
 
@@ -141,7 +139,9 @@
 {
     NSString *sortBy = [[NSUserDefaults standardUserDefaults] objectForKey:@"ProAnglerAlbumSortTypePrefKey"];
     self.catches = [ProAnglerDataStore fetchEntity:@"Catch" sortBy:sortBy withPredicate:nil];
-
+    for (Catch *catch in self.catches) {
+        NSLog(@"%@", [catch timeToString]);
+    }
 }
 
 @end

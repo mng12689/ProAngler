@@ -64,7 +64,7 @@
     NSArray *venueList = [ProAnglerDataStore fetchEntity:@"Venue" sortBy:@"name" withPredicate:nil];
     if(venueList && [venueList count]!=0){
         self.venueLabel.text = [[venueList objectAtIndex:0]name];
-         self.currentFilters = [NSPredicate predicateWithFormat:@"venue like \"%@\"",self.venueLabel.text];
+         self.currentFilters = [NSPredicate predicateWithFormat:@"venue.name like %@",self.venueLabel.text];
         [self loadDataWithPredicate:self.currentFilters];
     }
 }

@@ -21,9 +21,9 @@
 @property (strong, nonatomic) IBOutlet UIPickerView *waterLevelPickerView;
 @property (strong, nonatomic) IBOutlet UIPickerView *spawningPickerView;
 @property (strong, nonatomic) IBOutlet UIPickerView *baitDepthPickerView;
-@property (weak, nonatomic) IBOutlet UIPickerView *dateRangePickerView;
-@property (weak, nonatomic) IBOutlet UIDatePicker *timeRangePickerView;
-@property (weak, nonatomic) IBOutlet UIPickerView *weatherConditionsPickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *dateRangePickerView; //112
+@property (weak, nonatomic) IBOutlet UIDatePicker *timeRangePickerView; //113
+@property (weak, nonatomic) IBOutlet UIPickerView *weatherConditionsPickerView; //114
 @property (weak, nonatomic) IBOutlet UIPickerView *temperatureRangePickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *depthRangePickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *waterTempRangePickerView;

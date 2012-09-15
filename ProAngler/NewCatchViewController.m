@@ -17,21 +17,29 @@
 #import "Photo.h"
 #import "Species.h"
 #import "RestKit.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+#import "FullSizeImagePageViewController.h"
+#import "FullSizeImageViewController.h"
 
-@interface NewCatchViewController () < CLLocationManagerDelegate, AddAttributeViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RKRequestDelegate>
+@interface NewCatchViewController () < CLLocationManagerDelegate, AddAttributeViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RKRequestDelegate, UIActionSheetDelegate>
 
 @property (strong) CLLocationManager *locationManager;
 @property (strong) CLLocation *currentLocation;
 @property (weak) IBOutlet UIScrollView *scrollView;
 @property (weak) IBOutlet UIScrollView *mediaScrollView;
 @property (weak, nonatomic) IBOutlet UIView *detailView;
-@property (strong) NSMutableArray *photos;
 @property (strong) Catch *currentCatch;
+
+@property (strong) NSMutableArray *photos;
+@property (strong) UIImageView *currentlySelectedImageView;
 
 - (IBAction)addAttribute:(UIButton*)sender;
 - (IBAction)saveNewCatch:(id)sender;
-- (IBAction)takePhoto:(id)sender;
 - (IBAction)toggleHiddenView:(id)sender;
+- (IBAction)presentCameraActionSheet:(id)sender;
+
+- (void)takePhoto;
+- (void)chooseExisting;
 
 @end
 
@@ -41,11 +49,9 @@
 {
     [super viewDidLoad];
 
-    //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"light_wood_nav_bar.jpg"] forBarMetrics:UIBarMetricsDefault];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark_wood.jpg"]];
-    self.navigationController.navigationBarHidden = YES;
     
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, 450);
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     self.mediaScrollView.layer.cornerRadius = 5;
     self.mediaScrollView.backgroundColor = [UIColor colorWithHue:0 saturation:0 brightness:100 alpha:.2];
     
@@ -82,27 +88,30 @@
 
 - (IBAction)addAttribute:(UIButton*)sender 
 {
-    [self performSegueWithIdentifier:@"addAttributeSegue" sender:sender];
+    [self performSegueWithIdentifier:@"AddAttribute" sender:sender];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    AddAttributeViewController *addAttributeViewController = segue.destinationViewController;
-    UIButton *button = (UIButton*)sender;
-    
-    if (button.tag == 201) {
-        addAttributeViewController.attributeType = @"Venue";
+    if ([segue.identifier isEqualToString:@"AddAttribute"])
+    {
+        AddAttributeViewController *addAttributeViewController = segue.destinationViewController;
+        UIButton *button = (UIButton*)sender;
+        
+        if (button.tag == 201) {
+            addAttributeViewController.attributeType = @"Venue";
+        }
+        else if(button.tag == 202){
+            addAttributeViewController.attributeType = @"Species";
+        }
+        else if(button.tag == 203){
+            addAttributeViewController.attributeType = @"Bait";
+        }
+        else if(button.tag == 204){
+            addAttributeViewController.attributeType = @"Structure";
+        }
+        addAttributeViewController.delegate = self;
     }
-    else if(button.tag == 202){
-        addAttributeViewController.attributeType = @"Species";
-    }
-    else if(button.tag == 203){
-        addAttributeViewController.attributeType = @"Bait";
-    }
-    else if(button.tag == 204){
-        addAttributeViewController.attributeType = @"Structure";
-    }
-    addAttributeViewController.delegate = self;
 }
 
 - (void)attributeSaved:(NSString*)entity
@@ -130,6 +139,11 @@
 {
     Catch *catch = [ProAnglerDataStore createEntity:@"Catch"];
     self.currentCatch = catch;
+
+    catch.humidity = @-1;
+    catch.tempF = @-1;
+    catch.visibility = @-1;
+    catch.windSpeedMPH = @-1;
 
     /********* new catch entity **********/
 
@@ -271,19 +285,130 @@
     }
 }
 
-- (IBAction)takePhoto:(id)sender
+- (IBAction)presentCameraActionSheet:(id)sender
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Camera Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo", @"Choose Existing", nil];
+    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+}
+
+- (void)presentPhotoOptions:(UITapGestureRecognizer*)gesture
+{
+    self.currentlySelectedImageView = (UIImageView*)gesture.view;
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Photo Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles:@"View Full Size", nil];
+    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([actionSheet.title isEqualToString:@"Camera Options"]) {
+        switch (buttonIndex) {
+            case 0:
+                [self takePhoto];
+                break;
+            case 1:
+                [self chooseExisting];
+                break;
+            default:
+                break;
+        }
+    }
+    else if ([actionSheet.title isEqualToString:@"Photo Options"]) {
+        switch (buttonIndex) {
+            case 0:
+                [self deletePhoto];
+                break;
+            case 1:
+                [self presentFullSizeImage];
+                break;
+            default:
+                break;
+        }
+
+    }
+}
+
+- (void)takePhoto
 {
     UIImagePickerController *imagePickerController = [UIImagePickerController new];
     imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePickerController.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+    imagePickerController.mediaTypes = @[(NSString*)kUTTypeImage];
     imagePickerController.delegate = self;
     
     [self presentModalViewController:imagePickerController animated:YES];
 }
 
+- (void)chooseExisting
+{
+    UIImagePickerController *imagePickerController = [UIImagePickerController new];
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePickerController.mediaTypes = @[(NSString*)kUTTypeImage];
+    imagePickerController.delegate = self;
+    
+    [self presentModalViewController:imagePickerController animated:YES];
+}
+
+- (void)deletePhoto
+{
+    /********* remove selected image from view **********/
+
+    double maxFrameWidth = self.currentlySelectedImageView.frame.origin.x + self.currentlySelectedImageView.frame.size.width;
+    int indexInPhotosArray = maxFrameWidth/70;
+    [self.photos removeObjectAtIndex:indexInPhotosArray];
+    
+    [self.currentlySelectedImageView removeFromSuperview];
+
+    /********* shift all images left **********/
+
+    for (UIImageView *imageView in self.mediaScrollView.subviews)
+    {
+        if (imageView.frame.origin.x > self.currentlySelectedImageView.frame.size.width)
+        {
+            CABasicAnimation *shiftLeftAnimation = [CABasicAnimation animationWithKeyPath:@"position.x"];
+            shiftLeftAnimation.duration = .25;
+            shiftLeftAnimation.fromValue = [NSNumber numberWithInt:imageView.layer.position.x];
+            shiftLeftAnimation.toValue = [NSNumber numberWithInt:imageView.layer.position.x - 66];
+            [imageView.layer addAnimation:shiftLeftAnimation forKey:@"shiftLeftAnimation"];
+            
+            imageView.layer.position = CGPointMake(imageView.layer.position.x - 66, imageView.layer.position.y);
+        }
+    }
+    
+    /********* clean up **********/
+
+    self.mediaScrollView.contentSize = CGSizeMake(self.mediaScrollView.contentSize.width - 70, self.mediaScrollView.contentSize.height);
+    
+    self.currentlySelectedImageView = nil;
+}
+
+- (void)presentFullSizeImage
+{
+    double maxFrameWidth = self.currentlySelectedImageView.frame.origin.x + self.currentlySelectedImageView.frame.size.width;
+    int indexInPhotosArray = maxFrameWidth/70;
+    
+    FullSizeImageViewController *fullSizeImageViewController = [[FullSizeImageViewController alloc]initWithPhoto:[self.photos objectAtIndex:indexInPhotosArray]];
+    self.navigationController.navigationBar.alpha = 0.0;
+    
+    FullSizeImagePageViewController *pageViewController = [[FullSizeImagePageViewController alloc]
+                               initWithTransitionStyle: UIPageViewControllerTransitionStylePageCurl
+                               navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                               options: nil];
+    pageViewController.currentPage = indexInPhotosArray;
+    pageViewController.photosForPages = self.photos;
+    pageViewController.showFullStatsOption = NO;
+    [pageViewController setViewControllers:@[fullSizeImageViewController]
+                                      direction:UIPageViewControllerNavigationDirectionForward
+                                       animated:YES
+                                     completion:nil];
+    
+    [self.navigationController pushViewController:pageViewController animated:YES];
+    
+    self.currentlySelectedImageView = nil;
+}
+
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0 + 70*([self.mediaScrollView.subviews count]), 0, 70, 70)];
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 66*([self.mediaScrollView.subviews count]), 4, 62, 62)];
     
     if (!self.photos) 
         self.photos = [NSMutableArray new];
@@ -314,6 +439,10 @@
     
     imageView.image = thumbnail;
     imageView.opaque = YES;
+    imageView.layer.cornerRadius = 5;
+    imageView.layer.masksToBounds = YES;
+    imageView.userInteractionEnabled = YES;
+    [imageView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(presentPhotoOptions:)]];
     
     self.mediaScrollView.contentSize = CGSizeMake(70+self.mediaScrollView.contentSize.width,self.mediaScrollView.contentSize.height);
     [self.mediaScrollView addSubview:imageView];
@@ -338,7 +467,7 @@
     }
     else{
         self.detailView.hidden = YES;
-        self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, 450);
+        self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     }
 }
 
@@ -360,13 +489,8 @@
 {
     NSError *error = nil;
     NSDictionary *weatherResponse = [response parsedBody:&error];
-    if(error){
-        self.currentCatch.humidity = @-1;
-        self.currentCatch.tempF = @-1;
-        self.currentCatch.visibility = @-1;
-        self.currentCatch.windSpeedMPH = @-1;
-    }
-    else{
+    if(!error)
+    {
         NSDictionary *currentConditions = [[[weatherResponse objectForKey:@"data"] objectForKey:@"current_condition"] objectAtIndex:0];
         self.currentCatch.humidity = [NSNumber numberWithInt:[[currentConditions objectForKey:@"humidity"]intValue]];
         self.currentCatch.tempF = [NSNumber numberWithInt:[[currentConditions objectForKey:@"temp_F"]intValue]];

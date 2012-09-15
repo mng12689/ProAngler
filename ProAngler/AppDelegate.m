@@ -17,9 +17,9 @@
     NSDictionary *defaults = [NSDictionary dictionaryWithObject:@"date" forKey:@"ProAnglerAlbumSortTypePrefKey"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
-    //[[UITabBar appearance] setTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"light_wood_tab_bar.jpg"]]];
-    //[[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"light_wood_tab_bar.jpg"]];
-    //[[UINavigationBar appearance]setTitleView:[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dark_wood.jpg"]]];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"light_wood_nav_bar.jpg"] forBarMetrics:UIBarMetricsDefault];
+    [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"light_wood_tab_bar.jpg"]];
     
     return YES;
 }

@@ -21,7 +21,6 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong) NSArray *trophyFish;
 @property (strong) NSMutableArray *frameViewControllers;
-@property (strong) FullSizeImagePageViewController *pageViewController;
 -(void)populateWall;
 
 @end
@@ -32,7 +31,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -46,11 +44,6 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:@"AddToWOF" object:nil queue:nil usingBlock:^(NSNotification *note){
         [self populateWall];
     }];
-    
-    self.pageViewController = [[FullSizeImagePageViewController alloc]
-                                    initWithTransitionStyle: UIPageViewControllerTransitionStylePageCurl
-                                    navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
-                                    options: nil];
     
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     [self populateWall];
@@ -88,7 +81,7 @@
         
         [self.scrollView addSubview:pictureView];
         
-        if (index != 0 || index%2) 
+        if (index != 0 && index%2)
             row++;
         index++;
     }
@@ -99,21 +92,24 @@
     UIImageView *imageView = (UIImageView*)tapGesture.view;
     FullSizeImageViewController *fullSizeImageViewController = [[FullSizeImageViewController alloc]initWithPhoto:[(PictureView*)imageView.superview photo]];
     
-    self.pageViewController.currentPage = [self.trophyFish indexOfObject:[[(PictureView*)imageView.superview photo]catch]];
+    FullSizeImagePageViewController *pageViewController = [[FullSizeImagePageViewController alloc]
+                               initWithTransitionStyle: UIPageViewControllerTransitionStylePageCurl
+                               navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                               options: nil];
+    pageViewController.currentPage = [self.trophyFish indexOfObject:[[(PictureView*)imageView.superview photo]catch]];
     
     NSMutableArray *photos = [NSMutableArray new];
     for (Catch *catch in self.trophyFish) 
         [photos addObject:[catch.photos anyObject]];
     
-    self.pageViewController.photosForPages = photos;
-    self.pageViewController.showFullStatsOption = YES;
-    
-    [self.pageViewController setViewControllers:@[fullSizeImageViewController]
+    pageViewController.photosForPages = photos;
+    pageViewController.showFullStatsOption = YES;
+    [pageViewController setViewControllers:@[fullSizeImageViewController]
                                 direction:UIPageViewControllerNavigationDirectionForward
                                 animated:YES
                                 completion:nil];
     
-    [self.navigationController pushViewController:self.pageViewController animated:YES];
+    [self.navigationController pushViewController:pageViewController animated:YES];
 }
 
 @end

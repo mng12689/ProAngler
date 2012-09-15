@@ -169,6 +169,22 @@
     else if(pickerView.tag == 111)
         return [self.baitDepthList count]+1;
     
+    else if(pickerView.tag == 112)
+        
+        if (component == 0 || component == 2)
+            return 13;
+        else
+            return 11111111;
+    
+    else if (pickerView.tag == 113)
+        
+        if (component == 0 || component == 2)
+            return 13;
+        else
+            return 61;
+    
+    //else if (pickerView.tag == 114)
+      //  return;
     
     else if (pickerView.tag == 115)
         return 132;
