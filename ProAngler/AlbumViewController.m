@@ -55,7 +55,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.catches count];
+    return self.catches.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -66,6 +66,7 @@
         cell = [[CatchCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CatchCell"];
     
 	Catch *catch = [self.catches objectAtIndex:indexPath.row];
+    
     if (cell.currentCatch == catch)
         return cell;
     cell.currentCatch = catch;
@@ -96,7 +97,7 @@
     albumPageViewController.currentPage = indexPath.row;
     
     Catch *catch = [self.catches objectAtIndex:indexPath.row];
-    AlbumDetailViewController *albumDetailViewController = [[AlbumDetailViewController alloc]initWithNewCatch:catch atIndex:indexPath.row];
+    AlbumDetailViewController *albumDetailViewController = [[AlbumDetailViewController alloc]initWithNewCatch:catch];
     [albumPageViewController setViewControllers:@[albumDetailViewController]
                             direction:UIPageViewControllerNavigationDirectionForward
                             animated:YES
@@ -139,9 +140,6 @@
 {
     NSString *sortBy = [[NSUserDefaults standardUserDefaults] objectForKey:@"ProAnglerAlbumSortTypePrefKey"];
     self.catches = [ProAnglerDataStore fetchEntity:@"Catch" sortBy:sortBy withPredicate:nil];
-    for (Catch *catch in self.catches) {
-        NSLog(@"%@", [catch timeToString]);
-    }
 }
 
 @end

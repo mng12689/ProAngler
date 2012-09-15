@@ -62,16 +62,6 @@
 @end
 
 @implementation AlbumDetailViewController
-@synthesize baitDepthLabel = _baitDepthLabel;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -145,17 +135,12 @@
     [self setAddToWallOfFameButton:nil];
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [self.navigationController.navigationBar setAlpha:1.0];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (AlbumDetailViewController*) initWithNewCatch:(Catch*)catch atIndex:(int)index
+- (AlbumDetailViewController*) initWithNewCatch:(Catch*)catch
 {
     self = [super init];
     if (self) {
@@ -164,7 +149,6 @@
         self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"page_texture.png"]];
         
         self.catch = catch;
-        self.currentPage = index;
         
         self.dateLabel.text = [catch dateToString];
         self.speciesLabel.text = catch.species.name;
@@ -189,14 +173,14 @@
         self.waterLevelLabel.text = catch.waterLevel;
         
         self.photos = [NSMutableArray arrayWithArray:[catch.photos allObjects]];
-        if ([self.photos count] > 0)
+        if (self.photos.count > 0)
         {
             self.mainImageView.image = [UIImage imageWithData:[[self.photos objectAtIndex:0] fullSizeImage]];
             self.currentlySelectedPhoto = [self.photos objectAtIndex:0];
             
             int column = 0;
             BOOL toggle = YES;
-            for (int i = 0; i < [self.photos count]; i++)
+            for (int i = 0; i < self.photos.count; i++)
             {
                 toggle = !toggle;
                 
@@ -213,7 +197,7 @@
                 [self.mediaScrollView addSubview:imageView];
             }
         }
-        if ([self.photos count] == 0)
+        if (self.photos.count == 0)
             self.addToWallOfFameButton.userInteractionEnabled = NO;
     }
 
@@ -306,11 +290,11 @@
 
 -(void)moveThumbnailToMainView:(UITapGestureRecognizer*)tapGesure
 {
-    for (int i = 0; i < [self.mediaScrollView.subviews count]; i++)
+    for (int i = 0; i < self.mediaScrollView.subviews.count; i++)
     {
         UIImageView *imageView = [self.mediaScrollView.subviews objectAtIndex:i];
-        if (CGRectContainsPoint(imageView.frame, [tapGesure locationInView:self.mediaScrollView])){
-            //imageView.highlighted = YES;
+        if (CGRectContainsPoint(imageView.frame, [tapGesure locationInView:self.mediaScrollView]))
+        {
             self.currentlySelectedPhoto = [self.photos objectAtIndex:i];
             self.mainImageView.image = [UIImage imageWithData:[self.currentlySelectedPhoto screenSizeImage]];
             break;

@@ -12,18 +12,11 @@
 
 @interface AlbumPageViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIGestureRecognizerDelegate>
 
+@property int previousPage;
+
 @end
 
 @implementation AlbumPageViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -40,11 +33,6 @@
     [super viewDidUnload];
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    NSLog(@"current_page: %d",self.currentPage);
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
@@ -52,48 +40,43 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    int index;
-    if(self.currentPage == 0){
-        index = [self.catches count]-1;
-    }
-    else{
-        index = self.currentPage - 1;
-    }
-    NSLog(@"Will display previous page: %d",index);
-    self.currentPage = index;
+    self.previousPage = self.currentPage;
     
-    Catch *catch = [self.catches objectAtIndex:index];
-    return [[AlbumDetailViewController alloc ]initWithNewCatch:catch atIndex:index];
+    if(self.currentPage == 0)
+        self.currentPage = self.catches.count - 1;
+    
+    else
+        self.currentPage--;
+    
+    NSLog(@"Will display previous page: %d",self.currentPage);
+    
+    Catch *catch = [self.catches objectAtIndex:self.currentPage];
+    return [[AlbumDetailViewController alloc ]initWithNewCatch:catch];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    int index;
-    if(self.currentPage == [self.catches count]-1){
-        index = 0;
-    }
-    else{
-        index = self.currentPage + 1;
-    }
-    NSLog(@"Will display next page: %d",index);
-    self.currentPage = index;
-    Catch *catch = [self.catches objectAtIndex:index];
-    return [[AlbumDetailViewController alloc] initWithNewCatch:catch atIndex:index];
+    self.previousPage = self.currentPage;
+    
+    if(self.currentPage == self.catches.count - 1)
+        self.currentPage = 0;
+    
+    else
+        self.currentPage++;
+    
+    NSLog(@"Will display next page: %d",self.currentPage);
+          
+    Catch *catch = [self.catches objectAtIndex:self.currentPage];
+    return [[AlbumDetailViewController alloc] initWithNewCatch:catch];
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
-    AlbumDetailViewController *previousViewController = [previousViewControllers objectAtIndex:0];
-    if (!completed) {
+    if (!completed)
+    {
         [self setViewControllers:previousViewControllers direction:UIPageViewControllerNavigationOrientationHorizontal animated:YES completion:nil];
-        if(previousViewController.currentPage < self.currentPage){
-            NSLog(@"Current page -1");
-            self.currentPage--;
-        }
-        else if(previousViewController.currentPage > self.currentPage){
-            NSLog(@"Current page +1");
-            self.currentPage++;
-        }
+
+        self.currentPage = self.previousPage;
     }
 }
 

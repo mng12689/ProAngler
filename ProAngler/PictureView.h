@@ -13,7 +13,7 @@
 @interface PictureView : UIView
 
 @property (strong) Photo *photo;
-//@property int index;
+
 - (id)initWithFrame:(CGRect)frame photo:(Photo*)photo delegate:(WallOfFameViewController*)wallViewController;
 
 @end

@@ -25,9 +25,11 @@
 
 @property (strong) CLLocationManager *locationManager;
 @property (strong) CLLocation *currentLocation;
+
 @property (weak) IBOutlet UIScrollView *scrollView;
 @property (weak) IBOutlet UIScrollView *mediaScrollView;
 @property (weak, nonatomic) IBOutlet UIView *detailView;
+
 @property (strong) Catch *currentCatch;
 
 @property (strong) NSMutableArray *photos;
@@ -241,6 +243,7 @@
     [self.photos removeAllObjects];
     for (UIImageView *imageView in self.mediaScrollView.subviews)
         [imageView removeFromSuperview];
+    
     self.mediaScrollView.contentSize = CGSizeMake(0, 0);
     
     if (!self.detailView.hidden) 
@@ -402,13 +405,12 @@
                                      completion:nil];
     
     [self.navigationController pushViewController:pageViewController animated:YES];
-    
     self.currentlySelectedImageView = nil;
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 66*([self.mediaScrollView.subviews count]), 4, 62, 62)];
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 66*self.mediaScrollView.subviews.count, 4, 62, 62)];
     
     if (!self.photos) 
         self.photos = [NSMutableArray new];

@@ -20,10 +20,10 @@
 @interface PageOneMapViewController () <FilterViewControllerDelegate, MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (strong) NSArray* catchesToBeDisplayed;
 @property (weak, nonatomic) IBOutlet UILabel *venueLabel;
 @property (weak, nonatomic) IBOutlet UITextView *additionalFiltersTextView;
 
+@property (strong) NSArray* catchesToBeDisplayed;
 @property (strong) NSPredicate *currentFilters;
 
 -(void)annotateMap;
@@ -189,7 +189,7 @@
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     CatchPointAnnotation *annotationView = (CatchPointAnnotation*)view;
-    [self presentModalViewController:[[AlbumDetailViewController alloc]initWithNewCatch:annotationView.catch atIndex:0] animated:YES];
+    [self presentModalViewController:[[AlbumDetailViewController alloc]initWithNewCatch:annotationView.catch] animated:YES];
 }
 
 -(void)loadDataWithPredicate:(NSPredicate *)predicate

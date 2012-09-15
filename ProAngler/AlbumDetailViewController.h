@@ -11,8 +11,6 @@
 
 @interface AlbumDetailViewController : UIViewController
 
-@property int currentPage;
-
 @property (weak, nonatomic) IBOutlet UIButton *emailButton;
 @property (weak, nonatomic) IBOutlet UIButton *twitterButton;
 @property (weak, nonatomic) IBOutlet UIButton *addToWallOfFameButton;
@@ -20,6 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-- (AlbumDetailViewController*) initWithNewCatch:(Catch*)newCatch atIndex:(int)index;
+- (AlbumDetailViewController*) initWithNewCatch:(Catch*)newCatch;
 
 @end

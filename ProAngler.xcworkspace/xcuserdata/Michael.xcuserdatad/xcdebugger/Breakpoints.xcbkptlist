@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/AlbumDetailViewController.m"
-         timestampString = "369352998.397534"
+         timestampString = "369387174.197604"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "284"
-         endingLineNumber = "284"
+         startingLineNumber = "268"
+         endingLineNumber = "268"
          landmarkName = "-showFullSizeImage"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/AlbumDetailViewController.m"
-         timestampString = "369352998.397534"
+         timestampString = "369387174.197604"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "112"
-         endingLineNumber = "112"
+         startingLineNumber = "102"
+         endingLineNumber = "102"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/FullSizeImageViewController.m"
-         timestampString = "369199859.55636"
+         timestampString = "369384679.365037"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "39"
-         endingLineNumber = "39"
+         startingLineNumber = "36"
+         endingLineNumber = "36"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/WallOfFameViewController.m"
-         timestampString = "369352998.397534"
+         timestampString = "369388029.470751"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "90"
-         endingLineNumber = "90"
+         startingLineNumber = "81"
+         endingLineNumber = "81"
          landmarkName = "-showFullSizeImage:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/FullSizeImageViewController.m"
-         timestampString = "369199859.55636"
+         timestampString = "369384679.365037"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "68"
-         endingLineNumber = "68"
+         startingLineNumber = "65"
+         endingLineNumber = "65"
          landmarkName = "-animateNavBar"
          landmarkType = "5">
       </FileBreakpoint>
@@ -99,7 +99,150 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/FullSizeImageViewController.m"
-         timestampString = "369199859.55636"
+         timestampString = "369384679.365037"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "35"
+         endingLineNumber = "35"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ProAngler/FullSizeImageViewController.m"
+         timestampString = "369384679.365037"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
+         landmarkName = "-animateNavBar"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ProAngler/FullSizeImageViewController.m"
+         timestampString = "369384679.365037"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "55"
+         endingLineNumber = "55"
+         landmarkName = "-animation"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ProAngler/FullSizeImagePageViewController.m"
+         timestampString = "369384591.359094"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "88"
+         endingLineNumber = "88"
+         landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ProAngler/AlbumPageViewController.m"
+         timestampString = "369387174.197604"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
+         landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ProAngler/AlbumDetailViewController.m"
+         timestampString = "369387174.197604"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "193"
+         endingLineNumber = "193"
+         landmarkName = "-initWithNewCatch:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ProAngler/AlbumDetailViewController.m"
+         timestampString = "369387174.197604"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "175"
+         endingLineNumber = "175"
+         landmarkName = "-initWithNewCatch:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ProAngler/AlbumDetailViewController.m"
+         timestampString = "369387174.197604"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "291"
+         endingLineNumber = "291"
+         landmarkName = "-moveThumbnailToMainView:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ProAngler/AlbumDetailViewController.m"
+         timestampString = "369387174.197604"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "102"
+         endingLineNumber = "102"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ProAngler/AlbumViewController.m"
+         timestampString = "369386676.087116"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "100"
+         endingLineNumber = "100"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ProAngler/AlbumViewController.m"
+         timestampString = "369386676.087116"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ProAngler/WallOfFameViewController.m"
+         timestampString = "369388029.470751"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "37"
@@ -111,155 +254,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "ProAngler/FullSizeImageViewController.m"
-         timestampString = "369199859.55636"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "69"
-         endingLineNumber = "69"
-         landmarkName = "-animateNavBar"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ProAngler/FullSizeImageViewController.m"
-         timestampString = "369199859.55636"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "58"
-         endingLineNumber = "58"
-         landmarkName = "-animation"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ProAngler/FullSizeImagePageViewController.m"
-         timestampString = "369301260.141169"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "106"
-         endingLineNumber = "106"
-         landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ProAngler/AlbumPageViewController.m"
-         timestampString = "369201463.352925"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "100"
-         endingLineNumber = "100"
-         landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ProAngler/AlbumDetailViewController.m"
-         timestampString = "369352998.397534"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "209"
-         endingLineNumber = "209"
-         landmarkName = "-initWithNewCatch:atIndex:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ProAngler/AlbumDetailViewController.m"
-         timestampString = "369352998.397534"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "191"
-         endingLineNumber = "191"
-         landmarkName = "-initWithNewCatch:atIndex:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ProAngler/AlbumDetailViewController.m"
-         timestampString = "369352998.397534"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "307"
-         endingLineNumber = "307"
-         landmarkName = "-moveThumbnailToMainView:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ProAngler/AlbumDetailViewController.m"
-         timestampString = "369352998.397534"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "112"
-         endingLineNumber = "112"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ProAngler/AlbumViewController.m"
-         timestampString = "369358187.301396"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "99"
-         endingLineNumber = "99"
-         landmarkName = "-tableView:didSelectRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ProAngler/AlbumViewController.m"
-         timestampString = "369356949.051544"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "71"
-         endingLineNumber = "71"
-         landmarkName = "-tableView:cellForRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ProAngler/WallOfFameViewController.m"
-         timestampString = "369352998.397534"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "ProAngler/NewCatchViewController.m"
-         timestampString = "369352998.397534"
+         timestampString = "369386676.087116"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "331"
-         endingLineNumber = "331"
+         startingLineNumber = "334"
+         endingLineNumber = "334"
          landmarkName = "-takePhoto"
          landmarkType = "5">
       </FileBreakpoint>
@@ -268,11 +268,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/AlbumDetailViewController.m"
-         timestampString = "369352998.397534"
+         timestampString = "369387174.197604"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "85"
-         endingLineNumber = "85"
+         startingLineNumber = "75"
+         endingLineNumber = "75"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -281,11 +281,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/NewCatchViewController.m"
-         timestampString = "369352998.397534"
+         timestampString = "369386676.087116"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "294"
-         endingLineNumber = "294"
+         startingLineNumber = "297"
+         endingLineNumber = "297"
          landmarkName = "-presentPhotoOptions:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -294,25 +294,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/NewCatchViewController.m"
-         timestampString = "369352998.397534"
+         timestampString = "369386676.087116"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "442"
-         endingLineNumber = "442"
+         startingLineNumber = "444"
+         endingLineNumber = "444"
          landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ProAngler/AlbumDetailViewController.m"
-         timestampString = "369352998.397534"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "150"
-         endingLineNumber = "150"
-         landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -372,11 +359,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/AlbumViewController.m"
-         timestampString = "369358187.301396"
+         timestampString = "369386676.087116"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "89"
-         endingLineNumber = "89"
+         startingLineNumber = "90"
+         endingLineNumber = "90"
          landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -385,11 +372,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/NewCatchViewController.m"
-         timestampString = "369352998.397534"
+         timestampString = "369386676.087116"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "488"
-         endingLineNumber = "488"
+         startingLineNumber = "490"
+         endingLineNumber = "490"
          landmarkName = "-request:didLoadResponse:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -411,11 +398,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/NewCatchViewController.m"
-         timestampString = "369352998.397534"
+         timestampString = "369386676.087116"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "209"
-         endingLineNumber = "209"
+         startingLineNumber = "211"
+         endingLineNumber = "211"
          landmarkName = "-saveNewCatch:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -424,11 +411,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/NewCatchViewController.m"
-         timestampString = "369352998.397534"
+         timestampString = "369386676.087116"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "204"
-         endingLineNumber = "204"
+         startingLineNumber = "206"
+         endingLineNumber = "206"
          landmarkName = "-saveNewCatch:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -436,25 +423,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "ProAngler/WallOfFameViewController.m"
-         timestampString = "369352998.397534"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "33"
-         endingLineNumber = "33"
-         landmarkName = "-initWithNibName:bundle:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "ProAngler/NewCatchViewController.m"
-         timestampString = "369352998.397534"
+         timestampString = "369386676.087116"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "351"
-         endingLineNumber = "351"
+         startingLineNumber = "354"
+         endingLineNumber = "354"
          landmarkName = "-deletePhoto"
          landmarkType = "5">
       </FileBreakpoint>
@@ -463,11 +437,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/NewCatchViewController.m"
-         timestampString = "369352998.397534"
+         timestampString = "369386676.087116"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "384"
-         endingLineNumber = "384"
+         startingLineNumber = "387"
+         endingLineNumber = "387"
          landmarkName = "-presentFullSizeImage"
          landmarkType = "5">
       </FileBreakpoint>
@@ -476,11 +450,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/NewCatchViewController.m"
-         timestampString = "369352998.397534"
+         timestampString = "369386676.087116"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "76"
-         endingLineNumber = "76"
+         startingLineNumber = "78"
+         endingLineNumber = "78"
          landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -489,11 +463,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/FullSizeImagePageViewController.m"
-         timestampString = "369350860.280427"
+         timestampString = "369384591.359094"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "125"
-         endingLineNumber = "125"
+         startingLineNumber = "107"
+         endingLineNumber = "107"
          landmarkName = "-showFullStats"
          landmarkType = "5">
       </FileBreakpoint>
@@ -502,11 +476,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/AlbumViewController.m"
-         timestampString = "369358226.213621"
+         timestampString = "369386676.087116"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "81"
-         endingLineNumber = "81"
+         startingLineNumber = "82"
+         endingLineNumber = "82"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -599,6 +573,19 @@
          startingLineNumber = "85"
          endingLineNumber = "85"
          landmarkName = "-prepareForSegue:sender:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ProAngler/PageTwoStatsViewController.m"
+         timestampString = "369378955.150595"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "87"
+         endingLineNumber = "87"
+         landmarkName = "-loadData"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

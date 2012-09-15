@@ -3,7 +3,7 @@
 //  ProAngler
 //
 //  Created by Michael Ng on 9/11/12.
-//  Copyright (c) 2012 Amherst College. All rights reserved.
+//  Copyright (c) Michael Ng. All rights reserved.
 //
 
 #import "PictureView.h"

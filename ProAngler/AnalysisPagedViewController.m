@@ -3,7 +3,7 @@
 //  ProAngler
 //
 //  Created by Michael Ng on 9/8/12.
-//  Copyright (c) 2012 Amherst College. All rights reserved.
+//  Copyright (c) Michael Ng. All rights reserved.
 //
 
 #import "AnalysisPagedViewController.h"
@@ -21,15 +21,6 @@
 @end
 
 @implementation AnalysisPagedViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -56,7 +47,6 @@
     [self setScrollView:nil];
     [self setPageControl:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -64,14 +54,16 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)sender {
+- (void)scrollViewDidScroll:(UIScrollView *)sender
+{
     // Update the page when more than 50% of the previous/next page is visible
     CGFloat pageWidth = self.scrollView.frame.size.width;
     int page = floor((self.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     self.pageControl.currentPage = page;
 }
 
-- (IBAction)changePage {
+- (IBAction)changePage
+{
     // update the scroll view to the appropriate page
     CGRect frame;
     frame.origin.x = self.scrollView.frame.size.width * self.pageControl.currentPage;

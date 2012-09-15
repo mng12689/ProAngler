@@ -3,7 +3,7 @@
 //  ProAngler
 //
 //  Created by Michael Ng on 6/25/12.
-//  Copyright (c) 2012 Amherst College. All rights reserved.
+//  Copyright (c) Michael Ng. All rights reserved.
 //
 
 #import "WallOfFameViewController.h"
@@ -27,14 +27,6 @@
 
 @implementation WallOfFameViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -53,7 +45,6 @@
 {
     [self setScrollView:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 -(void)viewWillAppear:(BOOL)animated

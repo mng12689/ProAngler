@@ -128,7 +128,7 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
        
 {
-    if(pickerView.tag == 101)
+    if(pickerView == self.sizePickerView)
         
         if(component == 0)
             return 1002;
@@ -139,64 +139,64 @@
         else
             return 122;
         
-    else if(pickerView.tag == 102)
+    else if(pickerView == self.venuePickerView)
         return [self.venueList count]+1;
     
-    else if(pickerView.tag == 103) 
+    else if(pickerView == self.speciesPickerView)
         return [self.speciesList count]+1;
     
-    else if(pickerView.tag == 104)
+    else if(pickerView == self.baitPickerView)
         return [self.baitList count]+1;
     
-    else if(pickerView.tag == 105) 
+    else if(pickerView == self.structurePickerView)
         return [self.structureList count]+1;
     
-    else if(pickerView.tag == 106 || pickerView.tag == 116)
+    else if(pickerView == self.depthPickerView || pickerView == self.depthRangePickerView)
         return 152;
     
-    else if(pickerView.tag == 107 || pickerView.tag == 117)
+    else if(pickerView == self.waterTempPickerView || pickerView == self.waterTempRangePickerView)
         return 70;
     
-    else if(pickerView.tag == 108) 
+    else if(pickerView == self.waterColorPickerView)
         return [self.waterColorList count]+1;
     
-    else if(pickerView.tag == 109) 
+    else if(pickerView == self.waterLevelPickerView)
         return [self.waterLevelList count]+1;
     
-    else if(pickerView.tag == 110) 
+    else if(pickerView == self.spawningPickerView)
         return [self.spawningList count]+1;
     
-    else if(pickerView.tag == 111)
+    else if(pickerView == self.baitDepthPickerView)
         return [self.baitDepthList count]+1;
     
-    else if(pickerView.tag == 112)
+    else if(pickerView == self.dateRangePickerView)
         
         if (component == 0 || component == 2)
             return 13;
         else
             return 11111111;
     
-    else if (pickerView.tag == 113)
+    else if (pickerView == self.timeRangePickerView)
         
         if (component == 0 || component == 2)
             return 13;
         else
             return 61;
     
-    //else if (pickerView.tag == 114)
-      //  return;
+    /*else if (pickerView == self.weatherConditionsPickerView)
+        return self.weatherConditionsList.count;*/
     
-    else if (pickerView.tag == 115)
+    else if (pickerView == self.temperatureRangePickerView)
         return 132;
     
-    else if (pickerView.tag == 118)
+    else if (pickerView == self.weightRangePickerView)
         
         if (component == 0 || component == 2)
             return 1002;
         else
             return 17;
         
-    else if (pickerView.tag == 119)
+    else if (pickerView == self.lengthRangePickerView)
         return 122;
 
     else
@@ -208,40 +208,40 @@
     if(row == 0)
         return @"";
     
-    else if(pickerView.tag == 101 || pickerView.tag == 118 || pickerView.tag == 119)
+    else if(pickerView == self.sizePickerView || pickerView == self.weightRangePickerView || pickerView == self.lengthRangePickerView)
         return [[NSNumber numberWithInt:row-1] stringValue];
     
-    else if(pickerView.tag == 102)
+    else if(pickerView == self.venuePickerView)
         return [[self.venueList objectAtIndex:row-1]name];
     
-    else if(pickerView.tag == 103)  
+    else if(pickerView == self.speciesPickerView)
         return [[self.speciesList objectAtIndex:row-1]name];
     
-    else if(pickerView.tag == 104)
+    else if(pickerView == self.baitPickerView)
         return [[self.baitList objectAtIndex:row-1]name];
     
-    else if(pickerView.tag == 105)
+    else if(pickerView == self.structurePickerView)
         return [[self.structureList objectAtIndex:row-1]name];
     
-    else if(pickerView.tag == 106 || pickerView.tag == 116)
+    else if(pickerView == self.depthPickerView || pickerView == self.depthRangePickerView)
         return [[NSNumber numberWithInt:row-1]stringValue];
     
-    else if(pickerView.tag == 107 || pickerView.tag == 117)
+    else if(pickerView == self.waterTempPickerView || pickerView == self.waterTempRangePickerView)
         return [[NSNumber numberWithInt:row+31]stringValue];
     
-    else if(pickerView.tag == 108)     
+    else if(pickerView == self.waterColorPickerView)
         return [self.waterColorList objectAtIndex:row-1];
     
-    else if(pickerView.tag == 109)
+    else if(pickerView == self.waterLevelPickerView)
         return [self.waterLevelList objectAtIndex:row-1];
     
-    else if(pickerView.tag == 110)
+    else if(pickerView == self.spawningPickerView)
         return [self.spawningList objectAtIndex:row-1];
     
-    else if(pickerView.tag == 111)
+    else if(pickerView == self.baitDepthPickerView)
         return [self.baitDepthList objectAtIndex:row-1];
     
-    else if(pickerView.tag == 115)
+    else if(pickerView == self.temperatureRangePickerView)
         return [[NSNumber numberWithInt:row-1]stringValue];
     
     else 

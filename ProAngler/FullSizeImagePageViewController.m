@@ -12,19 +12,13 @@
 #import "Photo.h"
 #import "AlbumDetailViewController.h"
 
-@interface FullSizeImagePageViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIGestureRecognizerDelegate>
+@interface FullSizeImagePageViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIGestureRecognizerDelegate, UINavigationBarDelegate>
+
+@property int previousPage;
 
 @end
 
 @implementation FullSizeImagePageViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -44,12 +38,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    NSLog(@"current_page: %d",self.currentPage);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -59,47 +47,41 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    int index;
-    if(self.currentPage == 0){
-        index = [self.photosForPages count]-1;
-    }
-    else{
-        index = self.currentPage - 1;
-    }
-    NSLog(@"Will display previous page: %d",index);
-    self.currentPage = index;
+    self.previousPage = self.currentPage;
+    
+    if(self.currentPage == 0)
+        self.currentPage = self.photosForPages.count - 1;
+    
+    else
+        self.currentPage--;
+    
+    NSLog(@"Will display previous page: %d",self.currentPage);
     
     return [[FullSizeImageViewController alloc]initWithPhoto:[self.photosForPages objectAtIndex:self.currentPage]];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    int index;
-    if(self.currentPage == [self.photosForPages count]-1){
-        index = 0;
-    }
-    else{
-        index = self.currentPage + 1;
-    }
-    NSLog(@"Will display next page: %d",index);
-    self.currentPage = index;
+    self.previousPage = self.currentPage;
+
+    if(self.currentPage == self.photosForPages.count - 1)
+        self.currentPage = 0;
     
-    return [[FullSizeImageViewController alloc]initWithPhoto:[self.photosForPages objectAtIndex:self.currentPage]];
+    else
+        self.currentPage++;
+    
+    NSLog(@"Will display next page: %d",self.currentPage);
+        
+    return [[FullSizeImageViewController alloc]initWithPhoto:[self.photosForPages objectAtIndex:self.currentPage]];;
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
-    FullSizeImageViewController *previousViewController = [previousViewControllers objectAtIndex:0];
-    if (!completed) {
+    if (!completed)
+    {
         [self setViewControllers:previousViewControllers direction:UIPageViewControllerNavigationOrientationHorizontal animated:YES completion:nil];
-        if(previousViewController.currentPage < self.currentPage){
-            NSLog(@"Current page -1");
-            self.currentPage--;
-        }
-        else if(previousViewController.currentPage > self.currentPage){
-            NSLog(@"Current page +1");
-            self.currentPage++;
-        }
+        
+        self.currentPage = self.previousPage;
     }
 }
 
@@ -113,7 +95,7 @@
 
 -(void)showFullStats
 {
-    AlbumDetailViewController *albumDetailForCatch = [[AlbumDetailViewController alloc]initWithNewCatch:[[self.photosForPages objectAtIndex:self.currentPage] catch] atIndex:0];
+    AlbumDetailViewController *albumDetailForCatch = [[AlbumDetailViewController alloc]initWithNewCatch:[[self.photosForPages objectAtIndex:self.currentPage] catch]];
     albumDetailForCatch.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     
     UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0,0,320,44)];
@@ -130,6 +112,11 @@
 -(void)done
 {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)navigationBar:(UINavigationBar *)navigationBar didPopItem:(UINavigationItem *)item
+{
+    self.navigationController.navigationBar.alpha = 1.0;
 }
 
 @end

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E2617" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="YPd-6v-T69">
     <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
@@ -580,16 +581,14 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="0sw-uR-Ymk">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" id="mTs-1q-8TD">
-                                        <rect key="frame" x="0.0" y="375" width="320" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <connections>
-                                            <action selector="changePage" destination="y2J-3S-AXc" eventType="valueChanged" id="GdF-3F-cXi"/>
-                                        </connections>
-                                    </pageControl>
-                                </subviews>
                             </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" id="mTs-1q-8TD">
+                                <rect key="frame" x="0.0" y="380" width="320" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="changePage" destination="y2J-3S-AXc" eventType="valueChanged" id="GdF-3F-cXi"/>
+                                </connections>
+                            </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qNh-P3-M7e">
                                 <rect key="frame" x="228" y="20" width="72" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

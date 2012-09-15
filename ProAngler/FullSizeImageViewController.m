@@ -8,10 +8,9 @@
 
 #import "FullSizeImageViewController.h"
 #import "AlbumDetailViewController.h"
-#import "Catch.h"
 #import "Photo.h"
 
-@interface FullSizeImageViewController () <UINavigationBarDelegate>
+@interface FullSizeImageViewController ()
 
 @property (strong) Photo *photo;
 @property (strong) NSTimer *timer;
@@ -34,8 +33,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //if (true)
-       // self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Full Stats" style:UIBarButtonItemStyleBordered target:self action:@selector(showFullStats)];
 }
 
 - (void)viewDidUnload
@@ -70,15 +67,5 @@
     [self.navigationController.navigationBar setAlpha:1.0];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(animation) userInfo:nil repeats:NO];
 }
-
--(void)navigationBar:(UINavigationBar *)navigationBar didPopItem:(UINavigationItem *)item
-{
-    self.navigationController.navigationBar.alpha = 1.0;
-}
-
-/*-(void)showFullStats
-{
-    [self presentModalViewController:[[AlbumDetailViewController alloc]initWithNewCatch:self.photo.catch atIndex:0] animated:YES];
-}*/
 
 @end
