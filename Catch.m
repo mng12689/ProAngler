@@ -74,7 +74,7 @@
 {
     NSString *depthString = @"";
     if([self.depth intValue] != -1){
-        depthString = [NSString stringWithFormat:@"%d ft",[self.length intValue]];
+        depthString = [NSString stringWithFormat:@"%d ft",[self.depth intValue]];
     }
     return depthString;
 }

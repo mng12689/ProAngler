@@ -54,6 +54,8 @@
 		4C47C64F15F5B9E70061621E /* Structure.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C47C64E15F5B9E70061621E /* Structure.m */; };
 		4C6602F615FB36CA007F81E1 /* CatchPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6602F515FB36CA007F81E1 /* CatchPointAnnotation.m */; };
 		4C69949815B353D400289161 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C69949715B353D400289161 /* MapKit.framework */; };
+		4C9B33A31605253300E2901D /* EditModeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B33A11605253300E2901D /* EditModeDetailViewController.m */; };
+		4C9B33A41605253300E2901D /* EditModeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B33A21605253300E2901D /* EditModeDetailViewController.xib */; };
 		4CA2727715F4082700EFD55F /* ProAnglerDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA2727615F4082700EFD55F /* ProAnglerDataStore.m */; };
 		4CA939BF15D30248008F1A13 /* nav_bar_water_droplets@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA939BE15D30248008F1A13 /* nav_bar_water_droplets@2x.png */; };
 		4CA939C615D392AD008F1A13 /* page_texture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA939C515D392AD008F1A13 /* page_texture@2x.png */; };
@@ -139,6 +141,9 @@
 		4C6602F415FB36C9007F81E1 /* CatchPointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatchPointAnnotation.h; sourceTree = "<group>"; };
 		4C6602F515FB36CA007F81E1 /* CatchPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatchPointAnnotation.m; sourceTree = "<group>"; };
 		4C69949715B353D400289161 /* MapKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4C9B33A01605253200E2901D /* EditModeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditModeDetailViewController.h; sourceTree = "<group>"; };
+		4C9B33A11605253300E2901D /* EditModeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditModeDetailViewController.m; sourceTree = "<group>"; };
+		4C9B33A21605253300E2901D /* EditModeDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditModeDetailViewController.xib; sourceTree = "<group>"; };
 		4CA2727515F4082700EFD55F /* ProAnglerDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProAnglerDataStore.h; sourceTree = "<group>"; };
 		4CA2727615F4082700EFD55F /* ProAnglerDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProAnglerDataStore.m; sourceTree = "<group>"; };
 		4CA939BE15D30248008F1A13 /* nav_bar_water_droplets@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_bar_water_droplets@2x.png"; sourceTree = "<group>"; };
@@ -287,6 +292,9 @@
 				279E6A651539368000D72111 /* AlbumSettingsViewController.m */,
 				276B6F3F159C28B500F84728 /* AlbumDetailViewController.h */,
 				276B6F40159C28B500F84728 /* AlbumDetailViewController.m */,
+				4C9B33A01605253200E2901D /* EditModeDetailViewController.h */,
+				4C9B33A11605253300E2901D /* EditModeDetailViewController.m */,
+				4C9B33A21605253300E2901D /* EditModeDetailViewController.xib */,
 			);
 			name = Album;
 			sourceTree = "<group>";
@@ -436,6 +444,7 @@
 				4C11AF1116007A4F0088D55F /* light_wood_tab_bar@2x.jpg in Resources */,
 				4C11AF15160102D60088D55F /* light_wood_nav_bar@2x.jpg in Resources */,
 				4CF342ED1602B5BB009D22B6 /* dark_wood_no_gradient@2x.jpg in Resources */,
+				4C9B33A41605253300E2901D /* EditModeDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +499,7 @@
 				4C11AF1816014E080088D55F /* FullSizeImageViewController.m in Sources */,
 				4CF342E1160166D0009D22B6 /* FullSizeImagePageViewController.m in Sources */,
 				4CF342F41603E608009D22B6 /* CatchCell.m in Sources */,
+				4C9B33A31605253300E2901D /* EditModeDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

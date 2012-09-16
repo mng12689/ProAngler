@@ -1228,7 +1228,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         </connections>
                                     </button>
                                     <view hidden="YES" contentMode="scaleToFill" id="aKH-eT-8ir">
-                                        <rect key="frame" x="0.0" y="387" width="320" height="1764"/>
+                                        <rect key="frame" x="0.0" y="387" width="320" height="1788"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <pickerView tag="103" contentMode="scaleToFill" id="6BZ-AL-brK">
@@ -1476,7 +1476,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1030" y="-1582"/>
+            <point key="canvasLocation" x="850" y="-1532"/>
         </scene>
     </scenes>
     <resources>

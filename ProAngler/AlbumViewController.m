@@ -33,7 +33,7 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"page_texture.png"]];
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAdded" object:nil queue:nil usingBlock:^(NSNotification *note){
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note){
         [self loadData];
         [self.tableView reloadData];
     }];

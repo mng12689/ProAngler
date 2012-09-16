@@ -48,7 +48,7 @@
     
     self.mapView.delegate = self;
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAdded" object:nil queue:nil usingBlock:^(NSNotification *note){
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note){
         [self loadDataWithPredicate:self.currentFilters];
     }];
     

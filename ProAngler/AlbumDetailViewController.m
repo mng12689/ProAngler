@@ -19,6 +19,7 @@
 #import <Twitter/Twitter.h>
 #import "FullSizeImageViewController.h"
 #import "FullSizeImagePageViewController.h"
+#import "EditModeDetailViewController.h"
 
 @interface AlbumDetailViewController () <MFMailComposeViewControllerDelegate>
 
@@ -63,6 +64,24 @@
 
 @implementation AlbumDetailViewController
 
+- (AlbumDetailViewController*) initWithNewCatch:(Catch*)catch
+{
+    self = [super init];
+    if (self)
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+        self = [storyboard instantiateViewControllerWithIdentifier: @"albumDetailViewController"];
+        
+        self.catch = catch;
+        
+        [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note){
+            [self loadCatchData];
+        }];
+
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -99,6 +118,13 @@
     self.mainImageView.layer.masksToBounds = YES;
     self.mainImageView.userInteractionEnabled = YES;
     [self.mainImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFullSizeImage)]];
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"page_texture.png"]];
+    
+    [self loadCatchData];
+    
+    if (self.photos.count == 0 || [self.catch.trophyFish boolValue] == YES)
+        self.addToWallOfFameButton.userInteractionEnabled = NO;
 }
 
 - (void)viewDidUnload
@@ -140,68 +166,55 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (AlbumDetailViewController*) initWithNewCatch:(Catch*)catch
+- (void) loadCatchData
 {
-    self = [super init];
-    if (self) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-        self = [storyboard instantiateViewControllerWithIdentifier: @"albumDetailViewController"];
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"page_texture.png"]];
+    self.dateLabel.text = [self.catch dateToString];
+    self.speciesLabel.text = self.catch.species.name;
+    self.weightLabel.text = [self.catch weightToString];
+    self.lengthLabel.text = [self.catch lengthToString];
+    self.venueLabel.text = self.catch.venue.name;
+    self.baitLabel.text = self.catch.bait.name;
+    self.structureLabel.text = self.catch.structure.name;
+    self.depthLabel.text = [self.catch depthToString];
+    self.baitDepthLabel.text = self.catch.baitDepth;
+    self.timeLabel.text = [self.catch timeToString];
+    self.spawningLabel.text = self.catch.spawning;
+    
+    self.weatherDescriptionLabel.text = self.catch.weatherDesc;
+    self.tempLabel.text = [self.catch tempFToString];
+    self.windLabel.text = [self.catch windToString];
+    self.humidityLabel.text = [self.catch humidityToString];
+    self.visibilityLabel.text = [self.catch visibilityToString];
+    
+    self.waterColorLabel.text = self.catch.waterColor;
+    self.waterTempLabel.text = [self.catch waterTempFToString];
+    self.waterLevelLabel.text = self.catch.waterLevel;
+    
+    self.photos = [NSMutableArray arrayWithArray:[self.catch.photos allObjects]];
+    if (self.photos.count > 0)
+    {
+        self.mainImageView.image = [UIImage imageWithData:[[self.photos objectAtIndex:0] fullSizeImage]];
+        self.currentlySelectedPhoto = [self.photos objectAtIndex:0];
         
-        self.catch = catch;
-        
-        self.dateLabel.text = [catch dateToString];
-        self.speciesLabel.text = catch.species.name;
-        self.weightLabel.text = [catch weightToString];
-        self.lengthLabel.text = [catch lengthToString];
-        self.venueLabel.text = catch.venue.name;
-        self.baitLabel.text = catch.bait.name;
-        self.structureLabel.text = catch.structure.name;
-        self.depthLabel.text = [catch depthToString];
-        self.baitDepthLabel.text = catch.baitDepth;
-        self.timeLabel.text = [catch timeToString];
-        self.spawningLabel.text = catch.spawning;
-        
-        self.weatherDescriptionLabel.text = catch.weatherDesc;
-        self.tempLabel.text = [catch tempFToString];
-        self.windLabel.text = [catch windToString];
-        self.humidityLabel.text = [catch humidityToString];
-        self.visibilityLabel.text = [catch visibilityToString];
-        
-        self.waterColorLabel.text = catch.waterColor;
-        self.waterTempLabel.text = [catch waterTempFToString];
-        self.waterLevelLabel.text = catch.waterLevel;
-        
-        self.photos = [NSMutableArray arrayWithArray:[catch.photos allObjects]];
-        if (self.photos.count > 0)
+        int column = 0;
+        BOOL toggle = YES;
+        for (int i = 0; i < self.photos.count; i++)
         {
-            self.mainImageView.image = [UIImage imageWithData:[[self.photos objectAtIndex:0] fullSizeImage]];
-            self.currentlySelectedPhoto = [self.photos objectAtIndex:0];
+            toggle = !toggle;
             
-            int column = 0;
-            BOOL toggle = YES;
-            for (int i = 0; i < self.photos.count; i++)
-            {
-                toggle = !toggle;
-                
-                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 56*column, 4 + 56*toggle, 52, 52)];
-                imageView.layer.cornerRadius = 5;
-                imageView.layer.masksToBounds = YES;
-                imageView.image = [UIImage imageWithData:[[self.photos objectAtIndex:i] thumbnail]];
-                
-                if (i != 0 && i % 5 == 0)
-                    self.mediaScrollView.contentSize = CGSizeMake(58+self.mediaScrollView.contentSize.width,self.mediaScrollView.contentSize.height);
-                if (i % 2)
-                    column++;
-                
-                [self.mediaScrollView addSubview:imageView];
-            }
+            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 56*column, 4 + 56*toggle, 52, 52)];
+            imageView.layer.cornerRadius = 5;
+            imageView.layer.masksToBounds = YES;
+            imageView.image = [UIImage imageWithData:[[self.photos objectAtIndex:i] thumbnail]];
+            
+            if (i != 0 && i % 5 == 0)
+                self.mediaScrollView.contentSize = CGSizeMake(58+self.mediaScrollView.contentSize.width,self.mediaScrollView.contentSize.height);
+            if (i % 2)
+                column++;
+            
+            [self.mediaScrollView addSubview:imageView];
         }
-        if (self.photos.count == 0)
-            self.addToWallOfFameButton.userInteractionEnabled = NO;
     }
-
-    return self;
 }
 
 - (IBAction)addToWallOfFame:(id)sender
@@ -300,6 +313,16 @@
             break;
         }
     }
+}
+
+-(void)editMode
+{
+    EditModeDetailViewController *editViewController =[EditModeDetailViewController new];
+    editViewController.catch = self.catch;
+    
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:editViewController];
+
+    [self presentModalViewController:navController animated:YES];
 }
 
 @end
