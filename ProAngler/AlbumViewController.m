@@ -33,6 +33,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor clearColor];
+    self.tableView.separatorColor = [UIColor brownColor];
     
     AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
     [appDelegate setTitle:@"Album" forNavItem:self.navigationItem];
@@ -70,9 +71,6 @@
         cell = [[CatchCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CatchCell"];
     
 	Catch *catch = [self.catches objectAtIndex:indexPath.row];
-    
-    if (cell.currentCatch == catch)
-        return cell;
     cell.currentCatch = catch;
  
 	cell.venueLabel.text = catch.venue.name ;
@@ -81,12 +79,35 @@
     
     cell.customImageView.layer.cornerRadius = 3;
     cell.customImageView.layer.masksToBounds = YES;
-    cell.customImageView.image = nil;
+    if (cell.customImageView.subviews.count != 0)
+        [[cell.customImageView.subviews objectAtIndex:0] removeFromSuperview];
 
     if ([catch.photos count] != 0)
     {
         UIImage *thumbnail = [UIImage imageWithData:[[[catch.photos allObjects] objectAtIndex:0] thumbnail]];
-        cell.customImageView.image = thumbnail;
+        
+        UIImageView *mainImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.customImageView.frame.size.width, cell.customImageView.frame.size.height)];
+        mainImageView.image = thumbnail;
+        
+        [cell.customImageView addSubview:mainImageView];
+    }
+    else
+    {
+        UIView *placeHolderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, cell.customImageView.frame.size.width, cell.customImageView.frame.size.height)];
+        placeHolderView.backgroundColor = [UIColor lightGrayColor];
+        placeHolderView.opaque = YES;
+        
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, cell.customImageView.frame.size.width, 80)];
+        label.layer.position = CGPointMake(cell.customImageView.frame.size.width/2,cell.customImageView.frame.size.height/2);
+        label.text = @"No Photos";
+        label.textAlignment = UITextAlignmentCenter;
+        label.backgroundColor = [UIColor clearColor];
+        label.font = [UIFont boldSystemFontOfSize:10];
+        label.shadowColor = [UIColor colorWithWhite:1.0 alpha:.5];
+        label.shadowOffset = CGSizeMake(0, 1);
+        
+        [placeHolderView addSubview:label];
+        [cell.customImageView addSubview:placeHolderView];
     }
     
     return cell;    

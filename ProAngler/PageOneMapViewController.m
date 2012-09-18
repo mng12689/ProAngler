@@ -213,8 +213,26 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    CatchPointAnnotation *annotationView = (CatchPointAnnotation*)view;
-    [self presentModalViewController:[[AlbumDetailViewController alloc]initWithNewCatch:annotationView.catch] animated:YES];
+    CatchPointAnnotation *annotation = view.annotation;
+    
+    AlbumDetailViewController *albumDetailForCatch = [[AlbumDetailViewController alloc]initWithNewCatch:annotation.catch];
+    albumDetailForCatch.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    
+    UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0,0,320,44)];
+    UINavigationItem *navItem = [UINavigationItem new];
+    navItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(done)];
+    navBar.items = @[navItem];
+    
+    [albumDetailForCatch.view addSubview:navBar];
+    
+    albumDetailForCatch.scrollView.frame = CGRectMake(albumDetailForCatch.scrollView.frame.origin.x, albumDetailForCatch.scrollView.frame.origin.y + navBar.frame.size.height, albumDetailForCatch.scrollView.frame.size.width, albumDetailForCatch.scrollView.frame.size.height - navBar.frame.size.height);
+    
+    [self presentModalViewController:albumDetailForCatch animated:YES];
+}
+
+-(void)done
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 -(void)loadDataWithPredicate:(NSPredicate *)predicate

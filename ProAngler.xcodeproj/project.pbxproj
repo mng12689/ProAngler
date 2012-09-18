@@ -59,6 +59,7 @@
 		4C9B33B01607F8A900E2901D /* engraved_wood_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B33AF1607F8A900E2901D /* engraved_wood_texture.jpg */; };
 		4C9B33B316084D5F00E2901D /* Bait.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B33B216084D5F00E2901D /* Bait.m */; };
 		4C9B33BC16084F2D00E2901D /* Structure.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B33BB16084F2C00E2901D /* Structure.m */; };
+		4C9B33BE1608FE9E00E2901D /* brushed_metal_camera_button.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B33BD1608FE9E00E2901D /* brushed_metal_camera_button.jpeg */; };
 		4CA2727715F4082700EFD55F /* ProAnglerDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA2727615F4082700EFD55F /* ProAnglerDataStore.m */; };
 		4CA939BF15D30248008F1A13 /* nav_bar_water_droplets@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA939BE15D30248008F1A13 /* nav_bar_water_droplets@2x.png */; };
 		4CA939C615D392AD008F1A13 /* page_texture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA939C515D392AD008F1A13 /* page_texture@2x.png */; };
@@ -151,6 +152,7 @@
 		4C9B33B216084D5F00E2901D /* Bait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bait.m; sourceTree = "<group>"; };
 		4C9B33BA16084F2B00E2901D /* Structure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Structure.h; sourceTree = "<group>"; };
 		4C9B33BB16084F2C00E2901D /* Structure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Structure.m; sourceTree = "<group>"; };
+		4C9B33BD1608FE9E00E2901D /* brushed_metal_camera_button.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = brushed_metal_camera_button.jpeg; sourceTree = "<group>"; };
 		4CA2727515F4082700EFD55F /* ProAnglerDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProAnglerDataStore.h; sourceTree = "<group>"; };
 		4CA2727615F4082700EFD55F /* ProAnglerDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProAnglerDataStore.m; sourceTree = "<group>"; };
 		4CA939BE15D30248008F1A13 /* nav_bar_water_droplets@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_bar_water_droplets@2x.png"; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 		4C286A8815E1EEF50079B47F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4C9B33BD1608FE9E00E2901D /* brushed_metal_camera_button.jpeg */,
 				4C11AF1016007A4F0088D55F /* light_wood_tab_bar@2x.jpg */,
 				4C11AEE615FDCBB60088D55F /* NureenHouseStock_0017.JPG */,
 				4CF342EC1602B5BB009D22B6 /* dark_wood_no_gradient@2x.jpg */,
@@ -458,6 +461,7 @@
 				4C9B33A71606DA8E00E2901D /* FilterViewController.xib in Resources */,
 				4C9B33AC1607E5C500E2901D /* AddAttributeViewController.xib in Resources */,
 				4C9B33B01607F8A900E2901D /* engraved_wood_texture.jpg in Resources */,
+				4C9B33BE1608FE9E00E2901D /* brushed_metal_camera_button.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

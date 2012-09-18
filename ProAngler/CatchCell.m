@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 @implementation CatchCell
+@synthesize customImageView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

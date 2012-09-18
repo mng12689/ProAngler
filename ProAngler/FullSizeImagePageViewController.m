@@ -111,8 +111,6 @@
     UINavigationItem *navItem = [UINavigationItem new];
     navItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(done)];
     navBar.items = @[navItem];
-    
-    /*albumDetailForCatch.view.frame = CGRectMake(albumDetailForCatch.view.frame.origin.x, albumDetailForCatch.view.frame.origin.y + navBar.frame.size.height, albumDetailForCatch.view.frame.size.width, albumDetailForCatch.view.frame.size.height - navBar.frame.size.height);*/
 
     [albumDetailForCatch.view addSubview:navBar];
     

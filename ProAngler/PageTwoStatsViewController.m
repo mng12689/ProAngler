@@ -115,7 +115,7 @@
         [stats addObject:venueString];
         
         NSSortDescriptor *sortByWeight = [[NSSortDescriptor alloc]initWithKey:@"weightOZ" ascending:NO];
-        NSArray *speciesForVenue = [venue.species allObjects];
+        NSArray *speciesForVenue = [[venue.species allObjects] sortedArrayUsingDescriptors:@[[[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES]]];
         NSArray *catchesForVenue = [venue.catches allObjects];
         
         for (Species *species in speciesForVenue)

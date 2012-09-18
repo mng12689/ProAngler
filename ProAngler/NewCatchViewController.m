@@ -138,108 +138,116 @@
 
 - (IBAction)saveNewCatch:(id)sender 
 {
-    Catch *catch = [ProAnglerDataStore createEntity:@"Catch"];
-    self.currentCatch = catch;
+    if([super.venuePickerView selectedRowInComponent:0]!=0) {
+       
+        Catch *catch = [ProAnglerDataStore createEntity:@"Catch"];
+        self.currentCatch = catch;
 
-    catch.humidity = @-1;
-    catch.tempF = @-1;
-    catch.visibility = @-1;
-    catch.windSpeedMPH = @-1;
-
-    /********* new catch entity **********/
-
-    catch.date = [NSDate date];
-    
-    if (self.currentLocation.horizontalAccuracy <= 10)
-        catch.location = self.currentLocation;
-    
-    [self requestWeatherConditions:catch.location];
-
-    for (Photo *photo in self.photos) 
-        photo.catch = catch;
-    catch.photos = [NSSet setWithArray:self.photos];
-    
-    if([super.sizePickerView selectedRowInComponent:0]!=0 && [super.sizePickerView selectedRowInComponent:1]!=0)
-        catch.weightOZ = [NSNumber numberWithInt:(([super.sizePickerView selectedRowInComponent:0]-1)*16) + [super.sizePickerView selectedRowInComponent:1]-1];
-    else
-        catch.weightOZ = @-1;
-    
-    if([super.sizePickerView selectedRowInComponent:2]!=0)
-        catch.length = [NSNumber numberWithInt:[super.sizePickerView selectedRowInComponent:2]-1];
-    else
-        catch.length = @-1;
-    
-    if([super.venuePickerView selectedRowInComponent:0]!=0)
-        catch.venue = [super.venueList objectAtIndex:[super.venuePickerView selectedRowInComponent:0]-1];
-    
-    if([super.speciesPickerView selectedRowInComponent:0]!=0)
-        catch.species = [super.speciesList objectAtIndex:[super.speciesPickerView selectedRowInComponent:0]-1];
-    
-    if([super.baitPickerView selectedRowInComponent:0]!=0)
-        catch.bait = [super.baitList objectAtIndex:[super.baitPickerView selectedRowInComponent:0]-1];
-    
-    if([super.structurePickerView selectedRowInComponent:0]!=0)
-        catch.structure = [super.structureList objectAtIndex:[super.structurePickerView selectedRowInComponent:0]-1];
-    
-    if([super.waterTempPickerView selectedRowInComponent:0]!=0)
-        catch.waterTempF = [NSNumber numberWithInt:[super.waterTempPickerView selectedRowInComponent:0]+31];
-    else
-        catch.waterTempF = @-1;
-    
-    if([super.waterColorPickerView selectedRowInComponent:0]!=0)
-        catch.waterColor = [super.waterColorList objectAtIndex:[super.waterColorPickerView selectedRowInComponent:0]-1];
-    
-    if([super.waterLevelPickerView selectedRowInComponent:0]!=0)
-        catch.waterLevel = [super.waterLevelList objectAtIndex: [super.waterLevelPickerView selectedRowInComponent:0]-1];
+        catch.humidity = @-1;
+        catch.tempF = @-1;
+        catch.visibility = @-1;
+        catch.windSpeedMPH = @-1;
         
-    if([super.depthPickerView selectedRowInComponent:0]!=0)
-        catch.depth = [NSNumber numberWithInt:[super.depthPickerView selectedRowInComponent:0]-1];
-    else
-        catch.depth = @-1;
-    
-    if([super.spawningPickerView selectedRowInComponent:0]!=0)
-    catch.spawning = [super.spawningList objectAtIndex:[super.spawningPickerView selectedRowInComponent:0]-1];
-    
-    if([super.baitDepthPickerView selectedRowInComponent:0]!=0)
-        catch.baitDepth = [super.baitDepthList objectAtIndex:[super.baitDepthPickerView selectedRowInComponent:0]-1];
-    
-    /********* species entity updates **********/
-    
-    if (catch.species)
-    {
-        int newTotal = [catch.species.totalCatches intValue] + 1;
-        catch.species.totalCatches = [NSNumber numberWithInt:newTotal];
+        /********* new catch entity **********/
+
+        catch.date = [NSDate date];
         
-        if (catch.weightOZ) {
-            if ([catch.species.largestCatch.weightOZ intValue] < [catch.weightOZ intValue])
-                catch.species.largestCatch = catch;
+        if (self.currentLocation.horizontalAccuracy <= 10)
+            catch.location = self.currentLocation;
+        
+        [self requestWeatherConditions:catch.location];
+
+        for (Photo *photo in self.photos) 
+            photo.catch = catch;
+        catch.photos = [NSSet setWithArray:self.photos];
+        
+        if([super.sizePickerView selectedRowInComponent:0]!=0 && [super.sizePickerView selectedRowInComponent:1]!=0)
+            catch.weightOZ = [NSNumber numberWithInt:(([super.sizePickerView selectedRowInComponent:0]-1)*16) + [super.sizePickerView selectedRowInComponent:1]-1];
+        else
+            catch.weightOZ = @-1;
+        
+        if([super.sizePickerView selectedRowInComponent:2]!=0)
+            catch.length = [NSNumber numberWithInt:[super.sizePickerView selectedRowInComponent:2]-1];
+        else
+            catch.length = @-1;
+        
+        if([super.venuePickerView selectedRowInComponent:0]!=0)
+            catch.venue = [super.venueList objectAtIndex:[super.venuePickerView selectedRowInComponent:0]-1];
+        
+        if([super.speciesPickerView selectedRowInComponent:0]!=0)
+            catch.species = [super.speciesList objectAtIndex:[super.speciesPickerView selectedRowInComponent:0]-1];
+        
+        if([super.baitPickerView selectedRowInComponent:0]!=0)
+            catch.bait = [super.baitList objectAtIndex:[super.baitPickerView selectedRowInComponent:0]-1];
+        
+        if([super.structurePickerView selectedRowInComponent:0]!=0)
+            catch.structure = [super.structureList objectAtIndex:[super.structurePickerView selectedRowInComponent:0]-1];
+        
+        if([super.waterTempPickerView selectedRowInComponent:0]!=0)
+            catch.waterTempF = [NSNumber numberWithInt:[super.waterTempPickerView selectedRowInComponent:0]+31];
+        else
+            catch.waterTempF = @-1;
+        
+        if([super.waterColorPickerView selectedRowInComponent:0]!=0)
+            catch.waterColor = [super.waterColorList objectAtIndex:[super.waterColorPickerView selectedRowInComponent:0]-1];
+        
+        if([super.waterLevelPickerView selectedRowInComponent:0]!=0)
+            catch.waterLevel = [super.waterLevelList objectAtIndex: [super.waterLevelPickerView selectedRowInComponent:0]-1];
+            
+        if([super.depthPickerView selectedRowInComponent:0]!=0)
+            catch.depth = [NSNumber numberWithInt:[super.depthPickerView selectedRowInComponent:0]-1];
+        else
+            catch.depth = @-1;
+        
+        if([super.spawningPickerView selectedRowInComponent:0]!=0)
+        catch.spawning = [super.spawningList objectAtIndex:[super.spawningPickerView selectedRowInComponent:0]-1];
+        
+        if([super.baitDepthPickerView selectedRowInComponent:0]!=0)
+            catch.baitDepth = [super.baitDepthList objectAtIndex:[super.baitDepthPickerView selectedRowInComponent:0]-1];
+        
+        /********* species entity updates **********/
+        
+        if (catch.species)
+        {
+            int newTotal = [catch.species.totalCatches intValue] + 1;
+            catch.species.totalCatches = [NSNumber numberWithInt:newTotal];
+            
+            if (catch.weightOZ) {
+                if ([catch.species.largestCatch.weightOZ intValue] < [catch.weightOZ intValue])
+                    catch.species.largestCatch = catch;
+            }
         }
+        
+        /********* venue/species entities updates **********/
+        if (catch.venue && catch.species && ![catch.venue.species containsObject:catch.species] && ![catch.species.venues containsObject:catch.venue]) {
+            [catch.venue addSpeciesObject:catch.species];
+            [catch.species addVenuesObject:catch.venue];
+        }
+        
+        NSError *error;
+        [ProAnglerDataStore saveContext:&error];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CatchAddedOrModified" object:self];
+        [self resetView];
+        
+        NSString *title;
+        NSString *message;
+        if(error){
+            title = @"Catch not saved";
+            message = [error localizedFailureReason];
+        }
+        else{
+            title = @"Catch saved!";
+            message = @"View all catches in your album.";
+        }
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
     }
     
-    /********* venue/species entities updates **********/
-    if (catch.venue && catch.species && ![catch.venue.species containsObject:catch.species] && ![catch.species.venues containsObject:catch.venue]) {
-        [catch.venue addSpeciesObject:catch.species];
-        [catch.species addVenuesObject:catch.venue];
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid Input" message:@"Please select a venue (required)" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
     }
-    
-    NSError *error;
-    [ProAnglerDataStore saveContext:&error];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"CatchAddedOrModified" object:self];
-    [self resetView];
-    
-    NSString *title;
-    NSString *message;
-    if(error){
-        title = @"Catch not saved";
-        message = [error localizedFailureReason];
-    }
-    else{
-        title = @"Catch saved!";
-        message = @"View all catches in your album.";
-    }
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
 }
 
 - (void)resetView
@@ -327,7 +335,6 @@
             default:
                 break;
         }
-
     }
 }
 

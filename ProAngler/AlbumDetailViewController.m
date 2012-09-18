@@ -22,7 +22,7 @@
 #import "EditModeDetailViewController.h"
 #import "WeatherDescription.h"
 
-@interface AlbumDetailViewController () <MFMailComposeViewControllerDelegate>
+@interface AlbumDetailViewController () <MFMailComposeViewControllerDelegate, UIActionSheetDelegate>
 
 @property (strong) Catch *catch;
 
@@ -58,8 +58,8 @@
 @property (strong) Photo *currentlySelectedPhoto;
 
 - (IBAction)addToWallOfFame:(id)sender;
-- (IBAction)composeEmail:(id)sender;
-- (IBAction)composeTwitterMessage:(id)sender;
+- (IBAction)presentEmailActionSheet:(id)sender;
+- (IBAction)presentTwitterActionSheet:(id)sender;
 
 @end
 
@@ -257,57 +257,103 @@
     [ProAnglerDataStore saveContext:nil];
 }
 
-- (IBAction)composeEmail:(id)sender
+-(IBAction)presentEmailActionSheet:(id)sender
 {
-    MFMailComposeViewController *emailViewController = [MFMailComposeViewController new];
-    emailViewController.mailComposeDelegate = self;
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Email Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Easy Email", @"Blank Template", nil];
     
-    [emailViewController setSubject:[NSString stringWithFormat:@"%@ - %@ (Sent from my Pro Angler iPhone app)",self.dateLabel.text,self.venueLabel.text]];
-    
-    [emailViewController setMessageBody:@"test" isHTML:NO];
-    
-    NSArray *photos = [self.catch.photos allObjects];
-    int counter = 0;
-    for (Photo *photo in  photos) {
-        [emailViewController addAttachmentData:photo.fullSizeImage mimeType:@"image/jpeg" fileName:[NSString stringWithFormat:@"%@_%@_%d",self.dateLabel.text,self.venueLabel.text,counter]];
-        counter++;
-    }
-    
-    [self presentModalViewController:emailViewController animated:YES];
+    if (self.tabBarController.tabBar) 
+        [actionSheet showFromTabBar:self.tabBarController.tabBar];
+    else
+        [actionSheet showInView:self.view];
+
 }
 
-- (IBAction)composeTwitterMessage:(id)sender
+-(IBAction)presentTwitterActionSheet:(id)sender
 {
-    TWTweetComposeViewController *twitterViewController = [TWTweetComposeViewController new];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Twitter Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Easy Tweet", @"Blank Template", nil];
     
-    if (![self.weightLabel.text isEqualToString:@""]) 
-        [twitterViewController setInitialText:[NSString stringWithFormat:@"%@ - %@\n%@",self.dateLabel.text,self.venueLabel.text,self.weightLabel.text]];
+    if (self.tabBarController.tabBar)
+        [actionSheet showFromTabBar:self.tabBarController.tabBar];
     else
-        [twitterViewController setInitialText:[NSString stringWithFormat:@"%@ - %@",self.dateLabel.text,self.venueLabel.text]];
+        [actionSheet showInView:self.view];
     
-    if (self.catch.photos) 
-        [twitterViewController addImage:[UIImage imageWithData:[[self.catch.photos anyObject] fullSizeImage]]];
+}
 
-    [twitterViewController setCompletionHandler:^(TWTweetComposeViewControllerResult result) {
-        
-        switch (result) {
-            case TWTweetComposeViewControllerResultCancelled:
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([actionSheet.title isEqualToString:@"Email Options"]) {
+        switch (buttonIndex) {
+            case 0:
+                [self composeEmailAutofill:YES];
                 break;
-            case TWTweetComposeViewControllerResultDone:
+            case 1:
+                [self composeEmailAutofill:NO];
                 break;
             default:
                 break;
         }
-        
-        [self dismissModalViewControllerAnimated:YES];
-    }];
+    }
+    else if ([actionSheet.title isEqualToString:@"Twitter Options"]){
+        switch (buttonIndex) {
+            case 0:
+                [self composeTwitterAutofill:YES];
+                break;
+            case 1:
+                [self composeTwitterAutofill:NO];
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+- (void)composeEmailAutofill:(BOOL)autofill
+{
+    MFMailComposeViewController *emailViewController = [MFMailComposeViewController new];
+    emailViewController.mailComposeDelegate = self;
     
-    [self presentModalViewController:twitterViewController animated:YES];
+    if (autofill){
+        [emailViewController setSubject:[NSString stringWithFormat:@"%@ - %@",self.dateLabel.text,self.venueLabel.text]];
+        
+        NSArray *photos = [self.catch.photos allObjects];
+        int counter = 0;
+        for (Photo *photo in  photos) {
+            [emailViewController addAttachmentData:photo.fullSizeImage mimeType:@"image/jpeg" fileName:[NSString stringWithFormat:@"%@_%@_%d",self.dateLabel.text,self.venueLabel.text,counter]];
+            counter++;
+        }
+    }
+    
+    [emailViewController setMessageBody:@"\n\nSent from my ProAngler© fishing app\n\n" isHTML:NO];
+    
+    [self presentModalViewController:emailViewController animated:YES];
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)composeTwitterAutofill:(BOOL)autofill
+{
+    TWTweetComposeViewController *twitterViewController = [TWTweetComposeViewController new];
+    
+    if (autofill){
+        if (![self.weightLabel.text isEqualToString:@""]) 
+            [twitterViewController setInitialText:[NSString stringWithFormat:@"%@ - %@\n%@",self.dateLabel.text,self.venueLabel.text,self.weightLabel.text]];
+        else
+            [twitterViewController setInitialText:[NSString stringWithFormat:@"%@ - %@",self.dateLabel.text,self.venueLabel.text]];
+        
+        if (self.catch.photos) {
+            UIImage *mainImage = [[self.mainImageView.subviews objectAtIndex:0] image];
+            [twitterViewController addImage:mainImage];
+        }
+    }
+
+    [twitterViewController setCompletionHandler:^(TWTweetComposeViewControllerResult result) {
+        [self dismissModalViewControllerAnimated:YES];
+    }];
+    
+    [self presentModalViewController:twitterViewController animated:YES];
 }
 
 -(void)showFullSizeImage

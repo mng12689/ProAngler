@@ -15,25 +15,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CatchCell" rowHeight="80" id="SPZ-Gm-gc1" customClass="CatchCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CatchCell" rowHeight="80" id="SPZ-Gm-gc1" customClass="CatchCell">
                                 <rect key="frame" x="0.0" y="22" width="320" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" tag="105" contentMode="scaleToFill" id="7ou-5e-FL0">
-                                            <rect key="frame" x="11" y="5" width="70" height="70"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" text="Venue" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="vLA-jL-xjf">
                                             <rect key="frame" x="89" y="4" width="184" height="38"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="Cochin-Italic" family="Cochin" pointSize="24"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="shadowColor" red="0.046822703450000003" green="0.062828472149999995" blue="0.48913043480000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                                            <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <size key="shadowOffset" width="1" height="0.0"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="103" contentMode="left" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="2pP-VU-YAk">
                                             <rect key="frame" x="89" y="36" width="172" height="21"/>
@@ -47,11 +43,16 @@
                                             <fontDescription key="fontDescription" type="italicSystem" pointSize="13"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
+                                        <view contentMode="scaleToFill" id="izP-sJ-06q">
+                                            <rect key="frame" x="11" y="4" width="70" height="70"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <outlet property="customImageView" destination="7ou-5e-FL0" id="lU6-Zx-R7w"/>
+                                    <outlet property="customImageView" destination="izP-sJ-06q" id="e9x-ib-0Ri"/>
                                     <outlet property="dateLabel" destination="2pP-VU-YAk" id="N7Z-NJ-1qY"/>
                                     <outlet property="timeLabel" destination="dzy-Bu-NMx" id="dn9-lH-doC"/>
                                     <outlet property="venueLabel" destination="vLA-jL-xjf" id="xhY-A9-cV2"/>
@@ -461,7 +462,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="composeTwitterMessage:" destination="WM5-U1-rga" eventType="touchUpInside" id="n5L-eZ-EY6"/>
+                                                    <action selector="presentTwitterActionSheet:" destination="WM5-U1-rga" eventType="touchUpInside" id="4du-WC-0ba"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EOg-n3-DvG">
@@ -476,7 +477,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="composeEmail:" destination="WM5-U1-rga" eventType="touchUpInside" id="oOE-7e-REW"/>
+                                                    <action selector="presentEmailActionSheet:" destination="WM5-U1-rga" eventType="touchUpInside" id="r6b-wb-gol"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" id="GGe-KM-Zfm">
@@ -748,7 +749,7 @@
                                         <rect key="frame" x="20" y="9" width="61" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Photo/Video">
+                                        <state key="normal" title="Photo/Video" image="brushed_metal_camera_button.jpeg">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1061,6 +1062,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="brushed_metal_camera_button.jpeg" width="224" height="225"/>
         <image name="twitter-bird-white-on-blue.png" width="300" height="300"/>
     </resources>
     <classes>
@@ -1068,8 +1070,8 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AlbumDetailViewController.h"/>
             <relationships>
                 <relationship kind="action" name="addToWallOfFame:"/>
-                <relationship kind="action" name="composeEmail:"/>
-                <relationship kind="action" name="composeTwitterMessage:"/>
+                <relationship kind="action" name="presentEmailActionSheet:"/>
+                <relationship kind="action" name="presentTwitterActionSheet:"/>
                 <relationship kind="outlet" name="addToWallOfFameButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="baitDepthLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="baitLabel" candidateClass="UILabel"/>

@@ -16,6 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *venueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *customImageView;
+@property (weak, nonatomic) IBOutlet UIView *customImageView;
 
 @end
