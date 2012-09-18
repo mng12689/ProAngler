@@ -12,7 +12,7 @@
 @class FilterViewController;
 
 @protocol FilterViewControllerDelegate <NSObject>
-- (void)filterForVenue:(NSString*)venue withPredicate:(NSPredicate*)predicate andAdditionalFilters:(NSArray*)filters;
+- (void)filterForVenue:(NSString*)venue withPredicate:(NSPredicate*)predicate andAdditionalFilters:(NSArray*)filters filterDate:(NSDictionary*)filterDate filterTime:(NSDictionary*)filterTime;
 @end
 
 @interface FilterViewController : SelectAttributesViewController

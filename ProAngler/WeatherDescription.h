@@ -1,8 +1,8 @@
 //
-//  Structure.h
+//  WeatherDescription.h
 //  ProAngler
 //
-//  Created by Michael Ng on 9/17/12.
+//  Created by Michael Ng on 9/16/12.
 //  Copyright (c) 2012 Amherst College. All rights reserved.
 //
 
@@ -11,13 +11,13 @@
 
 @class Catch;
 
-@interface Structure : NSManagedObject
+@interface WeatherDescription : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *catches;
 @end
 
-@interface Structure (CoreDataGeneratedAccessors)
+@interface WeatherDescription (CoreDataGeneratedAccessors)
 
 - (void)addCatchesObject:(Catch *)value;
 - (void)removeCatchesObject:(Catch *)value;

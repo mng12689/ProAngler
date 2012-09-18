@@ -21,9 +21,9 @@
 @property (strong, nonatomic) IBOutlet UIPickerView *waterLevelPickerView;
 @property (strong, nonatomic) IBOutlet UIPickerView *spawningPickerView;
 @property (strong, nonatomic) IBOutlet UIPickerView *baitDepthPickerView;
-@property (weak, nonatomic) IBOutlet UIPickerView *dateRangePickerView; //112
-@property (weak, nonatomic) IBOutlet UIDatePicker *timeRangePickerView; //113
-@property (weak, nonatomic) IBOutlet UIPickerView *weatherConditionsPickerView; //114
+@property (weak, nonatomic) IBOutlet UIPickerView *dateRangePickerView; 
+@property (weak, nonatomic) IBOutlet UIPickerView *timeRangePickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *weatherConditionsPickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *temperatureRangePickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *depthRangePickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *waterTempRangePickerView;
@@ -38,15 +38,6 @@
 @property (strong, nonatomic) NSArray *waterLevelList;
 @property (strong, nonatomic) NSArray *spawningList;
 @property (strong, nonatomic) NSArray *baitDepthList;
-
-/*@property (strong, nonatomic) NSMutableArray *speciesList;
-@property (strong, nonatomic) NSMutableArray *venueList;
-@property (strong, nonatomic) NSMutableArray *baitList;
-@property (strong, nonatomic) NSMutableArray *structureList;
-@property (strong, nonatomic) NSMutableArray *waterColorList;
-@property (strong, nonatomic) NSMutableArray *waterLevelList;
-@property (strong, nonatomic) NSMutableArray *spawningList;
-@property (strong, nonatomic) NSMutableArray *baitDepthList;*/
-
+@property (strong, nonatomic) NSArray *weatherDescriptionsList;
 
 @end

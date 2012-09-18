@@ -7,10 +7,11 @@
 //
 
 #import "FilterViewController.h"
+#import "AppDelegate.h"
 
 @interface FilterViewController ()
 
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *detailView;
 
 - (IBAction)saveFilter:(id)sender;
@@ -35,13 +36,15 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark_wood.jpg"]];
+    
+    AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
+    [appDelegate setTitle:@"Filter" forNavItem:self.navigationItem];
 
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
 }
 
 - (void)viewDidUnload
 {
-    [self setDetailView:nil];
     [self setDetailView:nil];
     [super viewDidUnload];
     [self setScrollView:nil];
@@ -61,7 +64,10 @@
 {
     NSString *conditional = @"";
     NSMutableArray *filters = [NSMutableArray new];
+    
     NSString *venue;
+    NSDictionary *filterDate;
+    NSDictionary *filterTime;
     
     BOOL invalidInput = NO;
     NSString *invalidInputMessage = @"";
@@ -69,7 +75,7 @@
     //set venue conditional
     if ([super.venuePickerView selectedRowInComponent:0] == 0) {
         invalidInput = YES;
-        invalidInputMessage = [invalidInputMessage stringByAppendingString:@"You must select a venue"];
+        invalidInputMessage = [invalidInputMessage stringByAppendingString:@"You must select a venue\n"];
     }
     else {
         int row = [super.venuePickerView selectedRowInComponent:0];
@@ -85,27 +91,53 @@
         [filters addObject:[NSString stringWithFormat:@"Species: %@",titleForRow]];
     }
     
-    /*if([super.dateRangePickerView selectedRowInComponent:0]!=0){
-        row = [super.dateRangePickerView selectedRowInComponent:0];
-        titleForRow = [[super.dateRangesList objectAtIndex:row-1]name];
-        [conditional stringByAppendingString:[NSString stringWithFormat:@" AND (date > %@ date < %@",titleForRow]];
-        [filters addObject:titleForRow];
+    if([super.dateRangePickerView selectedRowInComponent:0]!=0 && [super.dateRangePickerView selectedRowInComponent:1]!=0 && [super.dateRangePickerView selectedRowInComponent:2]!=0 && [super.dateRangePickerView selectedRowInComponent:3]!=0 )
+    {
+        NSDateFormatter *df = [NSDateFormatter new];
+        NSArray *months = [df monthSymbols];
+        
+        int startMonth = [super.dateRangePickerView selectedRowInComponent:0];
+        int startDay = [super.dateRangePickerView selectedRowInComponent:1];
+        
+        int endMonth = [super.dateRangePickerView selectedRowInComponent:2];
+        int endDay = [super.dateRangePickerView selectedRowInComponent:3];
+        
+        filterDate = [NSDictionary dictionaryWithObjects:@[@(startMonth),@(startDay),@(endMonth),@(endDay)] forKeys:@[@"startMonth",@"startDay",@"endMonth",@"endDay"]];
+        [filters addObject:[NSString stringWithFormat:@"Date in range: %@ %d - %@ %d",[months objectAtIndex:startMonth], startDay,[months objectAtIndex:endMonth], endDay]];
     }
-    
-    if([super.timeRangePickerView selectedRowInComponent:0]!=0){
-        row = [super.timeRangePickerView selectedRowInComponent:0];
-        titleForRow = [[super.dateRangesList objectAtIndex:row-1]name];
-        [conditional stringByAppendingString:[NSString stringWithFormat:@" AND (date > %@ date < %@",titleForRow]];
-        [filters addObject:titleForRow];
-    }*/
 
-    /*if([super.weatherConditionsPickerView selectedRowInComponent:0]!=0)
+    if([super.timeRangePickerView selectedRowInComponent:0]!=0 && [super.timeRangePickerView selectedRowInComponent:1]!=0 && [super.timeRangePickerView selectedRowInComponent:2]!=0 && [super.timeRangePickerView selectedRowInComponent:3]!=0)
+    {
+        int startTime = [super.timeRangePickerView selectedRowInComponent:0];
+        if (startTime == 12)
+            startTime = 0;
+        
+        int militaryStartTime = startTime;
+        NSString *startIndicator = @"AM";
+        if ([super.timeRangePickerView selectedRowInComponent:1] == 2){
+            militaryStartTime += 12;
+            startIndicator = @"PM";
+        }
+        
+        int endTime = [super.timeRangePickerView selectedRowInComponent:2];
+        int militaryEndTime = endTime;
+        NSString *endIndicator = @"AM";
+        if ([super.timeRangePickerView selectedRowInComponent:3] == 2){
+            militaryEndTime += 12;
+            endIndicator = @"PM";
+        }
+        
+        filterTime = [NSDictionary dictionaryWithObjects:@[@(militaryStartTime),@(militaryEndTime)] forKeys:@[@"startTime",@"endTime"]];
+        [filters addObject:[NSString stringWithFormat:@"Time in range: %d %@  - %d %@",startTime,startIndicator,endTime,endIndicator]];
+    }
+
+    if([super.weatherConditionsPickerView selectedRowInComponent:0]!=0)
     {
         int row = [super.weatherConditionsPickerView selectedRowInComponent:0];
-        NSString *titleForRow = [super.weatherConditionsList objectAtIndex:row-1];
-        [conditional stringByAppendingString:[NSString stringWithFormat:@" AND weatherConditions like %@",titleForRow]];
+        NSString *titleForRow = [[super.weatherDescriptionsList objectAtIndex:row-1]name];
+        conditional = [conditional stringByAppendingFormat:@" AND weatherDescription.name like \"%@\"",titleForRow];
         [filters addObject:[NSString stringWithFormat:@"Weather Conditions: %@",titleForRow]];
-    }*/
+    }
 
     if([super.temperatureRangePickerView selectedRowInComponent:0]!=0 && [super.temperatureRangePickerView selectedRowInComponent:1]!=0)
     {
@@ -240,7 +272,7 @@
     else {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:conditional];
         [self cancelModal:nil];
-        [self.delegate filterForVenue:venue withPredicate:predicate andAdditionalFilters:filters];
+        [self.delegate filterForVenue:venue withPredicate:predicate andAdditionalFilters:filters filterDate:filterDate filterTime:filterTime];
     }
 }
 

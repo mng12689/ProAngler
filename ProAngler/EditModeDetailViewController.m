@@ -19,6 +19,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "FullSizeImagePageViewController.h"
 #import "FullSizeImageViewController.h"
+#import "AppDelegate.h"
 
 @interface EditModeDetailViewController () <AddAttributeViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
 
@@ -54,13 +55,16 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark_wood.jpg"]];
-    
+
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.detailView.frame.origin.y + self.detailView.frame.size.height);
     self.mediaScrollView.layer.cornerRadius = 5;
     self.mediaScrollView.backgroundColor = [UIColor colorWithHue:0 saturation:0 brightness:100 alpha:.2];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveChanges)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
+    
+    AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
+    [appDelegate setTitle:@"Edit Catch" forNavItem:self.navigationItem];
     
     for (Photo *photo in self.catch.photos)
     {
@@ -141,30 +145,25 @@
 
 - (IBAction)addAttribute:(UIButton*)sender
 {
-    [self performSegueWithIdentifier:@"AddAttribute" sender:sender];
-}
-
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"AddAttribute"])
-    {
-        AddAttributeViewController *addAttributeViewController = segue.destinationViewController;
-        UIButton *button = (UIButton*)sender;
-        
-        if (button.tag == 201) {
-            addAttributeViewController.attributeType = @"Venue";
-        }
-        else if(button.tag == 202){
-            addAttributeViewController.attributeType = @"Species";
-        }
-        else if(button.tag == 203){
-            addAttributeViewController.attributeType = @"Bait";
-        }
-        else if(button.tag == 204){
-            addAttributeViewController.attributeType = @"Structure";
-        }
-        addAttributeViewController.delegate = self;
+    AddAttributeViewController *addAttributeViewController = [AddAttributeViewController new];
+    addAttributeViewController.delegate = self;
+    
+    UIButton *button = (UIButton*)sender;
+    
+    if (button.tag == 201) {
+        addAttributeViewController.attributeType = @"Venue";
     }
+    else if(button.tag == 202){
+        addAttributeViewController.attributeType = @"Species";
+    }
+    else if(button.tag == 203){
+        addAttributeViewController.attributeType = @"Bait";
+    }
+    else if(button.tag == 204){
+        addAttributeViewController.attributeType = @"Structure";
+    }
+    
+    [self presentModalViewController:addAttributeViewController animated:YES];
 }
 
 - (void)attributeSaved:(NSString*)entity
@@ -185,6 +184,7 @@
         super.structureList = [ProAnglerDataStore fetchEntity:entity sortBy:@"name" withPredicate:nil];
         [super.structurePickerView reloadComponent:0];
     }
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"AttributeAdded" object:self];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -208,31 +208,31 @@
     else
         self.catch.length = @-1;
     
-    /*if([super.venuePickerView selectedRowInComponent:0]!=0)
+    if([super.venuePickerView selectedRowInComponent:0]!=0)
         self.catch.venue = [super.venueList objectAtIndex:[super.venuePickerView selectedRowInComponent:0]-1];
-    else
-        venue.catches remove
+    else {
+        [self.catch.venue removeCatchesObject:self.catch];
         self.catch.venue = nil;
+    }
     
     if([super.speciesPickerView selectedRowInComponent:0]!=0)
         newSpecies = [super.speciesList objectAtIndex:[super.speciesPickerView selectedRowInComponent:0]-1];
-    else
-        species.catches remove
-        self.catch.species = nil;*/
+    else {
+        [self.catch.species removeCatchesObject:self.catch];
+        self.catch.species = nil;
+    }
     
     if([super.baitPickerView selectedRowInComponent:0]!=0)
         self.catch.bait = [super.baitList objectAtIndex:[super.baitPickerView selectedRowInComponent:0]-1];
     else {
-        Bait *bait = self.catch.bait;
-        //bait.catches remove
+        [self.catch.bait removeCatchesObject:self.catch];
         self.catch.bait = nil;
     }
     
     if([super.structurePickerView selectedRowInComponent:0]!=0)
         self.catch.structure = [super.structureList objectAtIndex:[super.structurePickerView selectedRowInComponent:0]-1];
     else {
-        Structure *structure = self.catch.structure;
-        //structure.catches remove
+        [self.catch.structure removeCatchesObject:self.catch];
         self.catch.structure = nil;
     }
     
@@ -273,9 +273,10 @@
         int newTotal = [newSpecies.totalCatches intValue] + 1;
         newSpecies.totalCatches = [NSNumber numberWithInt:newTotal];
         
-        if (self.catch.weightOZ)
-            if (newSpecies.largestCatch.weightOZ < self.catch.weightOZ)
+        if (self.catch.weightOZ){
+            if ([newSpecies.largestCatch.weightOZ intValue] < [self.catch.weightOZ intValue])
                 newSpecies.largestCatch = self.catch;
+        }
     }
     
     /********* venue/species entities updates **********/
@@ -283,6 +284,8 @@
         [self.catch.venue addSpeciesObject:newSpecies];
         [newSpecies addVenuesObject:self.catch.venue];
     }
+    
+    self.catch.species = newSpecies;
     
     NSError *error;
     [ProAnglerDataStore saveContext:&error];
@@ -430,16 +433,16 @@
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 66*self.mediaScrollView.subviews.count, 4, 62, 62)];
-    
+{    
     if (!self.photos)
         self.photos = [NSMutableArray new];
     
-    UIImage *newImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     Photo *photo = [ProAnglerDataStore createEntity:@"Photo"];
+    UIImage *newImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     
     photo.fullSizeImage = UIImageJPEGRepresentation(newImage, 1);
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera)
+        UIImageWriteToSavedPhotosAlbum(newImage, nil, nil, nil);
     
     UIImage *screenSizeImage;
     UIImage *thumbnail;
@@ -460,6 +463,7 @@
     
     [self.photos addObject:photo];
     
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 66*self.mediaScrollView.subviews.count, 4, 62, 62)];
     imageView.image = thumbnail;
     imageView.opaque = YES;
     imageView.layer.cornerRadius = 5;

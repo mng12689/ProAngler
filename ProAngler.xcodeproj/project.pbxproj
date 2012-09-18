@@ -28,7 +28,6 @@
 		276B6F3E159BA70200F84728 /* AlbumPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 276B6F3D159BA70100F84728 /* AlbumPageViewController.m */; };
 		276B6F41159C28B600F84728 /* AlbumDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 276B6F40159C28B500F84728 /* AlbumDetailViewController.m */; };
 		279C520715A007CE00FAF2E9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 279C520615A007CE00FAF2E9 /* QuartzCore.framework */; };
-		279C520915A1106E00FAF2E9 /* wood_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 279C520815A1106E00FAF2E9 /* wood_texture.png */; };
 		279C520F15A2CEF700FAF2E9 /* AddAttributeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279C520E15A2CEF700FAF2E9 /* AddAttributeViewController.m */; };
 		279E6A661539368000D72111 /* AlbumSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279E6A651539368000D72111 /* AlbumSettingsViewController.m */; };
 		4C11AEBC15FBD6840088D55F /* AnalysisPagedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C11AEBB15FBD6840088D55F /* AnalysisPagedViewController.m */; };
@@ -50,12 +49,16 @@
 		4C11AF15160102D60088D55F /* light_wood_nav_bar@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AF14160102D50088D55F /* light_wood_nav_bar@2x.jpg */; };
 		4C11AF1816014E080088D55F /* FullSizeImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C11AF1716014E080088D55F /* FullSizeImageViewController.m */; };
 		4C47C64315F5B7A50061621E /* Catch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C47C64215F5B7A50061621E /* Catch.m */; };
-		4C47C64615F5B9D00061621E /* Bait.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C47C64515F5B9D00061621E /* Bait.m */; };
-		4C47C64F15F5B9E70061621E /* Structure.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C47C64E15F5B9E70061621E /* Structure.m */; };
 		4C6602F615FB36CA007F81E1 /* CatchPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6602F515FB36CA007F81E1 /* CatchPointAnnotation.m */; };
 		4C69949815B353D400289161 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C69949715B353D400289161 /* MapKit.framework */; };
 		4C9B33A31605253300E2901D /* EditModeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B33A11605253300E2901D /* EditModeDetailViewController.m */; };
 		4C9B33A41605253300E2901D /* EditModeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B33A21605253300E2901D /* EditModeDetailViewController.xib */; };
+		4C9B33A71606DA8E00E2901D /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B33A61606DA8E00E2901D /* FilterViewController.xib */; };
+		4C9B33AA1606E24400E2901D /* WeatherDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B33A91606E24400E2901D /* WeatherDescription.m */; };
+		4C9B33AC1607E5C500E2901D /* AddAttributeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B33AB1607E5C500E2901D /* AddAttributeViewController.xib */; };
+		4C9B33B01607F8A900E2901D /* engraved_wood_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B33AF1607F8A900E2901D /* engraved_wood_texture.jpg */; };
+		4C9B33B316084D5F00E2901D /* Bait.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B33B216084D5F00E2901D /* Bait.m */; };
+		4C9B33BC16084F2D00E2901D /* Structure.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B33BB16084F2C00E2901D /* Structure.m */; };
 		4CA2727715F4082700EFD55F /* ProAnglerDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA2727615F4082700EFD55F /* ProAnglerDataStore.m */; };
 		4CA939BF15D30248008F1A13 /* nav_bar_water_droplets@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA939BE15D30248008F1A13 /* nav_bar_water_droplets@2x.png */; };
 		4CA939C615D392AD008F1A13 /* page_texture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA939C515D392AD008F1A13 /* page_texture@2x.png */; };
@@ -101,7 +104,6 @@
 		276B6F3F159C28B500F84728 /* AlbumDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumDetailViewController.h; sourceTree = "<group>"; };
 		276B6F40159C28B500F84728 /* AlbumDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumDetailViewController.m; sourceTree = "<group>"; };
 		279C520615A007CE00FAF2E9 /* QuartzCore.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		279C520815A1106E00FAF2E9 /* wood_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wood_texture.png; sourceTree = "<group>"; };
 		279C520D15A2CEF600FAF2E9 /* AddAttributeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAttributeViewController.h; sourceTree = "<group>"; };
 		279C520E15A2CEF700FAF2E9 /* AddAttributeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAttributeViewController.m; sourceTree = "<group>"; };
 		279E6A641539368000D72111 /* AlbumSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumSettingsViewController.h; sourceTree = "<group>"; };
@@ -134,16 +136,21 @@
 		4C11AF1716014E080088D55F /* FullSizeImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullSizeImageViewController.m; sourceTree = "<group>"; };
 		4C47C64115F5B7A50061621E /* Catch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Catch.h; path = ../Catch.h; sourceTree = "<group>"; };
 		4C47C64215F5B7A50061621E /* Catch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Catch.m; path = ../Catch.m; sourceTree = "<group>"; };
-		4C47C64415F5B9D00061621E /* Bait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bait.h; sourceTree = "<group>"; };
-		4C47C64515F5B9D00061621E /* Bait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bait.m; sourceTree = "<group>"; };
-		4C47C64D15F5B9E70061621E /* Structure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Structure.h; path = ../Structure.h; sourceTree = "<group>"; };
-		4C47C64E15F5B9E70061621E /* Structure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Structure.m; path = ../Structure.m; sourceTree = "<group>"; };
 		4C6602F415FB36C9007F81E1 /* CatchPointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatchPointAnnotation.h; sourceTree = "<group>"; };
 		4C6602F515FB36CA007F81E1 /* CatchPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatchPointAnnotation.m; sourceTree = "<group>"; };
 		4C69949715B353D400289161 /* MapKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4C9B33A01605253200E2901D /* EditModeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditModeDetailViewController.h; sourceTree = "<group>"; };
 		4C9B33A11605253300E2901D /* EditModeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditModeDetailViewController.m; sourceTree = "<group>"; };
 		4C9B33A21605253300E2901D /* EditModeDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditModeDetailViewController.xib; sourceTree = "<group>"; };
+		4C9B33A61606DA8E00E2901D /* FilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
+		4C9B33A81606E24400E2901D /* WeatherDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherDescription.h; sourceTree = "<group>"; };
+		4C9B33A91606E24400E2901D /* WeatherDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherDescription.m; sourceTree = "<group>"; };
+		4C9B33AB1607E5C500E2901D /* AddAttributeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAttributeViewController.xib; sourceTree = "<group>"; };
+		4C9B33AF1607F8A900E2901D /* engraved_wood_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = engraved_wood_texture.jpg; sourceTree = "<group>"; };
+		4C9B33B116084D5E00E2901D /* Bait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bait.h; sourceTree = "<group>"; };
+		4C9B33B216084D5F00E2901D /* Bait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bait.m; sourceTree = "<group>"; };
+		4C9B33BA16084F2B00E2901D /* Structure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Structure.h; sourceTree = "<group>"; };
+		4C9B33BB16084F2C00E2901D /* Structure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Structure.m; sourceTree = "<group>"; };
 		4CA2727515F4082700EFD55F /* ProAnglerDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProAnglerDataStore.h; sourceTree = "<group>"; };
 		4CA2727615F4082700EFD55F /* ProAnglerDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProAnglerDataStore.m; sourceTree = "<group>"; };
 		4CA939BE15D30248008F1A13 /* nav_bar_water_droplets@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_bar_water_droplets@2x.png"; sourceTree = "<group>"; };
@@ -264,8 +271,8 @@
 				4C11AEE615FDCBB60088D55F /* NureenHouseStock_0017.JPG */,
 				4CF342EC1602B5BB009D22B6 /* dark_wood_no_gradient@2x.jpg */,
 				4C11AEE415FDCBAA0088D55F /* NureenHouseStock_0016.JPG */,
-				279C520815A1106E00FAF2E9 /* wood_texture.png */,
 				4C11AF14160102D50088D55F /* light_wood_nav_bar@2x.jpg */,
+				4C9B33AF1607F8A900E2901D /* engraved_wood_texture.jpg */,
 				4C11AF0C16004B0E0088D55F /* dark_wood@2x.jpg */,
 				4CA939C915D39FF6008F1A13 /* wood_beam@2x.png */,
 				4CA939C515D392AD008F1A13 /* page_texture@2x.png */,
@@ -306,6 +313,7 @@
 				272AE2BF15AA687500F7A4DB /* SelectAttributesViewController.m */,
 				279C520D15A2CEF600FAF2E9 /* AddAttributeViewController.h */,
 				279C520E15A2CEF700FAF2E9 /* AddAttributeViewController.m */,
+				4C9B33AB1607E5C500E2901D /* AddAttributeViewController.xib */,
 			);
 			name = "Attribute Management";
 			sourceTree = "<group>";
@@ -316,18 +324,20 @@
 				273D0BF3152FB419009D054A /* ProAngler.xcdatamodeld */,
 				4CA2727515F4082700EFD55F /* ProAnglerDataStore.h */,
 				4CA2727615F4082700EFD55F /* ProAnglerDataStore.m */,
+				4C9B33BA16084F2B00E2901D /* Structure.h */,
+				4C9B33BB16084F2C00E2901D /* Structure.m */,
+				4C9B33B116084D5E00E2901D /* Bait.h */,
+				4C9B33B216084D5F00E2901D /* Bait.m */,
 				4C11AED415FD54940088D55F /* Venue.h */,
 				4C11AED515FD54940088D55F /* Venue.m */,
 				4C11AEE115FDA14A0088D55F /* Species.h */,
 				4C11AEE215FDA14A0088D55F /* Species.m */,
-				4C47C64415F5B9D00061621E /* Bait.h */,
-				4C47C64515F5B9D00061621E /* Bait.m */,
-				4C47C64D15F5B9E70061621E /* Structure.h */,
-				4C47C64E15F5B9E70061621E /* Structure.m */,
 				4C47C64115F5B7A50061621E /* Catch.h */,
 				4C47C64215F5B7A50061621E /* Catch.m */,
 				4C11AEEC15FEC53E0088D55F /* Photo.h */,
 				4C11AEED15FEC53E0088D55F /* Photo.m */,
+				4C9B33A81606E24400E2901D /* WeatherDescription.h */,
+				4C9B33A91606E24400E2901D /* WeatherDescription.m */,
 			);
 			name = "Data Models";
 			sourceTree = "<group>";
@@ -356,6 +366,7 @@
 				4C11AEC415FC062B0088D55F /* PageTwoStatsViewController.xib */,
 				272AE2BA15AA60DB00F7A4DB /* FilterViewController.h */,
 				272AE2BB15AA60DB00F7A4DB /* FilterViewController.m */,
+				4C9B33A61606DA8E00E2901D /* FilterViewController.xib */,
 				4C6602F415FB36C9007F81E1 /* CatchPointAnnotation.h */,
 				4C6602F515FB36CA007F81E1 /* CatchPointAnnotation.m */,
 			);
@@ -430,7 +441,6 @@
 				276B6F141592770200F84728 /* green.jpg in Resources */,
 				276B6F28159954C800F84728 /* wood_wall_texture.jpg in Resources */,
 				276B6F2A159954CD00F84728 /* wood_wall_texture@2x.jpg in Resources */,
-				279C520915A1106E00FAF2E9 /* wood_texture.png in Resources */,
 				4CA939BF15D30248008F1A13 /* nav_bar_water_droplets@2x.png in Resources */,
 				4CA939C615D392AD008F1A13 /* page_texture@2x.png in Resources */,
 				4CA939C815D39C21008F1A13 /* graph_paper@2x.png in Resources */,
@@ -445,6 +455,9 @@
 				4C11AF15160102D60088D55F /* light_wood_nav_bar@2x.jpg in Resources */,
 				4CF342ED1602B5BB009D22B6 /* dark_wood_no_gradient@2x.jpg in Resources */,
 				4C9B33A41605253300E2901D /* EditModeDetailViewController.xib in Resources */,
+				4C9B33A71606DA8E00E2901D /* FilterViewController.xib in Resources */,
+				4C9B33AC1607E5C500E2901D /* AddAttributeViewController.xib in Resources */,
+				4C9B33B01607F8A900E2901D /* engraved_wood_texture.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,8 +499,6 @@
 				272AE2C015AA687500F7A4DB /* SelectAttributesViewController.m in Sources */,
 				4CA2727715F4082700EFD55F /* ProAnglerDataStore.m in Sources */,
 				4C47C64315F5B7A50061621E /* Catch.m in Sources */,
-				4C47C64615F5B9D00061621E /* Bait.m in Sources */,
-				4C47C64F15F5B9E70061621E /* Structure.m in Sources */,
 				4C6602F615FB36CA007F81E1 /* CatchPointAnnotation.m in Sources */,
 				4C11AEBC15FBD6840088D55F /* AnalysisPagedViewController.m in Sources */,
 				4C11AEC515FC062B0088D55F /* PageTwoStatsViewController.m in Sources */,
@@ -500,6 +511,9 @@
 				4CF342E1160166D0009D22B6 /* FullSizeImagePageViewController.m in Sources */,
 				4CF342F41603E608009D22B6 /* CatchCell.m in Sources */,
 				4C9B33A31605253300E2901D /* EditModeDetailViewController.m in Sources */,
+				4C9B33AA1606E24400E2901D /* WeatherDescription.m in Sources */,
+				4C9B33B316084D5F00E2901D /* Bait.m in Sources */,
+				4C9B33BC16084F2D00E2901D /* Structure.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

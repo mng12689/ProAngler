@@ -26,6 +26,7 @@
 @property (strong) NSArray* catchesToBeDisplayed;
 @property (strong) NSPredicate *currentFilters;
 
+- (IBAction)presentFilterModal:(id)sender;
 -(void)annotateMap;
 -(void)loadDataWithPredicate:(NSPredicate*)predicate;
 
@@ -82,18 +83,42 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (IBAction)presentFilterModal:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"Filter"]) {
-        
-        FilterViewController *filterViewController = segue.destinationViewController;
-        filterViewController.delegate = self;
-    }
+    FilterViewController *filterViewController = [FilterViewController new];
+    filterViewController.delegate = self;
+    
+    [self presentModalViewController:filterViewController animated:YES];
 }
 
--(void)filterForVenue:(NSString *)venue withPredicate:(NSPredicate *)predicate andAdditionalFilters:(NSArray *)filters
+-(void)filterForVenue:(NSString *)venue withPredicate:(NSPredicate *)predicate andAdditionalFilters:(NSArray *)filters filterDate:(NSDictionary *)filterDate filterTime:(NSDictionary *)filterTime
 {
     [self loadDataWithPredicate:predicate];
+    
+    if (filterDate) {
+        self.catchesToBeDisplayed = [self.catchesToBeDisplayed filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Catch *evaluatedObject,NSDictionary *bindings)
+        {
+            int startMonth = [[filterDate objectForKey:@"startMonth"] intValue];
+            int startDay = [[filterDate objectForKey:@"startDay"] intValue];
+            int endMonth = [[filterDate objectForKey:@"endMonth"] intValue];
+            int endDay = [[filterDate objectForKey:@"endDay"] intValue];
+            
+            return [evaluatedObject dateIsBetweenMonth:startMonth day:startDay andMonth:endMonth day:endDay];
+        }]];
+        [self annotateMap];
+    }
+    if (filterTime) {
+        self.catchesToBeDisplayed = [self.catchesToBeDisplayed filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Catch *evaluatedObject,NSDictionary *bindings)
+        {
+            int startTime = [[filterTime objectForKey:@"startTime"] intValue];
+            int endTime = [[filterTime objectForKey:@"endTime"] intValue];
+            
+            return [evaluatedObject timeBetweenHour:startTime andHour:endTime];
+        }]];
+        [self annotateMap];
+    }
+
+    
     self.venueLabel.text = venue;
     
     if ([filters count] == 0){

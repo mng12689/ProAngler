@@ -2,7 +2,7 @@
 //  Bait.h
 //  ProAngler
 //
-//  Created by Michael Ng on 9/3/12.
+//  Created by Michael Ng on 9/17/12.
 //  Copyright (c) 2012 Amherst College. All rights reserved.
 //
 
@@ -19,9 +19,9 @@
 
 @interface Bait (CoreDataGeneratedAccessors)
 
-- (void)addCatchObject:(Catch *)value;
-- (void)removeCatchObject:(Catch *)value;
-- (void)addCatch:(NSSet *)values;
-- (void)removeCatch:(NSSet *)values;
+- (void)addCatchesObject:(Catch *)value;
+- (void)removeCatchesObject:(Catch *)value;
+- (void)addCatches:(NSSet *)values;
+- (void)removeCatches:(NSSet *)values;
 
 @end

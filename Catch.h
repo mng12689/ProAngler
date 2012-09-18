@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Bait, Photo, Species, Structure, Venue;
+@class Bait, Photo, Species, Structure, Venue, WeatherDescription;
 
 @interface Catch : NSManagedObject
 
@@ -32,15 +32,17 @@
 @property (nonatomic, retain) NSNumber * tempF;
 @property (nonatomic, retain) NSNumber * trophyFish;
 @property (nonatomic, retain) NSNumber * visibility;
-@property (nonatomic, retain) NSString * weatherDesc;
+@property (nonatomic, retain) WeatherDescription * weatherDescription;
 @property (nonatomic, retain) NSNumber * windSpeedMPH;
 @property (nonatomic, retain) NSString * windDir;
 
 -(NSString*)dateToString;
+- (BOOL)dateIsBetweenMonth:(int)startMonth day:(int)startDay andMonth:(int)endMonth day:(int)endDay;
 -(NSString*)weightToString;
 -(NSString*)lengthToString;
 -(NSString*)depthToString;
 -(NSString*)timeToString;
+- (BOOL)timeBetweenHour:(int)startHour andHour:(int)endHour;
 -(NSString*)humidityToString;
 -(NSString*)tempFToString;
 -(NSString*)visibilityToString;

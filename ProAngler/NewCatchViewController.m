@@ -20,6 +20,8 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "FullSizeImagePageViewController.h"
 #import "FullSizeImageViewController.h"
+#import "WeatherDescription.h"
+#import "AppDelegate.h"
 
 @interface NewCatchViewController () < CLLocationManagerDelegate, AddAttributeViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RKRequestDelegate, UIActionSheetDelegate>
 
@@ -53,13 +55,16 @@
 
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark_wood.jpg"]];
     
+    AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
+    [appDelegate setTitle:@"Record Catch" forNavItem:self.navigationItem];
+    
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     self.mediaScrollView.layer.cornerRadius = 5;
     self.mediaScrollView.backgroundColor = [UIColor colorWithHue:0 saturation:0 brightness:100 alpha:.2];
     
     self.locationManager = [[CLLocationManager alloc]init];
     self.locationManager.delegate = self;
-    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     
     [RKClient clientWithBaseURL:[NSURL URLWithString:@"http://free.worldweatheronline.com"]];
 }
@@ -89,30 +94,25 @@
 
 - (IBAction)addAttribute:(UIButton*)sender 
 {
-    [self performSegueWithIdentifier:@"AddAttribute" sender:sender];
-}
+    AddAttributeViewController *addAttributeViewController = [AddAttributeViewController new];
+    addAttributeViewController.delegate = self;
 
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"AddAttribute"])
-    {
-        AddAttributeViewController *addAttributeViewController = segue.destinationViewController;
-        UIButton *button = (UIButton*)sender;
-        
-        if (button.tag == 201) {
-            addAttributeViewController.attributeType = @"Venue";
-        }
-        else if(button.tag == 202){
-            addAttributeViewController.attributeType = @"Species";
-        }
-        else if(button.tag == 203){
-            addAttributeViewController.attributeType = @"Bait";
-        }
-        else if(button.tag == 204){
-            addAttributeViewController.attributeType = @"Structure";
-        }
-        addAttributeViewController.delegate = self;
+    UIButton *button = (UIButton*)sender;
+    
+    if (button.tag == 201) {
+        addAttributeViewController.attributeType = @"Venue";
     }
+    else if(button.tag == 202){
+        addAttributeViewController.attributeType = @"Species";
+    }
+    else if(button.tag == 203){
+        addAttributeViewController.attributeType = @"Bait";
+    }
+    else if(button.tag == 204){
+        addAttributeViewController.attributeType = @"Structure";
+    }
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"AttributeAdded" object:self];
+    [self presentModalViewController:addAttributeViewController animated:YES];
 }
 
 - (void)attributeSaved:(NSString*)entity
@@ -149,7 +149,10 @@
     /********* new catch entity **********/
 
     catch.date = [NSDate date];
-    catch.location = self.currentLocation;
+    
+    if (self.currentLocation.horizontalAccuracy <= 10)
+        catch.location = self.currentLocation;
+    
     [self requestWeatherConditions:catch.location];
 
     for (Photo *photo in self.photos) 
@@ -207,9 +210,10 @@
         int newTotal = [catch.species.totalCatches intValue] + 1;
         catch.species.totalCatches = [NSNumber numberWithInt:newTotal];
         
-        if (catch.weightOZ) 
-            if (catch.species.largestCatch.weightOZ < catch.weightOZ)
+        if (catch.weightOZ) {
+            if ([catch.species.largestCatch.weightOZ intValue] < [catch.weightOZ intValue])
                 catch.species.largestCatch = catch;
+        }
     }
     
     /********* venue/species entities updates **********/
@@ -220,6 +224,7 @@
     
     NSError *error;
     [ProAnglerDataStore saveContext:&error];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CatchAddedOrModified" object:self];
     [self resetView];
     
     NSString *title;
@@ -276,13 +281,9 @@
         [self.locationManager stopUpdatingLocation];
     } 
     else if(error.code == kCLErrorLocationUnknown) {
-        // retry
+        // retry (automatic, no implementation needed)
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error retrieving location"
-                                              message:[error description]
-                                              delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error retrieving location" message:[error description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
 }
@@ -409,26 +410,28 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 66*self.mediaScrollView.subviews.count, 4, 62, 62)];
-    
     if (!self.photos) 
         self.photos = [NSMutableArray new];
     
-    UIImage *newImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     Photo *photo = [ProAnglerDataStore createEntity:@"Photo"];
+    UIImage *newImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     
     photo.fullSizeImage = UIImageJPEGRepresentation(newImage, 1);
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera)
+        UIImageWriteToSavedPhotosAlbum(newImage, nil, nil, nil);
     
     UIImage *screenSizeImage;
     UIImage *thumbnail;
-    if (newImage.size.width < newImage.size.height) {
+    if (newImage.size.width < newImage.size.height)
+    {
         screenSizeImage = [self changeSizeOfImage:newImage withSize:CGSizeMake(640,960)];
         photo.screenSizeImage = UIImageJPEGRepresentation(screenSizeImage, 1);
         
         thumbnail = [self changeSizeOfImage:newImage withSize:CGSizeMake(64,96)];
         photo.thumbnail = UIImageJPEGRepresentation(thumbnail, 1);
     }
-    else{
+    else
+    {
         screenSizeImage = [self changeSizeOfImage:newImage withSize:CGSizeMake(960,640)];
         photo.screenSizeImage = UIImageJPEGRepresentation(screenSizeImage, 1);
         
@@ -438,6 +441,7 @@
                                                                            
     [self.photos addObject:photo];
     
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 66*self.mediaScrollView.subviews.count, 4, 62, 62)];
     imageView.image = thumbnail;
     imageView.opaque = YES;
     imageView.layer.cornerRadius = 5;
@@ -496,14 +500,27 @@
         self.currentCatch.humidity = [NSNumber numberWithInt:[[currentConditions objectForKey:@"humidity"]intValue]];
         self.currentCatch.tempF = [NSNumber numberWithInt:[[currentConditions objectForKey:@"temp_F"]intValue]];
         self.currentCatch.visibility = [NSNumber numberWithInt:[[currentConditions objectForKey:@"visibility"]intValue]];
-        self.currentCatch.weatherDesc = [[[currentConditions objectForKey:@"weatherDesc"] objectAtIndex:0] objectForKey:@"value"];
         self.currentCatch.windSpeedMPH = [NSNumber numberWithInt:[[currentConditions objectForKey:@"windspeedMiles"]intValue]];
         self.currentCatch.windDir = [currentConditions objectForKey:@"winddir16Point"];
         
+        NSString *weatherDesc = [[[currentConditions objectForKey:@"weatherDesc"] objectAtIndex:0] objectForKey:@"value"];
+        NSArray *descriptions = [ProAnglerDataStore fetchEntity:@"WeatherDescription" sortBy:@"name" withPredicate:nil];
+        
+        WeatherDescription *descObject;
+        if (descriptions.count == 0) {
+            descObject = [ProAnglerDataStore createEntity:@"WeatherDescription"];
+            descObject.name = weatherDesc;
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"AttributeAdded" object:self];
+        }
+        else
+            descObject = [descriptions objectAtIndex:0];
+        
+        self.currentCatch.weatherDescription = descObject;
+            
         [ProAnglerDataStore saveContext:nil];
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"CatchAdded" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CatchAddedOrModified" object:self];
 }
 
 @end

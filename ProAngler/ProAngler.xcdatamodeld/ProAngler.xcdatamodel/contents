@@ -18,7 +18,6 @@
         <attribute name="waterColor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="waterLevel" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="waterTempF" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="weatherDesc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="weightOZ" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="windDir" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="windSpeedMPH" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -27,6 +26,7 @@
         <relationship name="species" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Species" syncable="YES"/>
         <relationship name="structure" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Structure" inverseName="catches" inverseEntity="Structure" syncable="YES"/>
         <relationship name="venue" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Venue" inverseName="catches" inverseEntity="Venue" syncable="YES"/>
+        <relationship name="weatherDescription" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="WeatherDescription" inverseName="catches" inverseEntity="WeatherDescription" syncable="YES"/>
         <userInfo/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES">
@@ -51,12 +51,17 @@
         <relationship name="catches" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Catch" inverseName="venue" inverseEntity="Catch" syncable="YES"/>
         <relationship name="species" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Species" inverseName="venues" inverseEntity="Species" syncable="YES"/>
     </entity>
+    <entity name="WeatherDescription" representedClassName="WeatherDescription" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="catches" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Catch" inverseName="weatherDescription" inverseEntity="Catch" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Bait" positionX="0" positionY="0" width="128" height="75"/>
-        <element name="Catch" positionX="0" positionY="0" width="128" height="285"/>
-        <element name="Photo" positionX="0" positionY="0" width="128" height="105"/>
-        <element name="Species" positionX="0" positionY="0" width="128" height="75"/>
-        <element name="Structure" positionX="0" positionY="0" width="128" height="75"/>
-        <element name="Venue" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="Bait" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Catch" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Photo" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Species" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Structure" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Venue" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="WeatherDescription" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

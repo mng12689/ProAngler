@@ -1,16 +1,16 @@
 //
-//  Structure.m
+//  WeatherDescription.m
 //  ProAngler
 //
-//  Created by Michael Ng on 9/17/12.
+//  Created by Michael Ng on 9/16/12.
 //  Copyright (c) 2012 Amherst College. All rights reserved.
 //
 
-#import "Structure.h"
+#import "WeatherDescription.h"
 #import "Catch.h"
 
 
-@implementation Structure
+@implementation WeatherDescription
 
 @dynamic name;
 @dynamic catches;

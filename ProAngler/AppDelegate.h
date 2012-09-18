@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+- (void)setTitle:(NSString *)title forNavItem:(UINavigationItem*)navItem;
+
 @end

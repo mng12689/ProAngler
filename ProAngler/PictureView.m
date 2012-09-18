@@ -42,8 +42,8 @@
         
         // landscape image
         else {
-            double imageHeight = self.frame.size.width * self.imageView.frame.size.height / self.imageView.frame.size.width;
-            self.frameView = [[UIView alloc]initWithFrame:CGRectMake(0,0,self.imageView.frame.size.width,imageHeight)];
+            double imageHeight = self.imageView.frame.size.width * self.imageView.image.size.height / self.imageView.image.size.width;
+            self.frameView = [[UIView alloc]initWithFrame:CGRectMake(0,0,self.imageView.frame.size.width + 20,imageHeight + 20)];
         }
         self.frameView.center = self.imageView.center;
         self.frameView.backgroundColor = [UIColor brownColor];

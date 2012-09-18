@@ -61,6 +61,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Album" id="5Es-Yc-aYF">
                         <barButtonItem key="rightBarButtonItem" title="Sort" id="tQd-r0-nzp">
+                            <color key="tintColor" red="0.69826211734693877" green="0.69826211734693877" blue="0.69826211734693877" alpha="0.45000000000000001" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="yoo-G7-DxT" kind="modal" identifier="AlbumSettings" modalTransitionStyle="partialCurl" id="RGn-4i-R1c"/>
                             </connections>
@@ -118,12 +119,8 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" id="SS9-kn-LRv">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="1054"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="bZV-qQ-ZSj">
-                                                <rect key="frame" x="20" y="20" width="160" height="239"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </imageView>
                                             <view alpha="0.50000000000000011" contentMode="scaleToFill" id="STK-Dl-b4s">
                                                 <rect key="frame" x="18" y="878" width="280" height="147"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -482,6 +479,11 @@
                                                     <action selector="composeEmail:" destination="WM5-U1-rga" eventType="touchUpInside" id="oOE-7e-REW"/>
                                                 </connections>
                                             </button>
+                                            <view contentMode="scaleToFill" id="GGe-KM-Zfm">
+                                                <rect key="frame" x="20" y="20" width="160" height="239"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            </view>
                                         </subviews>
                                     </view>
                                 </subviews>
@@ -502,7 +504,7 @@
                         <outlet property="emailButton" destination="EOg-n3-DvG" id="XIq-9x-AO5"/>
                         <outlet property="humidityLabel" destination="0kS-0P-zyI" id="UBr-cs-3JZ"/>
                         <outlet property="lengthLabel" destination="hhq-Q7-jhe" id="Ep7-bW-deF"/>
-                        <outlet property="mainImageView" destination="bZV-qQ-ZSj" id="bMg-TN-9JX"/>
+                        <outlet property="mainImageView" destination="GGe-KM-Zfm" id="BJ4-ig-jpf"/>
                         <outlet property="mediaScrollView" destination="QQw-ma-Gqk" id="5au-26-4gP"/>
                         <outlet property="scrollView" destination="bo3-be-QTD" id="5DE-LG-N43"/>
                         <outlet property="spawningLabel" destination="k1h-0H-jB1" id="laE-bK-Rvr"/>
@@ -582,28 +584,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </scrollView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" id="mTs-1q-8TD">
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" id="mTs-1q-8TD">
                                 <rect key="frame" x="0.0" y="380" width="320" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="changePage" destination="y2J-3S-AXc" eventType="valueChanged" id="GdF-3F-cXi"/>
                                 </connections>
                             </pageControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qNh-P3-M7e">
-                                <rect key="frame" x="228" y="20" width="72" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Filter">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="j3l-jB-EHF" kind="modal" identifier="Filter" id="58X-Yk-p1h"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -617,94 +604,6 @@
                 </viewController>
             </objects>
             <point key="canvasLocation" x="-1124" y="820"/>
-        </scene>
-        <!--Filter View Controller-->
-        <scene sceneID="HvD-Gw-X23">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WuX-R0-dXJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="j3l-jB-EHF" customClass="FilterViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UAd-7y-9qH">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" id="k6e-N0-dg3">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.046822703450000003" green="0.062828472149999995" blue="0.48913043480000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <navigationItem title="Filter" id="JvK-NP-Tlw">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Hui-wu-lLa">
-                                            <connections>
-                                                <action selector="cancelModal:" destination="j3l-jB-EHF" id="tmU-EA-9NN"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="4jL-fc-WZ8">
-                                            <color key="tintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <connections>
-                                                <action selector="saveFilter:" destination="j3l-jB-EHF" id="iks-Ec-vuD"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="fKm-ro-HqK">
-                                <rect key="frame" x="0.0" y="44" width="320" height="416"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Venue" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="YdB-SE-Gge">
-                                        <rect key="frame" x="135" y="20" width="50" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView tag="102" contentMode="scaleToFill" id="NN2-uh-LyF">
-                                        <rect key="frame" x="20" y="49" width="280" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </pickerView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5LP-tO-lks">
-                                        <rect key="frame" x="114" y="273" width="92" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="More...">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="toggleHiddenView:" destination="j3l-jB-EHF" eventType="touchUpInside" id="NsW-pC-3zV"/>
-                                            <action selector="toggleHiddenView:" destination="0wO-s4-Dhj" eventType="touchUpInside" id="Ths-Im-uBV"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </scrollView>
-                        </subviews>
-                    </view>
-                    <connections>
-                        <outlet property="baitDepthPickerView" destination="mgZ-Oo-9vr" id="xh4-ZY-7Sw"/>
-                        <outlet property="baitPickerView" destination="Juj-es-Ua4" id="sqg-dC-5YB"/>
-                        <outlet property="dateRangePickerView" destination="bJe-tY-nV7" id="5qH-Kv-xXe"/>
-                        <outlet property="depthRangePickerView" destination="H4S-HJ-M0i" id="qO9-JU-adh"/>
-                        <outlet property="detailView" destination="brn-3a-Jio" id="U11-Rb-UPv"/>
-                        <outlet property="lengthRangePickerView" destination="rpw-7S-cMb" id="8q6-Hf-JUg"/>
-                        <outlet property="scrollView" destination="fKm-ro-HqK" id="4oP-LX-nMg"/>
-                        <outlet property="spawningPickerView" destination="avH-Fe-iyP" id="e6D-m7-P9L"/>
-                        <outlet property="speciesPickerView" destination="Hib-Wu-ohW" id="hZw-yR-RPP"/>
-                        <outlet property="structurePickerView" destination="IoM-2F-vEh" id="dRg-DE-LaS"/>
-                        <outlet property="temperatureRangePickerView" destination="hhi-aN-IIj" id="2XL-qo-W66"/>
-                        <outlet property="timeRangePickerView" destination="em8-lF-zmo" id="oZG-PT-ve1"/>
-                        <outlet property="venuePickerView" destination="NN2-uh-LyF" id="MzY-hR-LIa"/>
-                        <outlet property="waterColorPickerView" destination="weJ-VM-4Xq" id="bef-fg-2FV"/>
-                        <outlet property="waterLevelPickerView" destination="gm6-bm-QA4" id="2hr-fM-3N1"/>
-                        <outlet property="waterTempRangePickerView" destination="mrs-BR-W0Y" id="Ts6-KL-F8V"/>
-                        <outlet property="weatherConditionsPickerView" destination="U5i-Op-pbI" id="8m7-BY-DBX"/>
-                        <outlet property="weightRangePickerView" destination="xdh-mr-LJz" id="xOY-Is-b3r"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="-718" y="837"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="cf5-Zo-H9N">
@@ -722,287 +621,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view hidden="YES" contentMode="scaleToFill" id="brn-3a-Jio">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="3323"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <pickerView tag="103" contentMode="scaleToFill" id="Hib-Wu-ohW">
-                                        <rect key="frame" x="20" y="51" width="280" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </pickerView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Species" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="HNu-Dl-YMe">
-                                        <rect key="frame" x="130" y="20" width="61" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView tag="112" contentMode="scaleToFill" id="bJe-tY-nV7">
-                                        <rect key="frame" x="20" y="304" width="280" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </pickerView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date Range" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="7oO-p4-CeO">
-                                        <rect key="frame" x="115" y="275" width="91" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Time Range" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="PCB-sT-D25">
-                                        <rect key="frame" x="114" y="528" width="93" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <datePicker tag="113" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="em8-lF-zmo">
-                                        <rect key="frame" x="20" y="557" width="280" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="368745984.15560597">
-                                            <!--2012-09-07 21:26:24 +0000-->
-                                        </date>
-                                        <locale key="locale" localeIdentifier="en_US"/>
-                                        <timeZone key="timeZone" name="America/Los_Angeles">
-                                            <data key="data">
-VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
-y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
-5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
-8n/BkPNvwKD0X6OQ9U+ioPY/hZD3L4Sg+CiiEPkPZqD6CIQQ+viDIPvoZhD82GUg/chIEP64RyD/qCoQ
-AJgpIAGIDBACeAsgA3EokARhJ6AFUQqQBkEJoAcw7JAHjUOgCRDOkAmtvyAK8LCQC+CvoAzZzRANwJGg
-DrmvEA+priAQmZEQEYmQIBJ5cxATaXIgFFlVEBVJVCAWOTcQFyk2IBgiU5AZCRggGgI1kBryNKAb4heQ
-HNIWoB3B+ZAesfigH6HbkCB2KyAhgb2QIlYNICNq2hAkNe8gJUq8ECYV0SAnKp4QJ/7toCkKgBAp3s+g
-KupiECu+saAs036QLZ6ToC6zYJAvfnWgMJNCkDFnkiAycySQM0d0IDRTBpA1J1YgNjLokDcHOCA4HAUQ
-OOcaIDn75xA6xvwgO9vJEDywGKA9u6sQPo/6oD+bjRBAb9ygQYSpkEJPvqBDZIuQRC+goEVEbZBF89Mg
-Ry2KEEfTtSBJDWwQSbOXIErtThBLnLOgTNZqkE18laBOtkyQT1x3oFCWLpBRPFmgUnYQkFMcO6BUVfKQ
-VPwdoFY11JBW5TogWB7xEFjFHCBZ/tMQWqT+IFvetRBchOAgXb6XEF5kwiBfnnkQYE3eoGGHlZBiLcCg
-Y2d3kGQNoqBlR1mQZe2EoGcnO5BnzWagaQcdkGmtSKBq5v+Qa5ZlIGzQHBBtdkcgbq/+EG9WKSBwj+AQ
-cTYLIHJvwhBzFe0gdE+kEHT/CaB2OMCQdt7roHgYopB4vs2gefiEkHqer6B72GaQfH6RoH24SJB+XnOg
-f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</data>
-                                        </timeZone>
-                                    </datePicker>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Weather Conditions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="MO9-GD-0p8">
-                                        <rect key="frame" x="85" y="781" width="151" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView tag="114" contentMode="scaleToFill" id="U5i-Op-pbI">
-                                        <rect key="frame" x="20" y="810" width="280" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </pickerView>
-                                    <pickerView tag="115" contentMode="scaleToFill" id="hhi-aN-IIj">
-                                        <rect key="frame" x="20" y="1063" width="280" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </pickerView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="°F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="W2N-RN-TRm">
-                                        <rect key="frame" x="261" y="1160" width="22" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="°F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="36q-Bg-3wp">
-                                        <rect key="frame" x="130" y="1160" width="22" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Temperature Range" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="M2S-Yk-aiY">
-                                        <rect key="frame" x="84" y="1034" width="153" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Spawning" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="5Py-mr-OQi">
-                                        <rect key="frame" x="200" y="1287" width="76" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView tag="110" contentMode="scaleToFill" id="avH-Fe-iyP">
-                                        <rect key="frame" x="177" y="1316" width="123" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </pickerView>
-                                    <pickerView tag="111" contentMode="scaleToFill" id="mgZ-Oo-9vr">
-                                        <rect key="frame" x="20" y="1316" width="159" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </pickerView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Bait Depth" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="5Jd-8G-hw3">
-                                        <rect key="frame" x="59" y="1287" width="81" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView tag="116" contentMode="scaleToFill" id="H4S-HJ-M0i">
-                                        <rect key="frame" x="20" y="1569" width="280" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </pickerView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="ft" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Wgh-fx-5ut">
-                                        <rect key="frame" x="134" y="1667" width="14" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView tag="117" contentMode="scaleToFill" id="mrs-BR-W0Y">
-                                        <rect key="frame" x="20" y="1822" width="280" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </pickerView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="°F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="v6w-xZ-N8n">
-                                        <rect key="frame" x="261" y="1919" width="22" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Depth Range" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Ra5-Mf-QxT">
-                                        <rect key="frame" x="110" y="1540" width="101" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Water Temp Range" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="jXF-Jr-jYW">
-                                        <rect key="frame" x="86" y="1793" width="149" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="ft" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Jiy-dW-EUl">
-                                        <rect key="frame" x="269" y="1666" width="14" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="°F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="67B-Y8-oh1">
-                                        <rect key="frame" x="130" y="1920" width="22" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Water Color" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="izn-rV-rd8">
-                                        <rect key="frame" x="44" y="2046" width="91" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Water Level" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="dir-Jf-qm8">
-                                        <rect key="frame" x="185" y="2046" width="91" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView tag="108" contentMode="scaleToFill" id="weJ-VM-4Xq">
-                                        <rect key="frame" x="20" y="2075" width="139" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </pickerView>
-                                    <pickerView tag="109" contentMode="scaleToFill" id="gm6-bm-QA4">
-                                        <rect key="frame" x="159" y="2075" width="141" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </pickerView>
-                                    <pickerView tag="118" contentMode="scaleToFill" id="xdh-mr-LJz">
-                                        <rect key="frame" x="20" y="2328" width="280" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </pickerView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="lb" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="hx1-Lw-aDR">
-                                        <rect key="frame" x="204" y="2425" width="15" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="oz" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="dGG-9f-tqd">
-                                        <rect key="frame" x="135" y="2425" width="18" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="lb" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Byw-J9-hua">
-                                        <rect key="frame" x="76" y="2425" width="16" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="oz" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="ryN-Gh-fbI">
-                                        <rect key="frame" x="266" y="2425" width="21" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Weight Range" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="hrT-7x-O72">
-                                        <rect key="frame" x="106" y="2299" width="108" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView tag="119" contentMode="scaleToFill" id="rpw-7S-cMb">
-                                        <rect key="frame" x="20" y="2581" width="280" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </pickerView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="in" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="QZM-WR-SbB">
-                                        <rect key="frame" x="134" y="2678" width="14" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="in" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="g6h-hg-eoc">
-                                        <rect key="frame" x="266" y="2678" width="14" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Length Range" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="5Tk-Et-cnI">
-                                        <rect key="frame" x="107" y="2552" width="107" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView tag="104" contentMode="scaleToFill" id="Juj-es-Ua4">
-                                        <rect key="frame" x="20" y="2834" width="280" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </pickerView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Bait" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Gxc-pk-MoR">
-                                        <rect key="frame" x="142" y="2805" width="36" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView tag="105" contentMode="scaleToFill" id="IoM-2F-vEh">
-                                        <rect key="frame" x="20" y="3087" width="280" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </pickerView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Structure" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="YFh-js-yPY">
-                                        <rect key="frame" x="125" y="3058" width="71" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1057,51 +675,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
             </objects>
             <point key="canvasLocation" x="987" y="1249"/>
-        </scene>
-        <!--Add Attribute View Controller-->
-        <scene sceneID="gTi-sI-IeF">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3O3-kO-fKq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="addVenue" id="ulO-IM-Dfv" customClass="AddAttributeViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="yia-Vz-5op">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="BXX-6J-hRY">
-                                <rect key="frame" x="80" y="214" width="161" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
-                            </textField>
-                            <navigationBar contentMode="scaleToFill" id="hRS-FH-iZk">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <navigationItem title="Add Attribute" id="rwJ-tg-FAz">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="bmE-7B-Lyq">
-                                            <connections>
-                                                <action selector="cancelModal:" destination="ulO-IM-Dfv" id="BQW-Ux-9o5"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" tag="101" systemItem="save" id="Gxx-qe-ZYn">
-                                            <color key="tintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <connections>
-                                                <action selector="saveAttribute:" destination="ulO-IM-Dfv" id="LI2-PV-UL2"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="textField" destination="BXX-6J-hRY" id="Rwu-T5-rgx"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="773" y="-2131"/>
         </scene>
         <!--Navigation Controller - Album-->
         <scene sceneID="oCk-I8-TGk">
@@ -1169,7 +742,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="R6h-Ql-qvU">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="387"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4Uk-aV-e3o">
                                         <rect key="frame" x="20" y="9" width="61" height="70"/>
@@ -1435,6 +1008,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <tabBarItem key="tabBarItem" title="New Catch" id="TK3-Np-8cM"/>
                     <navigationItem key="navigationItem" title="New Catch" id="glT-5T-Q27">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="ely-wT-7vI">
+                            <color key="tintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="saveNewCatch:" destination="0wO-s4-Dhj" id="oZh-xW-Esa"/>
                             </connections>
@@ -1456,7 +1030,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="waterColorPickerView" destination="VO7-BN-V29" id="PFU-iF-HfL"/>
                         <outlet property="waterLevelPickerView" destination="luW-aL-3KP" id="J0F-qA-gEJ"/>
                         <outlet property="waterTempPickerView" destination="NC9-pz-tmY" id="r7b-y1-lJl"/>
-                        <segue destination="ulO-IM-Dfv" kind="modal" identifier="AddAttribute" id="0cP-Re-K6m"/>
                     </connections>
                 </viewController>
             </objects>
@@ -1470,6 +1043,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <view key="view" contentMode="scaleToFill" id="tGn-2y-60O">
                         <rect key="frame" x="0.0" y="20" width="320" height="2250"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="dmdmdmdm" borderStyle="roundedRect" minimumFontSize="17" id="WC1-9X-ahk">
+                                <rect key="frame" x="137" y="205" width="171" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="30"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     </view>
@@ -1483,14 +1064,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="twitter-bird-white-on-blue.png" width="300" height="300"/>
     </resources>
     <classes>
-        <class className="AddAttributeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddAttributeViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelModal:"/>
-                <relationship kind="action" name="saveAttribute:"/>
-                <relationship kind="outlet" name="textField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
         <class className="AlbumDetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AlbumDetailViewController.h"/>
             <relationships>
@@ -1506,7 +1079,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="emailButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="humidityLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lengthLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mainImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="mainImageView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="mediaScrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="spawningLabel" candidateClass="UILabel"/>
@@ -1554,16 +1127,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="venueLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
-        <class className="FilterViewController" superclassName="SelectAttributesViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FilterViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelModal:"/>
-                <relationship kind="action" name="saveFilter:"/>
-                <relationship kind="action" name="toggleHiddenView:"/>
-                <relationship kind="outlet" name="detailView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
         <class className="NewCatchViewController" superclassName="SelectAttributesViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewCatchViewController.h"/>
             <relationships>
@@ -1590,7 +1153,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="speciesPickerView" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="structurePickerView" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="temperatureRangePickerView" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="timeRangePickerView" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="timeRangePickerView" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="venuePickerView" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="waterColorPickerView" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="waterLevelPickerView" candidateClass="UIPickerView"/>

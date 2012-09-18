@@ -23,8 +23,8 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor clearColor];
-    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"page_texture.png"]];
+
     self.sorters = @[@"date",@"weightOZ",@"venue.name",@"species.name"];
     NSString *sortBy= [[NSUserDefaults standardUserDefaults] objectForKey:@"ProAnglerAlbumSortTypePrefKey"];
     

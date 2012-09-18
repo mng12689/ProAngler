@@ -35,7 +35,7 @@
 @dynamic tempF;
 @dynamic trophyFish;
 @dynamic visibility;
-@dynamic weatherDesc;
+@dynamic weatherDescription;
 @dynamic windSpeedMPH;
 @dynamic windDir;
 
@@ -44,6 +44,54 @@
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateStyle:NSDateFormatterShortStyle];
     return [format stringFromDate:self.date];
+}
+
+- (BOOL)dateIsBetweenMonth:(int)startMonth day:(int)startDay andMonth:(int)endMonth day:(int)endDay
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *catchDateComponents = [calendar components:NSDayCalendarUnit fromDate:self.date];
+    
+    NSDateComponents *startDateComponents = [NSDateComponents new];
+    startDateComponents.day = startDay;
+    startDateComponents.month = startMonth;
+    startDateComponents.year = 2001;
+    
+    NSDate *startDate = [calendar dateFromComponents:startDateComponents];
+    startDateComponents = [calendar components:NSDayCalendarUnit fromDate:startDate];
+    
+    NSDateComponents *endDateComponents = [NSDateComponents new];
+    endDateComponents.day = endDay;
+    endDateComponents.month = endMonth;
+    endDateComponents.year = 2001;
+    
+    NSDate *endDate = [calendar dateFromComponents:endDateComponents];
+    endDateComponents = [calendar components:NSDayCalendarUnit fromDate:endDate];
+    
+    if ([self daysElapsedStart:startDateComponents.day end:catchDateComponents.day] <= [self daysElapsedStart:startDateComponents.day end:endDateComponents.day])
+        return YES;
+    
+    return NO;
+}
+
+-(int)daysElapsedStart:(int)startDay end:(int)endDay
+{
+    return ((endDay-startDay)+366)%366;
+}
+
+- (BOOL)timeBetweenHour:(int)startHour andHour:(int)endHour
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *catchDateComponents = [calendar components:NSHourCalendarUnit fromDate:self.date];
+
+    if ([self timeElapsedStart:startHour end:catchDateComponents.hour] <= [self timeElapsedStart:startHour end:endHour])
+        return YES;
+    
+    return NO;
+}
+
+-(int)timeElapsedStart:(int)startHour end:(int)endHour
+{
+    return ((endHour-startHour)+24)%24;
 }
 
 -(NSString*)weightToString

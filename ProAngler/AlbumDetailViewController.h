@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *twitterButton;
 @property (weak, nonatomic) IBOutlet UIButton *addToWallOfFameButton;
 
-@property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
+@property (weak, nonatomic) IBOutlet UIView *mainImageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 - (AlbumDetailViewController*) initWithNewCatch:(Catch*)newCatch;

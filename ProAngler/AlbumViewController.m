@@ -17,6 +17,7 @@
 #import "Species.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CatchCell.h"
+#import "AppDelegate.h"
 
 @interface AlbumViewController () <AlbumSettingsViewControllerDelegate>
 
@@ -31,8 +32,11 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"page_texture.png"]];
+    self.view.backgroundColor = [UIColor clearColor];
     
+    AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
+    [appDelegate setTitle:@"Album" forNavItem:self.navigationItem];
+
     [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note){
         [self loadData];
         [self.tableView reloadData];
@@ -74,6 +78,9 @@
 	cell.venueLabel.text = catch.venue.name ;
 	cell.dateLabel.text = [catch dateToString];
 	cell.timeLabel.text = [catch timeToString];
+    
+    cell.customImageView.layer.cornerRadius = 3;
+    cell.customImageView.layer.masksToBounds = YES;
     cell.customImageView.image = nil;
 
     if ([catch.photos count] != 0)

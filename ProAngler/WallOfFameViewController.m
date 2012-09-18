@@ -37,6 +37,10 @@
         [self populateWall];
     }];
     
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note){
+        [self populateWall];
+    }];
+    
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     [self populateWall];
 }

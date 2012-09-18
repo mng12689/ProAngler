@@ -15,8 +15,6 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.customImageView.layer.cornerRadius = 3;
-        self.customImageView.layer.masksToBounds = YES;
     }
     return self;
 }

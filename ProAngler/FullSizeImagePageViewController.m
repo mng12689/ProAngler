@@ -11,6 +11,7 @@
 #import "FullSizeImageViewController.h"
 #import "Photo.h"
 #import "AlbumDetailViewController.h"
+#import "AppDelegate.h"
 
 @interface FullSizeImagePageViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIGestureRecognizerDelegate, UINavigationBarDelegate>
 
@@ -31,6 +32,9 @@
     
     if (self.showFullStatsOption)
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Full Stats" style:UIBarButtonItemStyleBordered target:self action:@selector(showFullStats)];
+    
+    AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
+    [appDelegate setTitle:[NSString stringWithFormat:@"Photo %d of %d",self.currentPage+1,self.photosForPages.count] forNavItem:self.navigationItem];
     
     self.hidesBottomBarWhenPushed = YES;
 }
@@ -71,7 +75,7 @@
         self.currentPage++;
     
     NSLog(@"Will display next page: %d",self.currentPage);
-        
+    
     return [[FullSizeImageViewController alloc]initWithPhoto:[self.photosForPages objectAtIndex:self.currentPage]];;
 }
 
@@ -82,6 +86,11 @@
         [self setViewControllers:previousViewControllers direction:UIPageViewControllerNavigationOrientationHorizontal animated:YES completion:nil];
         
         self.currentPage = self.previousPage;
+    }
+    else
+    {
+        AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
+        [appDelegate setTitle:[NSString stringWithFormat:@"Photo %d of %d",self.currentPage+1,self.photosForPages.count] forNavItem:self.navigationItem];
     }
 }
 
@@ -97,14 +106,17 @@
 {
     AlbumDetailViewController *albumDetailForCatch = [[AlbumDetailViewController alloc]initWithNewCatch:[[self.photosForPages objectAtIndex:self.currentPage] catch]];
     albumDetailForCatch.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    
+
     UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0,0,320,44)];
     UINavigationItem *navItem = [UINavigationItem new];
     navItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(done)];
     navBar.items = @[navItem];
     
-    albumDetailForCatch.scrollView.frame = CGRectMake(albumDetailForCatch.scrollView.frame.origin.x, albumDetailForCatch.scrollView.frame.origin.y + navBar.frame.size.height, albumDetailForCatch.scrollView.frame.size.width, albumDetailForCatch.view.frame.size.height - navBar.frame.size.height);
+    /*albumDetailForCatch.view.frame = CGRectMake(albumDetailForCatch.view.frame.origin.x, albumDetailForCatch.view.frame.origin.y + navBar.frame.size.height, albumDetailForCatch.view.frame.size.width, albumDetailForCatch.view.frame.size.height - navBar.frame.size.height);*/
+
     [albumDetailForCatch.view addSubview:navBar];
+    
+    albumDetailForCatch.scrollView.frame = CGRectMake(albumDetailForCatch.scrollView.frame.origin.x, albumDetailForCatch.scrollView.frame.origin.y + navBar.frame.size.height, albumDetailForCatch.scrollView.frame.size.width, albumDetailForCatch.scrollView.frame.size.height - navBar.frame.size.height);
     
     [self presentModalViewController:albumDetailForCatch animated:YES];
 }

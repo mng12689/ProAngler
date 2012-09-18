@@ -9,6 +9,8 @@
 #import "AlbumPageViewController.h"
 #import "AlbumDetailViewController.h"
 #import "Catch.h"
+#import "ProAnglerDataStore.h"
+#import "AppDelegate.h"
 
 @interface AlbumPageViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIGestureRecognizerDelegate>
 
@@ -21,11 +23,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.delegate = self;
     self.dataSource = self;
     for (UIGestureRecognizer *gR in self.view.gestureRecognizers)
         gR.delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note)
+    {
+        NSString *sortBy = [[NSUserDefaults standardUserDefaults] objectForKey:@"ProAnglerAlbumSortTypePrefKey"];
+        self.catches = [ProAnglerDataStore fetchEntity:@"Catch" sortBy:sortBy withPredicate:nil];
+    }];
 }
 
 - (void)viewDidUnload
@@ -36,6 +44,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStyleBordered target:[self.viewControllers objectAtIndex:0] action:@selector(editMode)];
+    
+    AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
+    [appDelegate setTitle:[NSString stringWithFormat:@"Catch %d of %d",self.currentPage+1,self.catches.count] forNavItem:self.navigationItem];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -70,7 +81,7 @@
         self.currentPage++;
     
     NSLog(@"Will display next page: %d",self.currentPage);
-          
+    
     Catch *catch = [self.catches objectAtIndex:self.currentPage];
     return [[AlbumDetailViewController alloc] initWithNewCatch:catch];
 }
@@ -82,6 +93,11 @@
         [self setViewControllers:previousViewControllers direction:UIPageViewControllerNavigationOrientationHorizontal animated:YES completion:nil];
 
         self.currentPage = self.previousPage;
+    }
+    else {
+        AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
+        [appDelegate setTitle:[NSString stringWithFormat:@"Catch %d of %d",self.currentPage+1,self.catches.count] forNavItem:self.navigationItem];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStyleBordered target:[self.viewControllers objectAtIndex:0] action:@selector(editMode)];
     }
 }
 

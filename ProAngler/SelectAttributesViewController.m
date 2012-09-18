@@ -28,7 +28,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-       
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"AttributeAdded" object:nil queue:nil usingBlock:^(NSNotification *note){
+        [self.venuePickerView reloadAllComponents];
+        [self.speciesPickerView reloadAllComponents];
+        [self.baitPickerView reloadAllComponents];
+        [self.structurePickerView reloadAllComponents];
+        [self.weatherConditionsPickerView reloadAllComponents];
+    }];
+    
     self.venueList = [ProAnglerDataStore fetchEntity:@"Venue" sortBy:@"name" withPredicate:nil];
     self.speciesList = [ProAnglerDataStore fetchEntity:@"Species" sortBy:@"name" withPredicate:nil];
     self.baitList = [ProAnglerDataStore fetchEntity:@"Bait" sortBy:@"name" withPredicate:nil];
@@ -37,7 +46,8 @@
     self.waterLevelList = [NSArray arrayWithObjects:@"Low", @"Normal", @"High", nil];
     self.spawningList = [NSArray arrayWithObjects:@"NO", @"YES", nil];
     self.baitDepthList = [NSArray arrayWithObjects:@"Topwater", @"Suspended", @"Bottom", nil];
-       
+    self.weatherDescriptionsList = [ProAnglerDataStore fetchEntity:@"WeatherDescription" sortBy:@"name" withPredicate:nil];
+    
     self.sizePickerView.delegate = self;
     self.sizePickerView.dataSource = self;
     self.venuePickerView.delegate = self;
@@ -63,8 +73,8 @@
     
     self.dateRangePickerView.delegate = self;
     self.dateRangePickerView.dataSource = self;
-    //self.timeRangePickerView.delegate = self;
-    //self.timeRangePickerView.dataSource = self;
+    self.timeRangePickerView.delegate = self;
+    self.timeRangePickerView.dataSource = self;
     self.weatherConditionsPickerView.delegate = self;
     self.weatherConditionsPickerView.dataSource = self;
     self.temperatureRangePickerView.delegate = self;
@@ -112,10 +122,10 @@
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    if(pickerView.tag == 101)
+    if(pickerView == self.sizePickerView)
         return 3;
     
-    else if (pickerView.tag == 118)
+    else if (pickerView == self.timeRangePickerView || pickerView == self.dateRangePickerView)
         return 4;
     
     else if (pickerView.tag >= 115)
@@ -174,17 +184,17 @@
         if (component == 0 || component == 2)
             return 13;
         else
-            return 11111111;
+            return 32;
     
     else if (pickerView == self.timeRangePickerView)
         
         if (component == 0 || component == 2)
             return 13;
         else
-            return 61;
+            return 3;
     
-    /*else if (pickerView == self.weatherConditionsPickerView)
-        return self.weatherConditionsList.count;*/
+    else if (pickerView == self.weatherConditionsPickerView)
+        return [self.weatherDescriptionsList count] +1;
     
     else if (pickerView == self.temperatureRangePickerView)
         return 132;
@@ -244,8 +254,31 @@
     else if(pickerView == self.temperatureRangePickerView)
         return [[NSNumber numberWithInt:row-1]stringValue];
     
-    else 
-        return @"";
+    else if(pickerView == self.weatherConditionsPickerView)
+        return [[self.weatherDescriptionsList objectAtIndex:row-1]name];
+    
+    else if (pickerView == self.timeRangePickerView) {
+        if (component == 0 || component == 2) 
+            return [[NSNumber numberWithInt:row] stringValue];
+        else {
+            if (row == 1)
+                return @"AM";
+            else
+                return @"PM";
+        }
+    }
+             
+    else if (pickerView == self.dateRangePickerView) {
+        if (component == 0 || component == 2)
+        {
+            NSDateFormatter *dateFormatter = [NSDateFormatter new];
+            return [[dateFormatter shortMonthSymbols] objectAtIndex:row-1];
+        }
+        else
+            return [[NSNumber numberWithInt:row] stringValue];
+    }
+    
+    return @"";
     
 }
 

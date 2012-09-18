@@ -28,8 +28,8 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark_wood_no_gradient.jpg"]];
     
-    int pageCount = 5;
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * pageCount, 480);
+    int pageCount = 2;
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * pageCount, self.scrollView.frame.size.height);
     self.scrollView.delegate = self;
     
     self.pagesViewControllers = [NSMutableArray new];

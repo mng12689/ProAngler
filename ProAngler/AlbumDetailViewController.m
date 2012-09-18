@@ -20,6 +20,7 @@
 #import "FullSizeImageViewController.h"
 #import "FullSizeImagePageViewController.h"
 #import "EditModeDetailViewController.h"
+#import "WeatherDescription.h"
 
 @interface AlbumDetailViewController () <MFMailComposeViewControllerDelegate>
 
@@ -116,8 +117,6 @@
     
     self.mainImageView.layer.cornerRadius = 5;
     self.mainImageView.layer.masksToBounds = YES;
-    self.mainImageView.userInteractionEnabled = YES;
-    [self.mainImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFullSizeImage)]];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"page_texture.png"]];
     
@@ -132,6 +131,7 @@
     [self setEmailButton:nil];
     [self setTwitterButton:nil];
     [self setBaitDepthLabel:nil];
+    [self setMainImageView:nil];
     [super viewDidUnload];
     [self setSpeciesLabel:nil];
     [self setWeightLabel:nil];
@@ -180,7 +180,7 @@
     self.timeLabel.text = [self.catch timeToString];
     self.spawningLabel.text = self.catch.spawning;
     
-    self.weatherDescriptionLabel.text = self.catch.weatherDesc;
+    self.weatherDescriptionLabel.text = self.catch.weatherDescription.name;
     self.tempLabel.text = [self.catch tempFToString];
     self.windLabel.text = [self.catch windToString];
     self.humidityLabel.text = [self.catch humidityToString];
@@ -189,11 +189,25 @@
     self.waterColorLabel.text = self.catch.waterColor;
     self.waterTempLabel.text = [self.catch waterTempFToString];
     self.waterLevelLabel.text = self.catch.waterLevel;
-    
+        
     self.photos = [NSMutableArray arrayWithArray:[self.catch.photos allObjects]];
+
+    for (UIImageView *imageView in self.mediaScrollView.subviews){
+        [imageView removeFromSuperview];
+    }
+    for (UIView *view in self.mainImageView.subviews) {
+        [view removeFromSuperview];
+    }
+    
     if (self.photos.count > 0)
     {
-        self.mainImageView.image = [UIImage imageWithData:[[self.photos objectAtIndex:0] fullSizeImage]];
+        UIImageView *mainImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.mainImageView.frame.size.width, self.mainImageView.frame.size.height)];
+        mainImageView.image = [UIImage imageWithData:[[self.photos objectAtIndex:0] fullSizeImage]];
+        mainImageView.userInteractionEnabled = YES;
+        mainImageView.opaque = YES;
+        [mainImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFullSizeImage)]];
+        [self.mainImageView addSubview:mainImageView];
+        
         self.currentlySelectedPhoto = [self.photos objectAtIndex:0];
         
         int column = 0;
@@ -214,6 +228,24 @@
             
             [self.mediaScrollView addSubview:imageView];
         }
+    }
+    else
+    {
+        UIView *placeHolderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.mainImageView.frame.size.width, self.mainImageView.frame.size.height)];
+        placeHolderView.backgroundColor = [UIColor lightGrayColor];
+        placeHolderView.opaque = YES;
+        [self.mainImageView addSubview:placeHolderView];
+        
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.mainImageView.frame.size.width, 80)];
+        label.layer.position = CGPointMake(self.mainImageView.frame.size.width/2,self.mainImageView.frame.size.height/2);
+        label.text = @"No Photos";
+        label.textAlignment = UITextAlignmentCenter;
+        label.backgroundColor = [UIColor clearColor];
+        label.font = [UIFont boldSystemFontOfSize:15];
+        label.shadowColor = [UIColor colorWithWhite:1.0 alpha:.5];
+        label.shadowOffset = CGSizeMake(0, 1);
+    
+        [self.mainImageView addSubview:label];
     }
 }
 
@@ -280,7 +312,8 @@
 
 -(void)showFullSizeImage
 {
-    if (self.mainImageView.image)
+    UIImageView *mainImageView = [self.mainImageView.subviews objectAtIndex:0];
+    if (mainImageView.image)
     {
         FullSizeImageViewController *fullSizeImageViewController = [[FullSizeImageViewController alloc]initWithPhoto:self.currentlySelectedPhoto];
         self.navigationController.navigationBar.alpha = 0.0;
@@ -303,13 +336,15 @@
 
 -(void)moveThumbnailToMainView:(UITapGestureRecognizer*)tapGesure
 {
+    UIImageView *mainImageView = [self.mainImageView.subviews objectAtIndex:0];
+
     for (int i = 0; i < self.mediaScrollView.subviews.count; i++)
     {
         UIImageView *imageView = [self.mediaScrollView.subviews objectAtIndex:i];
         if (CGRectContainsPoint(imageView.frame, [tapGesure locationInView:self.mediaScrollView]))
         {
             self.currentlySelectedPhoto = [self.photos objectAtIndex:i];
-            self.mainImageView.image = [UIImage imageWithData:[self.currentlySelectedPhoto screenSizeImage]];
+            mainImageView.image = [UIImage imageWithData:[self.currentlySelectedPhoto screenSizeImage]];
             break;
         }
     }
