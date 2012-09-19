@@ -27,6 +27,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.view.frame = CGRectMake(320, 0, self.view.frame.size.width, self.view.frame.size.height);
+        [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note){
+            [self loadData];
+        }];
     }
     return self;
 }
@@ -34,10 +37,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note){
-        [self loadData];
-    }];
     
     self.textView.editable = NO;
     self.textView.textColor = [UIColor whiteColor];
@@ -48,8 +47,6 @@
 {
     [self setTextView:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

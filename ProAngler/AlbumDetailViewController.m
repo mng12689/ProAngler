@@ -189,48 +189,12 @@
     
     self.photos = [[self.catch.photos allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];;
 
-    for (UIImageView *imageView in self.mediaScrollView.subviews){
-        [imageView removeFromSuperview];
-    }
-    for (UIView *view in self.mainImageView.subviews) {
-        [view removeFromSuperview];
-    }
-    
     if (self.photos.count > 0)
     {
-        UIImageView *mainImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.mainImageView.frame.size.width, self.mainImageView.frame.size.height)];
-        mainImageView.image = [UIImage imageWithData:[[self.photos objectAtIndex:0] fullSizeImage]];
-        mainImageView.userInteractionEnabled = YES;
-        mainImageView.opaque = YES;
-        [mainImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFullSizeImage)]];
-        
-        [self.mainImageView addSubview:mainImageView];
-        self.currentlySelectedPhoto = [self.photos objectAtIndex:0];
-        
-        if ([[[self.photos objectAtIndex:0] trophyFish] boolValue] == YES)
-            self.addToWallOfFameButton.userInteractionEnabled = NO;
-        else
-            self.addToWallOfFameButton.userInteractionEnabled = YES;
-
-        int column = 0;
-        BOOL toggle = YES;
-        for (int i = 0; i < self.photos.count; i++)
-        {
-            toggle = !toggle;
-            
-            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 56*column, 4 + 56*toggle, 52, 52)];
-            imageView.layer.cornerRadius = 5;
-            imageView.layer.masksToBounds = YES;
-            imageView.image = [UIImage imageWithData:[[self.photos objectAtIndex:i] thumbnail]];
-            
-            if (i != 0 && i % 5 == 0)
-                self.mediaScrollView.contentSize = CGSizeMake(58+self.mediaScrollView.contentSize.width,self.mediaScrollView.contentSize.height);
-            if (i % 2)
-                column++;
-            
-            [self.mediaScrollView addSubview:imageView];
-        }
+        [self populateMainImageView];
+        [self populateMediaScrollView];
     }
+    
     else
     {
         UIView *placeHolderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.mainImageView.frame.size.width, self.mainImageView.frame.size.height)];
@@ -247,6 +211,53 @@
         label.shadowOffset = CGSizeMake(0, 1);
     
         [self.mainImageView addSubview:label];
+    }
+}
+
+- (void)populateMainImageView
+{
+    for (UIView *view in self.mainImageView.subviews) {
+        [view removeFromSuperview];
+    }
+    
+    UIImageView *mainImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.mainImageView.frame.size.width, self.mainImageView.frame.size.height)];
+    mainImageView.image = [UIImage imageWithData:[[self.photos objectAtIndex:0] fullSizeImage]];
+    mainImageView.userInteractionEnabled = YES;
+    mainImageView.opaque = YES;
+    [mainImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFullSizeImage)]];
+    
+    [self.mainImageView addSubview:mainImageView];
+    self.currentlySelectedPhoto = [self.photos objectAtIndex:0];
+    
+    if ([[self.currentlySelectedPhoto trophyFish] boolValue] == YES)
+        self.addToWallOfFameButton.userInteractionEnabled = NO;
+    else
+        self.addToWallOfFameButton.userInteractionEnabled = YES;
+}
+
+- (void)populateMediaScrollView
+{
+    for (UIImageView *imageView in self.mediaScrollView.subviews){
+        [imageView removeFromSuperview];
+    }
+    
+    int column = 0;
+    BOOL toggle = YES;
+    for (int i = 0; i < self.photos.count; i++)
+    {
+        toggle = !toggle;
+        
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 56*column, 4 + 56*toggle, 52, 52)];
+        imageView.layer.cornerRadius = 5;
+        imageView.layer.masksToBounds = YES;
+        imageView.image = [UIImage imageWithData:[[self.photos objectAtIndex:i] thumbnail]];
+        
+        if (i != 0 && i % 5 == 0)
+            self.mediaScrollView.contentSize = CGSizeMake(58+self.mediaScrollView.contentSize.width,self.mediaScrollView.contentSize.height);
+        if (i % 2)
+            column++;
+        
+        [self.mediaScrollView addSubview:imageView];
     }
 }
 

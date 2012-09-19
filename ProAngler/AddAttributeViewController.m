@@ -35,7 +35,7 @@
     [super viewDidLoad];
     self.textField.delegate = self;
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark_wood"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark_wood.jpg"]];
     
     AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
     [appDelegate setTitle:[NSString stringWithFormat:@"Add %@",self.attributeType] forNavItem:self.navItem];
@@ -55,16 +55,19 @@
 
 - (IBAction)saveAttribute:(id)sender
 {
-    if ([self.textField.text isEqualToString:@""]) {
+    if ([self.textField.text isEqualToString:@""])
+    {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid input" message:@"Please enter a valid input. If you wish to leave this page without saving, please hit 'Cancel'" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
+        [alert show];
     }
-    else{
+    else
+    {
         NSManagedObject *newAttribute = [ProAnglerDataStore createNewAttribute:self.attributeType];;
         [newAttribute setValue:self.textField.text forKey:@"name"];
         [ProAnglerDataStore saveContext:nil];
         
-        [self.delegate attributeSaved:self.attributeType];
+        [[NSNotificationCenter defaultCenter] postNotificationName:[NSString stringWithFormat:@"%@Added",self.attributeType] object:self];
+        [self dismissModalViewControllerAnimated:YES];
     }
 }
 

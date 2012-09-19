@@ -28,6 +28,19 @@
 
 @implementation AlbumViewController
 
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note){
+            [self loadDataSource];
+            [self.tableView reloadData];
+        }];        
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -37,13 +50,8 @@
     
     AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
     [appDelegate setTitle:@"Album" forNavItem:self.navigationItem];
-
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note){
-        [self loadData];
-        [self.tableView reloadData];
-    }];
     
-    [self loadData];
+    [self loadDataSource];
 }
 
 - (void)viewDidUnload
@@ -72,8 +80,8 @@
     
 	Catch *catch = [self.catches objectAtIndex:indexPath.row];
     cell.currentCatch = catch;
- 
-	cell.venueLabel.text = catch.venue.name ;
+    
+    cell.venueLabel.text = catch.venue.name;
 	cell.dateLabel.text = [catch dateToString];
 	cell.timeLabel.text = [catch timeToString];
     
@@ -163,7 +171,7 @@
     } 
 }   
 
-- (void)loadData
+- (void)loadDataSource
 {
     NSString *sortBy = [[NSUserDefaults standardUserDefaults] objectForKey:@"ProAnglerAlbumSortTypePrefKey"];
     self.catches = [ProAnglerDataStore fetchEntity:@"Catch" sortBy:sortBy withPredicate:nil];

@@ -21,7 +21,7 @@
 #import "FullSizeImageViewController.h"
 #import "AppDelegate.h"
 
-@interface EditModeDetailViewController () <AddAttributeViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
+@interface EditModeDetailViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
 
 @property (weak) IBOutlet UIScrollView *scrollView;
 @property (weak) IBOutlet UIScrollView *mediaScrollView;
@@ -74,16 +74,7 @@
     
     for (Photo *photo in self.catch.photos)
     {
-        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 66*self.mediaScrollView.subviews.count, 4, 62, 62)];
-        imageView.image = [UIImage imageWithData:photo.thumbnail];
-        imageView.opaque = YES;
-        imageView.layer.cornerRadius = 5;
-        imageView.layer.masksToBounds = YES;
-        imageView.userInteractionEnabled = YES;
-        [imageView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(presentPhotoOptions:)]];
-        
-        self.mediaScrollView.contentSize = CGSizeMake(70+self.mediaScrollView.contentSize.width,self.mediaScrollView.contentSize.height);
-        [self.mediaScrollView addSubview:imageView];
+        [self addImageToMediaScrollView:[UIImage imageWithData:photo.thumbnail]];
         
         if (!self.photos)
             self.photos = [NSMutableArray new];
@@ -153,46 +144,22 @@
 - (IBAction)addAttribute:(UIButton*)sender
 {
     AddAttributeViewController *addAttributeViewController = [AddAttributeViewController new];
-    addAttributeViewController.delegate = self;
     
     UIButton *button = (UIButton*)sender;
     
-    if (button.tag == 201) {
+    if (button.tag == 201) 
         addAttributeViewController.attributeType = @"Venue";
-    }
-    else if(button.tag == 202){
+    
+    else if(button.tag == 202)
         addAttributeViewController.attributeType = @"Species";
-    }
-    else if(button.tag == 203){
+    
+    else if(button.tag == 203)
         addAttributeViewController.attributeType = @"Bait";
-    }
-    else if(button.tag == 204){
+    
+    else if(button.tag == 204)
         addAttributeViewController.attributeType = @"Structure";
-    }
     
     [self presentModalViewController:addAttributeViewController animated:YES];
-}
-
-- (void)attributeSaved:(NSString*)entity
-{
-    if ([entity isEqualToString:@"Venue"]){
-        super.venueList = [ProAnglerDataStore fetchEntity:entity sortBy:@"name" withPredicate:nil];
-        [super.venuePickerView reloadComponent:0];
-    }
-    else if([entity isEqualToString:@"Species"]){
-        super.speciesList = [ProAnglerDataStore fetchEntity:entity sortBy:@"name" withPredicate:nil];
-        [super.speciesPickerView reloadComponent:0];
-    }
-    else if([entity isEqualToString:@"Bait"]){
-        super.baitList = [ProAnglerDataStore fetchEntity:entity sortBy:@"name" withPredicate:nil];
-        [super.baitPickerView reloadComponent:0];
-    }
-    else if([entity isEqualToString:@"Structure"]){
-        super.structureList = [ProAnglerDataStore fetchEntity:entity sortBy:@"name" withPredicate:nil];
-        [super.structurePickerView reloadComponent:0];
-    }
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"AttributeAdded" object:self];
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)saveChanges
@@ -476,9 +443,15 @@
     }
     
     [self.photos addObject:photo];
+    [self addImageToMediaScrollView:thumbnail];
     
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)addImageToMediaScrollView:(UIImage*)image
+{
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 66*self.mediaScrollView.subviews.count, 4, 62, 62)];
-    imageView.image = thumbnail;
+    imageView.image = image;
     imageView.opaque = YES;
     imageView.layer.cornerRadius = 5;
     imageView.layer.masksToBounds = YES;
@@ -487,8 +460,6 @@
     
     self.mediaScrollView.contentSize = CGSizeMake(70+self.mediaScrollView.contentSize.width,self.mediaScrollView.contentSize.height);
     [self.mediaScrollView addSubview:imageView];
-    
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (UIImage *)changeSizeOfImage:(UIImage *)image withSize:(CGSize)newSize

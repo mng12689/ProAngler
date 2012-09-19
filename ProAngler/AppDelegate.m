@@ -20,7 +20,6 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES animated:UIStatusBarAnimationNone];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"light_wood_nav_bar.jpg"] forBarMetrics:UIBarMetricsDefault];
     [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"light_wood_tab_bar.jpg"]];
-    //[[UINavigationItem appearance] setTitleV
     
     [self.window.rootViewController.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"page_texture"]]];
     

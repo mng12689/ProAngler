@@ -10,17 +10,17 @@
 
 @interface SelectAttributesViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UIPickerView *sizePickerView;
-@property (strong, nonatomic) IBOutlet UIPickerView *venuePickerView;
-@property (strong, nonatomic) IBOutlet UIPickerView *speciesPickerView;
-@property (strong, nonatomic) IBOutlet UIPickerView *baitPickerView;
-@property (strong, nonatomic) IBOutlet UIPickerView *structurePickerView;
-@property (strong, nonatomic) IBOutlet UIPickerView *depthPickerView;
-@property (strong, nonatomic) IBOutlet UIPickerView *waterTempPickerView;
-@property (strong, nonatomic) IBOutlet UIPickerView *waterColorPickerView;
-@property (strong, nonatomic) IBOutlet UIPickerView *waterLevelPickerView;
-@property (strong, nonatomic) IBOutlet UIPickerView *spawningPickerView;
-@property (strong, nonatomic) IBOutlet UIPickerView *baitDepthPickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *sizePickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *venuePickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *speciesPickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *baitPickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *structurePickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *depthPickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *waterTempPickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *waterColorPickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *waterLevelPickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *spawningPickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *baitDepthPickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *dateRangePickerView; 
 @property (weak, nonatomic) IBOutlet UIPickerView *timeRangePickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *weatherConditionsPickerView;

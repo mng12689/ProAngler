@@ -10,7 +10,7 @@
 
 @interface FullSizeImagePageViewController : UIPageViewController
 
-@property (nonatomic,strong) NSArray *photosForPages;
+@property (strong) NSArray *photosForPages;
 @property int currentPage;
 @property BOOL showFullStatsOption;
 

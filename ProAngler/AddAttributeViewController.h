@@ -8,15 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@class AddAttributeViewController;
-
-@protocol AddAttributeViewControllerDelegate <NSObject>
-- (void)attributeSaved:(NSString*)attributeType;
-@end
-
 @interface AddAttributeViewController : UIViewController
 
-@property (nonatomic, weak) id <AddAttributeViewControllerDelegate> delegate;
 @property (nonatomic, strong) NSString* attributeType;
 
 @end

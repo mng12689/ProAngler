@@ -23,7 +23,7 @@
 #import "WeatherDescription.h"
 #import "AppDelegate.h"
 
-@interface NewCatchViewController () < CLLocationManagerDelegate, AddAttributeViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RKRequestDelegate, UIActionSheetDelegate>
+@interface NewCatchViewController () < CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RKRequestDelegate, UIActionSheetDelegate>
 
 @property (strong) CLLocationManager *locationManager;
 @property (strong) CLLocation *currentLocation;
@@ -51,8 +51,20 @@
 @end
 
 @implementation NewCatchViewController
-@synthesize photoButton = _photoButton;
-@synthesize showMoreOptionsButton = _showMoreOptionsButton;
+
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        self.locationManager = [[CLLocationManager alloc]init];
+        self.locationManager.delegate = self;
+        [self.locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+        
+        [RKClient clientWithBaseURL:[NSURL URLWithString:@"http://free.worldweatheronline.com"]];
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -67,10 +79,6 @@
     self.mediaScrollView.layer.cornerRadius = 5;
     self.mediaScrollView.backgroundColor = [UIColor colorWithHue:0 saturation:0 brightness:100 alpha:.2];
     
-    self.locationManager = [[CLLocationManager alloc]init];
-    self.locationManager.delegate = self;
-    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
-    
     self.photoButton.layer.cornerRadius = 8;
     self.photoButton.layer.masksToBounds = YES;
     
@@ -79,7 +87,9 @@
     self.showMoreOptionsButton.titleLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:.2];
     self.showMoreOptionsButton.titleLabel.shadowOffset = CGSizeMake(0, 1);
     
-    [RKClient clientWithBaseURL:[NSURL URLWithString:@"http://free.worldweatheronline.com"]];
+    for (Photo *photo in self.photos){
+        [self addImageToMediaScrollView:[UIImage imageWithData:photo.thumbnail]];
+    } 
 }
 
 - (void)viewDidUnload
@@ -110,56 +120,33 @@
 - (IBAction)addAttribute:(UIButton*)sender 
 {
     AddAttributeViewController *addAttributeViewController = [AddAttributeViewController new];
-    addAttributeViewController.delegate = self;
 
     UIButton *button = (UIButton*)sender;
     
-    if (button.tag == 201) {
+    if (button.tag == 201)
         addAttributeViewController.attributeType = @"Venue";
-    }
-    else if(button.tag == 202){
+    
+    else if(button.tag == 202)
         addAttributeViewController.attributeType = @"Species";
-    }
-    else if(button.tag == 203){
+    
+    else if(button.tag == 203)
         addAttributeViewController.attributeType = @"Bait";
-    }
-    else if(button.tag == 204){
+    
+    else if(button.tag == 204)
         addAttributeViewController.attributeType = @"Structure";
-    }
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"AttributeAdded" object:self];
+    
     [self presentModalViewController:addAttributeViewController animated:YES];
-}
-
-- (void)attributeSaved:(NSString*)entity
-{
-    if ([entity isEqualToString:@"Venue"]){
-        super.venueList = [ProAnglerDataStore fetchEntity:entity sortBy:@"name" withPredicate:nil];
-        [super.venuePickerView reloadComponent:0];
-    }
-    else if([entity isEqualToString:@"Species"]){
-        super.speciesList = [ProAnglerDataStore fetchEntity:entity sortBy:@"name" withPredicate:nil];
-        [super.speciesPickerView reloadComponent:0];
-    }
-    else if([entity isEqualToString:@"Bait"]){
-        super.baitList = [ProAnglerDataStore fetchEntity:entity sortBy:@"name" withPredicate:nil];
-        [super.baitPickerView reloadComponent:0];
-    }
-    else if([entity isEqualToString:@"Structure"]){
-        super.structureList = [ProAnglerDataStore fetchEntity:entity sortBy:@"name" withPredicate:nil];
-        [super.structurePickerView reloadComponent:0];
-    }
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)saveNewCatch:(id)sender 
 {
     if([super.venuePickerView selectedRowInComponent:0]!=0) {
        
+        /********* create new catch entity **********/
+
         Catch *catch = [ProAnglerDataStore createEntity:@"Catch"];
         self.currentCatch = catch;
         
-        /********* new catch entity **********/
-
         catch.date = [NSDate date];
         
         if (self.currentLocation.horizontalAccuracy <= 10){
@@ -230,6 +217,7 @@
         
         NSError *error;
         [ProAnglerDataStore saveContext:&error];
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"CatchAddedOrModified" object:self];
         [self resetView];
         
@@ -451,9 +439,15 @@
     }
                                                                            
     [self.photos addObject:photo];
+    [self addImageToMediaScrollView:thumbnail];
     
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)addImageToMediaScrollView:(UIImage*)image
+{
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 66*self.mediaScrollView.subviews.count, 4, 62, 62)];
-    imageView.image = thumbnail;
+    imageView.image = image;
     imageView.opaque = YES;
     imageView.layer.cornerRadius = 5;
     imageView.layer.masksToBounds = YES;
@@ -462,8 +456,6 @@
     
     self.mediaScrollView.contentSize = CGSizeMake(70+self.mediaScrollView.contentSize.width,self.mediaScrollView.contentSize.height);
     [self.mediaScrollView addSubview:imageView];
-    
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (UIImage *)changeSizeOfImage:(UIImage *)image withSize:(CGSize)newSize
@@ -508,6 +500,7 @@
     if(!error)
     {
         NSDictionary *currentConditions = [[[weatherResponse objectForKey:@"data"] objectForKey:@"current_condition"] objectAtIndex:0];
+        
         self.currentCatch.humidity = [NSNumber numberWithInt:[[currentConditions objectForKey:@"humidity"]intValue]];
         self.currentCatch.tempF = [NSNumber numberWithInt:[[currentConditions objectForKey:@"temp_F"]intValue]];
         self.currentCatch.visibility = [NSNumber numberWithInt:[[currentConditions objectForKey:@"visibility"]intValue]];
@@ -521,7 +514,7 @@
         if (descriptions.count == 0) {
             descObject = [ProAnglerDataStore createEntity:@"WeatherDescription"];
             descObject.name = weatherDesc;
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"AttributeAdded" object:self];
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"WeatherDescriptionAdded" object:self];
         }
         else
             descObject = [descriptions objectAtIndex:0];

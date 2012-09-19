@@ -24,24 +24,36 @@
 
 @implementation AnalysisPagedViewController
 
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        self.pageCount = 2;
+        
+        self.pagesViewControllers = [NSMutableArray new];
+        
+        PageOneMapViewController *pageOne = [PageOneMapViewController new];
+        pageOne.analysisViewController = self;
+        [self.pagesViewControllers addObject:pageOne];
+        
+        PageTwoStatsViewController *pageTwo = [PageTwoStatsViewController new];
+        [self.pagesViewControllers addObject:pageTwo];
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark_wood_no_gradient.jpg"]];
     
-    self.pageCount = 2;
     self.scrollView.delegate = self;
     
-    self.pagesViewControllers = [NSMutableArray new];
-    PageOneMapViewController *pageOne = [PageOneMapViewController new];
-    pageOne.analysisViewController = self;
-    [self.scrollView addSubview:pageOne.view];
-    [self.pagesViewControllers addObject:pageOne];
-    
-    PageTwoStatsViewController *pageTwo = [PageTwoStatsViewController new];
-    [self.scrollView addSubview:pageTwo.view];
-    [self.pagesViewControllers addObject:pageTwo];    
+    for (UIViewController *viewController in self.pagesViewControllers) {
+        [self.scrollView addSubview:viewController.view];
+    }
 }
 
 - (void)viewDidUnload

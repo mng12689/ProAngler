@@ -8,6 +8,9 @@
 
 #import "CatchCell.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Venue.h"
+#import "Catch.h"
+#import "Photo.h"
 
 @interface CatchCell ()
 
@@ -19,10 +22,14 @@
 {
     [super awakeFromNib];
     
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+
+    //self.venueLabel.text = self.currentCatch.venue.name;
+	//self.dateLabel.text = [self.currentCatch dateToString];
+	//self.timeLabel.text = [self.currentCatch timeToString];
+    
     self.customImageView.layer.cornerRadius = 3;
     self.customImageView.layer.masksToBounds = YES;
-    
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

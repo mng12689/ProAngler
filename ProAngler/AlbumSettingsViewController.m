@@ -19,13 +19,21 @@
 
 @implementation AlbumSettingsViewController
 
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.sorters = @[@"date",@"weightOZ",@"venue.name",@"species.name"];
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"page_texture.png"]];
 
-    self.sorters = @[@"date",@"weightOZ",@"venue.name",@"species.name"];
     NSString *sortBy= [[NSUserDefaults standardUserDefaults] objectForKey:@"ProAnglerAlbumSortTypePrefKey"];
     
     for (int i = 0; i < [self.sorters count]; i++) {

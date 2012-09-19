@@ -15,26 +15,26 @@
 
 @implementation SelectAttributesViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (void)setup
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"AttributeAdded" object:nil queue:nil usingBlock:^(NSNotification *note){
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"VenueAdded" object:nil queue:nil usingBlock:^(NSNotification *note){
+        self.venueList = [ProAnglerDataStore fetchEntity:@"Venue" sortBy:@"name" withPredicate:nil];
         [self.venuePickerView reloadAllComponents];
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"SpeciesAdded" object:nil queue:nil usingBlock:^(NSNotification *note){
+        self.speciesList = [ProAnglerDataStore fetchEntity:@"Species" sortBy:@"name" withPredicate:nil];
         [self.speciesPickerView reloadAllComponents];
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"BaitAdded" object:nil queue:nil usingBlock:^(NSNotification *note){
+        self.baitList = [ProAnglerDataStore fetchEntity:@"Bait" sortBy:@"name" withPredicate:nil];
         [self.baitPickerView reloadAllComponents];
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"StructureAdded" object:nil queue:nil usingBlock:^(NSNotification *note){
+        self.structureList = [ProAnglerDataStore fetchEntity:@"Structure" sortBy:@"name" withPredicate:nil];
         [self.structurePickerView reloadAllComponents];
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"WeatherDescriptionAdded" object:nil queue:nil usingBlock:^(NSNotification *note){
+        self.weatherDescriptionsList = [ProAnglerDataStore fetchEntity:@"WeatherDescription" sortBy:@"name" withPredicate:nil];
         [self.weatherConditionsPickerView reloadAllComponents];
     }];
     
@@ -47,6 +47,29 @@
     self.spawningList = [NSArray arrayWithObjects:@"NO", @"YES", nil];
     self.baitDepthList = [NSArray arrayWithObjects:@"Topwater", @"Suspended", @"Bottom", nil];
     self.weatherDescriptionsList = [ProAnglerDataStore fetchEntity:@"WeatherDescription" sortBy:@"name" withPredicate:nil];
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
     
     self.sizePickerView.delegate = self;
     self.sizePickerView.dataSource = self;

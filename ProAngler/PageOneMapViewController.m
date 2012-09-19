@@ -35,13 +35,17 @@
 @end
 
 @implementation PageOneMapViewController
-@synthesize filterButton = _filterButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        
+        [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note){
+            [self loadDataWithPredicate:self.currentFilters];
+        }];
     }
     return self;
 }
@@ -51,10 +55,6 @@
     [super viewDidLoad];
     
     self.mapView.delegate = self;
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note){
-        [self loadDataWithPredicate:self.currentFilters];
-    }];
     
     self.filterButton.layer.cornerRadius = 8;
     self.filterButton.layer.masksToBounds = YES;
@@ -73,7 +73,7 @@
     NSArray *venueList = [ProAnglerDataStore fetchEntity:@"Venue" sortBy:@"name" withPredicate:nil];
     if(venueList && [venueList count]!=0){
         self.venueLabel.text = [[venueList objectAtIndex:0]name];
-         self.currentFilters = [NSPredicate predicateWithFormat:@"venue.name like %@",self.venueLabel.text];
+        self.currentFilters = [NSPredicate predicateWithFormat:@"venue.name like %@",self.venueLabel.text];
         [self loadDataWithPredicate:self.currentFilters];
     }
 }

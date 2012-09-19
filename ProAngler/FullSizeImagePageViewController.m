@@ -21,12 +21,20 @@
 
 @implementation FullSizeImagePageViewController
 
+-(id)initWithTransitionStyle:(UIPageViewControllerTransitionStyle)style navigationOrientation:(UIPageViewControllerNavigationOrientation)navigationOrientation options:(NSDictionary *)options{
+    self = [super initWithTransitionStyle:style navigationOrientation:navigationOrientation options:options];
+    if (self) {
+        self.delegate = self;
+        self.dataSource = self;
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.delegate = self;
-    self.dataSource = self;
     for (UIGestureRecognizer *gR in self.view.gestureRecognizers)
         gR.delegate = self;
     
@@ -34,9 +42,7 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Full Stats" style:UIBarButtonItemStyleBordered target:self action:@selector(showFullStats)];
     
     AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
-    [appDelegate setTitle:[NSString stringWithFormat:@"Photo %d of %d",self.currentPage+1,self.photosForPages.count] forNavItem:self.navigationItem];
-    
-    self.hidesBottomBarWhenPushed = YES;
+    [appDelegate setTitle:[NSString stringWithFormat:@"Photo %d of %d",self.currentPage+1,self.photosForPages.count] forNavItem:self.navigationItem];    
 }
 
 - (void)viewDidUnload

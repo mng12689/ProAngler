@@ -20,12 +20,19 @@
 
 @implementation AlbumPageViewController
 
+-(id)initWithTransitionStyle:(UIPageViewControllerTransitionStyle)style navigationOrientation:(UIPageViewControllerNavigationOrientation)navigationOrientation options:(NSDictionary *)options{
+    self = [super initWithTransitionStyle:style navigationOrientation:navigationOrientation options:options];
+    if (self) {
+        self.delegate = self;
+        self.dataSource = self;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    self.delegate = self;
-    self.dataSource = self;
     for (UIGestureRecognizer *gR in self.view.gestureRecognizers)
         gR.delegate = self;
     

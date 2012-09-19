@@ -27,19 +27,26 @@
 
 @implementation WallOfFameViewController
 
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserverForName:@"AddToWOF" object:nil queue:nil usingBlock:^(NSNotification *note){
+            [self populateWall];
+        }];
+        
+        [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note){
+            [self populateWall];
+        }];
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.scrollView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wood_wall_texture.jpg"]];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"AddToWOF" object:nil queue:nil usingBlock:^(NSNotification *note){
-        [self populateWall];
-    }];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note){
-        [self populateWall];
-    }];
     
     [self populateWall];
 }
@@ -62,6 +69,10 @@
 
 -(void)populateWall
 {
+    for (PictureView *pictureView in self.scrollView.subviews) {
+        [pictureView removeFromSuperview];
+    }
+    
     self.trophyFishPhotos = [ProAnglerDataStore fetchEntity:@"Photo" sortBy:@"catch.date" withPredicate:[NSPredicate predicateWithFormat:@"trophyFish == YES"]];
     
     BOOL toggle = YES;
@@ -73,11 +84,11 @@
     
         PictureView *pictureView = [[PictureView alloc] initWithFrame:CGRectMake(20 + 150*toggle, 20 + 150*row, 130, 130) photo:photo delegate:self];
         
+        self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, pictureView.frame.origin.y + pictureView.frame.size.height + 20);
         [self.scrollView addSubview:pictureView];
         
         if (index != 0 && index%2){
             row++;
-            self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, pictureView.frame.origin.y + pictureView.frame.size.height + 20);
         }
         index++;
     }
