@@ -13,7 +13,6 @@
         <attribute name="location" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="spawning" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tempF" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="trophyFish" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="visibility" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="waterColor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="waterLevel" optional="YES" attributeType="String" syncable="YES"/>
@@ -30,9 +29,11 @@
         <userInfo/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="fullSizeImage" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="screenSizeImage" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="trophyFish" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="catch" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Catch" inverseName="photos" inverseEntity="Catch" syncable="YES"/>
     </entity>
     <entity name="Species" representedClassName="Species" syncable="YES">

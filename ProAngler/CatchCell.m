@@ -9,22 +9,30 @@
 #import "CatchCell.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation CatchCell
-@synthesize customImageView;
+@interface CatchCell ()
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+@end
+
+@implementation CatchCell
+
+- (void)awakeFromNib
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-    }
-    return self;
+    [super awakeFromNib];
+    
+    self.customImageView.layer.cornerRadius = 3;
+    self.customImageView.layer.masksToBounds = YES;
+    
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
+    
+    UIView *selectedView = [[UIView alloc]initWithFrame:self.frame];
+    selectedView.backgroundColor = [UIColor colorWithRed:0 green:1 blue:0 alpha:.3];
 
-    // Configure the view for the selected state
+    self.selectedBackgroundView = selectedView;
 }
 
 @end

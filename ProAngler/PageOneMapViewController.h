@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class AnalysisPagedViewController;
 
 @interface PageOneMapViewController : UIViewController
+
+@property (strong) AnalysisPagedViewController *analysisViewController;
 
 @end

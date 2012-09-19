@@ -2,7 +2,7 @@
 //  Photo.m
 //  ProAngler
 //
-//  Created by Michael Ng on 9/10/12.
+//  Created by Michael Ng on 9/18/12.
 //  Copyright (c) 2012 Amherst College. All rights reserved.
 //
 
@@ -15,6 +15,14 @@
 @dynamic fullSizeImage;
 @dynamic screenSizeImage;
 @dynamic thumbnail;
+@dynamic trophyFish;
+@dynamic createdAt;
 @dynamic catch;
+
+- (void) awakeFromInsert
+{
+    [super awakeFromInsert];
+    self.createdAt = [NSDate date];
+}
 
 @end

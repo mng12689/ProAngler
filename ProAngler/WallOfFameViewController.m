@@ -19,7 +19,7 @@
 @interface WallOfFameViewController ()
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong) NSArray *trophyFish;
+@property (strong) NSArray *trophyFishPhotos;
 @property (strong) NSMutableArray *frameViewControllers;
 -(void)populateWall;
 
@@ -41,7 +41,6 @@
         [self populateWall];
     }];
     
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     [self populateWall];
 }
 
@@ -63,21 +62,23 @@
 
 -(void)populateWall
 {
-    self.trophyFish = [ProAnglerDataStore fetchEntity:@"Catch" sortBy:@"date" withPredicate:[NSPredicate predicateWithFormat:@"trophyFish == YES"]];
+    self.trophyFishPhotos = [ProAnglerDataStore fetchEntity:@"Photo" sortBy:@"catch.date" withPredicate:[NSPredicate predicateWithFormat:@"trophyFish == YES"]];
     
     BOOL toggle = YES;
     int index = 0;
     int row = 0;
-    for (Catch *catch in self.trophyFish)
+    for (Photo *photo in self.trophyFishPhotos)
     {
         toggle = !toggle;
     
-        PictureView *pictureView = [[PictureView alloc] initWithFrame:CGRectMake(20 + 150*toggle, 20 + 150*row, 130, 130) photo:[catch.photos anyObject] delegate:self];
+        PictureView *pictureView = [[PictureView alloc] initWithFrame:CGRectMake(20 + 150*toggle, 20 + 150*row, 130, 130) photo:photo delegate:self];
         
         [self.scrollView addSubview:pictureView];
         
-        if (index != 0 && index%2)
+        if (index != 0 && index%2){
             row++;
+            self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, pictureView.frame.origin.y + pictureView.frame.size.height + 20);
+        }
         index++;
     }
 }
@@ -91,13 +92,9 @@
                                initWithTransitionStyle: UIPageViewControllerTransitionStylePageCurl
                                navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                options: nil];
-    pageViewController.currentPage = [self.trophyFish indexOfObject:[[(PictureView*)imageView.superview photo]catch]];
-    
-    NSMutableArray *photos = [NSMutableArray new];
-    for (Catch *catch in self.trophyFish) 
-        [photos addObject:[catch.photos anyObject]];
-    
-    pageViewController.photosForPages = photos;
+    pageViewController.currentPage = [self.trophyFishPhotos indexOfObject:[(PictureView*)imageView.superview photo]];
+        
+    pageViewController.photosForPages = self.trophyFishPhotos;
     pageViewController.showFullStatsOption = YES;
     [pageViewController setViewControllers:@[fullSizeImageViewController]
                                 direction:UIPageViewControllerNavigationDirectionForward

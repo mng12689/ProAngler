@@ -33,11 +33,24 @@
 @dynamic venue;
 @dynamic humidity;
 @dynamic tempF;
-@dynamic trophyFish;
 @dynamic visibility;
 @dynamic weatherDescription;
 @dynamic windSpeedMPH;
 @dynamic windDir;
+
+
+-(void)awakeFromInsert
+{
+    self.weightOZ = @-1;
+    self.length = @-1;
+    self.waterTempF = @-1;
+    self.depth = @-1;
+    
+    self.humidity = @-1;
+    self.tempF = @-1;
+    self.visibility = @-1;
+    self.windSpeedMPH = @-1;
+}
 
 -(NSString*)dateToString
 {

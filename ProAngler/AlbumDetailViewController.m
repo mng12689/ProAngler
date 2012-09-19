@@ -120,10 +120,7 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"page_texture.png"]];
     
-    [self loadCatchData];
-    
-    if (self.photos.count == 0 || [self.catch.trophyFish boolValue] == YES)
-        self.addToWallOfFameButton.userInteractionEnabled = NO;
+    [self loadCatchData];    
 }
 
 - (void)viewDidUnload
@@ -206,10 +203,15 @@
         mainImageView.userInteractionEnabled = YES;
         mainImageView.opaque = YES;
         [mainImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFullSizeImage)]];
-        [self.mainImageView addSubview:mainImageView];
         
+        [self.mainImageView addSubview:mainImageView];
         self.currentlySelectedPhoto = [self.photos objectAtIndex:0];
         
+        if ([[[self.photos objectAtIndex:0] trophyFish] boolValue] == YES)
+            self.addToWallOfFameButton.userInteractionEnabled = NO;
+        else
+            self.addToWallOfFameButton.userInteractionEnabled = YES;
+
         int column = 0;
         BOOL toggle = YES;
         for (int i = 0; i < self.photos.count; i++)
@@ -233,7 +235,6 @@
     {
         UIView *placeHolderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.mainImageView.frame.size.width, self.mainImageView.frame.size.height)];
         placeHolderView.backgroundColor = [UIColor lightGrayColor];
-        placeHolderView.opaque = YES;
         [self.mainImageView addSubview:placeHolderView];
         
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.mainImageView.frame.size.width, 80)];
@@ -251,7 +252,8 @@
 
 - (IBAction)addToWallOfFame:(id)sender
 {
-    self.catch.trophyFish = [NSNumber numberWithBool:YES];
+    self.currentlySelectedPhoto.trophyFish = [NSNumber numberWithBool:YES];
+    self.addToWallOfFameButton.userInteractionEnabled = NO;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"AddToWOF" object:self];
     [ProAnglerDataStore saveContext:nil];
@@ -391,6 +393,12 @@
         {
             self.currentlySelectedPhoto = [self.photos objectAtIndex:i];
             mainImageView.image = [UIImage imageWithData:[self.currentlySelectedPhoto screenSizeImage]];
+            
+            if ([[self.currentlySelectedPhoto trophyFish] boolValue] == YES)
+                self.addToWallOfFameButton.userInteractionEnabled = NO;
+            else
+                self.addToWallOfFameButton.userInteractionEnabled = YES;
+            
             break;
         }
     }

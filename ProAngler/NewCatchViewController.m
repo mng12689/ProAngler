@@ -64,7 +64,7 @@
     
     self.locationManager = [[CLLocationManager alloc]init];
     self.locationManager.delegate = self;
-    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
     
     [RKClient clientWithBaseURL:[NSURL URLWithString:@"http://free.worldweatheronline.com"]];
 }
@@ -142,18 +142,15 @@
        
         Catch *catch = [ProAnglerDataStore createEntity:@"Catch"];
         self.currentCatch = catch;
-
-        catch.humidity = @-1;
-        catch.tempF = @-1;
-        catch.visibility = @-1;
-        catch.windSpeedMPH = @-1;
         
         /********* new catch entity **********/
 
         catch.date = [NSDate date];
         
-        if (self.currentLocation.horizontalAccuracy <= 10)
+        if (self.currentLocation.horizontalAccuracy <= 10){
             catch.location = self.currentLocation;
+            NSLog(@"%f",self.currentLocation.horizontalAccuracy);
+        }
         
         [self requestWeatherConditions:catch.location];
 
@@ -163,13 +160,9 @@
         
         if([super.sizePickerView selectedRowInComponent:0]!=0 && [super.sizePickerView selectedRowInComponent:1]!=0)
             catch.weightOZ = [NSNumber numberWithInt:(([super.sizePickerView selectedRowInComponent:0]-1)*16) + [super.sizePickerView selectedRowInComponent:1]-1];
-        else
-            catch.weightOZ = @-1;
         
         if([super.sizePickerView selectedRowInComponent:2]!=0)
             catch.length = [NSNumber numberWithInt:[super.sizePickerView selectedRowInComponent:2]-1];
-        else
-            catch.length = @-1;
         
         if([super.venuePickerView selectedRowInComponent:0]!=0)
             catch.venue = [super.venueList objectAtIndex:[super.venuePickerView selectedRowInComponent:0]-1];
@@ -185,8 +178,6 @@
         
         if([super.waterTempPickerView selectedRowInComponent:0]!=0)
             catch.waterTempF = [NSNumber numberWithInt:[super.waterTempPickerView selectedRowInComponent:0]+31];
-        else
-            catch.waterTempF = @-1;
         
         if([super.waterColorPickerView selectedRowInComponent:0]!=0)
             catch.waterColor = [super.waterColorList objectAtIndex:[super.waterColorPickerView selectedRowInComponent:0]-1];
@@ -196,11 +187,9 @@
             
         if([super.depthPickerView selectedRowInComponent:0]!=0)
             catch.depth = [NSNumber numberWithInt:[super.depthPickerView selectedRowInComponent:0]-1];
-        else
-            catch.depth = @-1;
-        
+            
         if([super.spawningPickerView selectedRowInComponent:0]!=0)
-        catch.spawning = [super.spawningList objectAtIndex:[super.spawningPickerView selectedRowInComponent:0]-1];
+            catch.spawning = [super.spawningList objectAtIndex:[super.spawningPickerView selectedRowInComponent:0]-1];
         
         if([super.baitDepthPickerView selectedRowInComponent:0]!=0)
             catch.baitDepth = [super.baitDepthList objectAtIndex:[super.baitDepthPickerView selectedRowInComponent:0]-1];
@@ -278,9 +267,9 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    if (newLocation.horizontalAccuracy > self.currentLocation.horizontalAccuracy) {
+    NSLog(@"%f",newLocation.horizontalAccuracy);
+    if (newLocation.horizontalAccuracy < self.currentLocation.horizontalAccuracy || !self.currentLocation)
         self.currentLocation = newLocation;
-    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error

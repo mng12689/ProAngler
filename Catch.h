@@ -30,7 +30,6 @@
 @property (nonatomic, retain) Venue *venue;
 @property (nonatomic, retain) NSNumber * humidity;
 @property (nonatomic, retain) NSNumber * tempF;
-@property (nonatomic, retain) NSNumber * trophyFish;
 @property (nonatomic, retain) NSNumber * visibility;
 @property (nonatomic, retain) WeatherDescription * weatherDescription;
 @property (nonatomic, retain) NSNumber * windSpeedMPH;

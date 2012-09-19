@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong) NSMutableArray *pagesViewControllers;
 
+@property int pageCount;
+
 - (IBAction)changePage;
 
 @end
@@ -28,12 +30,12 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark_wood_no_gradient.jpg"]];
     
-    int pageCount = 2;
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * pageCount, self.scrollView.frame.size.height);
+    self.pageCount = 2;
     self.scrollView.delegate = self;
     
     self.pagesViewControllers = [NSMutableArray new];
     PageOneMapViewController *pageOne = [PageOneMapViewController new];
+    pageOne.analysisViewController = self;
     [self.scrollView addSubview:pageOne.view];
     [self.pagesViewControllers addObject:pageOne];
     
@@ -47,6 +49,11 @@
     [self setScrollView:nil];
     [self setPageControl:nil];
     [super viewDidUnload];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * self.pageCount, self.scrollView.frame.size.height);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

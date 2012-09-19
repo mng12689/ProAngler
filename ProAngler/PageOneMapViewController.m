@@ -16,6 +16,7 @@
 #import "ProAnglerDataStore.h"
 #import "AlbumDetailViewController.h"
 #import "CatchPointAnnotation.h"
+#import "AnalysisPagedViewController.h"
 
 @interface PageOneMapViewController () <FilterViewControllerDelegate, MKMapViewDelegate>
 
@@ -88,7 +89,7 @@
     FilterViewController *filterViewController = [FilterViewController new];
     filterViewController.delegate = self;
     
-    [self presentModalViewController:filterViewController animated:YES];
+    [self.analysisViewController presentModalViewController:filterViewController animated:YES];
 }
 
 -(void)filterForVenue:(NSString *)venue withPredicate:(NSPredicate *)predicate andAdditionalFilters:(NSArray *)filters filterDate:(NSDictionary *)filterDate filterTime:(NSDictionary *)filterTime

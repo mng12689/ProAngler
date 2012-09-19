@@ -41,7 +41,6 @@
 		4C11AEE715FDCBB60088D55F /* NureenHouseStock_0017.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AEE615FDCBB60088D55F /* NureenHouseStock_0017.JPG */; };
 		4C11AEE915FE9E8D0088D55F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C11AEE815FE9E8D0088D55F /* MessageUI.framework */; };
 		4C11AEEB15FE9ED80088D55F /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C11AEEA15FE9ED80088D55F /* Twitter.framework */; };
-		4C11AEEE15FEC53E0088D55F /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C11AEED15FEC53E0088D55F /* Photo.m */; };
 		4C11AEFD160003130088D55F /* PictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C11AEFC160003130088D55F /* PictureView.m */; };
 		4C11AF0D16004B0E0088D55F /* dark_wood@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AF0C16004B0E0088D55F /* dark_wood@2x.jpg */; };
 		4C11AF0F1600726D0088D55F /* twitter-bird-white-on-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AF0E1600726C0088D55F /* twitter-bird-white-on-blue.png */; };
@@ -60,6 +59,7 @@
 		4C9B33B316084D5F00E2901D /* Bait.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B33B216084D5F00E2901D /* Bait.m */; };
 		4C9B33BC16084F2D00E2901D /* Structure.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B33BB16084F2C00E2901D /* Structure.m */; };
 		4C9B33BE1608FE9E00E2901D /* brushed_metal_camera_button.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B33BD1608FE9E00E2901D /* brushed_metal_camera_button.jpeg */; };
+		4C9B33C416095C5100E2901D /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B33C316095C5000E2901D /* Photo.m */; };
 		4CA2727715F4082700EFD55F /* ProAnglerDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA2727615F4082700EFD55F /* ProAnglerDataStore.m */; };
 		4CA939BF15D30248008F1A13 /* nav_bar_water_droplets@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA939BE15D30248008F1A13 /* nav_bar_water_droplets@2x.png */; };
 		4CA939C615D392AD008F1A13 /* page_texture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA939C515D392AD008F1A13 /* page_texture@2x.png */; };
@@ -125,8 +125,6 @@
 		4C11AEE615FDCBB60088D55F /* NureenHouseStock_0017.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = NureenHouseStock_0017.JPG; sourceTree = "<group>"; };
 		4C11AEE815FE9E8D0088D55F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4C11AEEA15FE9ED80088D55F /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
-		4C11AEEC15FEC53E0088D55F /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
-		4C11AEED15FEC53E0088D55F /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		4C11AEFB160003130088D55F /* PictureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureView.h; sourceTree = "<group>"; };
 		4C11AEFC160003130088D55F /* PictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureView.m; sourceTree = "<group>"; };
 		4C11AF0C16004B0E0088D55F /* dark_wood@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "dark_wood@2x.jpg"; sourceTree = "<group>"; };
@@ -153,6 +151,8 @@
 		4C9B33BA16084F2B00E2901D /* Structure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Structure.h; sourceTree = "<group>"; };
 		4C9B33BB16084F2C00E2901D /* Structure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Structure.m; sourceTree = "<group>"; };
 		4C9B33BD1608FE9E00E2901D /* brushed_metal_camera_button.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = brushed_metal_camera_button.jpeg; sourceTree = "<group>"; };
+		4C9B33C216095C5000E2901D /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		4C9B33C316095C5000E2901D /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		4CA2727515F4082700EFD55F /* ProAnglerDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProAnglerDataStore.h; sourceTree = "<group>"; };
 		4CA2727615F4082700EFD55F /* ProAnglerDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProAnglerDataStore.m; sourceTree = "<group>"; };
 		4CA939BE15D30248008F1A13 /* nav_bar_water_droplets@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_bar_water_droplets@2x.png"; sourceTree = "<group>"; };
@@ -335,10 +335,10 @@
 				4C11AED515FD54940088D55F /* Venue.m */,
 				4C11AEE115FDA14A0088D55F /* Species.h */,
 				4C11AEE215FDA14A0088D55F /* Species.m */,
+				4C9B33C216095C5000E2901D /* Photo.h */,
+				4C9B33C316095C5000E2901D /* Photo.m */,
 				4C47C64115F5B7A50061621E /* Catch.h */,
 				4C47C64215F5B7A50061621E /* Catch.m */,
-				4C11AEEC15FEC53E0088D55F /* Photo.h */,
-				4C11AEED15FEC53E0088D55F /* Photo.m */,
 				4C9B33A81606E24400E2901D /* WeatherDescription.h */,
 				4C9B33A91606E24400E2901D /* WeatherDescription.m */,
 			);
@@ -509,7 +509,6 @@
 				4C11AED615FD54940088D55F /* Venue.m in Sources */,
 				4C11AEDC15FD6B2D0088D55F /* PageOneMapViewController.m in Sources */,
 				4C11AEE315FDA14A0088D55F /* Species.m in Sources */,
-				4C11AEEE15FEC53E0088D55F /* Photo.m in Sources */,
 				4C11AEFD160003130088D55F /* PictureView.m in Sources */,
 				4C11AF1816014E080088D55F /* FullSizeImageViewController.m in Sources */,
 				4CF342E1160166D0009D22B6 /* FullSizeImagePageViewController.m in Sources */,
@@ -518,6 +517,7 @@
 				4C9B33AA1606E24400E2901D /* WeatherDescription.m in Sources */,
 				4C9B33B316084D5F00E2901D /* Bait.m in Sources */,
 				4C9B33BC16084F2D00E2901D /* Structure.m in Sources */,
+				4C9B33C416095C5100E2901D /* Photo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

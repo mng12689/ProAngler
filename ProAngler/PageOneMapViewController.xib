@@ -45,7 +45,7 @@
 						<string key="NSFrame">{{125, 20}, {73, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="953318483"/>
+						<reference key="NSNextKeyView" ref="113793413"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -148,7 +148,7 @@
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">1316</int>
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
-						<string key="NSFrame">{{20, 349}, {280, 111}}</string>
+						<string key="NSFrame">{{20, 349}, {280, 76}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -171,12 +171,13 @@
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
-					<object class="IBUIButton" id="102075552">
+					<object class="IBUIButton" id="113793413">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{228, 12}, {72, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="953318483"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -268,7 +269,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">presentFilterModal:</string>
-						<reference key="source" ref="102075552"/>
+						<reference key="source" ref="113793413"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -290,10 +291,10 @@
 							<reference ref="953318483"/>
 							<reference ref="667235119"/>
 							<reference ref="322367694"/>
-							<reference ref="1057233575"/>
 							<reference ref="744725944"/>
 							<reference ref="876743182"/>
-							<reference ref="102075552"/>
+							<reference ref="113793413"/>
+							<reference ref="1057233575"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -340,7 +341,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">16</int>
-						<reference key="object" ref="102075552"/>
+						<reference key="object" ref="113793413"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>

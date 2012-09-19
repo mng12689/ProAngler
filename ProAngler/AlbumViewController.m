@@ -77,8 +77,6 @@
 	cell.dateLabel.text = [catch dateToString];
 	cell.timeLabel.text = [catch timeToString];
     
-    cell.customImageView.layer.cornerRadius = 3;
-    cell.customImageView.layer.masksToBounds = YES;
     if (cell.customImageView.subviews.count != 0)
         [[cell.customImageView.subviews objectAtIndex:0] removeFromSuperview];
 
