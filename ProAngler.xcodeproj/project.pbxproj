@@ -20,7 +20,6 @@
 		273D0BF5152FB419009D054A /* ProAngler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 273D0BF3152FB419009D054A /* ProAngler.xcdatamodeld */; };
 		273D0C3A1530D6BC009D054A /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 273D0C391530D6BC009D054A /* AlbumViewController.m */; };
 		2756DC2115350BC8000FB98A /* NewCatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2756DC2015350BC8000FB98A /* NewCatchViewController.m */; };
-		276B6F141592770200F84728 /* green.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 276B6F131592770200F84728 /* green.jpg */; };
 		276B6F1A15928CDD00F84728 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276B6F1915928CDC00F84728 /* CoreLocation.framework */; };
 		276B6F28159954C800F84728 /* wood_wall_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 276B6F27159954C800F84728 /* wood_wall_texture.jpg */; };
 		276B6F2A159954CD00F84728 /* wood_wall_texture@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 276B6F29159954CD00F84728 /* wood_wall_texture@2x.jpg */; };
@@ -38,7 +37,6 @@
 		4C11AEDD15FD6B2D0088D55F /* PageOneMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AEDB15FD6B2D0088D55F /* PageOneMapViewController.xib */; };
 		4C11AEE315FDA14A0088D55F /* Species.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C11AEE215FDA14A0088D55F /* Species.m */; };
 		4C11AEE515FDCBAA0088D55F /* NureenHouseStock_0016.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AEE415FDCBAA0088D55F /* NureenHouseStock_0016.JPG */; };
-		4C11AEE715FDCBB60088D55F /* NureenHouseStock_0017.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 4C11AEE615FDCBB60088D55F /* NureenHouseStock_0017.JPG */; };
 		4C11AEE915FE9E8D0088D55F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C11AEE815FE9E8D0088D55F /* MessageUI.framework */; };
 		4C11AEEB15FE9ED80088D55F /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C11AEEA15FE9ED80088D55F /* Twitter.framework */; };
 		4C11AEFD160003130088D55F /* PictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C11AEFC160003130088D55F /* PictureView.m */; };
@@ -58,13 +56,12 @@
 		4C9B33B01607F8A900E2901D /* engraved_wood_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B33AF1607F8A900E2901D /* engraved_wood_texture.jpg */; };
 		4C9B33B316084D5F00E2901D /* Bait.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B33B216084D5F00E2901D /* Bait.m */; };
 		4C9B33BC16084F2D00E2901D /* Structure.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B33BB16084F2C00E2901D /* Structure.m */; };
-		4C9B33BE1608FE9E00E2901D /* brushed_metal_camera_button.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B33BD1608FE9E00E2901D /* brushed_metal_camera_button.jpeg */; };
 		4C9B33C416095C5100E2901D /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B33C316095C5000E2901D /* Photo.m */; };
+		4C9B33C81609A06F00E2901D /* green_button@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B33C71609A06F00E2901D /* green_button@2x.jpg */; };
+		4C9B33CA1609A43F00E2901D /* photo_button@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B33C91609A43F00E2901D /* photo_button@2x.jpg */; };
+		4C9B33CC1609AB8F00E2901D /* twitter-bird-white-on-blue@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B33CB1609AB8E00E2901D /* twitter-bird-white-on-blue@2x.jpg */; };
 		4CA2727715F4082700EFD55F /* ProAnglerDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA2727615F4082700EFD55F /* ProAnglerDataStore.m */; };
-		4CA939BF15D30248008F1A13 /* nav_bar_water_droplets@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA939BE15D30248008F1A13 /* nav_bar_water_droplets@2x.png */; };
 		4CA939C615D392AD008F1A13 /* page_texture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA939C515D392AD008F1A13 /* page_texture@2x.png */; };
-		4CA939C815D39C21008F1A13 /* graph_paper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA939C715D39C21008F1A13 /* graph_paper@2x.png */; };
-		4CA939CA15D39FF6008F1A13 /* wood_beam@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CA939C915D39FF6008F1A13 /* wood_beam@2x.png */; };
 		4CF342E1160166D0009D22B6 /* FullSizeImagePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF342E0160166D0009D22B6 /* FullSizeImagePageViewController.m */; };
 		4CF342EB160294B5009D22B6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF342EA160294B5009D22B6 /* MobileCoreServices.framework */; };
 		4CF342ED1602B5BB009D22B6 /* dark_wood_no_gradient@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4CF342EC1602B5BB009D22B6 /* dark_wood_no_gradient@2x.jpg */; };
@@ -94,7 +91,6 @@
 		273D0C391530D6BC009D054A /* AlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
 		2756DC1F15350BC8000FB98A /* NewCatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewCatchViewController.h; sourceTree = "<group>"; };
 		2756DC2015350BC8000FB98A /* NewCatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewCatchViewController.m; sourceTree = "<group>"; };
-		276B6F131592770200F84728 /* green.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = green.jpg; path = ../../green.jpg; sourceTree = "<group>"; };
 		276B6F1915928CDC00F84728 /* CoreLocation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		276B6F27159954C800F84728 /* wood_wall_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wood_wall_texture.jpg; sourceTree = "<group>"; };
 		276B6F29159954CD00F84728 /* wood_wall_texture@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "wood_wall_texture@2x.jpg"; sourceTree = "<group>"; };
@@ -122,7 +118,6 @@
 		4C11AEE115FDA14A0088D55F /* Species.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Species.h; sourceTree = "<group>"; };
 		4C11AEE215FDA14A0088D55F /* Species.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Species.m; sourceTree = "<group>"; };
 		4C11AEE415FDCBAA0088D55F /* NureenHouseStock_0016.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = NureenHouseStock_0016.JPG; sourceTree = "<group>"; };
-		4C11AEE615FDCBB60088D55F /* NureenHouseStock_0017.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = NureenHouseStock_0017.JPG; sourceTree = "<group>"; };
 		4C11AEE815FE9E8D0088D55F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4C11AEEA15FE9ED80088D55F /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		4C11AEFB160003130088D55F /* PictureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureView.h; sourceTree = "<group>"; };
@@ -150,15 +145,14 @@
 		4C9B33B216084D5F00E2901D /* Bait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bait.m; sourceTree = "<group>"; };
 		4C9B33BA16084F2B00E2901D /* Structure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Structure.h; sourceTree = "<group>"; };
 		4C9B33BB16084F2C00E2901D /* Structure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Structure.m; sourceTree = "<group>"; };
-		4C9B33BD1608FE9E00E2901D /* brushed_metal_camera_button.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = brushed_metal_camera_button.jpeg; sourceTree = "<group>"; };
 		4C9B33C216095C5000E2901D /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		4C9B33C316095C5000E2901D /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		4C9B33C71609A06F00E2901D /* green_button@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "green_button@2x.jpg"; sourceTree = "<group>"; };
+		4C9B33C91609A43F00E2901D /* photo_button@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "photo_button@2x.jpg"; sourceTree = "<group>"; };
+		4C9B33CB1609AB8E00E2901D /* twitter-bird-white-on-blue@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "twitter-bird-white-on-blue@2x.jpg"; sourceTree = "<group>"; };
 		4CA2727515F4082700EFD55F /* ProAnglerDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProAnglerDataStore.h; sourceTree = "<group>"; };
 		4CA2727615F4082700EFD55F /* ProAnglerDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProAnglerDataStore.m; sourceTree = "<group>"; };
-		4CA939BE15D30248008F1A13 /* nav_bar_water_droplets@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_bar_water_droplets@2x.png"; sourceTree = "<group>"; };
 		4CA939C515D392AD008F1A13 /* page_texture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "page_texture@2x.png"; sourceTree = "<group>"; };
-		4CA939C715D39C21008F1A13 /* graph_paper@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "graph_paper@2x.png"; sourceTree = "<group>"; };
-		4CA939C915D39FF6008F1A13 /* wood_beam@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wood_beam@2x.png"; sourceTree = "<group>"; };
 		4CF342DF160166D0009D22B6 /* FullSizeImagePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullSizeImagePageViewController.h; sourceTree = "<group>"; };
 		4CF342E0160166D0009D22B6 /* FullSizeImagePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullSizeImagePageViewController.m; sourceTree = "<group>"; };
 		4CF342EA160294B5009D22B6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -269,22 +263,19 @@
 		4C286A8815E1EEF50079B47F /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				4C9B33BD1608FE9E00E2901D /* brushed_metal_camera_button.jpeg */,
 				4C11AF1016007A4F0088D55F /* light_wood_tab_bar@2x.jpg */,
-				4C11AEE615FDCBB60088D55F /* NureenHouseStock_0017.JPG */,
+				4C9B33C71609A06F00E2901D /* green_button@2x.jpg */,
 				4CF342EC1602B5BB009D22B6 /* dark_wood_no_gradient@2x.jpg */,
+				4C9B33C91609A43F00E2901D /* photo_button@2x.jpg */,
+				4C9B33CB1609AB8E00E2901D /* twitter-bird-white-on-blue@2x.jpg */,
 				4C11AEE415FDCBAA0088D55F /* NureenHouseStock_0016.JPG */,
 				4C11AF14160102D50088D55F /* light_wood_nav_bar@2x.jpg */,
 				4C9B33AF1607F8A900E2901D /* engraved_wood_texture.jpg */,
 				4C11AF0C16004B0E0088D55F /* dark_wood@2x.jpg */,
-				4CA939C915D39FF6008F1A13 /* wood_beam@2x.png */,
 				4CA939C515D392AD008F1A13 /* page_texture@2x.png */,
-				4CA939C715D39C21008F1A13 /* graph_paper@2x.png */,
 				4C11AF0E1600726C0088D55F /* twitter-bird-white-on-blue.png */,
-				4CA939BE15D30248008F1A13 /* nav_bar_water_droplets@2x.png */,
 				276B6F27159954C800F84728 /* wood_wall_texture.jpg */,
 				276B6F29159954CD00F84728 /* wood_wall_texture@2x.jpg */,
-				276B6F131592770200F84728 /* green.jpg */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -441,17 +432,12 @@
 			files = (
 				273D0BE9152FB419009D054A /* InfoPlist.strings in Resources */,
 				273D0BF2152FB419009D054A /* MainStoryboard.storyboard in Resources */,
-				276B6F141592770200F84728 /* green.jpg in Resources */,
 				276B6F28159954C800F84728 /* wood_wall_texture.jpg in Resources */,
 				276B6F2A159954CD00F84728 /* wood_wall_texture@2x.jpg in Resources */,
-				4CA939BF15D30248008F1A13 /* nav_bar_water_droplets@2x.png in Resources */,
 				4CA939C615D392AD008F1A13 /* page_texture@2x.png in Resources */,
-				4CA939C815D39C21008F1A13 /* graph_paper@2x.png in Resources */,
-				4CA939CA15D39FF6008F1A13 /* wood_beam@2x.png in Resources */,
 				4C11AEC615FC062B0088D55F /* PageTwoStatsViewController.xib in Resources */,
 				4C11AEDD15FD6B2D0088D55F /* PageOneMapViewController.xib in Resources */,
 				4C11AEE515FDCBAA0088D55F /* NureenHouseStock_0016.JPG in Resources */,
-				4C11AEE715FDCBB60088D55F /* NureenHouseStock_0017.JPG in Resources */,
 				4C11AF0D16004B0E0088D55F /* dark_wood@2x.jpg in Resources */,
 				4C11AF0F1600726D0088D55F /* twitter-bird-white-on-blue.png in Resources */,
 				4C11AF1116007A4F0088D55F /* light_wood_tab_bar@2x.jpg in Resources */,
@@ -461,7 +447,9 @@
 				4C9B33A71606DA8E00E2901D /* FilterViewController.xib in Resources */,
 				4C9B33AC1607E5C500E2901D /* AddAttributeViewController.xib in Resources */,
 				4C9B33B01607F8A900E2901D /* engraved_wood_texture.jpg in Resources */,
-				4C9B33BE1608FE9E00E2901D /* brushed_metal_camera_button.jpeg in Resources */,
+				4C9B33C81609A06F00E2901D /* green_button@2x.jpg in Resources */,
+				4C9B33CA1609A43F00E2901D /* photo_button@2x.jpg in Resources */,
+				4C9B33CC1609AB8F00E2901D /* twitter-bird-white-on-blue@2x.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

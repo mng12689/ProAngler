@@ -27,6 +27,8 @@
 @property (weak) IBOutlet UIScrollView *mediaScrollView;
 @property (weak, nonatomic) IBOutlet UIView *detailView;
 
+@property (weak, nonatomic) IBOutlet UIButton *photoButton;
+
 @property (strong) NSMutableArray *photos;
 @property (strong) UIImageView *currentlySelectedImageView;
 
@@ -40,6 +42,7 @@
 @end
 
 @implementation EditModeDetailViewController
+@synthesize photoButton = _photoButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,6 +62,9 @@
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.detailView.frame.origin.y + self.detailView.frame.size.height);
     self.mediaScrollView.layer.cornerRadius = 5;
     self.mediaScrollView.backgroundColor = [UIColor colorWithHue:0 saturation:0 brightness:100 alpha:.2];
+    
+    self.photoButton.layer.cornerRadius = 8;
+    self.photoButton.layer.masksToBounds = YES;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveChanges)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
@@ -133,6 +139,7 @@
 
 - (void)viewDidUnload
 {
+    [self setPhotoButton:nil];
     [super viewDidUnload];
     [self setMediaScrollView:nil];
     [self setScrollView:nil];

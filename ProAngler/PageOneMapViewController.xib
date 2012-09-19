@@ -45,7 +45,7 @@
 						<string key="NSFrame">{{125, 20}, {73, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="113793413"/>
+						<reference key="NSNextKeyView" ref="481936718"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -171,10 +171,10 @@
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
-					<object class="IBUIButton" id="113793413">
+					<object class="IBUIButton" id="481936718">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{228, 12}, {72, 37}}</string>
+						<string key="NSFrame">{{228, 14}, {72, 34}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="953318483"/>
@@ -191,11 +191,15 @@
 						</object>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+							<bytes key="NSRGB">MCAwIDAAA</bytes>
 						</object>
 						<object class="NSColor" key="IBUINormalTitleShadowColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
+						</object>
+						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">green_button@2x.jpg</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">2</int>
@@ -267,9 +271,17 @@
 					<int key="connectionID">13</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">filterButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="481936718"/>
+					</object>
+					<int key="connectionID">19</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">presentFilterModal:</string>
-						<reference key="source" ref="113793413"/>
+						<reference key="source" ref="481936718"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -293,8 +305,8 @@
 							<reference ref="322367694"/>
 							<reference ref="744725944"/>
 							<reference ref="876743182"/>
-							<reference ref="113793413"/>
 							<reference ref="1057233575"/>
+							<reference ref="481936718"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -341,7 +353,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">16</int>
-						<reference key="object" ref="113793413"/>
+						<reference key="object" ref="481936718"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
@@ -376,7 +388,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">18</int>
+			<int key="maxID">19</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -396,6 +408,7 @@
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="additionalFiltersTextView">UITextView</string>
+						<string key="filterButton">UIButton</string>
 						<string key="mapView">MKMapView</string>
 						<string key="venueLabel">UILabel</string>
 					</dictionary>
@@ -403,6 +416,10 @@
 						<object class="IBToOneOutletInfo" key="additionalFiltersTextView">
 							<string key="name">additionalFiltersTextView</string>
 							<string key="candidateClassName">UITextView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="filterButton">
+							<string key="name">filterButton</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="mapView">
 							<string key="name">mapView</string>
@@ -428,6 +445,10 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NS.key.0">green_button@2x.jpg</string>
+			<string key="NS.object.0">{120, 120}</string>
+		</object>
 		<string key="IBCocoaTouchPluginVersion">1498</string>
 	</data>
 </archive>

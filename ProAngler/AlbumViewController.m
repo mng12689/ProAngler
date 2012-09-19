@@ -82,7 +82,8 @@
 
     if ([catch.photos count] != 0)
     {
-        UIImage *thumbnail = [UIImage imageWithData:[[[catch.photos allObjects] objectAtIndex:0] thumbnail]];
+        NSArray *photosByDateCreated = [catch.photos sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];
+        UIImage *thumbnail = [UIImage imageWithData:[[photosByDateCreated objectAtIndex:0]thumbnail]];
         
         UIImageView *mainImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.customImageView.frame.size.width, cell.customImageView.frame.size.height)];
         mainImageView.image = thumbnail;

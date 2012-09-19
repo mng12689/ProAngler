@@ -54,7 +54,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *waterTempLabel;
 @property (weak, nonatomic) IBOutlet UILabel *waterLevelLabel;
 
-@property (strong) NSMutableArray *photos;
+@property (strong) NSArray *photos;
 @property (strong) Photo *currentlySelectedPhoto;
 
 - (IBAction)addToWallOfFame:(id)sender;
@@ -186,8 +186,8 @@
     self.waterColorLabel.text = self.catch.waterColor;
     self.waterTempLabel.text = [self.catch waterTempFToString];
     self.waterLevelLabel.text = self.catch.waterLevel;
-        
-    self.photos = [NSMutableArray arrayWithArray:[self.catch.photos allObjects]];
+    
+    self.photos = [[self.catch.photos allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];;
 
     for (UIImageView *imageView in self.mediaScrollView.subviews){
         [imageView removeFromSuperview];
@@ -319,7 +319,7 @@
         
         NSArray *photos = [self.catch.photos allObjects];
         int counter = 0;
-        for (Photo *photo in  photos) {
+        for (Photo *photo in photos) {
             [emailViewController addAttachmentData:photo.fullSizeImage mimeType:@"image/jpeg" fileName:[NSString stringWithFormat:@"%@_%@_%d",self.dateLabel.text,self.venueLabel.text,counter]];
             counter++;
         }
@@ -371,7 +371,7 @@
                                    navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                    options: nil];
         pageViewController.currentPage = 0;
-        pageViewController.photosForPages = [self.catch.photos allObjects];
+        pageViewController.photosForPages = self.photos;
         pageViewController.showFullStatsOption = NO;
         [pageViewController setViewControllers:@[fullSizeImageViewController]
                                         direction:UIPageViewControllerNavigationDirectionForward

@@ -8,11 +8,13 @@
 
 #import "FilterViewController.h"
 #import "AppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface FilterViewController ()
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *detailView;
+@property (weak, nonatomic) IBOutlet UIButton *showMoreOptionsButton;
 
 - (IBAction)saveFilter:(id)sender;
 - (IBAction)cancelModal:(id)sender;
@@ -21,6 +23,7 @@
 @end
 
 @implementation FilterViewController
+@synthesize showMoreOptionsButton = _showMoreOptionsButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,11 +44,17 @@
     [appDelegate setTitle:@"Filter" forNavItem:self.navigationItem];
 
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+    
+    self.showMoreOptionsButton.layer.cornerRadius = 8;
+    self.showMoreOptionsButton.layer.masksToBounds = YES;
+    self.showMoreOptionsButton.titleLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:.2];
+    self.showMoreOptionsButton.titleLabel.shadowOffset = CGSizeMake(0, 1);
 }
 
 - (void)viewDidUnload
 {
     [self setDetailView:nil];
+    [self setShowMoreOptionsButton:nil];
     [super viewDidUnload];
     [self setScrollView:nil];
 }

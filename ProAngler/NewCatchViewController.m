@@ -32,6 +32,9 @@
 @property (weak) IBOutlet UIScrollView *mediaScrollView;
 @property (weak, nonatomic) IBOutlet UIView *detailView;
 
+@property (weak, nonatomic) IBOutlet UIButton *photoButton;
+@property (weak, nonatomic) IBOutlet UIButton *showMoreOptionsButton;
+
 @property (strong) Catch *currentCatch;
 
 @property (strong) NSMutableArray *photos;
@@ -48,6 +51,8 @@
 @end
 
 @implementation NewCatchViewController
+@synthesize photoButton = _photoButton;
+@synthesize showMoreOptionsButton = _showMoreOptionsButton;
 
 - (void)viewDidLoad
 {
@@ -66,6 +71,14 @@
     self.locationManager.delegate = self;
     [self.locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
     
+    self.photoButton.layer.cornerRadius = 8;
+    self.photoButton.layer.masksToBounds = YES;
+    
+    self.showMoreOptionsButton.layer.cornerRadius = 8;
+    self.showMoreOptionsButton.layer.masksToBounds = YES;
+    self.showMoreOptionsButton.titleLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:.2];
+    self.showMoreOptionsButton.titleLabel.shadowOffset = CGSizeMake(0, 1);
+    
     [RKClient clientWithBaseURL:[NSURL URLWithString:@"http://free.worldweatheronline.com"]];
 }
 
@@ -74,6 +87,8 @@
     [self setMediaScrollView:nil];
     [self setScrollView:nil];
     [self setDetailView:nil];
+    [self setPhotoButton:nil];
+    [self setShowMoreOptionsButton:nil];
     [super viewDidUnload];
 }
 
@@ -267,7 +282,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    NSLog(@"%f",newLocation.horizontalAccuracy);
+    //NSLog(@"%f",newLocation.horizontalAccuracy);
     if (newLocation.horizontalAccuracy < self.currentLocation.horizontalAccuracy || !self.currentLocation)
         self.currentLocation = newLocation;
 }

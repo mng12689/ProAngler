@@ -17,9 +17,10 @@
     NSDictionary *defaults = [NSDictionary dictionaryWithObject:@"date" forKey:@"ProAnglerAlbumSortTypePrefKey"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
-    [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES animated:UIStatusBarAnimationNone];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"light_wood_nav_bar.jpg"] forBarMetrics:UIBarMetricsDefault];
     [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"light_wood_tab_bar.jpg"]];
+    //[[UINavigationItem appearance] setTitleV
     
     [self.window.rootViewController.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"page_texture"]]];
     
@@ -62,7 +63,6 @@
     titleView.font = [UIFont boldSystemFontOfSize:25];
     titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:.2];
     titleView.shadowOffset = CGSizeMake(0, 1);
-    //titleView.textColor = [UIColor colorWithWhite:0.0 alpha:.7];
     titleView.textColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"engraved_wood_texture.jpg"]];
 
     navItem.titleView = titleView;
@@ -71,19 +71,17 @@
     [titleView sizeToFit];
 }
 
-/*- (void)setTitle:(NSString *)title forViewController:(UIViewController*)viewController
+/*- (UIView*)setTitle:(NSString *)title forNavItem:(UINavigationItem*)navItem
 {
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)viewController.navigationItem.titleView;
+    UILabel *titleView = (UILabel *)navItem.titleView;
     titleView = [[UILabel alloc] initWithFrame:CGRectZero];
     titleView.backgroundColor = [UIColor clearColor];
     titleView.font = [UIFont boldSystemFontOfSize:25];
     titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:.2];
     titleView.shadowOffset = CGSizeMake(0, 1);
+    titleView.textColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"engraved_wood_texture.jpg"]];
     
-    titleView.textColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"engraved_wood_texture.jpg"]]; // Change to desired color
-    
-    viewController.navigationItem.titleView = titleView;
+    navItem.titleView = titleView;
     
     titleView.text = title;
     [titleView sizeToFit];
