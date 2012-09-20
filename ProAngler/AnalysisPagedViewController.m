@@ -9,16 +9,19 @@
 #import "AnalysisPagedViewController.h"
 #import "PageOneMapViewController.h"
 #import "PageTwoStatsViewController.h"
+#import "AppDelegate.h"
 
 @interface AnalysisPagedViewController () <UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (weak, nonatomic) IBOutlet UINavigationItem *customNavigationItem;
 @property (strong) NSMutableArray *pagesViewControllers;
 
 @property int pageCount;
 
 - (IBAction)changePage;
+- (IBAction)filter:(id)sender;
 
 @end
 
@@ -49,6 +52,9 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark_wood_no_gradient.jpg"]];
     
+    AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
+    [appDelegate setTitle:@"Analysis" forNavItem:self.customNavigationItem];
+    
     self.scrollView.delegate = self;
     
     for (UIViewController *viewController in self.pagesViewControllers) {
@@ -60,6 +66,7 @@
 {
     [self setScrollView:nil];
     [self setPageControl:nil];
+    [self setCustomNavigationItem:nil];
     [super viewDidUnload];
 }
 
@@ -89,6 +96,11 @@
     frame.origin.y = 0;
     frame.size = self.scrollView.frame.size;
     [self.scrollView scrollRectToVisible:frame animated:YES];
+}
+
+- (IBAction)filter:(id)sender
+{
+    [[self.pagesViewControllers objectAtIndex:0] presentFilterModal];
 }
 
 @end

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E2617" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="YPd-6v-T69">
     <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
@@ -581,16 +582,29 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="0sw-uR-Ymk">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="387"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" id="mTs-1q-8TD">
-                                <rect key="frame" x="0.0" y="380" width="320" height="36"/>
+                                <rect key="frame" x="0.0" y="395" width="320" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="changePage" destination="y2J-3S-AXc" eventType="valueChanged" id="GdF-3F-cXi"/>
                                 </connections>
                             </pageControl>
+                            <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" id="98w-P2-opb">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="n0U-Aq-wqS">
+                                        <barButtonItem key="rightBarButtonItem" title="Filter" id="pqc-Hm-lzv">
+                                            <connections>
+                                                <action selector="filter:" destination="y2J-3S-AXc" id="Eka-Pn-PsS"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -598,6 +612,7 @@
                     <navigationItem key="navigationItem" id="vcC-Xf-ewZ"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="customNavigationItem" destination="n0U-Aq-wqS" id="Nzl-3w-JKo"/>
                         <outlet property="pageControl" destination="mTs-1q-8TD" id="Vqk-93-8Fl"/>
                         <outlet property="scrollView" destination="0sw-uR-Ymk" id="rIa-S6-daJ"/>
                     </connections>
@@ -1112,6 +1127,8 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AnalysisPagedViewController.h"/>
             <relationships>
                 <relationship kind="action" name="changePage"/>
+                <relationship kind="action" name="filter:"/>
+                <relationship kind="outlet" name="customNavigationItem" candidateClass="UINavigationItem"/>
                 <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
             </relationships>
@@ -1135,7 +1152,6 @@
                 <relationship kind="outlet" name="detailView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="mediaScrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="photoButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="saveBarButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="showMoreOptionsButton" candidateClass="UIButton"/>
             </relationships>

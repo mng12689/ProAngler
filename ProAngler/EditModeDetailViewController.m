@@ -42,7 +42,6 @@
 @end
 
 @implementation EditModeDetailViewController
-@synthesize photoButton = _photoButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

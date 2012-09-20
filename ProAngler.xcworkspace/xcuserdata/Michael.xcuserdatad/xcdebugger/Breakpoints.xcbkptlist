@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/PageOneMapViewController.m"
-         timestampString = "369730920.695004"
+         timestampString = "369812263.108369"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "106"
-         endingLineNumber = "106"
+         startingLineNumber = "98"
+         endingLineNumber = "98"
          landmarkName = "-filterForVenue:withPredicate:andAdditionalFilters:filterDate:filterTime:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -99,11 +99,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/PageOneMapViewController.m"
-         timestampString = "369730920.695004"
+         timestampString = "369812263.108369"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "116"
-         endingLineNumber = "116"
+         startingLineNumber = "108"
+         endingLineNumber = "108"
          landmarkName = "-filterForVenue:withPredicate:andAdditionalFilters:filterDate:filterTime:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -112,11 +112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/PageOneMapViewController.m"
-         timestampString = "369730920.695004"
+         timestampString = "369812263.108369"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "119"
-         endingLineNumber = "119"
+         startingLineNumber = "111"
+         endingLineNumber = "111"
          landmarkName = "-filterForVenue:withPredicate:andAdditionalFilters:filterDate:filterTime:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -177,11 +177,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/PageOneMapViewController.m"
-         timestampString = "369730920.695004"
+         timestampString = "369812263.108369"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "125"
-         endingLineNumber = "125"
+         startingLineNumber = "117"
+         endingLineNumber = "117"
          landmarkName = "-filterForVenue:withPredicate:andAdditionalFilters:filterDate:filterTime:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -203,7 +203,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/NewCatchViewController.m"
-         timestampString = "369776411.487932"
+         timestampString = "369811381.1672"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "78"
@@ -359,11 +359,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/NewCatchViewController.m"
-         timestampString = "369792202.606922"
+         timestampString = "369811381.1672"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "415"
-         endingLineNumber = "415"
+         startingLineNumber = "416"
+         endingLineNumber = "416"
          landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -385,11 +385,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/PageOneMapViewController.m"
-         timestampString = "369730920.695004"
+         timestampString = "369812263.108369"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "99"
-         endingLineNumber = "99"
+         startingLineNumber = "91"
+         endingLineNumber = "91"
          landmarkName = "-presentFilterModal:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -398,11 +398,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/AnalysisPagedViewController.m"
-         timestampString = "369783740.110217"
+         timestampString = "369812263.108369"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "52"
-         endingLineNumber = "52"
+         startingLineNumber = "58"
+         endingLineNumber = "58"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -554,11 +554,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ProAngler/NewCatchViewController.m"
-         timestampString = "369792202.606922"
+         timestampString = "369811381.1672"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "529"
-         endingLineNumber = "529"
+         startingLineNumber = "530"
+         endingLineNumber = "530"
          landmarkName = "-navigationController:willShowViewController:animated:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -625,6 +625,19 @@
          startingLineNumber = "240"
          endingLineNumber = "240"
          landmarkName = "-populateMainImageView"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ProAngler/FilterViewController.m"
+         timestampString = "369815211.736594"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "207"
+         endingLineNumber = "207"
+         landmarkName = "-saveFilter:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

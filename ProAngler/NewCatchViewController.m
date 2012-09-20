@@ -51,7 +51,6 @@
 @end
 
 @implementation NewCatchViewController
-@synthesize saveBarButton = _saveBarButton;
 
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -89,8 +88,6 @@
     self.showMoreOptionsButton.titleLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:.2];
     self.showMoreOptionsButton.titleLabel.shadowOffset = CGSizeMake(0, 1);
     
-    self.saveBarButton.
-    
     for (Photo *photo in self.photos){
         [self addImageToMediaScrollView:[UIImage imageWithData:photo.thumbnail]];
     } 
@@ -103,7 +100,6 @@
     [self setDetailView:nil];
     [self setPhotoButton:nil];
     [self setShowMoreOptionsButton:nil];
-    [self setSaveBarButton:nil];
     [super viewDidUnload];
 }
 

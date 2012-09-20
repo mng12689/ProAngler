@@ -22,7 +22,7 @@
 @interface AlbumViewController () <AlbumSettingsViewControllerDelegate>
 
 @property (strong) NSArray* catches;
--(void)loadData;
+-(void)loadDataSource;
 
 @end
 

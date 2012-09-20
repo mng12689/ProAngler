@@ -95,9 +95,9 @@
     if([super.speciesPickerView selectedRowInComponent:0]!=0)
     {
         int row = [super.speciesPickerView selectedRowInComponent:0];
-        NSString *titleForRow = [[super.speciesList objectAtIndex:row-1]name];
-        conditional = [conditional stringByAppendingFormat:@" AND species.name like \"%@\"",titleForRow];
-        [filters addObject:[NSString stringWithFormat:@"Species: %@",titleForRow]];
+        NSString *species = [[super.speciesList objectAtIndex:row-1]name];
+        conditional = [conditional stringByAppendingFormat:@" AND species.name like \"%@\"",species];
+        [filters addObject:[NSString stringWithFormat:@"Species: %@",species]];
     }
     
     if([super.dateRangePickerView selectedRowInComponent:0]!=0 && [super.dateRangePickerView selectedRowInComponent:1]!=0 && [super.dateRangePickerView selectedRowInComponent:2]!=0 && [super.dateRangePickerView selectedRowInComponent:3]!=0 )
@@ -112,7 +112,7 @@
         int endDay = [super.dateRangePickerView selectedRowInComponent:3];
         
         filterDate = [NSDictionary dictionaryWithObjects:@[@(startMonth),@(startDay),@(endMonth),@(endDay)] forKeys:@[@"startMonth",@"startDay",@"endMonth",@"endDay"]];
-        [filters addObject:[NSString stringWithFormat:@"Date in range: %@ %d - %@ %d",[months objectAtIndex:startMonth], startDay,[months objectAtIndex:endMonth], endDay]];
+        [filters addObject:[NSString stringWithFormat:@"Date in range: %@ %d - %@ %d",[months objectAtIndex:startMonth-1], startDay,[months objectAtIndex:endMonth-1], endDay]];
     }
 
     if([super.timeRangePickerView selectedRowInComponent:0]!=0 && [super.timeRangePickerView selectedRowInComponent:1]!=0 && [super.timeRangePickerView selectedRowInComponent:2]!=0 && [super.timeRangePickerView selectedRowInComponent:3]!=0)
@@ -143,9 +143,9 @@
     if([super.weatherConditionsPickerView selectedRowInComponent:0]!=0)
     {
         int row = [super.weatherConditionsPickerView selectedRowInComponent:0];
-        NSString *titleForRow = [[super.weatherDescriptionsList objectAtIndex:row-1]name];
-        conditional = [conditional stringByAppendingFormat:@" AND weatherDescription.name like \"%@\"",titleForRow];
-        [filters addObject:[NSString stringWithFormat:@"Weather Conditions: %@",titleForRow]];
+        NSString *weatherDescription = [[super.weatherDescriptionsList objectAtIndex:row-1]name];
+        conditional = [conditional stringByAppendingFormat:@" AND weatherDescription.name like \"%@\"",weatherDescription];
+        [filters addObject:[NSString stringWithFormat:@"Weather Conditions: %@",weatherDescription]];
     }
 
     if([super.temperatureRangePickerView selectedRowInComponent:0]!=0 && [super.temperatureRangePickerView selectedRowInComponent:1]!=0)
@@ -155,28 +155,28 @@
             invalidInputMessage = [invalidInputMessage stringByAppendingString:@"Temperature range: Min > Max\n"];
         }
         else {
-            int row1 = [super.temperatureRangePickerView selectedRowInComponent:0];
-            int row2 = [super.temperatureRangePickerView selectedRowInComponent:1];
+            int minTemp = [super.temperatureRangePickerView selectedRowInComponent:0]-1;
+            int maxTemp = [super.temperatureRangePickerView selectedRowInComponent:1]-1;
 
-            conditional = [conditional stringByAppendingFormat:@" AND tempF >= %d AND tempF =< %d",row1-1,row2-1];
-            [filters addObject:[NSString stringWithFormat:@"Temperature in range: %d - %d",row1-1,row2-1]];
+            conditional = [conditional stringByAppendingFormat:@" AND tempF >= %d AND tempF =< %d",minTemp,maxTemp];
+            [filters addObject:[NSString stringWithFormat:@"Temperature in range: %dºF - %dºF", minTemp,maxTemp]];
         }
     }
     
     if([super.baitDepthPickerView selectedRowInComponent:0]!=0)
     {
         int row = [super.baitDepthPickerView selectedRowInComponent:0];
-        NSString *titleForRow = [super.baitDepthList objectAtIndex:row-1];
-        conditional = [conditional stringByAppendingFormat:@" AND baitDepth like \"%@\"",titleForRow];
-        [filters addObject:[NSString stringWithFormat:@"Bait Depth: %@",titleForRow]];
+        NSString *baitDepth = [super.baitDepthList objectAtIndex:row-1];
+        conditional = [conditional stringByAppendingFormat:@" AND baitDepth like \"%@\"",baitDepth];
+        [filters addObject:[NSString stringWithFormat:@"Bait Depth: %@",baitDepth]];
     }
     
     if([super.spawningPickerView selectedRowInComponent:0]!=0)
     {
         int row = [super.spawningPickerView selectedRowInComponent:0];
-        NSString *titleForRow = [super.spawningList objectAtIndex:row-1];
-        conditional = [conditional stringByAppendingFormat:@" AND spawning == %@",titleForRow];
-        [filters addObject:[NSString stringWithFormat:@"Spawning: %@",titleForRow]];
+        NSString *spawning = [super.spawningList objectAtIndex:row-1];
+        conditional = [conditional stringByAppendingFormat:@" AND spawning == %@",spawning];
+        [filters addObject:[NSString stringWithFormat:@"Spawning: %@",spawning]];
     }
     
     if([super.depthRangePickerView selectedRowInComponent:0]!=0 && [super.depthRangePickerView selectedRowInComponent:1]!=0)
@@ -186,11 +186,11 @@
             invalidInputMessage = [invalidInputMessage stringByAppendingString:@"Depth range: Min > Max\n"];
         }
         else {
-            int row1 = [super.depthRangePickerView selectedRowInComponent:0];
-            int row2 = [super.depthRangePickerView selectedRowInComponent:1];
+            int minDepth = [super.depthRangePickerView selectedRowInComponent:0]-1;
+            int maxDepth = [super.depthRangePickerView selectedRowInComponent:1]-1;
 
-            conditional = [conditional stringByAppendingFormat:@" AND depth >= %d AND depth <= %d",row1-1,row2-1];
-            [filters addObject:[NSString stringWithFormat:@"Depth in range: %d - %d",row1-1,row2-1]];
+            conditional = [conditional stringByAppendingFormat:@" AND depth >= %d AND depth <= %d",minDepth,maxDepth];
+            [filters addObject:[NSString stringWithFormat:@"Depth in range: %d ft - %d ft",minDepth, maxDepth]];
         }
     }
 
@@ -201,47 +201,45 @@
             invalidInputMessage = [invalidInputMessage stringByAppendingString:@"Water temp range: Min > Max\n"];
         }
         else {
-            int row1 = [super.waterTempPickerView selectedRowInComponent:0];
-            int row2 = [super.waterTempPickerView selectedRowInComponent:1];
+            int minTemp = [super.waterTempRangePickerView selectedRowInComponent:0]+31;
+            int maxTemp = [super.waterTempRangePickerView selectedRowInComponent:1]+31;
 
-            conditional = [conditional stringByAppendingFormat:@" AND waterTemp >= %d AND waterTemp <= %d",row1-1,row2-1];
-            [filters addObject:[NSString stringWithFormat:@"Water temp in range: %d - %d",row1-1,row2-1]];
+            conditional = [conditional stringByAppendingFormat:@" AND waterTempF >= %d AND waterTempF <= %d",minTemp,maxTemp];
+            [filters addObject:[NSString stringWithFormat:@"Water temp in range: %dºF - %dºF",minTemp,maxTemp]];
         }
     }
 
     if([super.waterColorPickerView selectedRowInComponent:0]!=0)
     {
         int row = [super.waterColorPickerView selectedRowInComponent:0];
-        NSString *titleForRow = [super.waterColorList objectAtIndex:row-1];
-        conditional = [conditional stringByAppendingFormat:@" AND waterColor like \"%@\"",titleForRow];
-        [filters addObject:[NSString stringWithFormat:@"Water color: %@",titleForRow]];
+        NSString *waterColor = [super.waterColorList objectAtIndex:row-1];
+        conditional = [conditional stringByAppendingFormat:@" AND waterColor like \"%@\"",waterColor];
+        [filters addObject:[NSString stringWithFormat:@"Water color: %@",waterColor]];
     }
     
     if([super.waterLevelPickerView selectedRowInComponent:0]!=0)
     {
         int row = [super.waterLevelPickerView selectedRowInComponent:0];
-        NSString *titleForRow = [super.waterLevelList objectAtIndex:row-1];
-        conditional = [conditional stringByAppendingFormat:@" AND waterLevel like \"%@\"",titleForRow];
-        [filters addObject:[NSString stringWithFormat:@"Water level: %@",titleForRow]];
+        NSString *waterLevel = [super.waterLevelList objectAtIndex:row-1];
+        conditional = [conditional stringByAppendingFormat:@" AND waterLevel like \"%@\"",waterLevel];
+        [filters addObject:[NSString stringWithFormat:@"Water level: %@",waterLevel]];
     }
 
-    /*if([super.weightRangePickerView selectedRowInComponent:0]!=0 && [super.weightRangePickerView selectedRowInComponent:1]!=0)
+    if([super.weightRangePickerView selectedRowInComponent:0]!=0 && [super.weightRangePickerView selectedRowInComponent:1]!=0)
     {
         if ([super.weightRangePickerView selectedRowInComponent:0] >[super.weightRangePickerView selectedRowInComponent:1]) {
             invalidInput = YES;
             invalidInputMessage = [invalidInputMessage stringByAppendingString:@"Weight range: Min > Max"];
         }
-        else {
-            int row1 = [super.weightRangePickerView selectedRowInComponent:0];
-            int row2 = [super.weightRangePickerView selectedRowInComponent:1];
+        else
+        {
+            int minOZ = ([super.weightRangePickerView selectedRowInComponent:0]-1)*16;
+            int maxOZ = ([super.weightRangePickerView selectedRowInComponent:1]-1)*16;
 
-            NSString *titleForRow1 = [NSString stringWithFormat:@"%d",row1-1];
-            NSString *titleForRow2 = [NSString stringWithFormat:@"%d",row2-1];
-
-            conditional = [conditional stringByAppendingFormat:@" AND weightLB >= %@ AND weightLB <= %@",titleForRow1,titleForRow2];
-            [filters addObject:[NSString stringWithFormat:@"Weight in range: %@ - %@",titleForRow1,titleForRow2]];
+            conditional = [conditional stringByAppendingFormat:@" AND weightOZ >= %d AND weightOZ <= %d",minOZ,maxOZ];
+            [filters addObject:[NSString stringWithFormat:@"Weight in range: %d LB - %d LB",(int)(minOZ/16),(int)(maxOZ/16)]];
         }
-    }*/
+    }
 
     if([super.lengthRangePickerView selectedRowInComponent:0]!=0 && [super.lengthRangePickerView selectedRowInComponent:1]!=0)
     {
@@ -250,28 +248,28 @@
             invalidInputMessage = [invalidInputMessage stringByAppendingString:@"Length range: Min > Max"];
         }
         else {
-            int row1 = [super.lengthRangePickerView selectedRowInComponent:0];
-            int row2 = [super.lengthRangePickerView selectedRowInComponent:1];
+            int minLength = [super.lengthRangePickerView selectedRowInComponent:0]-1;
+            int maxLength = [super.lengthRangePickerView selectedRowInComponent:1]-1;
 
-            conditional = [conditional stringByAppendingFormat:@" AND length >= %d AND length <= %d",row1-1,row2-1];
-            [filters addObject:[NSString stringWithFormat:@"Length in range: %d - %d",row1-1,row2-1]];
+            conditional = [conditional stringByAppendingFormat:@" AND length >= %d AND length <= %d",minLength,maxLength];
+            [filters addObject:[NSString stringWithFormat:@"Length in range: %d in - %d in",minLength,maxLength]];
         }
     }
     
     if([super.baitPickerView selectedRowInComponent:0]!=0)
     {
         int row = [super.baitPickerView selectedRowInComponent:0];
-        NSString *titleForRow = [super.baitList objectAtIndex:row-1];
-        conditional = [conditional stringByAppendingFormat:@" AND bait.name like \"%@\"",titleForRow];
-        [filters addObject:[NSString stringWithFormat:@"Bait: %@",titleForRow]];
+        NSString *bait = [super.baitList objectAtIndex:row-1];
+        conditional = [conditional stringByAppendingFormat:@" AND bait.name like \"%@\"",bait];
+        [filters addObject:[NSString stringWithFormat:@"Bait: %@",bait]];
     }
     
     if([super.structurePickerView selectedRowInComponent:0]!=0)
     {
         int row = [super.structurePickerView selectedRowInComponent:0];
-        NSString *titleForRow = [super.structureList objectAtIndex:row-1];
-        conditional = [conditional stringByAppendingFormat:@" AND structure.name like \"%@\"",titleForRow];
-        [filters addObject:[NSString stringWithFormat:@"Structure: %@",titleForRow]];
+        NSString *structure = [super.structureList objectAtIndex:row-1];
+        conditional = [conditional stringByAppendingFormat:@" AND structure.name like \"%@\"",structure];
+        [filters addObject:[NSString stringWithFormat:@"Structure: %@",structure]];
     }
     
     if (invalidInput) {

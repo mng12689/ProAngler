@@ -23,12 +23,10 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UILabel *venueLabel;
 @property (weak, nonatomic) IBOutlet UITextView *additionalFiltersTextView;
-@property (weak, nonatomic) IBOutlet UIButton *filterButton;
 
 @property (strong) NSArray* catchesToBeDisplayed;
 @property (strong) NSPredicate *currentFilters;
 
-- (IBAction)presentFilterModal:(id)sender;
 -(void)annotateMap;
 -(void)loadDataWithPredicate:(NSPredicate*)predicate;
 
@@ -56,11 +54,6 @@
     
     self.mapView.delegate = self;
     
-    self.filterButton.layer.cornerRadius = 8;
-    self.filterButton.layer.masksToBounds = YES;
-    self.filterButton.titleLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:.2];
-    self.filterButton.titleLabel.shadowOffset = CGSizeMake(0, 1);
-    
     self.mapView.mapType = MKMapTypeHybrid;
     self.mapView.showsUserLocation = YES;
     self.mapView.zoomEnabled = YES;
@@ -80,7 +73,6 @@
 
 - (void)viewDidUnload
 {
-    [self setFilterButton:nil];
     [super viewDidUnload];
     [self setMapView:nil];
     [self setVenueLabel:nil];
@@ -92,7 +84,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (IBAction)presentFilterModal:(id)sender
+- (void)presentFilterModal
 {
     FilterViewController *filterViewController = [FilterViewController new];
     filterViewController.delegate = self;

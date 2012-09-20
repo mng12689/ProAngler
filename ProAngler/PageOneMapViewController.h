@@ -12,5 +12,6 @@
 @interface PageOneMapViewController : UIViewController
 
 @property (strong) AnalysisPagedViewController *analysisViewController;
+-(void)presentFilterModal;
 
 @end
