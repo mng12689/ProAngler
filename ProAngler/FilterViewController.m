@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface FilterViewController ()
+@interface FilterViewController () <UIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *detailView;
@@ -23,7 +23,6 @@
 @end
 
 @implementation FilterViewController
-@synthesize showMoreOptionsButton = _showMoreOptionsButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -297,4 +296,17 @@
         self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     }
 }
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    if (pickerView == super.dateRangePickerView)
+    {
+        if (component == 0) 
+            [pickerView reloadComponent:1];
+        
+        else if (component == 2)
+            [pickerView reloadComponent:3];
+    }
+}
+
 @end

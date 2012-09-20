@@ -162,7 +162,7 @@
        
 {
     if(pickerView == self.sizePickerView)
-        
+    {
         if(component == 0)
             return 1002;
         
@@ -171,6 +171,7 @@
         
         else
             return 122;
+    }
         
     else if(pickerView == self.venuePickerView)
         return [self.venueList count]+1;
@@ -203,18 +204,35 @@
         return [self.baitDepthList count]+1;
     
     else if(pickerView == self.dateRangePickerView)
+    {
         
         if (component == 0 || component == 2)
             return 13;
+        
+        /****** return correct number of days based on month ****/
+        
         else
-            return 32;
+        {
+            NSCalendar *calendar = [NSCalendar currentCalendar];
+            NSDateComponents *dateComps = [NSDateComponents new];
+            
+            if (component == 1)
+                dateComps.month = [pickerView selectedRowInComponent:0];
+            else if (component == 3)
+                dateComps.month = [pickerView selectedRowInComponent:2];
+            
+            NSRange daysInSelectedMonth = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:[calendar dateFromComponents:dateComps]];
+            return daysInSelectedMonth.length + 1;
+        }
+    }
     
-    else if (pickerView == self.timeRangePickerView)
+    else if (pickerView == self.timeRangePickerView){
         
         if (component == 0 || component == 2)
             return 13;
         else
             return 3;
+    }
     
     else if (pickerView == self.weatherConditionsPickerView)
         return [self.weatherDescriptionsList count] +1;
@@ -228,8 +246,7 @@
     else if (pickerView == self.lengthRangePickerView)
         return 122;
 
-    else
-        return 0;
+    return 0;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component 
