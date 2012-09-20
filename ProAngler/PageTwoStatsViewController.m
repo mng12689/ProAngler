@@ -95,7 +95,8 @@
         else
             largestCatch = @"\n\t\tLargest Catch:";
         
-        NSString *totalCatches = [NSString stringWithFormat:@"\n\t\tTotal catches: %@",species.totalCatches];
+        
+        NSString *totalCatches = [NSString stringWithFormat:@"\n\t\tTotal catches: %d",species.catches.count];
         [stats addObjectsFromArray: [NSArray arrayWithObjects:speciesString,largestCatch,totalCatches, nil]];
     }
 
@@ -128,7 +129,8 @@
             else
                 largestCatchString = @"\n\t\t\tLargest Catch:";
             
-            NSString *totalCatchesString = [NSString stringWithFormat:@"\n\t\t\tTotal catches: %d",[speciesForVenue count]];
+            NSArray *catchesPerSpeciesAtVenue = [catchesForVenue filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"species.name like \"%@\"",species.name]];
+            NSString *totalCatchesString = [NSString stringWithFormat:@"\n\t\t\tTotal catches: %d",[catchesPerSpeciesAtVenue count]];
             
             [stats addObjectsFromArray: [NSArray arrayWithObjects:speciesString,largestCatchString,totalCatchesString, nil]];
         }

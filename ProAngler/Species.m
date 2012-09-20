@@ -14,7 +14,6 @@
 @implementation Species
 
 @dynamic name;
-@dynamic totalCatches;
 @dynamic catches;
 @dynamic venues;
 @dynamic largestCatch;

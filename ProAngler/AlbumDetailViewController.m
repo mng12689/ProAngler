@@ -89,8 +89,12 @@
         
     self.twitterButton.layer.cornerRadius = 8;
     self.twitterButton.layer.masksToBounds = YES;
+    
     self.emailButton.layer.cornerRadius = 8;
     self.emailButton.layer.masksToBounds = YES;
+    
+    self.addToWallOfFameButton.layer.cornerRadius = 8;
+    self.addToWallOfFameButton.layer.masksToBounds = YES;
     
     UIView *mainView = [self.scrollView.subviews objectAtIndex:0];
     self.scrollView.contentSize = CGSizeMake(mainView.frame.size.width, mainView.frame.size.height);
@@ -117,6 +121,8 @@
     
     self.mainImageView.layer.cornerRadius = 5;
     self.mainImageView.layer.masksToBounds = YES;
+    self.mainImageView.layer.borderColor = [[UIColor brownColor]CGColor];
+    self.mainImageView.layer.borderWidth = 2;
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"page_texture.png"]];
     
@@ -211,6 +217,8 @@
         label.shadowOffset = CGSizeMake(0, 1);
     
         [self.mainImageView addSubview:label];
+        
+        self.addToWallOfFameButton.userInteractionEnabled = NO;
     }
 }
 

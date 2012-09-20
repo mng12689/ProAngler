@@ -14,7 +14,6 @@
 @interface Species : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSNumber * totalCatches;
 @property (nonatomic, retain) NSSet *catches;
 @property (nonatomic, retain) NSSet *venues;
 @property (nonatomic, retain) Catch *largestCatch;

@@ -7,19 +7,19 @@
     <entity name="Catch" representedClassName="Catch">
         <attribute name="baitDepth" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="depth" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="humidity" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="length" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="depth" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="humidity" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="length" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="spawning" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="tempF" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="visibility" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="tempF" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="visibility" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="waterColor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="waterLevel" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="waterTempF" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="weightOZ" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="waterTempF" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="weightOZ" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="windDir" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="windSpeedMPH" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="windSpeedMPH" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="bait" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Bait" inverseName="catches" inverseEntity="Bait" syncable="YES"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="catch" inverseEntity="Photo" syncable="YES"/>
         <relationship name="species" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Species" syncable="YES"/>
@@ -38,7 +38,6 @@
     </entity>
     <entity name="Species" representedClassName="Species" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="totalCatches" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="catches" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Catch" inverseName="species" inverseEntity="Catch" syncable="YES"/>
         <relationship name="largestCatch" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Catch" syncable="YES"/>
         <relationship name="venues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Venue" inverseName="species" inverseEntity="Venue" syncable="YES"/>

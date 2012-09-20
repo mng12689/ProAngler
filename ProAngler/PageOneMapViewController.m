@@ -236,12 +236,12 @@
     
     albumDetailForCatch.scrollView.frame = CGRectMake(albumDetailForCatch.scrollView.frame.origin.x, albumDetailForCatch.scrollView.frame.origin.y + navBar.frame.size.height, albumDetailForCatch.scrollView.frame.size.width, albumDetailForCatch.scrollView.frame.size.height - navBar.frame.size.height);
     
-    [self presentModalViewController:albumDetailForCatch animated:YES];
+    [self.analysisViewController presentModalViewController:albumDetailForCatch animated:YES];
 }
 
 -(void)done
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self.analysisViewController dismissModalViewControllerAnimated:YES];
 }
 
 -(void)loadDataWithPredicate:(NSPredicate *)predicate

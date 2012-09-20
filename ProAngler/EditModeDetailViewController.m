@@ -246,9 +246,6 @@
         
         if (newSpecies)
         {
-            int newTotal = [newSpecies.totalCatches intValue] + 1;
-            newSpecies.totalCatches = [NSNumber numberWithInt:newTotal];
-            
             if (self.catch.weightOZ){
                 if ([newSpecies.largestCatch.weightOZ intValue] < [self.catch.weightOZ intValue])
                     newSpecies.largestCatch = self.catch;
@@ -256,8 +253,7 @@
         }
         
         /********* venue/species entities updates **********/
-        if (self.catch.venue && newSpecies && ![self.catch.venue.species containsObject:newSpecies] && ![newSpecies.venues containsObject:self.catch.venue]) {
-            [self.catch.venue addSpeciesObject:newSpecies];
+        if (self.catch.venue && newSpecies) {
             [newSpecies addVenuesObject:self.catch.venue];
         }
         

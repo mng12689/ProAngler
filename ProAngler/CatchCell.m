@@ -30,6 +30,8 @@
     
     self.customImageView.layer.cornerRadius = 3;
     self.customImageView.layer.masksToBounds = YES;
+    self.customImageView.layer.borderColor = [[UIColor brownColor]CGColor];
+    self.customImageView.layer.borderWidth = 2;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

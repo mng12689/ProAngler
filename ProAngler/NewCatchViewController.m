@@ -51,6 +51,7 @@
 @end
 
 @implementation NewCatchViewController
+@synthesize saveBarButton = _saveBarButton;
 
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -76,6 +77,7 @@
     [appDelegate setTitle:@"Record Catch" forNavItem:self.navigationItem];
     
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+    
     self.mediaScrollView.layer.cornerRadius = 5;
     self.mediaScrollView.backgroundColor = [UIColor colorWithHue:0 saturation:0 brightness:100 alpha:.2];
     
@@ -86,6 +88,8 @@
     self.showMoreOptionsButton.layer.masksToBounds = YES;
     self.showMoreOptionsButton.titleLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:.2];
     self.showMoreOptionsButton.titleLabel.shadowOffset = CGSizeMake(0, 1);
+    
+    self.saveBarButton.
     
     for (Photo *photo in self.photos){
         [self addImageToMediaScrollView:[UIImage imageWithData:photo.thumbnail]];
@@ -99,6 +103,7 @@
     [self setDetailView:nil];
     [self setPhotoButton:nil];
     [self setShowMoreOptionsButton:nil];
+    [self setSaveBarButton:nil];
     [super viewDidUnload];
 }
 
@@ -200,9 +205,6 @@
         
         if (catch.species)
         {
-            int newTotal = [catch.species.totalCatches intValue] + 1;
-            catch.species.totalCatches = [NSNumber numberWithInt:newTotal];
-            
             if (catch.weightOZ) {
                 if ([catch.species.largestCatch.weightOZ intValue] < [catch.weightOZ intValue])
                     catch.species.largestCatch = catch;
@@ -210,9 +212,8 @@
         }
         
         /********* venue/species entities updates **********/
-        if (catch.venue && catch.species && ![catch.venue.species containsObject:catch.species] && ![catch.species.venues containsObject:catch.venue]) {
+        if (catch.venue && catch.species) {
             [catch.venue addSpeciesObject:catch.species];
-            [catch.species addVenuesObject:catch.venue];
         }
         
         NSError *error;
@@ -525,6 +526,12 @@
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"CatchAddedOrModified" object:self];
+}
+
+-(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
+    [appDelegate setTitle:viewController.navigationItem.title forNavItem:viewController.navigationItem];
 }
 
 @end
