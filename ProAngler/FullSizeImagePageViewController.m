@@ -38,8 +38,10 @@
     for (UIGestureRecognizer *gR in self.view.gestureRecognizers)
         gR.delegate = self;
     
-    if (self.showFullStatsOption)
+    if (self.showFullStatsOption){
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Full Stats" style:UIBarButtonItemStyleBordered target:self action:@selector(showFullStats)];
+        //self.navigationItem.rightBarButtonItem.tintColor = [UIColor darkGrayColor];
+    }
     
     AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
     [appDelegate setTitle:[NSString stringWithFormat:@"Photo %d of %d",self.currentPage+1,self.photosForPages.count] forNavItem:self.navigationItem];    
@@ -116,6 +118,7 @@
     UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0,0,320,44)];
     UINavigationItem *navItem = [UINavigationItem new];
     navItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(done)];
+    navItem.rightBarButtonItem.tintColor = [UIColor darkGrayColor];
     navBar.items = @[navItem];
 
     [albumDetailForCatch.view addSubview:navBar];

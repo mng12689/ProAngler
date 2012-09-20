@@ -223,11 +223,7 @@
         return 132;
     
     else if (pickerView == self.weightRangePickerView)
-        
-        if (component == 0 || component == 2)
-            return 1002;
-        else
-            return 17;
+        return 1002;
         
     else if (pickerView == self.lengthRangePickerView)
         return 122;

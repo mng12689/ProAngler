@@ -21,6 +21,7 @@
 #import "FullSizeImagePageViewController.h"
 #import "EditModeDetailViewController.h"
 #import "WeatherDescription.h"
+#import "AppDelegate.h"
 
 @interface AlbumDetailViewController () <MFMailComposeViewControllerDelegate, UIActionSheetDelegate>
 
@@ -332,6 +333,9 @@
 {
     MFMailComposeViewController *emailViewController = [MFMailComposeViewController new];
     emailViewController.mailComposeDelegate = self;
+    
+    AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
+    [appDelegate setTitle:@"hi" forNavItem:emailViewController.navigationBar.topItem];
     
     if (autofill){
         [emailViewController setSubject:[NSString stringWithFormat:@"%@ - %@",self.dateLabel.text,self.venueLabel.text]];

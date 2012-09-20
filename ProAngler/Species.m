@@ -16,6 +16,5 @@
 @dynamic name;
 @dynamic catches;
 @dynamic venues;
-@dynamic largestCatch;
 
 @end

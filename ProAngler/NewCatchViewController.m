@@ -197,19 +197,10 @@
         if([super.baitDepthPickerView selectedRowInComponent:0]!=0)
             catch.baitDepth = [super.baitDepthList objectAtIndex:[super.baitDepthPickerView selectedRowInComponent:0]-1];
         
-        /********* species entity updates **********/
-        
-        if (catch.species)
-        {
-            if (catch.weightOZ) {
-                if ([catch.species.largestCatch.weightOZ intValue] < [catch.weightOZ intValue])
-                    catch.species.largestCatch = catch;
-            }
-        }
-        
         /********* venue/species entities updates **********/
         if (catch.venue && catch.species) {
             [catch.venue addSpeciesObject:catch.species];
+            [catch.species addVenuesObject:catch.venue];
         }
         
         NSError *error;

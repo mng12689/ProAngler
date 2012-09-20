@@ -129,6 +129,9 @@
         }
         
         int endTime = [super.timeRangePickerView selectedRowInComponent:2];
+        if (endTime == 12)
+            endTime = 0;
+        
         int militaryEndTime = endTime;
         NSString *endIndicator = @"AM";
         if ([super.timeRangePickerView selectedRowInComponent:3] == 2){
@@ -259,7 +262,7 @@
     if([super.baitPickerView selectedRowInComponent:0]!=0)
     {
         int row = [super.baitPickerView selectedRowInComponent:0];
-        NSString *bait = [super.baitList objectAtIndex:row-1];
+        NSString *bait = [[super.baitList objectAtIndex:row-1]name];
         conditional = [conditional stringByAppendingFormat:@" AND bait.name like \"%@\"",bait];
         [filters addObject:[NSString stringWithFormat:@"Bait: %@",bait]];
     }
@@ -267,7 +270,7 @@
     if([super.structurePickerView selectedRowInComponent:0]!=0)
     {
         int row = [super.structurePickerView selectedRowInComponent:0];
-        NSString *structure = [super.structureList objectAtIndex:row-1];
+        NSString *structure = [[super.structureList objectAtIndex:row-1]name];
         conditional = [conditional stringByAppendingFormat:@" AND structure.name like \"%@\"",structure];
         [filters addObject:[NSString stringWithFormat:@"Structure: %@",structure]];
     }

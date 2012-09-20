@@ -22,7 +22,7 @@
         <attribute name="windSpeedMPH" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="bait" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Bait" inverseName="catches" inverseEntity="Bait" syncable="YES"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="catch" inverseEntity="Photo" syncable="YES"/>
-        <relationship name="species" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Species" syncable="YES"/>
+        <relationship name="species" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Species" inverseName="catches" inverseEntity="Species" syncable="YES"/>
         <relationship name="structure" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Structure" inverseName="catches" inverseEntity="Structure" syncable="YES"/>
         <relationship name="venue" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Venue" inverseName="catches" inverseEntity="Venue" syncable="YES"/>
         <relationship name="weatherDescription" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="WeatherDescription" inverseName="catches" inverseEntity="WeatherDescription" syncable="YES"/>
@@ -39,7 +39,6 @@
     <entity name="Species" representedClassName="Species" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="catches" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Catch" inverseName="species" inverseEntity="Catch" syncable="YES"/>
-        <relationship name="largestCatch" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Catch" syncable="YES"/>
         <relationship name="venues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Venue" inverseName="species" inverseEntity="Venue" syncable="YES"/>
     </entity>
     <entity name="Structure" representedClassName="Structure" syncable="YES">
@@ -56,12 +55,12 @@
         <relationship name="catches" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Catch" inverseName="weatherDescription" inverseEntity="Catch" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Bait" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Catch" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Photo" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Species" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Structure" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Venue" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="WeatherDescription" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Bait" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="Catch" positionX="0" positionY="0" width="128" height="285"/>
+        <element name="Photo" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="Species" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="Structure" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="Venue" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="WeatherDescription" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>

@@ -66,8 +66,10 @@
     self.photoButton.layer.masksToBounds = YES;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveChanges)];
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor greenColor];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
-    
+    self.navigationItem.leftBarButtonItem.tintColor = [UIColor darkGrayColor];
+
     AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
     [appDelegate setTitle:@"Edit Catch" forNavItem:self.navigationItem];
     
@@ -241,19 +243,10 @@
         else
             self.catch.baitDepth = nil;
         
-        /********* species entity updates **********/
-        
-        if (newSpecies)
-        {
-            if (self.catch.weightOZ){
-                if ([newSpecies.largestCatch.weightOZ intValue] < [self.catch.weightOZ intValue])
-                    newSpecies.largestCatch = self.catch;
-            }
-        }
-        
         /********* venue/species entities updates **********/
         if (self.catch.venue && newSpecies) {
             [newSpecies addVenuesObject:self.catch.venue];
+            [self.catch.venue addSpeciesObject:newSpecies];
         }
         
         self.catch.species = newSpecies;

@@ -16,7 +16,6 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *catches;
 @property (nonatomic, retain) NSSet *venues;
-@property (nonatomic, retain) Catch *largestCatch;
 @end
 
 @interface Species (CoreDataGeneratedAccessors)

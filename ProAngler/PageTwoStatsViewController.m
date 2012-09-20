@@ -88,16 +88,19 @@
     {
         NSString *speciesString = [NSString stringWithFormat:@"\n\t%@",species.name];
         
-        NSString *largestCatch;
-        int weightOZ = [species.largestCatch.weightOZ intValue];
-        if (weightOZ != -1)
-            largestCatch = [NSString stringWithFormat:@"\n\t\tLargest Catch: %d lbs %d oz",weightOZ/16,weightOZ%16];
-        else
-            largestCatch = @"\n\t\tLargest Catch:";
+        NSSortDescriptor *sortByWeight = [[NSSortDescriptor alloc]initWithKey:@"weightOZ" ascending:NO];
+        NSArray *catchesSortedByWeight = [[species.catches allObjects] sortedArrayUsingDescriptors:@[sortByWeight]];
+        Catch *largestCatch = [catchesSortedByWeight objectAtIndex:0];
         
+        NSString *largestCatchString;
+        if ([largestCatch.weightOZ intValue] != -1)
+            largestCatchString = [NSString stringWithFormat:@"\n\t\tLargest Catch: %d lbs %d oz",[largestCatch.weightOZ intValue]/16, [largestCatch.weightOZ intValue]%16];
+        else
+            largestCatchString = @"\n\t\tLargest Catch:";
+
         
         NSString *totalCatches = [NSString stringWithFormat:@"\n\t\tTotal catches: %d",species.catches.count];
-        [stats addObjectsFromArray: [NSArray arrayWithObjects:speciesString,largestCatch,totalCatches, nil]];
+        [stats addObjectsFromArray: [NSArray arrayWithObjects:speciesString,largestCatchString,totalCatches, nil]];
     }
 
     /********* stats by venue **********/
@@ -112,7 +115,6 @@
         NSString *venueString = [NSString stringWithFormat:@"\n\t%@",venue.name];
         [stats addObject:venueString];
         
-        NSSortDescriptor *sortByWeight = [[NSSortDescriptor alloc]initWithKey:@"weightOZ" ascending:NO];
         NSArray *speciesForVenue = [[venue.species allObjects] sortedArrayUsingDescriptors:@[[[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES]]];
         NSArray *catchesForVenue = [venue.catches allObjects];
         
@@ -120,6 +122,7 @@
         {
             NSString *speciesString = [NSString stringWithFormat:@"\n\t\t%@",species.name];
             
+            NSSortDescriptor *sortByWeight = [[NSSortDescriptor alloc]initWithKey:@"weightOZ" ascending:NO];
             NSArray *catchesSortedByWeight = [[catchesForVenue filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"species.name like %@",species.name]] sortedArrayUsingDescriptors:@[sortByWeight]];
             Catch *largestCatch = [catchesSortedByWeight objectAtIndex:0];
             
@@ -129,7 +132,7 @@
             else
                 largestCatchString = @"\n\t\t\tLargest Catch:";
             
-            NSArray *catchesPerSpeciesAtVenue = [catchesForVenue filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"species.name like \"%@\"",species.name]];
+            NSArray *catchesPerSpeciesAtVenue = [catchesForVenue filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"species == %@",species]];
             NSString *totalCatchesString = [NSString stringWithFormat:@"\n\t\t\tTotal catches: %d",[catchesPerSpeciesAtVenue count]];
             
             [stats addObjectsFromArray: [NSArray arrayWithObjects:speciesString,largestCatchString,totalCatchesString, nil]];
