@@ -33,12 +33,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.textField.delegate = self;
-    
+        
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark_wood.jpg"]];
     
     AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
     [appDelegate setTitle:[NSString stringWithFormat:@"Add %@",self.attributeType] forNavItem:self.navItem];
+    
+    self.textField.delegate = self;
 }
 
 - (void)viewDidUnload

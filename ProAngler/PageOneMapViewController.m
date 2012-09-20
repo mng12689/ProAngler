@@ -222,6 +222,7 @@
     UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0,0,320,44)];
     UINavigationItem *navItem = [UINavigationItem new];
     navItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(done)];
+    navItem.rightBarButtonItem.tintColor= [UIColor darkGrayColor];
     navBar.items = @[navItem];
     
     [albumDetailForCatch.view addSubview:navBar];
