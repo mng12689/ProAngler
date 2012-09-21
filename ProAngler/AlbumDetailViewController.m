@@ -238,8 +238,10 @@
     [self.mainImageView addSubview:mainImageView];
     self.currentlySelectedPhoto = [self.photos objectAtIndex:0];
     
-    if ([[self.currentlySelectedPhoto trophyFish] boolValue] == YES)
+    if ([[self.currentlySelectedPhoto trophyFish] boolValue] == YES){
         self.addToWallOfFameButton.userInteractionEnabled = NO;
+        [self addInductionLabel];
+    }
     else
         self.addToWallOfFameButton.userInteractionEnabled = YES;
 }
@@ -273,7 +275,9 @@
 - (IBAction)addToWallOfFame:(id)sender
 {
     self.currentlySelectedPhoto.trophyFish = [NSNumber numberWithBool:YES];
+    self.currentlySelectedPhoto.inductionDate = [NSDate date];
     self.addToWallOfFameButton.userInteractionEnabled = NO;
+    [self addInductionLabel];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"AddToWOF" object:self];
     [ProAnglerDataStore saveContext:nil];
@@ -417,8 +421,10 @@
             self.currentlySelectedPhoto = [self.photos objectAtIndex:i];
             mainImageView.image = [UIImage imageWithData:[self.currentlySelectedPhoto screenSizeImage]];
             
-            if ([[self.currentlySelectedPhoto trophyFish] boolValue] == YES)
+            if ([[self.currentlySelectedPhoto trophyFish] boolValue] == YES){
                 self.addToWallOfFameButton.userInteractionEnabled = NO;
+                [self addInductionLabel];
+            }
             else
                 self.addToWallOfFameButton.userInteractionEnabled = YES;
             
@@ -435,6 +441,18 @@
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:editViewController];
 
     [self presentModalViewController:navController animated:YES];
+}
+
+-(void)addInductionLabel
+{
+    UILabel *inductedLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.addToWallOfFameButton.frame.size.width, self.addToWallOfFameButton.frame.size.height)];
+    inductedLabel.textAlignment = UITextAlignmentCenter;
+    inductedLabel.text = [NSString stringWithFormat:@"Inducted to Wall of Fame\n%@", [self.currentlySelectedPhoto inductionDateToString]];
+    inductedLabel.font = [UIFont fontWithName:@"Cochin" size:10];
+    inductedLabel.numberOfLines = 2;
+    inductedLabel.layer.zPosition = 1;
+    inductedLabel.backgroundColor = [UIColor clearColor];
+    [self.addToWallOfFameButton addSubview:inductedLabel];
 }
 
 @end

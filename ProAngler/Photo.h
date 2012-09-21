@@ -19,5 +19,8 @@
 @property (nonatomic, retain) NSNumber * trophyFish;
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) Catch *catch;
+@property (nonatomic, retain) NSDate * inductionDate;
+
+- (NSString*)inductionDateToString;
 
 @end

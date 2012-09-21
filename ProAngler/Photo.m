@@ -18,11 +18,19 @@
 @dynamic trophyFish;
 @dynamic createdAt;
 @dynamic catch;
+@dynamic inductionDate;
 
-- (void) awakeFromInsert
+- (void)awakeFromInsert
 {
     [super awakeFromInsert];
     self.createdAt = [NSDate date];
+}
+
+- (NSString*)inductionDateToString
+{
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateStyle:NSDateFormatterShortStyle];
+    return [format stringFromDate:self.inductionDate];
 }
 
 @end
