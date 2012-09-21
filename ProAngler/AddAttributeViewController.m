@@ -72,13 +72,9 @@
     }
 }
 
-- (IBAction)cancelModal:(id)sender {
-   	[self dismissViewControllerAnimated:YES completion:nil];
-}
-
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (IBAction)cancelModal:(id)sender
 {
-    [self.textField resignFirstResponder];
+   	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)txtField

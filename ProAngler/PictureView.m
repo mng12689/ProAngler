@@ -34,19 +34,52 @@
         self.imageView.userInteractionEnabled = YES;
         [self.imageView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:wallViewController action:@selector(showFullSizeImage:)]];
         
-        // portrait image
-        if (self.imageView.image.size.height > self.imageView.image.size.width) {
+        BOOL portrait = NO;
+        if (self.imageView.image.size.height > self.imageView.image.size.width) 
+            portrait = YES;
+
+        if (portrait) {
             double imageWidth = self.imageView.frame.size.height * self.imageView.image.size.width / self.imageView.image.size.height;
             self.frameView = [[UIView alloc] initWithFrame:CGRectMake(0,0,imageWidth + 20,self.imageView.frame.size.height + 20)];
         }
-        
-        // landscape image
         else {
             double imageHeight = self.imageView.frame.size.width * self.imageView.image.size.height / self.imageView.image.size.width;
             self.frameView = [[UIView alloc]initWithFrame:CGRectMake(0,0,self.imageView.frame.size.width + 20,imageHeight + 20)];
         }
         self.frameView.center = self.imageView.center;
-        self.frameView.backgroundColor = [UIColor brownColor];
+        
+        // create custom frame
+        UIImageView *leftFrameSide = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 10, self.frameView.frame.size.height)];
+        UIImage *leftImage = [UIImage imageNamed:@"wood_frame_left_side.png"];
+        leftFrameSide.image = leftImage;
+        if (portrait)
+            leftFrameSide.layer.zPosition = 1;
+        
+        [self.frameView addSubview:leftFrameSide];
+        
+        UIImageView *rightFrameSide = [[UIImageView alloc]initWithFrame:CGRectMake(self.frameView.frame.size.width-10, 0, 10, self.frameView.frame.size.height)];
+        UIImage *rightImage = [UIImage imageNamed:@"wood_frame_right_side.png"];
+        rightFrameSide.image = rightImage;
+        if (portrait)
+            rightFrameSide.layer.zPosition = 1;
+        
+        [self.frameView addSubview:rightFrameSide];
+        
+        UIImageView *topFrameSide = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.frameView.frame.size.width, 10)];
+        UIImage *topImage = [UIImage imageNamed:@"wood_frame_top_side.png"];
+        topFrameSide.image = topImage;
+        if (!portrait)
+            topFrameSide.layer.zPosition = 1;
+        
+        [self.frameView addSubview:topFrameSide];
+
+        UIImageView *bottomFrameSide = [[UIImageView alloc]initWithFrame:CGRectMake(0, self.frameView.frame.size.height - 10, self.frameView.frame.size.width, 10)];
+        UIImage *bottomImage = [UIImage imageNamed:@"wood_frame_bottom_side.png"];
+        bottomFrameSide.image = bottomImage;
+        if (!portrait)
+            bottomFrameSide.layer.zPosition = 1;
+
+        [self.frameView addSubview:bottomFrameSide];
         
         [self addSubview:self.frameView];
         [self addSubview:self.imageView];
