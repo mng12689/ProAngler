@@ -56,7 +56,7 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark_wood.jpg"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark_wood_slight_gradient.jpg"]];
 
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.detailView.frame.origin.y + self.detailView.frame.size.height);
     self.mediaScrollView.layer.cornerRadius = 5;
@@ -441,6 +441,7 @@
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 66*self.mediaScrollView.subviews.count, 4, 62, 62)];
     imageView.image = image;
     imageView.opaque = YES;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.layer.cornerRadius = 5;
     imageView.layer.masksToBounds = YES;
     imageView.userInteractionEnabled = YES;

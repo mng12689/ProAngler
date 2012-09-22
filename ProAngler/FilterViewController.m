@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *detailView;
 @property (weak, nonatomic) IBOutlet UIButton *showMoreOptionsButton;
+@property (weak, nonatomic) IBOutlet UINavigationItem *customNavigationItem;
 
 - (IBAction)saveFilter:(id)sender;
 - (IBAction)cancelModal:(id)sender;
@@ -23,6 +24,7 @@
 @end
 
 @implementation FilterViewController
+@synthesize customNavigationItem = _customNavigationItem;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,7 +42,7 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark_wood.jpg"]];
     
     AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
-    [appDelegate setTitle:@"Filter" forNavItem:self.navigationItem];
+    [appDelegate setTitle:@"Filter" forNavItem:self.customNavigationItem];
 
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     
@@ -54,6 +56,7 @@
 {
     [self setDetailView:nil];
     [self setShowMoreOptionsButton:nil];
+    [self setCustomNavigationItem:nil];
     [super viewDidUnload];
     [self setScrollView:nil];
 }

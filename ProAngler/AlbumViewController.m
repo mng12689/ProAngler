@@ -94,6 +94,7 @@
         UIImage *thumbnail = [UIImage imageWithData:[[photosByDateCreated objectAtIndex:0]thumbnail]];
         
         UIImageView *mainImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.customImageView.frame.size.width, cell.customImageView.frame.size.height)];
+        mainImageView.contentMode = UIViewContentModeScaleAspectFill;
         mainImageView.image = thumbnail;
         
         [cell.customImageView addSubview:mainImageView];

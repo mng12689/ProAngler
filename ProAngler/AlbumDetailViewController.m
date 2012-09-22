@@ -261,6 +261,7 @@
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(4 + 56*column, 4 + 56*toggle, 52, 52)];
         imageView.layer.cornerRadius = 5;
         imageView.layer.masksToBounds = YES;
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.image = [UIImage imageWithData:[[self.photos objectAtIndex:i] thumbnail]];
         
         if (i != 0 && i % 5 == 0)
