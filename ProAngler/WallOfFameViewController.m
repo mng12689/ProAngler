@@ -31,11 +31,11 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserverForName:@"AddToWOF" object:nil queue:nil usingBlock:^(NSNotification *note){
+        [[NSNotificationCenter defaultCenter] addObserverForName:@"InductionToWOF" object:nil queue:nil usingBlock:^(NSNotification *note){
             [self populateWall];
         }];
         
-        [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note){
+        [[NSNotificationCenter defaultCenter] addObserverForName:@"RemovalFromWOF" object:nil queue:nil usingBlock:^(NSNotification *note){
             [self populateWall];
         }];
     }

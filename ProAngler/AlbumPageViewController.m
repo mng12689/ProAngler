@@ -36,7 +36,7 @@
     for (UIGestureRecognizer *gR in self.view.gestureRecognizers)
         gR.delegate = self;
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note)
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchesModified" object:nil queue:nil usingBlock:^(NSNotification *note)
     {
         NSString *sortBy = [[NSUserDefaults standardUserDefaults] objectForKey:@"ProAnglerAlbumSortTypePrefKey"];
         self.catches = [ProAnglerDataStore fetchEntity:@"Catch" sortBy:sortBy withPredicate:nil];

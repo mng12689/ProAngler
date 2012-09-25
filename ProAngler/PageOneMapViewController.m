@@ -41,7 +41,7 @@
     {
         self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         
-        [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note){
+        [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchesModified" object:nil queue:nil usingBlock:^(NSNotification *note){
             [self loadDataWithPredicate:self.currentFilters];
         }];
     }
@@ -142,37 +142,38 @@
     CLLocationDegrees minLat;
     CLLocationDegrees maxLat;
     
-    for(Catch *catch in self.catchesToBeDisplayed){
-        
-        CatchPointAnnotation *annotation = [CatchPointAnnotation new];
-        CLLocation *location = catch.location;
-        annotation.coordinate = location.coordinate;
-        annotation.title = catch.species.name;
-        annotation.subtitle = [catch dateToString];
-        annotation.catch = catch;
-        
-        [self.mapView addAnnotation:annotation];
-        
-        if([catch isEqual:[self.catchesToBeDisplayed objectAtIndex:0]]){
-            minLat = location.coordinate.latitude;
-            maxLat = location.coordinate.latitude;
-            minLng = location.coordinate.longitude;
-            maxLng = location.coordinate.longitude;
-        }
-        else{
-            if (location.coordinate.latitude < minLat)
+    for(Catch *catch in self.catchesToBeDisplayed)
+    {
+        if (catch.location)
+        {
+            CatchPointAnnotation *annotation = [CatchPointAnnotation new];
+            CLLocation *location = catch.location;
+            annotation.coordinate = location.coordinate;
+            annotation.title = [catch dateToString];
+            annotation.subtitle = catch.species.name;
+            annotation.catch = catch;
+            
+            [self.mapView addAnnotation:annotation];
+            
+            if([catch isEqual:[self.catchesToBeDisplayed objectAtIndex:0]]){
                 minLat = location.coordinate.latitude;
-            
-            if (location.coordinate.latitude > maxLat)
                 maxLat = location.coordinate.latitude;
-            
-            if (location.coordinate.longitude < minLng)
                 minLng = location.coordinate.longitude;
-            
-            if (location.coordinate.longitude > maxLng)
                 maxLng = location.coordinate.longitude;
-            
-            NSLog(@"location: %f %f",location.coordinate.latitude,location.coordinate.longitude);
+            }
+            else{
+                if (location.coordinate.latitude < minLat)
+                    minLat = location.coordinate.latitude;
+                
+                if (location.coordinate.latitude > maxLat)
+                    maxLat = location.coordinate.latitude;
+                
+                if (location.coordinate.longitude < minLng)
+                    minLng = location.coordinate.longitude;
+                
+                if (location.coordinate.longitude > maxLng)
+                    maxLng = location.coordinate.longitude;                
+            }
         }
     }
     [self zoomMapWithMinLng:minLng maxLng:maxLng minLat:minLat maxLat:maxLat];

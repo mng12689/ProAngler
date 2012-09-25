@@ -430,7 +430,7 @@
                                                 <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="QQw-ma-Gqk">
-                                                <rect key="frame" x="188" y="143" width="116" height="116"/>
+                                                <rect key="frame" x="188" y="144" width="116" height="116"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </scrollView>
@@ -465,7 +465,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" id="GGe-KM-Zfm">
-                                                <rect key="frame" x="20" y="20" width="160" height="239"/>
+                                                <rect key="frame" x="20" y="20" width="160" height="240"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             </view>
@@ -732,12 +732,12 @@
             </objects>
             <point key="canvasLocation" x="-207" y="208"/>
         </scene>
-        <!--Navigation Controller - New Catch-->
+        <!--Navigation Controller - Record Catch-->
         <scene sceneID="pci-ks-uw1">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sfo-xm-gvY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="Qwj-RB-ELT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="New Catch" id="mZf-ri-jam"/>
+                    <tabBarItem key="tabBarItem" title="Record Catch" id="mZf-ri-jam"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="rYg-DH-j7o">
@@ -1025,7 +1025,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.2117647231" green="0.65882354970000001" blue="1" alpha="1" colorSpace="deviceRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="New Catch" id="TK3-Np-8cM"/>
+                    <tabBarItem key="tabBarItem" title="Record Catch" id="TK3-Np-8cM"/>
                     <navigationItem key="navigationItem" title="New Catch" id="glT-5T-Q27">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="ely-wT-7vI">
                             <color key="tintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

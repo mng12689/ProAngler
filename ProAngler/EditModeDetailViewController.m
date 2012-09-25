@@ -253,7 +253,7 @@
         
         NSError *error;
         [ProAnglerDataStore saveContext:&error];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"CatchAddedOrModified" object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CatchesModified" object:self];
         
         NSString *title;
         NSString *message;

@@ -57,11 +57,16 @@
 
 @property (strong) NSArray *photos;
 @property (strong) Photo *currentlySelectedPhoto;
+@property (strong) UILabel *inductionLabel;
 
 - (IBAction)addToWallOfFame:(id)sender;
 - (IBAction)presentEmailActionSheet:(id)sender;
 - (IBAction)presentTwitterActionSheet:(id)sender;
 
+- (void)populateMainImageView;
+- (void)populateMediaScrollView;
+- (void)addInductionLabel;
+- (void)removeInductionLabel;
 @end
 
 @implementation AlbumDetailViewController
@@ -76,10 +81,12 @@
         
         self.catch = catch;
         
-        [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchAddedOrModified" object:nil queue:nil usingBlock:^(NSNotification *note){
+        [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchesModified" object:nil queue:nil usingBlock:^(NSNotification *note){
             [self loadCatchData];
         }];
-
+        [[NSNotificationCenter defaultCenter] addObserverForName:@"RemovalFromWOF" object:nil queue:nil usingBlock:^(NSNotification *note){
+            [self loadCatchData];
+        }];
     }
     return self;
 }
@@ -102,7 +109,7 @@
         
     self.mediaScrollView.layer.cornerRadius = 5;
     self.mediaScrollView.backgroundColor = [UIColor colorWithHue:0 saturation:0 brightness:100 alpha:.2];
-    self.mediaScrollView.contentSize = CGSizeMake(self.mediaScrollView.frame.size.width, self.mediaScrollView.frame.size.height);
+    self.mediaScrollView.contentSize = CGSizeMake(0, 0);
     [self.mediaScrollView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moveThumbnailToMainView:)]];
     
     self.catchInfoView.layer.borderColor = [UIColor greenColor].CGColor;
@@ -242,8 +249,10 @@
         self.addToWallOfFameButton.userInteractionEnabled = NO;
         [self addInductionLabel];
     }
-    else
+    else{
         self.addToWallOfFameButton.userInteractionEnabled = YES;
+        [self removeInductionLabel];
+    }
 }
 
 - (void)populateMediaScrollView
@@ -264,11 +273,10 @@
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.image = [UIImage imageWithData:[[self.photos objectAtIndex:i] thumbnail]];
         
-        if (i != 0 && i % 5 == 0)
-            self.mediaScrollView.contentSize = CGSizeMake(58+self.mediaScrollView.contentSize.width,self.mediaScrollView.contentSize.height);
-        if (i % 2)
+        if (i % 2){
             column++;
-        
+        }
+        self.mediaScrollView.contentSize = CGSizeMake(imageView.frame.origin.x + imageView.frame.size.width + 4,self.mediaScrollView.contentSize.height);
         [self.mediaScrollView addSubview:imageView];
     }
 }
@@ -280,7 +288,7 @@
     self.addToWallOfFameButton.userInteractionEnabled = NO;
     [self addInductionLabel];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"AddToWOF" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"InductionToWOF" object:self];
     [ProAnglerDataStore saveContext:nil];
 }
 
@@ -353,7 +361,7 @@
         }
     }
     
-    [emailViewController setMessageBody:@"\n\nSent from my ProAngler© fishing app\n\n" isHTML:NO];
+    [emailViewController setMessageBody:@"\n\nSent from my ProAngler© fishing app" isHTML:NO];
     
     [self presentModalViewController:emailViewController animated:YES];
 }
@@ -412,6 +420,8 @@
 
 -(void)moveThumbnailToMainView:(UITapGestureRecognizer*)tapGesure
 {
+    [self removeInductionLabel];
+    
     UIImageView *mainImageView = [self.mainImageView.subviews objectAtIndex:0];
 
     for (int i = 0; i < self.mediaScrollView.subviews.count; i++)
@@ -446,14 +456,24 @@
 
 -(void)addInductionLabel
 {
-    UILabel *inductedLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.addToWallOfFameButton.frame.size.width, self.addToWallOfFameButton.frame.size.height)];
-    inductedLabel.textAlignment = UITextAlignmentCenter;
-    inductedLabel.text = [NSString stringWithFormat:@"Inducted to Wall of Fame\n%@", [self.currentlySelectedPhoto inductionDateToString]];
-    inductedLabel.font = [UIFont fontWithName:@"Cochin" size:10];
-    inductedLabel.numberOfLines = 2;
-    inductedLabel.layer.zPosition = 1;
-    inductedLabel.backgroundColor = [UIColor clearColor];
-    [self.addToWallOfFameButton addSubview:inductedLabel];
+    if (!self.inductionLabel) {
+        UILabel *inductedLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.addToWallOfFameButton.frame.size.width, self.addToWallOfFameButton.frame.size.height)];
+        inductedLabel.textAlignment = UITextAlignmentCenter;
+        inductedLabel.text = [NSString stringWithFormat:@"Inducted to Wall of Fame\n%@", [self.currentlySelectedPhoto inductionDateToString]];
+        inductedLabel.font = [UIFont fontWithName:@"Cochin" size:10];
+        inductedLabel.numberOfLines = 2;
+        inductedLabel.layer.zPosition = 1;
+        inductedLabel.backgroundColor = [UIColor clearColor];
+        
+        self.inductionLabel = inductedLabel;
+    }
+    
+    [self.addToWallOfFameButton addSubview:self.inductionLabel];
+}
+
+-(void)removeInductionLabel
+{
+    [self.inductionLabel removeFromSuperview];
 }
 
 @end

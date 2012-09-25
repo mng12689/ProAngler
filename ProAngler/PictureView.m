@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "Photo.h"
 
-@interface PictureView ()
+@interface PictureView () <UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *frameView;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
@@ -33,6 +33,7 @@
 
         self.imageView.userInteractionEnabled = YES;
         [self.imageView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:wallViewController action:@selector(showFullSizeImage:)]];
+        [self.imageView addGestureRecognizer:[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(removePhotoFromWall:)]];
         
         BOOL portrait = NO;
         if (self.imageView.image.size.height > self.imageView.image.size.width) 
@@ -85,6 +86,36 @@
         [self addSubview:self.imageView];
     }
     return self;
+}
+
+- (void)shakeAnimation
+{
+    CABasicAnimation* anim = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    [anim setToValue:[NSNumber numberWithFloat:0.0f]];
+    [anim setFromValue:[NSNumber numberWithDouble:M_PI/64]];
+    [anim setDuration:0.1];
+    [anim setRepeatCount:NSUIntegerMax];
+    [anim setAutoreverses:YES];
+    [self.layer addAnimation:anim forKey:@"Shake"];
+}
+
+- (void)removePhotoFromWall:(UILongPressGestureRecognizer*)gesture
+{
+    [self shakeAnimation];
+    
+    if (gesture.state == UIGestureRecognizerStateEnded) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Remove photo" message:@"Are you sure you want to remove this photo from your Wall Of Fame?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes",nil];
+        [alert show];
+    }
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        self.photo.trophyFish = NO;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RemovalFromWOF" object:nil];
+    }
+    [self.layer removeAllAnimations];
 }
 
 /*

@@ -26,7 +26,7 @@
 @interface NewCatchViewController () < CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RKRequestDelegate, UIActionSheetDelegate>
 
 @property (strong) CLLocationManager *locationManager;
-@property (strong) CLLocation *currentLocation;
+@property (strong) NSTimer *locationManagerTimer;
 
 @property (weak) IBOutlet UIScrollView *scrollView;
 @property (weak) IBOutlet UIScrollView *mediaScrollView;
@@ -103,16 +103,6 @@
     [super viewDidUnload];
 }
 
- - (void) viewWillAppear:(BOOL)animated
-{
-    [self.locationManager startUpdatingLocation];
-}
-
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [self.locationManager stopUpdatingLocation];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
@@ -142,25 +132,19 @@
 - (IBAction)saveNewCatch:(id)sender 
 {
     if([super.venuePickerView selectedRowInComponent:0]!=0) {
-       
+               
         /********* create new catch entity **********/
 
+        NSLog(@"Start save");
         Catch *catch = [ProAnglerDataStore createEntity:@"Catch"];
         self.currentCatch = catch;
         
+        [self.locationManager startUpdatingLocation];
+        self.locationManagerTimer = [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(stopLocationUpdates) userInfo:nil repeats:NO];
+        
         catch.date = [NSDate date];
-        
-        if (self.currentLocation.horizontalAccuracy <= 10){
-            catch.location = self.currentLocation;
-            NSLog(@"%f",self.currentLocation.horizontalAccuracy);
-        }
-        
-        [self requestWeatherConditions:catch.location];
-
-        for (Photo *photo in self.photos) 
-            photo.catch = catch;
         catch.photos = [NSSet setWithArray:self.photos];
-        
+
         if([super.sizePickerView selectedRowInComponent:0]!=0 && [super.sizePickerView selectedRowInComponent:1]!=0)
             catch.weightOZ = [NSNumber numberWithInt:(([super.sizePickerView selectedRowInComponent:0]-1)*16) + [super.sizePickerView selectedRowInComponent:1]-1];
         
@@ -206,7 +190,9 @@
         NSError *error;
         [ProAnglerDataStore saveContext:&error];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"CatchAddedOrModified" object:self];
+        NSLog(@"Starting notification center");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CatchesModified" object:self];
+        NSLog(@"Ended notification center");
         [self resetView];
         
         NSString *title;
@@ -222,6 +208,8 @@
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
+        
+        NSLog(@"Done saving");
     }
     
     else {
@@ -258,9 +246,24 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    //NSLog(@"%f",newLocation.horizontalAccuracy);
-    if (newLocation.horizontalAccuracy < self.currentLocation.horizontalAccuracy || !self.currentLocation)
-        self.currentLocation = newLocation;
+    if (newLocation.horizontalAccuracy <= 10)
+    {
+        [self stopLocationUpdates];
+        
+        self.currentCatch.location = newLocation;
+        
+        [ProAnglerDataStore saveContext:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CatchesModified" object:self];
+        
+        NSLog(@"%f,%f",newLocation.coordinate.latitude,newLocation.coordinate.longitude);
+        [self requestWeatherConditions:newLocation];
+    }
+}
+
+- (void)stopLocationUpdates
+{
+    [self.locationManager stopUpdatingLocation];
+    [self.locationManagerTimer invalidate];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -511,9 +514,8 @@
         self.currentCatch.weatherDescription = descObject;
             
         [ProAnglerDataStore saveContext:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CatchesModified" object:self];
     }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"CatchAddedOrModified" object:self];
 }
 
 -(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated

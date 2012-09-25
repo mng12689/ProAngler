@@ -21,5 +21,6 @@
 + (NSArray*) fetchEntity:(NSString*)entity sortBy:(NSString*)sortBy withPredicate:(NSPredicate*)predicate;
 + (id) createEntity:(NSString*)entity;
 + (id) createNewAttribute:(NSString*)attributeType;
++ (void) deleteObject:(NSManagedObject*)object;
 
 @end

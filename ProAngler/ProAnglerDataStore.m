@@ -56,6 +56,12 @@ NSPersistentStoreCoordinator *_psc;
     return [NSEntityDescription insertNewObjectForEntityForName:entity inManagedObjectContext:[ProAnglerDataStore context]];
 }
 
++ (void) deleteObject:(NSManagedObject*)object
+{
+    [[self context] deleteObject:object];
+    [self saveContext:nil];
+}
+
 + (void)saveContext:(NSError**)error
 {
     NSManagedObjectContext *context = [self context];
