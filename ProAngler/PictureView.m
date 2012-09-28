@@ -29,7 +29,7 @@
         self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, self.frame.size.width - 20, self.frame.size.height - 20)];
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         self.imageView.layer.masksToBounds = YES;
-        self.imageView.image = [UIImage imageWithData:photo.screenSizeImage];
+        self.imageView.image = [UIImage imageWithData:photo.thumbnail];
 
         self.imageView.userInteractionEnabled = YES;
         [self.imageView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:wallViewController action:@selector(showFullSizeImage:)]];

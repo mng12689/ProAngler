@@ -246,7 +246,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    if (newLocation.horizontalAccuracy <= 10)
+    if (newLocation.horizontalAccuracy <= 15)
     {
         [self stopLocationUpdates];
         
@@ -417,7 +417,7 @@
         screenSizeImage = [self changeSizeOfImage:newImage withSize:CGSizeMake(640,960)];
         photo.screenSizeImage = UIImageJPEGRepresentation(screenSizeImage, 1);
         
-        thumbnail = [self changeSizeOfImage:newImage withSize:CGSizeMake(64,96)];
+        thumbnail = [self changeSizeOfImage:newImage withSize:CGSizeMake(160,240)];
         photo.thumbnail = UIImageJPEGRepresentation(thumbnail, 1);
     }
     else
@@ -425,7 +425,7 @@
         screenSizeImage = [self changeSizeOfImage:newImage withSize:CGSizeMake(960,640)];
         photo.screenSizeImage = UIImageJPEGRepresentation(screenSizeImage, 1);
         
-        thumbnail = [self changeSizeOfImage:newImage withSize:CGSizeMake(96,64)];
+        thumbnail = [self changeSizeOfImage:newImage withSize:CGSizeMake(240,160)];
         photo.thumbnail = UIImageJPEGRepresentation(thumbnail, 1);
     }
                                                                            
