@@ -21,7 +21,7 @@ NSPersistentStoreCoordinator *_psc;
 
 @implementation ProAnglerDataStore
 
-+ (NSArray*)fetchEntity:(NSString*)entity sortBy:(NSString*)sortBy withPredicate:(NSPredicate *)predicate
++ (NSArray*)fetchEntity:(NSString*)entity sortBy:(NSString*)sortBy withPredicate:(NSPredicate *)predicate propertiesToFetch:(NSArray*)propertiesToFetch
 {
     NSFetchRequest *fetchRequest = [NSFetchRequest new];
     fetchRequest.entity = [[ProAnglerDataStore model].entitiesByName objectForKey:entity];
@@ -31,12 +31,13 @@ NSPersistentStoreCoordinator *_psc;
         ascending = NO;
    
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:sortBy ascending:ascending selector:nil];
-    NSArray *descriptors = [NSArray arrayWithObject:sortDescriptor];
-    fetchRequest.sortDescriptors = descriptors;
+    fetchRequest.sortDescriptors = @[sortDescriptor];
     
-    if (predicate) {
+    if (propertiesToFetch)
+        fetchRequest.propertiesToFetch = propertiesToFetch;
+    
+    if (predicate) 
         fetchRequest.predicate = predicate;
-    }
     
     NSError *error;
     NSArray *results = [[ProAnglerDataStore context] executeFetchRequest:fetchRequest error:&error];

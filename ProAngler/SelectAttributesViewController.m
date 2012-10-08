@@ -18,35 +18,35 @@
 - (void)setup
 {
     [[NSNotificationCenter defaultCenter] addObserverForName:@"VenueAdded" object:nil queue:nil usingBlock:^(NSNotification *note){
-        self.venueList = [ProAnglerDataStore fetchEntity:@"Venue" sortBy:@"name" withPredicate:nil];
+        self.venueList = [ProAnglerDataStore fetchEntity:@"Venue" sortBy:@"name" withPredicate:nil propertiesToFetch:nil];
         [self.venuePickerView reloadAllComponents];
     }];
     [[NSNotificationCenter defaultCenter] addObserverForName:@"SpeciesAdded" object:nil queue:nil usingBlock:^(NSNotification *note){
-        self.speciesList = [ProAnglerDataStore fetchEntity:@"Species" sortBy:@"name" withPredicate:nil];
+        self.speciesList = [ProAnglerDataStore fetchEntity:@"Species" sortBy:@"name" withPredicate:nil propertiesToFetch:nil];
         [self.speciesPickerView reloadAllComponents];
     }];
     [[NSNotificationCenter defaultCenter] addObserverForName:@"BaitAdded" object:nil queue:nil usingBlock:^(NSNotification *note){
-        self.baitList = [ProAnglerDataStore fetchEntity:@"Bait" sortBy:@"name" withPredicate:nil];
+        self.baitList = [ProAnglerDataStore fetchEntity:@"Bait" sortBy:@"name" withPredicate:nil propertiesToFetch:nil];
         [self.baitPickerView reloadAllComponents];
     }];
     [[NSNotificationCenter defaultCenter] addObserverForName:@"StructureAdded" object:nil queue:nil usingBlock:^(NSNotification *note){
-        self.structureList = [ProAnglerDataStore fetchEntity:@"Structure" sortBy:@"name" withPredicate:nil];
+        self.structureList = [ProAnglerDataStore fetchEntity:@"Structure" sortBy:@"name" withPredicate:nil propertiesToFetch:nil];
         [self.structurePickerView reloadAllComponents];
     }];
     [[NSNotificationCenter defaultCenter] addObserverForName:@"WeatherDescriptionAdded" object:nil queue:nil usingBlock:^(NSNotification *note){
-        self.weatherDescriptionsList = [ProAnglerDataStore fetchEntity:@"WeatherDescription" sortBy:@"name" withPredicate:nil];
+        self.weatherDescriptionsList = [ProAnglerDataStore fetchEntity:@"WeatherDescription" sortBy:@"name" withPredicate:nil propertiesToFetch:nil];
         [self.weatherConditionsPickerView reloadAllComponents];
     }];
     
-    self.venueList = [ProAnglerDataStore fetchEntity:@"Venue" sortBy:@"name" withPredicate:nil];
-    self.speciesList = [ProAnglerDataStore fetchEntity:@"Species" sortBy:@"name" withPredicate:nil];
-    self.baitList = [ProAnglerDataStore fetchEntity:@"Bait" sortBy:@"name" withPredicate:nil];
-    self.structureList = [ProAnglerDataStore fetchEntity:@"Structure" sortBy:@"name" withPredicate:nil];
+    self.venueList = [ProAnglerDataStore fetchEntity:@"Venue" sortBy:@"name" withPredicate:nil propertiesToFetch:nil];
+    self.speciesList = [ProAnglerDataStore fetchEntity:@"Species" sortBy:@"name" withPredicate:nil propertiesToFetch:nil];
+    self.baitList = [ProAnglerDataStore fetchEntity:@"Bait" sortBy:@"name" withPredicate:nil propertiesToFetch:nil];
+    self.structureList = [ProAnglerDataStore fetchEntity:@"Structure" sortBy:@"name" withPredicate:nil propertiesToFetch:nil];
     self.waterColorList = [NSArray arrayWithObjects:@"Clear", @"Murky", nil];
     self.waterLevelList = [NSArray arrayWithObjects:@"Low", @"Normal", @"High", nil];
     self.spawningList = [NSArray arrayWithObjects:@"NO", @"YES", nil];
     self.baitDepthList = [NSArray arrayWithObjects:@"Topwater", @"Suspended", @"Bottom", nil];
-    self.weatherDescriptionsList = [ProAnglerDataStore fetchEntity:@"WeatherDescription" sortBy:@"name" withPredicate:nil];
+    self.weatherDescriptionsList = [ProAnglerDataStore fetchEntity:@"WeatherDescription" sortBy:@"name" withPredicate:nil propertiesToFetch:nil];
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder

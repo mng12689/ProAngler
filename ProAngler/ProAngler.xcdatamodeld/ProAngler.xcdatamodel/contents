@@ -34,7 +34,7 @@
         <attribute name="inductionDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="screenSizeImage" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="trophyFish" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="trophyFish" optional="YES" attributeType="Boolean" indexed="YES" versionHashModifier="1.0" syncable="YES"/>
         <relationship name="catch" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Catch" inverseName="photos" inverseEntity="Catch" syncable="YES"/>
     </entity>
     <entity name="Species" representedClassName="Species" syncable="YES">
@@ -56,12 +56,12 @@
         <relationship name="catches" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Catch" inverseName="weatherDescription" inverseEntity="Catch" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Bait" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Catch" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Photo" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Species" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Structure" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Venue" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="WeatherDescription" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Bait" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="Catch" positionX="0" positionY="0" width="128" height="360"/>
+        <element name="Photo" positionX="0" positionY="0" width="128" height="150"/>
+        <element name="Species" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="Structure" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="Venue" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="WeatherDescription" positionX="0" positionY="0" width="128" height="75"/>
     </elements>
 </model>

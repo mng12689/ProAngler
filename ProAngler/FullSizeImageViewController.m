@@ -42,7 +42,11 @@
 
 -(void)loadView
 {
-    self.view = [[UIImageView alloc]initWithImage:[UIImage imageWithData:self.photo.screenSizeImage]];
+    UIImage *image = [UIImage imageWithData:self.photo.screenSizeImage];
+    if (image.size.height < image.size.width) {
+        image = [[UIImage alloc]initWithCGImage:[image CGImage] scale:1 orientation:UIImageOrientationLeft];
+    }
+    self.view = [[UIImageView alloc]initWithImage:image];
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(animateNavBar)]];
     self.view.userInteractionEnabled = YES;
 }

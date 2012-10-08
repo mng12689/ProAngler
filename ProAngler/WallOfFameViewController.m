@@ -73,7 +73,7 @@
         [pictureView removeFromSuperview];
     }
     
-    self.trophyFishPhotos = [ProAnglerDataStore fetchEntity:@"Photo" sortBy:@"catch.date" withPredicate:[NSPredicate predicateWithFormat:@"trophyFish == YES"]];
+    self.trophyFishPhotos = [ProAnglerDataStore fetchEntity:@"Photo" sortBy:@"catch.date" withPredicate:[NSPredicate predicateWithFormat:@"trophyFish == %@",[NSNumber numberWithBool:YES]] propertiesToFetch:@[@"thumbnail"]];
     
     BOOL toggle = YES;
     int index = 0;

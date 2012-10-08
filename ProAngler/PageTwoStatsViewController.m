@@ -25,7 +25,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.view.frame = CGRectMake(320, 0, self.view.frame.size.width, self.view.frame.size.height);
         [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchesModified" object:nil queue:nil usingBlock:^(NSNotification *note){
             [self loadData];
         }];
@@ -37,6 +36,7 @@
 {
     [super viewDidLoad];
     
+    self.view.frame = CGRectMake(320, 0, self.view.frame.size.width, self.view.frame.size.height);
     self.textView.editable = NO;
     self.textView.textColor = [UIColor whiteColor];
     [self loadData];
@@ -56,7 +56,7 @@
 -(void)loadData
 {
     NSMutableArray *stats = [NSMutableArray new];
-    NSArray *allCatches = [ProAnglerDataStore fetchEntity:@"Catch" sortBy:@"species" withPredicate:nil];
+    NSArray *allCatches = [ProAnglerDataStore fetchEntity:@"Catch" sortBy:@"species" withPredicate:nil propertiesToFetch:nil];
 
     /********* totals **********/
 
@@ -74,7 +74,7 @@
 
     /********* stats by species **********/
 
-    NSArray *allSpecies = [ProAnglerDataStore fetchEntity:@"Species" sortBy:@"name" withPredicate:nil];
+    NSArray *allSpecies = [ProAnglerDataStore fetchEntity:@"Species" sortBy:@"name" withPredicate:nil propertiesToFetch:nil];
 
     NSString *species = [NSString stringWithFormat:@"\n\nSpecies (%d)", allSpecies.count];
     [stats addObject:species];
@@ -96,7 +96,7 @@
 
     /********* stats by venue **********/
 
-    NSArray *allVenues = [ProAnglerDataStore fetchEntity:@"Venue" sortBy:@"name" withPredicate:nil];
+    NSArray *allVenues = [ProAnglerDataStore fetchEntity:@"Venue" sortBy:@"name" withPredicate:nil propertiesToFetch:nil];
 
     NSString *venues = [NSString stringWithFormat:@"\n\nVenues (%d)", allVenues.count];
     [stats addObject:venues];

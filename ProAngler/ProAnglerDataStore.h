@@ -18,7 +18,7 @@
 + (void)saveContext:(NSError**)error;
 + (NSURL*)applicationDocumentsDirectory;
 
-+ (NSArray*) fetchEntity:(NSString*)entity sortBy:(NSString*)sortBy withPredicate:(NSPredicate*)predicate;
++ (NSArray*) fetchEntity:(NSString*)entity sortBy:(NSString*)sortBy withPredicate:(NSPredicate*)predicate propertiesToFetch:(NSArray*)propertiesToFetch;
 + (id) createEntity:(NSString*)entity;
 + (id) createNewAttribute:(NSString*)attributeType;
 + (void) deleteObject:(NSManagedObject*)object;

@@ -236,8 +236,15 @@
         [view removeFromSuperview];
     }
     
+    UIImage *mainImage = [UIImage imageWithData:[[self.photos objectAtIndex:0] screenSizeImage]];
+    
+    if (mainImage.size.height < mainImage.size.width){
+        mainImage = [[UIImage alloc]initWithCGImage:[mainImage CGImage] scale:1 orientation:UIImageOrientationLeft];
+    }
+        
     UIImageView *mainImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.mainImageView.frame.size.width, self.mainImageView.frame.size.height)];
-    mainImageView.image = [UIImage imageWithData:[[self.photos objectAtIndex:0] fullSizeImage]];
+    mainImageView.contentMode = UIViewContentModeScaleAspectFit;
+    mainImageView.image = mainImage;
     mainImageView.userInteractionEnabled = YES;
     mainImageView.opaque = YES;
     [mainImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFullSizeImage)]];
@@ -431,6 +438,9 @@
         {
             self.currentlySelectedPhoto = [self.photos objectAtIndex:i];
             mainImageView.image = [UIImage imageWithData:[self.currentlySelectedPhoto screenSizeImage]];
+            if (mainImageView.image.size.height < mainImageView.image.size.width) {
+                mainImageView.image = [[UIImage alloc] initWithCGImage:[mainImageView.image CGImage] scale:1 orientation:UIImageOrientationLeft];
+            }
             
             if ([[self.currentlySelectedPhoto trophyFish] boolValue] == YES){
                 self.addToWallOfFameButton.userInteractionEnabled = NO;

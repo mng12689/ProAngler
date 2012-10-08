@@ -9,7 +9,6 @@
 #import "Photo.h"
 #import "Catch.h"
 
-
 @implementation Photo
 
 @dynamic fullSizeImage;

@@ -38,9 +38,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
-    {
-        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-        
+    {        
         [[NSNotificationCenter defaultCenter] addObserverForName:@"CatchesModified" object:nil queue:nil usingBlock:^(NSNotification *note){
             [self loadDataWithPredicate:self.currentFilters];
         }];
@@ -52,6 +50,8 @@
 {
     [super viewDidLoad];
     
+    self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+
     self.mapView.delegate = self;
     
     self.mapView.mapType = MKMapTypeHybrid;
@@ -63,7 +63,7 @@
     [self.mapView.layer setBorderColor:[[[UIColor grayColor] colorWithAlphaComponent:0.5] CGColor]];
     [self.mapView.layer setBorderWidth:2.0];
     
-    NSArray *venueList = [ProAnglerDataStore fetchEntity:@"Venue" sortBy:@"name" withPredicate:nil];
+    NSArray *venueList = [ProAnglerDataStore fetchEntity:@"Venue" sortBy:@"name" withPredicate:nil propertiesToFetch:nil];
     if(venueList && [venueList count]!=0){
         self.venueLabel.text = [[venueList objectAtIndex:0]name];
         self.currentFilters = [NSPredicate predicateWithFormat:@"venue.name like %@",self.venueLabel.text];
@@ -240,7 +240,7 @@
 
 -(void)loadDataWithPredicate:(NSPredicate *)predicate
 {
-    self.catchesToBeDisplayed = [ProAnglerDataStore fetchEntity:@"Catch" sortBy:@"venue" withPredicate:predicate];
+    self.catchesToBeDisplayed = [ProAnglerDataStore fetchEntity:@"Catch" sortBy:@"venue" withPredicate:predicate propertiesToFetch:nil];
     [self annotateMap];
 }
 

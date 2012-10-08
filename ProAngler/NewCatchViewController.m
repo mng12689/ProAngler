@@ -500,7 +500,7 @@
         self.currentCatch.windDir = [currentConditions objectForKey:@"winddir16Point"];
         
         NSString *weatherDesc = [[[currentConditions objectForKey:@"weatherDesc"] objectAtIndex:0] objectForKey:@"value"];
-        NSArray *descriptions = [ProAnglerDataStore fetchEntity:@"WeatherDescription" sortBy:@"name" withPredicate:nil];
+        NSArray *descriptions = [ProAnglerDataStore fetchEntity:@"WeatherDescription" sortBy:@"name" withPredicate:nil propertiesToFetch:nil];
         
         WeatherDescription *descObject;
         if (descriptions.count == 0) {
