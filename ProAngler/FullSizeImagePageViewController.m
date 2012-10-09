@@ -40,7 +40,6 @@
     
     if (self.showFullStatsOption){
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Full Stats" style:UIBarButtonItemStyleBordered target:self action:@selector(showFullStats)];
-        //self.navigationItem.rightBarButtonItem.tintColor = [UIColor darkGrayColor];
     }
     
     AppDelegate *appDelegate  = [[UIApplication sharedApplication] delegate];
